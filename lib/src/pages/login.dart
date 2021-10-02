@@ -13,6 +13,13 @@ class Login extends StatefulWidget {
 
 class _LoginState extends State<Login> {
   PageMostrar _currentPage = PageMostrar.registro;
+  bool _passwordVisible;
+
+  @override
+  void initState() {
+    _passwordVisible = true;
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -98,29 +105,31 @@ class _LoginState extends State<Login> {
               ],
             ),
           ),
-          Container(
-            margin: EdgeInsets.only(
-              top: ScreenUtil().setHeight(260),
-              left: ScreenUtil().setWidth(30),
-              right: ScreenUtil().setWidth(30),
-            ),
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(15),
-              boxShadow: [
-                BoxShadow(
-                  color: const Color(0xffb4b5e5).withOpacity(0.3),
-                  spreadRadius: 0,
-                  blurRadius: 15,
-                  offset: const Offset(0, 5), // changes position of shadow
-                ),
-              ],
-            ),
-            width: double.infinity,
-            height: ScreenUtil().setHeight(470),
-            child: AnimatedSwitcher(
-              duration: const Duration(milliseconds: 500),
-              child: _currentPage == PageMostrar.inicioSesion ? inicioSe() : registro(),
+          SingleChildScrollView(
+            child: Container(
+              margin: EdgeInsets.only(
+                top: ScreenUtil().setHeight(260),
+                left: ScreenUtil().setWidth(30),
+                right: ScreenUtil().setWidth(30),
+              ),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(15),
+                boxShadow: [
+                  BoxShadow(
+                    color: const Color(0xffb4b5e5).withOpacity(0.3),
+                    spreadRadius: 0,
+                    blurRadius: 15,
+                    offset: const Offset(0, 5), // changes position of shadow
+                  ),
+                ],
+              ),
+              width: double.infinity,
+              height: ScreenUtil().setHeight(470),
+              child: AnimatedSwitcher(
+                duration: const Duration(milliseconds: 500),
+                child: _currentPage == PageMostrar.inicioSesion ? inicioSe() : registro(),
+              ),
             ),
           )
         ],
@@ -276,7 +285,7 @@ class _LoginState extends State<Login> {
             child: MaterialButton(
               color: Colors.red,
               textColor: Colors.white,
-              elevation:10,
+              elevation: 10,
               onPressed: () {},
               shape: const RoundedRectangleBorder(
                 borderRadius: BorderRadius.all(
@@ -292,84 +301,220 @@ class _LoginState extends State<Login> {
   }
 
   Widget registro() {
-    return Column(
-      children: [
-        SizedBox(
-          height: ScreenUtil().setHeight(10),
-        ),
-        Container(
-          margin: EdgeInsets.symmetric(
-            horizontal: ScreenUtil().setWidth(30),
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: ScreenUtil().setWidth(30)),
+      child: Column(
+        children: [
+          SizedBox(
+            height: ScreenUtil().setHeight(10),
           ),
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(15),
-            border: Border.all(
-              color: const Color(0xffeaeaf5),
+          Container(
+            // margin: EdgeInsets.symmetric(
+            //   horizontal: ScreenUtil().setWidth(30),
+            // ),
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(15),
+              border: Border.all(
+                color: const Color(0xffeaeaf5),
+              ),
             ),
-          ),
-          child: Row(
-            children: [
-              Expanded(
-                child: InkWell(
-                  onTap: () {
-                    setState(() {
-                      _currentPage = PageMostrar.inicioSesion;
-                    });
-                  },
+            child: Row(
+              children: [
+                Expanded(
+                  child: InkWell(
+                    onTap: () {
+                      setState(() {
+                        _currentPage = PageMostrar.inicioSesion;
+                      });
+                    },
+                    child: Container(
+                      padding: EdgeInsets.symmetric(
+                        vertical: ScreenUtil().setHeight(5),
+                        horizontal: ScreenUtil().setWidth(5),
+                      ),
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(15),
+                        border: Border.all(color: Colors.white),
+                      ),
+                      child: Center(
+                        child: Text(
+                          'Iniciar sesión',
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontSize: ScreenUtil().setSp(17),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  width: ScreenUtil().setWidth(10),
+                ),
+                Expanded(
                   child: Container(
                     padding: EdgeInsets.symmetric(
                       vertical: ScreenUtil().setHeight(5),
                       horizontal: ScreenUtil().setWidth(5),
                     ),
                     decoration: BoxDecoration(
-                      color: Colors.white,
+                      color: Colors.red,
                       borderRadius: BorderRadius.circular(15),
-                      border: Border.all(color: Colors.white),
+                      border: Border.all(color: Colors.red),
                     ),
                     child: Center(
                       child: Text(
-                        'Iniciar sesión',
+                        'Registrar',
                         style: TextStyle(
-                          color: Colors.black,
+                          color: Colors.white,
                           fontSize: ScreenUtil().setSp(17),
                         ),
                       ),
                     ),
                   ),
                 ),
-              ),
-              SizedBox(
-                width: ScreenUtil().setWidth(10),
-              ),
-              Expanded(
-                child: Container(
-                  padding: EdgeInsets.symmetric(
+              ],
+            ),
+          ),
+          SizedBox(
+            height: ScreenUtil().setHeight(32),
+          ),
+          SizedBox(
+            height: ScreenUtil().setHeight(50),
+            child: TextField(
+              cursorColor: Colors.transparent,
+              keyboardType: TextInputType.text,
+              maxLines: 1,
+              decoration: InputDecoration(
+                  contentPadding: EdgeInsets.symmetric(
                     vertical: ScreenUtil().setHeight(5),
-                    horizontal: ScreenUtil().setWidth(5),
+                    horizontal: ScreenUtil().setWidth(10),
                   ),
-                  decoration: BoxDecoration(
-                    color: Colors.red,
-                    borderRadius: BorderRadius.circular(15),
-                    border: Border.all(color: Colors.red),
+                  hintStyle: const TextStyle(
+                    color: Color(0xffa8a7a7),
                   ),
-                  child: Center(
-                    child: Text(
-                      'Registrar',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: ScreenUtil().setSp(17),
-                      ),
-                    ),
+                  hintText: 'Negocio'),
+              enableInteractiveSelection: true,
+            ),
+          ),
+          SizedBox(
+            height: ScreenUtil().setHeight(50),
+            child: TextField(
+              cursorColor: Colors.transparent,
+              keyboardType: TextInputType.text,
+              maxLines: 1,
+              decoration: InputDecoration(
+                  contentPadding: EdgeInsets.symmetric(
+                    vertical: ScreenUtil().setHeight(5),
+                    horizontal: ScreenUtil().setWidth(10),
                   ),
+                  hintStyle: const TextStyle(
+                    color: Color(0xffa8a7a7),
+                  ),
+                  hintText: 'Nombre'),
+              enableInteractiveSelection: true,
+            ),
+          ),
+          SizedBox(
+            height: ScreenUtil().setHeight(50),
+            child: TextField(
+              cursorColor: Colors.transparent,
+              keyboardType: TextInputType.emailAddress,
+              maxLines: 1,
+              decoration: InputDecoration(
+                  contentPadding: EdgeInsets.symmetric(
+                    vertical: ScreenUtil().setHeight(5),
+                    horizontal: ScreenUtil().setWidth(10),
+                  ),
+                  hintStyle: const TextStyle(
+                    color: Color(0xffa8a7a7),
+                  ),
+                  hintText: 'Email'),
+              enableInteractiveSelection: true,
+            ),
+          ),
+          SizedBox(
+            height: ScreenUtil().setHeight(50),
+            child: TextField(
+              obscureText: _passwordVisible,
+              cursorColor: Colors.transparent,
+              keyboardType: TextInputType.text,
+              maxLines: 1,
+              decoration: InputDecoration(
+                contentPadding: EdgeInsets.symmetric(
+                  vertical: ScreenUtil().setHeight(15),
+                  horizontal: ScreenUtil().setWidth(10),
+                ),
+                hintStyle: const TextStyle(
+                  color: Color(0xffa8a7a7),
+                ),
+                hintText: 'Contraseña',
+                suffixIcon: IconButton(
+                  padding: EdgeInsets.all(0),
+                  onPressed: () {
+                    setState(() {
+                      if (_passwordVisible) {
+                        _passwordVisible = false;
+                      } else {
+                        _passwordVisible = true;
+                      }
+                    });
+                  },
+                  icon: _passwordVisible
+                      ? Icon(
+                          Icons.visibility,
+                          color: Color(0xffa8a7a7),
+                        )
+                      : Icon(
+                          Icons.visibility_off,
+                          color: Color(0xffa8a7a7),
+                        ),
                 ),
               ),
-            ],
+              enableInteractiveSelection: true,
+            ),
           ),
-        )
-      ],
+          SizedBox(
+            height: ScreenUtil().setHeight(50),
+            child: TextField(
+              obscureText: _passwordVisible,
+              cursorColor: Colors.transparent,
+              keyboardType: TextInputType.text,
+              maxLines: 1,
+              decoration: InputDecoration(
+                  contentPadding: EdgeInsets.symmetric(
+                    vertical: ScreenUtil().setHeight(5),
+                    horizontal: ScreenUtil().setWidth(10),
+                  ),
+                  hintStyle: const TextStyle(
+                    color: Color(0xffa8a7a7),
+                  ),
+                  hintText: 'Confirma contraseña'),
+              enableInteractiveSelection: true,
+            ),
+          ),
+          SizedBox(
+            height: ScreenUtil().setHeight(30),
+          ),
+          SizedBox(
+            width: double.infinity,
+            child: MaterialButton(
+              color: Colors.red,
+              textColor: Colors.white,
+              elevation: 10,
+              onPressed: () {},
+              shape: const RoundedRectangleBorder(
+                borderRadius: BorderRadius.all(
+                  Radius.circular(20.0),
+                ),
+              ),
+              child: const Text('Continuar'),
+            ),
+          )
+        ],
+      ),
     );
   }
 }
-
-
