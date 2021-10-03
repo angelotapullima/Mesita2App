@@ -17,18 +17,22 @@ class _SplashState extends State<Splash> with AfterLayoutMixin<Splash> {
 
   @override
   void initState() {
-    WidgetsBinding.instance.addPostFrameCallback((_) async {
-      final preferences = Preferences();
+    WidgetsBinding.instance.addPostFrameCallback(
+      (_) async {
+        final preferences = Preferences();
 
-      if (preferences.idUser.toString().isEmpty || preferences.idUser == null || preferences.idUser == '0') {
-        Navigator.pushReplacementNamed(context, 'login');
-      } else {
-        /* final bottomBloc = ProviderBloc.bottomNavic(context);
+        if (preferences.idUser.toString().isEmpty || preferences.idUser == null || preferences.idUser == '0') {
+          Navigator.pushReplacementNamed(context, 'home');
+          // Navigator.pushReplacementNamed(context, 'login');
+        } else {
+          /* final bottomBloc = ProviderBloc.bottomNavic(context);
         bottomBloc.changePage(0); */
-        Navigator.pushReplacementNamed(context, 'home');
-        //Navigator.pushReplacementNamed(context, preferences.pageInit);
-      }
-    });
+          //Navigator.pushReplacementNamed(context, 'home');
+          Navigator.pushReplacementNamed(context, 'login');
+          //Navigator.pushReplacementNamed(context, preferences.pageInit);
+        }
+      },
+    );
     super.initState();
   }
 
