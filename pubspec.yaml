@@ -43,6 +43,7 @@ dependencies:
   after_layout: ^1.1.0
   flutter_screenutil: ^5.0.0+2
   flutter_svg: ^0.21.0+1
+  keyboard_actions: ^3.4.0
 
 
 
