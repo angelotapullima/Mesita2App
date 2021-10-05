@@ -129,7 +129,10 @@ class _HomeState extends State<Home> {
                   width: ScreenUtil().setWidth(375),
                   height: double.infinity,
                   child: Column(
-                    children: [],
+                    children: [
+
+                      //poner los widget o las pantallas de acuerdo a lo que muestra el bloc optionsInicio
+                    ],
                   ),
                 ),
               ),
