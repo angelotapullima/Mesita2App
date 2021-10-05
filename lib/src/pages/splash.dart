@@ -26,7 +26,7 @@ class _SplashState extends State<Splash> with AfterLayoutMixin<Splash> {
         if (preferences.idUser.toString().isEmpty || preferences.idUser == null || preferences.idUser == '0') {
           Navigator.pushReplacementNamed(context, 'home');
 
-          Navigator.push(
+          /* Navigator.push(
             context,
             PageRouteBuilder(
               pageBuilder: (context, animation, secondaryAnimation) {
@@ -47,7 +47,7 @@ class _SplashState extends State<Splash> with AfterLayoutMixin<Splash> {
                 );
               },
             ),
-          );
+          ); */
           // Navigator.pushReplacementNamed(context, 'login');
         } else {
           /* final bottomBloc = ProviderBloc.bottomNavic(context);
