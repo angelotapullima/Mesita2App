@@ -2,6 +2,7 @@ import 'package:after_layout/after_layout.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:mesita_aplication_2/src/pages/Comidas/comidas_page.dart';
 import 'package:mesita_aplication_2/src/pages/Mesas/detalle_mesa_page.dart';
 import 'package:mesita_aplication_2/src/preferences/preferences.dart';
 
@@ -25,28 +26,28 @@ class _SplashState extends State<Splash> with AfterLayoutMixin<Splash> {
         if (preferences.idUser.toString().isEmpty || preferences.idUser == null || preferences.idUser == '0') {
           Navigator.pushReplacementNamed(context, 'home');
 
-          // Navigator.push(
-          //   context,
-          //   PageRouteBuilder(
-          //     pageBuilder: (context, animation, secondaryAnimation) {
-          //       return DetalleMesaPage();
-          //     },
-          //     transitionsBuilder: (context, animation, secondaryAnimation, child) {
-          //       var begin = Offset(0.0, 1.0);
-          //       var end = Offset.zero;
-          //       var curve = Curves.ease;
+          Navigator.push(
+            context,
+            PageRouteBuilder(
+              pageBuilder: (context, animation, secondaryAnimation) {
+                return ComidasPage();
+              },
+              transitionsBuilder: (context, animation, secondaryAnimation, child) {
+                var begin = Offset(0.0, 1.0);
+                var end = Offset.zero;
+                var curve = Curves.ease;
 
-          //       var tween = Tween(begin: begin, end: end).chain(
-          //         CurveTween(curve: curve),
-          //       );
+                var tween = Tween(begin: begin, end: end).chain(
+                  CurveTween(curve: curve),
+                );
 
-          //       return SlideTransition(
-          //         position: animation.drive(tween),
-          //         child: child,
-          //       );
-          //     },
-          //   ),
-          // );
+                return SlideTransition(
+                  position: animation.drive(tween),
+                  child: child,
+                );
+              },
+            ),
+          );
           // Navigator.pushReplacementNamed(context, 'login');
         } else {
           /* final bottomBloc = ProviderBloc.bottomNavic(context);
