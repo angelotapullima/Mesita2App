@@ -14,11 +14,14 @@ class MesaApi {
     try {
       final url = Uri.parse('$apiBaseURL/api/Negocio/listar_mesas_por_negocio');
 
-      final resp = await http.post(url, body: {
-        'tn': '${_prefs.token}',
-        'id_negocio': '${_prefs.idNegocio}',
-        'app': 'true',
-      });
+      final resp = await http.post(
+        url,
+        body: {
+          'tn': _prefs.token,
+          'id_negocio': _prefs.idNegocio,
+          'app': 'true',
+        },
+      );
 
       final decodedData = json.decode(resp.body);
       print(decodedData);

@@ -49,21 +49,23 @@ class _HomeState extends State<Home> {
                 right: _getPanelWhite(bloc.categoryProductState),
                 top: 0,
                 bottom: 0,
-                child: Container(
-                  decoration: BoxDecoration(
-                    color: Color(0xffededed),
-                    borderRadius: BorderRadius.only(
-                      topLeft: (bloc.categoryProductState == PanelIniciostate.open) ? Radius.circular(35) : Radius.circular(0),
-                      bottomLeft: (bloc.categoryProductState == PanelIniciostate.open) ? Radius.circular(35) : Radius.circular(0),
-                    ),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.only(
+                    topLeft: (bloc.categoryProductState == PanelIniciostate.open) ? Radius.circular(35) : Radius.circular(0),
+                    bottomLeft: (bloc.categoryProductState == PanelIniciostate.open) ? Radius.circular(35) : Radius.circular(0),
                   ),
-                  width: ScreenUtil().setWidth(375),
-                  height: double.infinity,
-                  child: (bloc.optionsInicio == OptionsInicio.table)
-                      ? MesasPage()
-                      : (bloc.optionsInicio == OptionsInicio.comida)
-                          ? ComidasPage()
-                          : Container(),
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: Color(0xffededed),
+                    ),
+                    width: ScreenUtil().setWidth(375),
+                    height: double.infinity,
+                    child: (bloc.optionsInicio == OptionsInicio.table)
+                        ? MesasPage()
+                        : (bloc.optionsInicio == OptionsInicio.comida)
+                            ? ComidasPage()
+                            : Container(),
+                  ),
                 ),
               ),
               Positioned(
