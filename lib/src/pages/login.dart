@@ -1,6 +1,11 @@
+import 'dart:io';
+
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:mesita_aplication_2/src/api/login_api.dart';
+import 'package:mesita_aplication_2/src/pages/Comidas/comidas_page.dart';
 
 enum PageMostrar { inicioSesion, registro }
 
@@ -14,6 +19,8 @@ class Login extends StatefulWidget {
 class _LoginState extends State<Login> {
   PageMostrar _currentPage = PageMostrar.registro;
   bool _passwordVisible;
+  String mensaje = '';
+  final _controller = ControllerNotifier();
 
   @override
   void initState() {
@@ -131,13 +138,35 @@ class _LoginState extends State<Login> {
                 child: _currentPage == PageMostrar.inicioSesion ? inicioSe() : registro(),
               ),
             ),
-          )
+          ),
+          AnimatedBuilder(
+              animation: _controller,
+              builder: (_, s) {
+                return (_controller.cargando) ? _mostrarAlert() : Container();
+              })
         ],
       ),
     );
   }
 
+  Widget _mostrarAlert() {
+    return Container(
+      height: double.infinity,
+      width: double.infinity,
+      color: Color.fromRGBO(0, 0, 0, 0.5),
+      child: Center(
+        child: (Platform.isAndroid)
+            ? CircularProgressIndicator(
+                color: Color(0xffFF0036),
+              )
+            : CupertinoActivityIndicator(),
+      ),
+    );
+  }
+
   Widget inicioSe() {
+    final TextEditingController _userNameController = TextEditingController();
+    final TextEditingController _passwdController = TextEditingController();
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: ScreenUtil().setWidth(30)),
       child: Column(
@@ -221,6 +250,7 @@ class _LoginState extends State<Login> {
           SizedBox(
             height: ScreenUtil().setHeight(50),
             child: TextField(
+              controller: _userNameController,
               cursorColor: Colors.transparent,
               keyboardType: TextInputType.text,
               maxLines: 1,
@@ -238,7 +268,7 @@ class _LoginState extends State<Login> {
                   hintStyle: const TextStyle(
                     color: Color(0xffa8a7a7),
                   ),
-                  hintText: 'Ingresa tu correo'),
+                  hintText: 'Ingresa tu usuario'),
               enableInteractiveSelection: true,
             ),
           ),
@@ -248,6 +278,7 @@ class _LoginState extends State<Login> {
           SizedBox(
             height: ScreenUtil().setHeight(50),
             child: TextField(
+              controller: _passwdController,
               cursorColor: Colors.transparent,
               keyboardType: TextInputType.text,
               maxLines: 1,
@@ -286,7 +317,47 @@ class _LoginState extends State<Login> {
               color: Colors.red,
               textColor: Colors.white,
               elevation: 10,
-              onPressed: () {},
+              onPressed: () async {
+                _controller.changeCargando(true);
+                _controller.changeMensaje('');
+                if (_userNameController.text.length > 0 && _passwdController.text.length > 0) {
+                  final _loginApi = LoginApi();
+                  final res = await _loginApi.login(_userNameController.text, _passwdController.text);
+
+                  if (res.code == '1') {
+                    Navigator.pushReplacementNamed(context, 'home');
+
+                    Navigator.push(
+                      context,
+                      PageRouteBuilder(
+                        pageBuilder: (context, animation, secondaryAnimation) {
+                          return ComidasPage();
+                        },
+                        transitionsBuilder: (context, animation, secondaryAnimation, child) {
+                          var begin = Offset(0.0, 1.0);
+                          var end = Offset.zero;
+                          var curve = Curves.ease;
+
+                          var tween = Tween(begin: begin, end: end).chain(
+                            CurveTween(curve: curve),
+                          );
+
+                          return SlideTransition(
+                            position: animation.drive(tween),
+                            child: child,
+                          );
+                        },
+                      ),
+                    );
+                    _controller.changeCargando(false);
+                  } else {
+                    _controller.changeMensaje(res.message);
+                  }
+                } else {
+                  _controller.changeMensaje('Complete los campos');
+                }
+                _controller.changeCargando(false);
+              },
               shape: const RoundedRectangleBorder(
                 borderRadius: BorderRadius.all(
                   Radius.circular(20.0),
@@ -294,7 +365,23 @@ class _LoginState extends State<Login> {
               ),
               child: const Text('Continuar'),
             ),
-          )
+          ),
+          SizedBox(
+            height: ScreenUtil().setHeight(8),
+          ),
+          AnimatedBuilder(
+              animation: _controller,
+              builder: (context, snapshot) {
+                return Center(
+                  child: Text(
+                    _controller.mensaje,
+                    style: TextStyle(
+                      color: const Color(0xffa8a7a7),
+                      fontSize: ScreenUtil().setSp(16),
+                    ),
+                  ),
+                );
+              })
         ],
       ),
     );
@@ -516,5 +603,20 @@ class _LoginState extends State<Login> {
         ],
       ),
     );
+  }
+}
+
+class ControllerNotifier extends ChangeNotifier {
+  bool cargando = false;
+  String mensaje = '';
+
+  void changeCargando(bool c) {
+    cargando = c;
+    notifyListeners();
+  }
+
+  void changeMensaje(String m) {
+    mensaje = m;
+    notifyListeners();
   }
 }

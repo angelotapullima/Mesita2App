@@ -1,7 +1,7 @@
 import 'package:shared_preferences/shared_preferences.dart';
 
 class Preferences {
-  static final Preferences _instancia =  Preferences._internal();
+  static final Preferences _instancia = Preferences._internal();
 
   factory Preferences() {
     return _instancia;
@@ -75,14 +75,6 @@ class Preferences {
     _prefs.setString('idNegocio', value);
   }
 
-  get idSucursal {
-    return _prefs.getString('idSucursal');
-  }
-
-  set idSucursal(String value) {
-    _prefs.setString('idSucursal', value);
-  }
-
   get negocioNombre {
     return _prefs.getString('negocioNombre');
   }
@@ -97,14 +89,6 @@ class Preferences {
 
   set negocioImage(String value) {
     _prefs.setString('negocioImage', value);
-  }
-
-  get negocioRuc {
-    return _prefs.getString('negocioRuc');
-  }
-
-  set negocioRuc(String value) {
-    _prefs.setString('negocioRuc', value);
   }
 
   get idRol {
@@ -123,11 +107,35 @@ class Preferences {
     _prefs.setString('rolName', value);
   }
 
-  get pageInit {
-    return _prefs.getString('pageInit');
+  get negocioDireccion {
+    return _prefs.getString('negocioDireccion');
   }
 
-  set pageInit(String value) {
-    _prefs.setString('pageInit', value);
+  set negocioDireccion(String value) {
+    _prefs.setString('negocioDireccion', value);
+  }
+
+  get tipoPlan {
+    return _prefs.getString('tipoPlan');
+  }
+
+  set tipoPlan(String value) {
+    _prefs.setString('tipoPlan', value);
+  }
+
+  get inicioPlan {
+    return _prefs.getString('inicioPlan');
+  }
+
+  set inicioPlan(String value) {
+    _prefs.setString('inicioPlan', value);
+  }
+
+  get estadoPlan {
+    return _prefs.getString('estadoPlan');
+  }
+
+  set estadoPlan(String value) {
+    _prefs.setString('estadoPlan', value);
   }
 }
