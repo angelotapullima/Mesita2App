@@ -42,7 +42,7 @@ class _SplashState extends State<Splash> with AfterLayoutMixin<Splash> {
           await api3.obtenerLineasPorNegocio();
           Navigator.pushReplacementNamed(context, 'home');
 
-          Navigator.push(
+          /* Navigator.push(
             context,
             PageRouteBuilder(
               pageBuilder: (context, animation, secondaryAnimation) {
@@ -63,7 +63,7 @@ class _SplashState extends State<Splash> with AfterLayoutMixin<Splash> {
                 );
               },
             ),
-          );
+          ); */
           // Navigator.pushReplacementNamed(context, 'login');
         }
       },

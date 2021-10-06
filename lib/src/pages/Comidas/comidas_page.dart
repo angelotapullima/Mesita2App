@@ -21,14 +21,11 @@ class _ComidasPageState extends State<ComidasPage> {
       backgroundColor: Color(0XFFE5E5E5),
       appBar: AppBar(
         backgroundColor: Color(0XFFE5E5E5),
-        leading: InkWell(
+         leading: InkWell(
           child: Container(
-            padding: EdgeInsets.symmetric(horizontal: ScreenUtil().setWidth(16)),
-            width: ScreenUtil().setWidth(24),
-            height: ScreenUtil().setHeight(17),
-            child: SvgPicture.asset('assets/food_svg/menu_icon.svg'),
+             
           ),
-        ),
+        ),   
         actions: [
           InkWell(
             onTap: () {

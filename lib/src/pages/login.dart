@@ -6,6 +6,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:mesita_aplication_2/src/api/login_api.dart';
 import 'package:mesita_aplication_2/src/pages/Comidas/comidas_page.dart';
+import 'package:mesita_aplication_2/src/pages/home.dart';
 
 enum PageMostrar { inicioSesion, registro }
 
@@ -331,7 +332,7 @@ class _LoginState extends State<Login> {
                       context,
                       PageRouteBuilder(
                         pageBuilder: (context, animation, secondaryAnimation) {
-                          return ComidasPage();
+                          return Home();
                         },
                         transitionsBuilder: (context, animation, secondaryAnimation, child) {
                           var begin = Offset(0.0, 1.0);

@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:mesita_aplication_2/src/bloc/inicio_bloc.dart';
+import 'package:mesita_aplication_2/src/pages/Comidas/comidas_page.dart';
+import 'package:mesita_aplication_2/src/pages/Mesas/mesas_page.dart';
 
 class Home extends StatefulWidget {
   const Home({Key key}) : super(key: key);
@@ -39,77 +41,6 @@ class _HomeState extends State<Home> {
                 child: Container(
                   width: ScreenUtil().setWidth(150),
                   color: Color(0xffFF0036),
-                  /* child: SafeArea(
-                    child: Padding(
-                      padding: EdgeInsets.only(left: ScreenUtil().setWidth(8)),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          SizedBox(
-                            height: ScreenUtil().setHeight(90),
-                          ),
-                          Container(
-                            height: ScreenUtil().setHeight(40),
-                            width: ScreenUtil().setWidth(35),
-                            child: SvgPicture.asset(
-                              'assets/svg/table_menu.svg',
-                            ),
-                          ),
-                          SizedBox(
-                            height: ScreenUtil().setHeight(50),
-                          ),
-                          Container(
-                            height: ScreenUtil().setHeight(40),
-                            width: ScreenUtil().setWidth(35),
-                            child: SvgPicture.asset(
-                              'assets/svg/pedido_menu.svg',
-                            ),
-                          ),
-                          SizedBox(
-                            height: ScreenUtil().setHeight(50),
-                          ),
-                          Container(
-                            height: ScreenUtil().setHeight(40),
-                            width: ScreenUtil().setWidth(35),
-                            child: SvgPicture.asset(
-                              'assets/svg/comida_menu.svg',
-                            ),
-                          ),
-                          SizedBox(
-                            height: ScreenUtil().setHeight(50),
-                          ),
-                          Container(
-                            height: ScreenUtil().setHeight(40),
-                            width: ScreenUtil().setWidth(35),
-                            child: SvgPicture.asset(
-                              'assets/svg/bebida_menu.svg',
-                            ),
-                          ),
-                          SizedBox(
-                            height: ScreenUtil().setHeight(50),
-                          ),
-                          Container(
-                            height: ScreenUtil().setHeight(40),
-                            width: ScreenUtil().setWidth(35),
-                            child: SvgPicture.asset(
-                              'assets/svg/ventas_menu.svg',
-                            ),
-                          ),
-                          SizedBox(
-                            height: ScreenUtil().setHeight(50),
-                          ),
-                          Container(
-                            height: ScreenUtil().setHeight(40),
-                            width: ScreenUtil().setWidth(35),
-                            child: SvgPicture.asset(
-                              'assets/svg/reportes_menu.svg',
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                 */
                 ),
               ),
               AnimatedPositioned(
@@ -128,12 +59,11 @@ class _HomeState extends State<Home> {
                   ),
                   width: ScreenUtil().setWidth(375),
                   height: double.infinity,
-                  child: Column(
-                    children: [
-
-                      //poner los widget o las pantallas de acuerdo a lo que muestra el bloc optionsInicio
-                    ],
-                  ),
+                  child: (bloc.optionsInicio == OptionsInicio.table)
+                      ? MesasPage()
+                      : (bloc.optionsInicio == OptionsInicio.comida)
+                          ? ComidasPage()
+                          : Container(),
                 ),
               ),
               Positioned(

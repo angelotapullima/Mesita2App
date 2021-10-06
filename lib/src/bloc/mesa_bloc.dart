@@ -4,7 +4,7 @@ import 'package:mesita_aplication_2/src/models/mesa_model.dart';
 import 'package:mesita_aplication_2/src/preferences/preferences.dart';
 import 'package:rxdart/rxdart.dart';
 
-class MesBloc {
+class MesasBloc {
   final _mesasController = BehaviorSubject<List<MesaModel>>();
   final _mesaDatabase = MesaDatabase();
   final _mesaApi = MesaApi();
