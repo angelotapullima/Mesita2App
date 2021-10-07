@@ -61,9 +61,13 @@ class MesaApi {
       );
 
       final decodedData = json.decode(resp.body);
-      print(decodedData);
-      return 1;
+      if (decodedData["result"] == 1) {
+        return 1;
+      } else {
+        return 2;
+      }
     } catch (e) {
+      print(e);
       return 2;
     }
   }

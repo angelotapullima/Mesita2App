@@ -49,6 +49,7 @@ class ProductoLineaApi {
     try {
       int resp;
       final uri = Uri.parse('$apiBaseURL/api/Negocio/guardar_producto');
+      print('${producto.idLinea}');
 
       var multipartFile;
 
@@ -63,6 +64,7 @@ class ProductoLineaApi {
       var request = new http.MultipartRequest("POST", uri);
 
       request.fields["app"] = 'true';
+      request.fields["tn"] = '${_prefs.token}';
       request.fields["id_linea"] = '${producto.idLinea}';
       request.fields["producto_nombre"] = '${producto.productoNombre}';
       request.fields["producto_descripcion"] = '${producto.productoDescripcion}';
@@ -75,14 +77,14 @@ class ProductoLineaApi {
       await request.send().then((response) async {
         // listen for response
         response.stream.transform(utf8.decoder).listen((value) {
-          //final decodedData = json.decode(value);
-          print(value);
-          resp = 1;
-          // if (decodedData['results'] == 1) {
+          final decodedData = json.decode(value);
+          print(decodedData);
 
-          // } else {
-          //   resp = false;
-          // }
+          if (decodedData["result"] == 1) {
+            resp = 1;
+          } else {
+            resp = 2;
+          }
         });
       }).catchError((e) {
         print(e);

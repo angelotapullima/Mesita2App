@@ -1,1 +1,1 @@
-const apiBaseURL = "http://mesita.bufeotec.com";
+const apiBaseURL = "https://mesita.bufeotec.com";
