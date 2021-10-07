@@ -1,9 +1,15 @@
+import 'dart:io';
+
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mesita_aplication_2/src/bloc/provider.dart';
 import 'package:mesita_aplication_2/src/models/mesa_model.dart';
+import 'package:mesita_aplication_2/src/pages/Mesas/modal_agregar_mesa.dart';
+import 'package:mesita_aplication_2/src/preferences/preferences.dart';
 
 class MesasPage extends StatelessWidget {
   const MesasPage({Key key}) : super(key: key);
@@ -12,6 +18,7 @@ class MesasPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final mesasBloc = ProviderBloc.mesas(context);
     mesasBloc.obtenerMesasPorNegocio();
+    final prefs = Preferences();
 
     return Scaffold(
       backgroundColor: Color(0XFFE5E5E5),
@@ -22,7 +29,9 @@ class MesasPage extends StatelessWidget {
         ),
         actions: [
           InkWell(
-            onTap: () {},
+            onTap: () {
+              mesaModal(context);
+            },
             child: Container(
               width: ScreenUtil().setWidth(20),
               height: ScreenUtil().setHeight(20),
@@ -32,12 +41,36 @@ class MesasPage extends StatelessWidget {
           SizedBox(
             width: ScreenUtil().setWidth(24),
           ),
-          Container(
-            width: ScreenUtil().setWidth(32),
-            height: ScreenUtil().setHeight(32),
-            decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              color: Colors.white,
+          InkWell(
+            child: Container(
+              width: ScreenUtil().setWidth(32),
+              height: ScreenUtil().setHeight(32),
+              child: CachedNetworkImage(
+                placeholder: (context, url) => Container(
+                  child: SvgPicture.asset('assets/settings_svg/porfile.svg'),
+                ),
+                errorWidget: (context, url, error) => Container(
+                  child: Container(
+                    child: SvgPicture.asset(
+                      'assets/settings_svg/porfile.svg',
+                    ),
+                  ),
+                ),
+                imageUrl: '${prefs.userImage}',
+                imageBuilder: (context, imageProvider) => Container(
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    border: Border.all(
+                      color: Colors.white,
+                      width: 2,
+                    ),
+                    image: DecorationImage(
+                      image: imageProvider,
+                      //fit: BoxFit.cover,
+                    ),
+                  ),
+                ),
+              ),
             ),
           ),
           SizedBox(
@@ -108,129 +141,157 @@ class MesasPage extends StatelessWidget {
                 ),
               ],
             ),
-            StreamBuilder(
-              stream: mesasBloc.mesasStream,
-              builder: (BuildContext context, AsyncSnapshot<List<MesaModel>> snapsdhot) {
-                return Expanded(
-                  child: GridView.builder(
-                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 2,
-                        childAspectRatio: 1.5,
-                        mainAxisSpacing: 0,
-                        crossAxisSpacing: ScreenUtil().setWidth(10),
-                      ),
-                      itemCount: 13,
-                      itemBuilder: (BuildContext context, int index) {
-                        return LayoutBuilder(builder: (context, constraints) {
-                          return Container(
-                            padding: EdgeInsets.only(
-                              right: ScreenUtil().setWidth(10),
-                              left: ScreenUtil().setWidth(10),
-                            ),
-                            width: constraints.maxWidth,
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Container(
-                                  width: constraints.maxWidth * 0.12,
-                                  child: Padding(
-                                    padding: EdgeInsets.symmetric(vertical: ScreenUtil().setHeight(10)),
-                                    child: Container(
-                                      decoration: BoxDecoration(
-                                        color: (index.isOdd) ? Colors.white : Color(0xffff0036),
-                                        borderRadius: BorderRadius.circular(5),
+            Expanded(
+              child: StreamBuilder(
+                stream: mesasBloc.mesasStream,
+                builder: (BuildContext context, AsyncSnapshot<List<MesaModel>> snapsdhot) {
+                  if (snapsdhot.hasData) {
+                    if (snapsdhot.data.length > 0) {
+                      return GridView.builder(
+                          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: 2,
+                            childAspectRatio: 1.5,
+                            mainAxisSpacing: 0,
+                            crossAxisSpacing: ScreenUtil().setWidth(10),
+                          ),
+                          itemCount: snapsdhot.data.length,
+                          itemBuilder: (BuildContext context, int index) {
+                            return LayoutBuilder(builder: (context, constraints) {
+                              return Container(
+                                padding: EdgeInsets.only(
+                                  right: ScreenUtil().setWidth(10),
+                                  left: ScreenUtil().setWidth(10),
+                                ),
+                                width: constraints.maxWidth,
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Container(
+                                      width: constraints.maxWidth * 0.12,
+                                      child: Padding(
+                                        padding: EdgeInsets.symmetric(vertical: ScreenUtil().setHeight(10)),
+                                        child: Container(
+                                          decoration: BoxDecoration(
+                                            color: (index.isOdd) ? Colors.white : Color(0xffff0036),
+                                            borderRadius: BorderRadius.circular(5),
+                                          ),
+                                          height: constraints.maxHeight * 0.55,
+                                          width: constraints.maxWidth * 0.2,
+                                        ),
                                       ),
-                                      height: constraints.maxHeight * 0.55,
-                                      width: constraints.maxWidth * 0.2,
                                     ),
-                                  ),
-                                ),
-                                SizedBox(
-                                  width: constraints.maxWidth * 0.05,
-                                ),
-                                Container(
-                                  height: constraints.maxHeight - constraints.maxHeight * 0.20,
-                                  width: constraints.maxWidth * 0.52,
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(5),
-                                    gradient: LinearGradient(
-                                      begin: Alignment.bottomLeft,
-                                      end: Alignment.topRight,
-                                      colors: [
-                                        (index.isOdd) ? Colors.white : Color(0xffff6787),
-                                        (index.isOdd) ? Colors.white : Color(0xffff0036),
-                                      ],
+                                    SizedBox(
+                                      width: constraints.maxWidth * 0.05,
+                                    ),
+                                    Container(
+                                      height: constraints.maxHeight - constraints.maxHeight * 0.20,
+                                      width: constraints.maxWidth * 0.52,
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(5),
+                                        gradient: LinearGradient(
+                                          begin: Alignment.bottomLeft,
+                                          end: Alignment.topRight,
+                                          colors: [
+                                            (index.isOdd) ? Colors.white : Color(0xffff6787),
+                                            (index.isOdd) ? Colors.white : Color(0xffff0036),
+                                          ],
 
-                                      //
-                                    ),
-                                    boxShadow: [
-                                      BoxShadow(
-                                        offset: Offset(0, 0),
-                                        blurRadius: 20.0,
-                                        color: (index.isOdd) ? Color(0xff585858).withOpacity(.15) : Color(0xffff0036).withOpacity(.3),
-                                      ),
-                                    ],
-                                  ),
-                                  child: Padding(
-                                    padding: EdgeInsets.symmetric(
-                                      horizontal: ScreenUtil().setWidth(10),
-                                    ),
-                                    child: Column(
-                                      crossAxisAlignment: CrossAxisAlignment.start,
-                                      children: [
-                                        Row(
-                                          children: [
-                                            Text(
-                                              '${index + 1}',
-                                              style: TextStyle(
-                                                fontSize: ScreenUtil().setSp(45),
-                                                color: (index.isOdd) ? Color(0xfff9708d) : Colors.white,
-                                                fontWeight: FontWeight.bold,
-                                              ),
-                                            ),
-                                          ],
+                                          //
                                         ),
-                                        Spacer(),
-                                        Row(
+                                        boxShadow: [
+                                          BoxShadow(
+                                            offset: Offset(0, 0),
+                                            blurRadius: 20.0,
+                                            color: (index.isOdd) ? Color(0xff585858).withOpacity(.15) : Color(0xffff0036).withOpacity(.3),
+                                          ),
+                                        ],
+                                      ),
+                                      child: Padding(
+                                        padding: EdgeInsets.symmetric(
+                                          horizontal: ScreenUtil().setWidth(10),
+                                        ),
+                                        child: Column(
+                                          crossAxisAlignment: CrossAxisAlignment.start,
                                           children: [
+                                            Row(
+                                              children: [
+                                                Text(
+                                                  '${snapsdhot.data[index].idMesa}',
+                                                  style: TextStyle(
+                                                    fontSize: ScreenUtil().setSp(45),
+                                                    color: (index.isOdd) ? Color(0xfff9708d) : Colors.white,
+                                                    fontWeight: FontWeight.bold,
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
                                             Spacer(),
-                                            Text(
-                                              'cap .${index + 1}',
-                                              style: TextStyle(color: (index.isOdd) ? Color(0xff585858) : Colors.white, fontWeight: FontWeight.bold, fontSize: ScreenUtil().setSp(18)),
+                                            Row(
+                                              children: [
+                                                Spacer(),
+                                                Text(
+                                                  'cap .${snapsdhot.data[index].mesaCapacidad}',
+                                                  style: TextStyle(
+                                                      color: (index.isOdd) ? Color(0xff585858) : Colors.white,
+                                                      fontWeight: FontWeight.bold,
+                                                      fontSize: ScreenUtil().setSp(18)),
+                                                ),
+                                              ],
                                             ),
                                           ],
                                         ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                                SizedBox(
-                                  width: constraints.maxWidth * 0.05,
-                                ),
-                                Container(
-                                  width: constraints.maxWidth * 0.12,
-                                  child: Padding(
-                                    padding: EdgeInsets.symmetric(vertical: ScreenUtil().setHeight(10)),
-                                    child: Container(
-                                      decoration: BoxDecoration(
-                                        color: (index.isOdd) ? Colors.white : Color(0xffff0036),
-                                        borderRadius: BorderRadius.circular(5),
                                       ),
-                                      height: constraints.maxHeight * 0.55,
-                                      width: constraints.maxWidth * 0.2,
                                     ),
-                                  ),
+                                    SizedBox(
+                                      width: constraints.maxWidth * 0.05,
+                                    ),
+                                    Container(
+                                      width: constraints.maxWidth * 0.12,
+                                      child: Padding(
+                                        padding: EdgeInsets.symmetric(vertical: ScreenUtil().setHeight(10)),
+                                        child: Container(
+                                          decoration: BoxDecoration(
+                                            color: (index.isOdd) ? Colors.white : Color(0xffff0036),
+                                            borderRadius: BorderRadius.circular(5),
+                                          ),
+                                          height: constraints.maxHeight * 0.55,
+                                          width: constraints.maxWidth * 0.2,
+                                        ),
+                                      ),
+                                    ),
+                                  ],
                                 ),
-                              ],
-                            ),
-                          );
-                        });
-                      }),
-                );
-              },
+                              );
+                            });
+                          });
+                    } else {
+                      return Center(
+                        child: Text('Aún no se agregaron mesas'),
+                      );
+                    }
+                  } else {
+                    return _showLoading();
+                  }
+                },
+              ),
             ),
           ],
         ),
+      ),
+    );
+  }
+
+  _showLoading() {
+    return Container(
+      height: double.infinity,
+      width: double.infinity,
+      color: Color.fromRGBO(0, 0, 0, 0.5),
+      child: Center(
+        child: (Platform.isAndroid)
+            ? CircularProgressIndicator(
+                color: Color(0XFFFF0036),
+              )
+            : CupertinoActivityIndicator(),
       ),
     );
   }

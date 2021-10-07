@@ -1,16 +1,14 @@
-
 import 'package:flutter/material.dart';
+import 'package:mesita_aplication_2/src/bloc/linea_bloc.dart';
 import 'package:mesita_aplication_2/src/bloc/mesa_bloc.dart';
-
+import 'package:mesita_aplication_2/src/bloc/productos_linea_bloc.dart';
 
 class ProviderBloc extends InheritedWidget {
-
-
   static ProviderBloc _instancia;
 
-
   final mesasBloc = MesasBloc();
-
+  final lineasBloc = LineaBloc();
+  final productosLineaBloc = ProductosLineaBloc();
 
   factory ProviderBloc({Key key, Widget child}) {
     if (_instancia == null) {
@@ -25,9 +23,15 @@ class ProviderBloc extends InheritedWidget {
   @override
   bool updateShouldNotify(InheritedWidget oldWidget) => true;
 
-
   static MesasBloc mesas(BuildContext context) {
     return (context.dependOnInheritedWidgetOfExactType<ProviderBloc>()).mesasBloc;
   }
 
+  static LineaBloc lineas(BuildContext context) {
+    return (context.dependOnInheritedWidgetOfExactType<ProviderBloc>()).lineasBloc;
+  }
+
+  static ProductosLineaBloc productosLinea(BuildContext context) {
+    return (context.dependOnInheritedWidgetOfExactType<ProviderBloc>()).productosLineaBloc;
+  }
 }

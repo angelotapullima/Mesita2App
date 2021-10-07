@@ -8,8 +8,8 @@ class MesaDatabase {
     try {
       final db = await dbprovider.database;
 
-      final res = await db.rawInsert("INSERT OR REPLACE INTO Mesas (idMesa,idNegocio,mesaNombre,mesaEstado) "
-          "VALUES ('${mesa.idMesa}','${mesa.idNegocio}','${mesa.mesaNombre}','${mesa.mesaEstado}')");
+      final res = await db.rawInsert("INSERT OR REPLACE INTO Mesas (idMesa,idNegocio,mesaNombre,mesaCapacidad, mesaEstado) "
+          "VALUES ('${mesa.idMesa}','${mesa.idNegocio}','${mesa.mesaNombre}','${mesa.mesaCapacidad}','${mesa.mesaEstado}')");
 
       return res;
     } catch (exception) {

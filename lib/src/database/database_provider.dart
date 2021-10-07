@@ -31,6 +31,7 @@ class DatabaseProvider {
           ' idMesa TEXT PRIMARY KEY,'
           ' idNegocio TEXT,'
           ' mesaNombre TEXT,'
+          ' mesaCapacidad TEXT,'
           ' mesaEstado TEXT'
           ')');
 

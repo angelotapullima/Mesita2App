@@ -5,15 +5,38 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:image_cropper/image_cropper.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:keyboard_actions/keyboard_actions.dart';
+import 'package:mesita_aplication_2/src/api/linea_api.dart';
+import 'package:mesita_aplication_2/src/api/producto_linea_api.dart';
+import 'package:mesita_aplication_2/src/bloc/linea_bloc.dart';
+import 'package:mesita_aplication_2/src/bloc/provider.dart';
+import 'package:mesita_aplication_2/src/models/linea_model.dart';
+import 'package:mesita_aplication_2/src/models/producto_linea_model.dart';
 
 class ChangeController extends ChangeNotifier {
   bool cargando = false;
   String text = '';
   bool boton = false;
+  File image;
+
+  String idLinea = '';
+  String linea = 'Seleccionar categoría de comida';
+
+  void changeLinea(String id, String l) {
+    idLinea = id;
+    linea = l;
+    notifyListeners();
+  }
 
   void changeBoton(bool b) {
     boton = b;
+    notifyListeners();
+  }
+
+  void changeImage(File i) {
+    image = i;
     notifyListeners();
   }
 
@@ -177,6 +200,8 @@ void addModal(BuildContext context) {
 }
 
 void _newFoodModal(BuildContext context) {
+  final lineasBloc = ProviderBloc.lineas(context);
+  lineasBloc.obtenerLineasPorNegocio();
   final _controller = ChangeController();
 
   TextEditingController _precioController = new TextEditingController();
@@ -186,6 +211,58 @@ void _newFoodModal(BuildContext context) {
   FocusNode _focus1 = FocusNode();
   FocusNode _focus2 = FocusNode();
   FocusNode _focus3 = FocusNode();
+
+  final picker = ImagePicker();
+  Future<Null> _cropImage(filePath) async {
+    File croppedImage = await ImageCropper.cropImage(
+        sourcePath: filePath,
+        aspectRatioPresets: Platform.isAndroid
+            ? [
+                CropAspectRatioPreset.square,
+                CropAspectRatioPreset.ratio3x2,
+                CropAspectRatioPreset.original,
+                CropAspectRatioPreset.ratio4x3,
+                CropAspectRatioPreset.ratio16x9
+              ]
+            : [
+                CropAspectRatioPreset.original,
+                CropAspectRatioPreset.square,
+                CropAspectRatioPreset.ratio3x2,
+                CropAspectRatioPreset.ratio4x3,
+                CropAspectRatioPreset.ratio5x3,
+                CropAspectRatioPreset.ratio5x4,
+                CropAspectRatioPreset.ratio7x5,
+                CropAspectRatioPreset.ratio16x9
+              ],
+        androidUiSettings: AndroidUiSettings(
+            toolbarTitle: 'Cortar Imagen',
+            toolbarColor: Color(0XFFFF0036),
+            toolbarWidgetColor: Colors.white,
+            initAspectRatio: CropAspectRatioPreset.original,
+            showCropGrid: true,
+            lockAspectRatio: false),
+        iosUiSettings: IOSUiSettings(minimumAspectRatio: 1.0, title: 'Cortar Imagen'));
+    if (croppedImage != null) {
+      _controller.changeImage(croppedImage);
+    }
+  }
+
+  Future getImageCamera() async {
+    final pickedFile = await picker.getImage(source: ImageSource.camera, imageQuality: 70);
+
+    if (pickedFile != null) {
+      _cropImage(pickedFile.path);
+    }
+  }
+
+  Future getImageGallery() async {
+    final pickedFile = await picker.getImage(source: ImageSource.gallery, imageQuality: 70);
+
+    if (pickedFile != null) {
+      _cropImage(pickedFile.path);
+    }
+    /**/
+  }
 
   showModalBottomSheet(
       context: context,
@@ -253,47 +330,157 @@ void _newFoodModal(BuildContext context) {
                                   Row(
                                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                     children: [
-                                      Container(
-                                        height: ScreenUtil().setHeight(150),
-                                        width: ScreenUtil().setWidth(150),
-                                        decoration: BoxDecoration(
-                                          color: Color(0XFFEEEEEE),
-                                          shape: BoxShape.circle,
-                                          boxShadow: [
-                                            BoxShadow(
-                                              color: Color.fromRGBO(88, 88, 88, 0.3),
-                                              blurRadius: 20,
-                                            ),
-                                          ],
-                                        ),
-                                        child: Stack(
-                                          children: [
-                                            Align(
-                                              alignment: Alignment.center,
-                                              child: Container(
-                                                  height: ScreenUtil().setHeight(120),
-                                                  width: ScreenUtil().setWidth(120),
-                                                  decoration: BoxDecoration(
-                                                    color: Color(0XFFEEEEEE),
-                                                    shape: BoxShape.circle,
-                                                    boxShadow: [
-                                                      BoxShadow(
-                                                        offset: Offset(-1, -1),
-                                                        color: Color.fromRGBO(0, 0, 0, 0.2),
-                                                        blurRadius: 5,
-                                                      ),
-                                                    ],
+                                      InkWell(
+                                        onTap: () {
+                                          showModalBottomSheet(
+                                            context: context,
+                                            isScrollControlled: true,
+                                            backgroundColor: Colors.transparent,
+                                            builder: (context) {
+                                              return GestureDetector(
+                                                onTap: () => Navigator.of(context).pop(),
+                                                child: Container(
+                                                  color: Color.fromRGBO(0, 0, 0, 0.001),
+                                                  child: GestureDetector(
+                                                    onTap: () {},
+                                                    child: DraggableScrollableSheet(
+                                                      initialChildSize: 0.2,
+                                                      minChildSize: 0.2,
+                                                      maxChildSize: 0.2,
+                                                      builder: (_, controller) {
+                                                        return Container(
+                                                          decoration: BoxDecoration(
+                                                            color: Colors.white,
+                                                            borderRadius: BorderRadius.only(
+                                                              topLeft: const Radius.circular(25.0),
+                                                              topRight: const Radius.circular(25.0),
+                                                            ),
+                                                          ),
+                                                          child: Padding(
+                                                            padding: EdgeInsets.symmetric(
+                                                              horizontal: ScreenUtil().setWidth(24),
+                                                            ),
+                                                            child: Column(
+                                                              crossAxisAlignment: CrossAxisAlignment.start,
+                                                              children: [
+                                                                SizedBox(
+                                                                  height: ScreenUtil().setHeight(24),
+                                                                ),
+                                                                InkWell(
+                                                                  onTap: () {
+                                                                    Navigator.pop(context);
+                                                                    getImageGallery();
+                                                                  },
+                                                                  child: Row(
+                                                                    children: [
+                                                                      Text(
+                                                                        'Seleccionar foto',
+                                                                        style: GoogleFonts.poppins(
+                                                                          fontStyle: FontStyle.normal,
+                                                                          color: Color(0XFF585858),
+                                                                          fontWeight: FontWeight.w400,
+                                                                          fontSize: ScreenUtil().setSp(16),
+                                                                          letterSpacing: ScreenUtil().setSp(0.016),
+                                                                        ),
+                                                                      ),
+                                                                      Spacer(),
+                                                                      Icon(
+                                                                        Icons.photo_album_outlined,
+                                                                        color: Color(0XFFFF0036),
+                                                                        size: ScreenUtil().setHeight(24),
+                                                                      )
+                                                                    ],
+                                                                  ),
+                                                                ),
+                                                                Divider(
+                                                                  thickness: 1,
+                                                                ),
+                                                                SizedBox(
+                                                                  height: ScreenUtil().setHeight(10),
+                                                                ),
+                                                                InkWell(
+                                                                  onTap: () {
+                                                                    Navigator.pop(context);
+                                                                    getImageCamera();
+                                                                  },
+                                                                  child: Row(
+                                                                    children: [
+                                                                      Text(
+                                                                        'Tomar foto',
+                                                                        style: GoogleFonts.poppins(
+                                                                          fontStyle: FontStyle.normal,
+                                                                          fontWeight: FontWeight.w400,
+                                                                          color: Color(0XFF585858),
+                                                                          fontSize: ScreenUtil().setSp(16),
+                                                                          letterSpacing: ScreenUtil().setSp(0.016),
+                                                                        ),
+                                                                      ),
+                                                                      Spacer(),
+                                                                      Icon(
+                                                                        Icons.photo_camera_outlined,
+                                                                        color: Color(0XFFFF0036),
+                                                                        size: ScreenUtil().setHeight(24),
+                                                                      )
+                                                                    ],
+                                                                  ),
+                                                                ),
+                                                                Divider(
+                                                                  thickness: 1,
+                                                                ),
+                                                              ],
+                                                            ),
+                                                          ),
+                                                        );
+                                                      },
+                                                    ),
                                                   ),
-                                                  child: SvgPicture.asset('assets/food_svg/food.svg')),
-                                            ),
-                                            Align(
-                                              alignment: Alignment.bottomRight,
-                                              child: Container(
-                                                  height: ScreenUtil().setHeight(23),
-                                                  width: ScreenUtil().setWidth(23),
-                                                  child: SvgPicture.asset('assets/food_svg/add_image.svg')),
-                                            ),
-                                          ],
+                                                ),
+                                              );
+                                            },
+                                          );
+                                        },
+                                        child: Container(
+                                          height: ScreenUtil().setHeight(150),
+                                          width: ScreenUtil().setWidth(150),
+                                          decoration: BoxDecoration(
+                                            color: Color(0XFFEEEEEE),
+                                            shape: BoxShape.circle,
+                                            boxShadow: [
+                                              BoxShadow(
+                                                color: Color.fromRGBO(88, 88, 88, 0.3),
+                                                blurRadius: 20,
+                                              ),
+                                            ],
+                                          ),
+                                          child: Stack(
+                                            children: [
+                                              Align(
+                                                alignment: Alignment.center,
+                                                child: Container(
+                                                    height: ScreenUtil().setHeight(120),
+                                                    width: ScreenUtil().setWidth(120),
+                                                    decoration: BoxDecoration(
+                                                      color: Color(0XFFEEEEEE),
+                                                      shape: BoxShape.circle,
+                                                      boxShadow: [
+                                                        BoxShadow(
+                                                          offset: Offset(-1, -1),
+                                                          color: Color.fromRGBO(0, 0, 0, 0.2),
+                                                          blurRadius: 5,
+                                                        ),
+                                                      ],
+                                                    ),
+                                                    child: SvgPicture.asset('assets/food_svg/food.svg')),
+                                              ),
+                                              Align(
+                                                alignment: Alignment.bottomRight,
+                                                child: Container(
+                                                    height: ScreenUtil().setHeight(23),
+                                                    width: ScreenUtil().setWidth(23),
+                                                    child: SvgPicture.asset('assets/food_svg/add_image.svg')),
+                                              ),
+                                            ],
+                                          ),
                                         ),
                                       ),
                                       Container(
@@ -313,7 +500,10 @@ void _newFoodModal(BuildContext context) {
                                               controller: _precioController,
                                               maxLines: 1,
                                               onChanged: (value) {
-                                                if (value.length > 0 && _nombreController.text.length > 0) {
+                                                if (value.length > 0 &&
+                                                    _nombreController.text.length > 0 &&
+                                                    _descripcionController.text.length > 0 &&
+                                                    _controller.idLinea != '') {
                                                   _controller.changeBoton(true);
                                                 } else {
                                                   _controller.changeBoton(false);
@@ -374,7 +564,10 @@ void _newFoodModal(BuildContext context) {
                                     maxLines: 1,
                                     keyboardType: TextInputType.text,
                                     onChanged: (value) {
-                                      if (value.length > 0 && _precioController.text.length > 0) {
+                                      if (value.length > 0 &&
+                                          _precioController.text.length > 0 &&
+                                          _descripcionController.text.length > 0 &&
+                                          _controller.idLinea != '') {
                                         _controller.changeBoton(true);
                                       } else {
                                         _controller.changeBoton(false);
@@ -422,31 +615,152 @@ void _newFoodModal(BuildContext context) {
                                     ),
                                   ),
                                   InkWell(
-                                    child: Container(
-                                      height: ScreenUtil().setHeight(48),
-                                      width: double.infinity,
-                                      decoration: BoxDecoration(color: Color(0XFFEDEDED), borderRadius: BorderRadius.circular(15)),
-                                      padding: EdgeInsets.symmetric(horizontal: ScreenUtil().setWidth(10)),
-                                      child: Row(
-                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          Text(
-                                            'Seleccionar categoria de comida',
-                                            style: TextStyle(
-                                              color: Color(0XFFBEBEBE),
-                                              fontWeight: FontWeight.w400,
-                                              fontSize: ScreenUtil().setSp(16),
-                                              fontStyle: FontStyle.normal,
+                                    onTap: () {
+                                      showModalBottomSheet(
+                                        context: context,
+                                        isScrollControlled: true,
+                                        backgroundColor: Colors.transparent,
+                                        builder: (context) {
+                                          return StreamBuilder(
+                                              stream: lineasBloc.lineasStream,
+                                              builder: (BuildContext context, AsyncSnapshot<List<LineaModel>> snapshot) {
+                                                if (snapshot.hasData && snapshot.data.length >= 0) {
+                                                  return GestureDetector(
+                                                    onTap: () => Navigator.of(context).pop(),
+                                                    child: Container(
+                                                      color: Color.fromRGBO(0, 0, 0, 0.001),
+                                                      child: GestureDetector(
+                                                        onTap: () {},
+                                                        child: DraggableScrollableSheet(
+                                                          initialChildSize: 0.9,
+                                                          minChildSize: 0.2,
+                                                          maxChildSize: 0.9,
+                                                          builder: (_, controller) {
+                                                            return Container(
+                                                              decoration: BoxDecoration(
+                                                                color: Colors.white,
+                                                                borderRadius: BorderRadius.only(
+                                                                  topLeft: const Radius.circular(30),
+                                                                  topRight: const Radius.circular(30),
+                                                                ),
+                                                              ),
+                                                              child: Padding(
+                                                                padding: EdgeInsets.symmetric(
+                                                                    vertical: ScreenUtil().setHeight(24), horizontal: ScreenUtil().setWidth(24)),
+                                                                child: Column(
+                                                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                                                  children: [
+                                                                    Row(
+                                                                      children: [
+                                                                        IconButton(
+                                                                          icon: Icon(
+                                                                            Icons.arrow_back_ios,
+                                                                          ),
+                                                                          iconSize: ScreenUtil().setSp(20),
+                                                                          onPressed: () => Navigator.of(context).pop(),
+                                                                        ),
+                                                                        SizedBox(width: ScreenUtil().setWidth(30)),
+                                                                        Text(
+                                                                          'Seleccione una línea',
+                                                                          textAlign: TextAlign.center,
+                                                                          style: GoogleFonts.poppins(
+                                                                            color: Color(0XFF585858),
+                                                                            fontStyle: FontStyle.normal,
+                                                                            fontWeight: FontWeight.w700,
+                                                                            fontSize: ScreenUtil().setSp(18),
+                                                                          ),
+                                                                        ),
+                                                                      ],
+                                                                    ),
+                                                                    Expanded(
+                                                                      child: ListView.builder(
+                                                                        itemCount: snapshot.data.length,
+                                                                        shrinkWrap: true,
+                                                                        itemBuilder: (context, index2) {
+                                                                          return Column(
+                                                                            children: [
+                                                                              InkWell(
+                                                                                onTap: () {
+                                                                                  _controller.changeLinea(snapshot.data[index2].idLinea,
+                                                                                      snapshot.data[index2].lineaNombre);
+                                                                                  if (_precioController.text.length > 0 &&
+                                                                                      _nombreController.text.length > 0 &&
+                                                                                      _descripcionController.text.length > 0 &&
+                                                                                      _controller.idLinea != '') {
+                                                                                    _controller.changeBoton(true);
+                                                                                  } else {
+                                                                                    _controller.changeBoton(false);
+                                                                                  }
+                                                                                  Navigator.pop(context);
+                                                                                },
+                                                                                child: Row(
+                                                                                  children: [
+                                                                                    SizedBox(
+                                                                                      width: ScreenUtil().setWidth(8),
+                                                                                    ),
+                                                                                    Text(
+                                                                                      '${snapshot.data[index2].lineaNombre}',
+                                                                                      style: GoogleFonts.poppins(
+                                                                                        color: Color(0XFF585858),
+                                                                                        fontWeight: FontWeight.w500,
+                                                                                        fontSize: ScreenUtil().setSp(16),
+                                                                                        letterSpacing: ScreenUtil().setSp(0.016),
+                                                                                      ),
+                                                                                    ),
+                                                                                  ],
+                                                                                ),
+                                                                              ),
+                                                                              Divider(),
+                                                                            ],
+                                                                          );
+                                                                        },
+                                                                      ),
+                                                                    ),
+                                                                  ],
+                                                                ),
+                                                              ),
+                                                            );
+                                                          },
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  );
+                                                } else {
+                                                  return Container();
+                                                }
+                                              });
+                                        },
+                                      );
+                                    },
+                                    child: AnimatedBuilder(
+                                        animation: _controller,
+                                        builder: (context, snapshot) {
+                                          return Container(
+                                            height: ScreenUtil().setHeight(48),
+                                            width: double.infinity,
+                                            decoration: BoxDecoration(color: Color(0XFFEDEDED), borderRadius: BorderRadius.circular(15)),
+                                            padding: EdgeInsets.symmetric(horizontal: ScreenUtil().setWidth(10)),
+                                            child: Row(
+                                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                              children: [
+                                                Text(
+                                                  _controller.linea,
+                                                  style: TextStyle(
+                                                    color: (_controller.idLinea != '') ? Color(0XFF585858) : Color(0XFFBEBEBE),
+                                                    fontWeight: FontWeight.w400,
+                                                    fontSize: ScreenUtil().setSp(16),
+                                                    fontStyle: FontStyle.normal,
+                                                  ),
+                                                ),
+                                                Icon(
+                                                  Icons.arrow_drop_down,
+                                                  size: ScreenUtil().setHeight(20),
+                                                  color: Color(0XFF585858),
+                                                ),
+                                              ],
                                             ),
-                                          ),
-                                          Icon(
-                                            Icons.arrow_drop_down,
-                                            size: ScreenUtil().setHeight(20),
-                                            color: Color(0XFF585858),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
+                                          );
+                                        }),
                                   ),
                                   SizedBox(height: ScreenUtil().setHeight(8)),
                                   Text(
@@ -463,7 +777,10 @@ void _newFoodModal(BuildContext context) {
                                     maxLines: null,
                                     keyboardType: TextInputType.multiline,
                                     onChanged: (value) {
-                                      if (value.length > 0 && _precioController.text.length > 0) {
+                                      if (value.length > 0 &&
+                                          _precioController.text.length > 0 &&
+                                          _nombreController.text.length > 0 &&
+                                          _controller.idLinea != '') {
                                         _controller.changeBoton(true);
                                       } else {
                                         _controller.changeBoton(false);
@@ -506,9 +823,24 @@ void _newFoodModal(BuildContext context) {
                                     onTap: () async {
                                       _controller.changeCargando(true);
                                       _controller.changeText('');
-                                      if (_controller.boton) {}
+                                      if (_controller.boton) {
+                                        final _productoLineaApi = ProductoLineaApi();
+                                        ProductoLineaModel producto = ProductoLineaModel();
+                                        producto.idLinea = _controller.idLinea;
+                                        producto.productoNombre = _nombreController.text;
+                                        producto.productoPrecio = _precioController.text;
+                                        producto.productoDescripcion = _descripcionController.text;
 
-                                      // }
+                                        final res = await _productoLineaApi.agregarNuevoProductoPorLinea(_controller.image, producto);
+                                        if (res == 1) {
+                                          final productosLineaBloc = ProviderBloc.productosLinea(context);
+                                          productosLineaBloc.obtenerProductosPorLinea(_controller.idLinea);
+                                          Navigator.pop(context);
+                                        } else {
+                                          _controller.changeText('Ocurrió un error. inténtelo nuevamente');
+                                        }
+                                      }
+
                                       _controller.changeCargando(false);
                                     },
                                     child: AnimatedBuilder(
@@ -597,7 +929,7 @@ void _newFoodModal(BuildContext context) {
 void _addCategoryModal(BuildContext context) {
   final _controller = ChangeController();
 
-  TextEditingController _precioController = new TextEditingController();
+  TextEditingController _nombreLineaController = new TextEditingController();
 
   FocusNode _focus1 = FocusNode();
 
@@ -672,7 +1004,7 @@ void _addCategoryModal(BuildContext context) {
                                   ),
                                   TextField(
                                     focusNode: _focus1,
-                                    controller: _precioController,
+                                    controller: _nombreLineaController,
                                     maxLines: 1,
                                     onChanged: (value) {
                                       if (value.length > 0) {
@@ -681,7 +1013,7 @@ void _addCategoryModal(BuildContext context) {
                                         _controller.changeBoton(false);
                                       }
                                     },
-                                    keyboardType: TextInputType.number,
+                                    keyboardType: TextInputType.text,
                                     decoration: InputDecoration(
                                       hintText: 'Ingrese nombre de la categoría',
                                       hintStyle: TextStyle(
@@ -719,9 +1051,18 @@ void _addCategoryModal(BuildContext context) {
                                     onTap: () async {
                                       _controller.changeCargando(true);
                                       _controller.changeText('');
-                                      if (_controller.boton) {}
+                                      if (_controller.boton) {
+                                        final _lineaApi = LineaApi();
+                                        final res = await _lineaApi.agregarNuevaLinea(_nombreLineaController.text);
+                                        if (res == 1) {
+                                          final lineasBloc = ProviderBloc.lineas(context);
+                                          lineasBloc.obtenerLineasPorNegocio();
+                                          Navigator.pop(context);
+                                        } else {
+                                          _controller.changeText('Ocurrió un error, inténtelo nuevamente');
+                                        }
+                                      }
 
-                                      // }
                                       _controller.changeCargando(false);
                                     },
                                     child: AnimatedBuilder(

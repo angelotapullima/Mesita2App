@@ -21,7 +21,6 @@ class LineaApi {
       });
 
       final decodedData = json.decode(resp.body);
-      print(decodedData);
 
       if (decodedData['result'].length > 0) {
         for (var i = 0; i < decodedData['result'].length; i++) {
@@ -38,6 +37,26 @@ class LineaApi {
       }
     } catch (e) {
       return false;
+    }
+  }
+
+  Future<int> agregarNuevaLinea(String nombreLinea) async {
+    try {
+      final url = Uri.parse('$apiBaseURL/api/Negocio/guardar_linea');
+
+      final resp = await http.post(url, body: {
+        'tn': '${_prefs.token}',
+        'id_negocio': '${_prefs.idNegocio}',
+        'linea_nombre': '$nombreLinea',
+        'app': 'true',
+      });
+
+      final decodedData = json.decode(resp.body);
+      print(decodedData);
+
+      return 1;
+    } catch (e) {
+      return 2;
     }
   }
 }

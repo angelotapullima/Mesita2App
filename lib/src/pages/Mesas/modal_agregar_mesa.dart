@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:keyboard_actions/keyboard_actions.dart';
+import 'package:mesita_aplication_2/src/api/mesa_api.dart';
+import 'package:mesita_aplication_2/src/bloc/provider.dart';
 
 class ChangeController extends ChangeNotifier {
   bool cargando = false;
@@ -87,7 +89,7 @@ void mesaModal(BuildContext context) {
                                   ),
                                   Center(
                                     child: Text(
-                                      'Editar mesa',
+                                      'Agregar mesa',
                                       style: GoogleFonts.poppins(
                                         color: Color(0XFFFF0036),
                                         fontWeight: FontWeight.w600,
@@ -208,9 +210,18 @@ void mesaModal(BuildContext context) {
                                     onTap: () async {
                                       _controller.changeCargando(true);
                                       _controller.changeText('');
-                                      if (_controller.boton) {}
+                                      if (_controller.boton) {
+                                        final _mesaApi = MesaApi();
+                                        final res = await _mesaApi.agregarNuevaMesa(_numberTableController.text, _capacityController.text);
+                                        if (res == 1) {
+                                          final mesasBloc = ProviderBloc.mesas(context);
+                                          mesasBloc.obtenerMesasPorNegocio();
+                                          Navigator.pop(context);
+                                        } else {
+                                          _controller.changeText('Ocurrió un error, inténtelo nuevamente');
+                                        }
+                                      }
 
-                                      // }
                                       _controller.changeCargando(false);
                                     },
                                     child: AnimatedBuilder(

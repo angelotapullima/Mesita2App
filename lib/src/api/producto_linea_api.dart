@@ -1,4 +1,6 @@
 import 'dart:convert';
+import 'dart:io';
+import 'package:path/path.dart';
 
 import 'package:http/http.dart' as http;
 import 'package:mesita_aplication_2/src/database/productos_linea_database.dart';
@@ -40,6 +42,56 @@ class ProductoLineaApi {
       }
     } catch (e) {
       return false;
+    }
+  }
+
+  Future<int> agregarNuevoProductoPorLinea(File _image, ProductoLineaModel producto) async {
+    try {
+      int resp;
+      final uri = Uri.parse('$apiBaseURL/api/Negocio/guardar_producto');
+
+      var multipartFile;
+
+      if (_image != null) {
+        var stream = new http.ByteStream(Stream.castFrom(_image.openRead()));
+
+        var length = await _image.length();
+
+        multipartFile = new http.MultipartFile('imagen', stream, length, filename: basename(_image.path));
+      }
+
+      var request = new http.MultipartRequest("POST", uri);
+
+      request.fields["app"] = 'true';
+      request.fields["id_linea"] = '${producto.idLinea}';
+      request.fields["producto_nombre"] = '${producto.productoNombre}';
+      request.fields["producto_descripcion"] = '${producto.productoDescripcion}';
+      request.fields["producto_precio"] = '${producto.productoPrecio}';
+
+      if (_image != null) {
+        request.files.add(multipartFile);
+      }
+
+      await request.send().then((response) async {
+        // listen for response
+        response.stream.transform(utf8.decoder).listen((value) {
+          //final decodedData = json.decode(value);
+          print(value);
+          resp = 1;
+          // if (decodedData['results'] == 1) {
+
+          // } else {
+          //   resp = false;
+          // }
+        });
+      }).catchError((e) {
+        print(e);
+        return 2;
+      });
+
+      return resp;
+    } catch (e) {
+      return 2;
     }
   }
 }
