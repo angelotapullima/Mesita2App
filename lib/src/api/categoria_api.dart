@@ -15,10 +15,13 @@ class CategoriaApi {
       final url = Uri.parse('$apiBaseURL/api/Negocio/listar_categorias');
       print('${_prefs.token}');
 
-      final resp = await http.post(url, body: {
-        'tn': _prefs.token,
-        'app': 'true',
-      });
+      final resp = await http.post(
+        url,
+        body: {
+          'tn': _prefs.token,
+          'app': 'true',
+        },
+      );
 
       final decodedData = json.decode(resp.body);
       print(decodedData);

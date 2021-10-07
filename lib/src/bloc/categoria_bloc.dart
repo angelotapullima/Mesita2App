@@ -10,7 +10,7 @@ class CategoriaBloc {
 
   Stream<List<CategoriaModel>> get categoriasStream => _categoriasController.stream;
 
-  void obtenerCategorias() async {
+  void obtenerCategoriasb() async {
     _categoriasController.sink.add(await _categoriaDatabase.obtenerCategorias());
     await _categoriaApi.obtenerCategorias();
     _categoriasController.sink.add(await _categoriaDatabase.obtenerCategorias());
