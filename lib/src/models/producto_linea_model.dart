@@ -6,6 +6,7 @@ class ProductoLineaModel {
   String productoFoto;
   String productoPrecio;
   String productoEstado;
+  String productoCocina;
 
   ProductoLineaModel({
     this.idProducto,
@@ -15,6 +16,7 @@ class ProductoLineaModel {
     this.productoFoto,
     this.productoPrecio,
     this.productoEstado,
+    this.productoCocina,
   });
 
   factory ProductoLineaModel.fromJson(Map<String, dynamic> json) => ProductoLineaModel(

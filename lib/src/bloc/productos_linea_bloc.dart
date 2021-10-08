@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:mesita_aplication_2/src/api/producto_linea_api.dart';
 import 'package:mesita_aplication_2/src/database/productos_linea_database.dart';
 import 'package:mesita_aplication_2/src/models/producto_linea_model.dart';
@@ -8,13 +9,21 @@ class ProductosLineaBloc {
   final _productoApi = ProductoLineaApi();
 
   final _productosLineaController = BehaviorSubject<List<ProductoLineaModel>>();
+  final _productoController = BehaviorSubject<List<ProductoLineaModel>>();
 
   Stream<List<ProductoLineaModel>> get productosLineaStream => _productosLineaController.stream;
+  Stream<List<ProductoLineaModel>> get productoStream => _productoController.stream;
 
   void obtenerProductosPorLinea(String idLinea) async {
     _productosLineaController.sink.add(await _productoDatabase.obtenerProductosPorIdLinea(idLinea));
     await _productoApi.obtenerProductosPorLinea(idLinea);
     _productosLineaController.sink.add(await _productoDatabase.obtenerProductosPorIdLinea(idLinea));
+  }
+
+  void obtenerProductoPorIdProducto(String idProducto, String idLinea) async {
+    _productoController.sink.add(await _productoDatabase.obtenerProductosPorIdProducto(idProducto));
+    await _productoApi.obtenerProductosPorLinea(idLinea);
+    _productoController.sink.add(await _productoDatabase.obtenerProductosPorIdProducto(idProducto));
   }
 
   dispose() {

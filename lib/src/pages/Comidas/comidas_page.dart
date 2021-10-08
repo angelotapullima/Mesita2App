@@ -9,8 +9,9 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:mesita_aplication_2/src/bloc/provider.dart';
 import 'package:mesita_aplication_2/src/models/linea_model.dart';
 import 'package:mesita_aplication_2/src/models/producto_linea_model.dart';
-import 'package:mesita_aplication_2/src/pages/Comidas/modals_food.dart';
-import 'package:mesita_aplication_2/src/pages/detail_product.dart';
+import 'package:mesita_aplication_2/src/pages/Products/modals_products.dart';
+import 'package:mesita_aplication_2/src/pages/Lineas_Categories/settings_lines_category.dart';
+import 'package:mesita_aplication_2/src/pages/Products/detail_product.dart';
 import 'package:mesita_aplication_2/src/preferences/preferences.dart';
 import 'package:mesita_aplication_2/src/utils/constants.dart';
 
@@ -23,11 +24,12 @@ class ComidasPage extends StatefulWidget {
 
 class _ComidasPageState extends State<ComidasPage> {
   final _controller = CategoryController();
+  final String idCategoria = '1';
   @override
   Widget build(BuildContext context) {
     final prefs = Preferences();
     final lineasBloc = ProviderBloc.lineas(context);
-    lineasBloc.obtenerLineasPorNegocio();
+    lineasBloc.obtenerLineasPorNegocio(idCategoria);
     final productosLineaBloc = ProviderBloc.productosLinea(context);
     return Scaffold(
       backgroundColor: Color(0XFFE5E5E5),
@@ -39,7 +41,7 @@ class _ComidasPageState extends State<ComidasPage> {
         actions: [
           InkWell(
             onTap: () {
-              addModal(context);
+              addModal(context, idCategoria, 'comida');
             },
             child: Container(
               width: ScreenUtil().setWidth(20),
@@ -101,24 +103,60 @@ class _ComidasPageState extends State<ComidasPage> {
           builder: (context, AsyncSnapshot<List<LineaModel>> snapshot) {
             if (snapshot.hasData) {
               if (snapshot.data.length > 0) {
-                var lienas = snapshot.data;
-                productosLineaBloc.obtenerProductosPorLinea(lienas[0].idLinea);
+                var lineas = snapshot.data;
+                productosLineaBloc.obtenerProductosPorLinea(lineas[0].idLinea);
                 return Column(
                   children: [
                     Container(
                       height: ScreenUtil().setHeight(40),
                       child: ListView.builder(
-                        itemCount: lienas.length,
+                        itemCount: lineas.length + 1,
                         shrinkWrap: true,
                         scrollDirection: Axis.horizontal,
                         itemBuilder: (BuildContext context, int index) {
+                          if (index == lineas.length) {
+                            return InkWell(
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  PageRouteBuilder(
+                                    pageBuilder: (context, animation, secondaryAnimation) {
+                                      return SettingsLinesCategory(
+                                        idCategoria: idCategoria,
+                                      );
+                                    },
+                                    transitionsBuilder: (context, animation, secondaryAnimation, child) {
+                                      var begin = Offset(0.0, 1.0);
+                                      var end = Offset.zero;
+                                      var curve = Curves.ease;
+
+                                      var tween = Tween(begin: begin, end: end).chain(
+                                        CurveTween(curve: curve),
+                                      );
+
+                                      return SlideTransition(
+                                        position: animation.drive(tween),
+                                        child: child,
+                                      );
+                                    },
+                                  ),
+                                );
+                              },
+                              child: Container(
+                                margin: EdgeInsets.symmetric(horizontal: ScreenUtil().setWidth(16)),
+                                height: ScreenUtil().setHeight(30),
+                                width: ScreenUtil().setWidth(30),
+                                child: SvgPicture.asset('assets/food_svg/settings_category.svg'),
+                              ),
+                            );
+                          }
                           return AnimatedBuilder(
                               animation: _controller,
                               builder: (_, s) {
                                 return InkWell(
                                   onTap: () {
-                                    //_controller.changeIdSelect(lienas[index].idLinea);
-                                    productosLineaBloc.obtenerProductosPorLinea(lienas[index].idLinea);
+                                    //_controller.changeIdSelect(lineas[index].idLinea);
+                                    productosLineaBloc.obtenerProductosPorLinea(lineas[index].idLinea);
                                     _controller.changeIndex(index);
                                   },
                                   child: Container(
@@ -136,7 +174,7 @@ class _ComidasPageState extends State<ComidasPage> {
                                         ]),
                                     child: Center(
                                         child: Text(
-                                      lienas[index].lineaNombre,
+                                      lineas[index].lineaNombre,
                                       style: TextStyle(
                                         color: (index == _controller.index) ? Colors.white : Color(0xFF585858),
                                         fontSize: ScreenUtil().setSp(14),
@@ -207,11 +245,11 @@ class _ComidasPageState extends State<ComidasPage> {
   }
 
   Widget itemFood(ProductoLineaModel food) {
-    String disponible = 'Disponible';
-    Color color = Colors.green;
-    if (food.productoEstado == '0') {
-      disponible = 'Agotado';
-      color = Colors.red;
+    String disponible = 'Agotado';
+    Color color = Colors.red;
+    if (food.productoEstado == '1') {
+      disponible = 'Disponible';
+      color = Colors.green;
     }
     return InkWell(
       onTap: () {
@@ -219,7 +257,11 @@ class _ComidasPageState extends State<ComidasPage> {
           context,
           PageRouteBuilder(
             pageBuilder: (context, animation, secondaryAnimation) {
-              return DetailProduct(producto: food,);
+              return DetailProduct(
+                producto: food,
+                nameCategory: 'comida',
+                idCategory: idCategoria,
+              );
             },
             transitionsBuilder: (context, animation, secondaryAnimation, child) {
               var begin = Offset(0.0, 1.0);
