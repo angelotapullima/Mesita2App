@@ -24,7 +24,7 @@ class ChangeController extends ChangeNotifier {
   File image;
 
   String idLinea = '';
-  String linea = 'Seleccionar categoría de comida';
+  String linea = 'Seleccionar categoría';
 
   void changeLinea(String id, String l) {
     idLinea = id;
@@ -43,7 +43,7 @@ class ChangeController extends ChangeNotifier {
       }
     } else {
       idLinea = id;
-      linea = 'Seleccionar categoría de comida';
+      linea = 'Seleccionar categoría';
     }
 
     notifyListeners();
@@ -231,58 +231,6 @@ void _newProductModal(BuildContext context, String idCategoria, String nameCateg
   FocusNode _focus2 = FocusNode();
   FocusNode _focus3 = FocusNode();
 
-  final picker = ImagePicker();
-  Future<Null> _cropImage(filePath) async {
-    File croppedImage = await ImageCropper.cropImage(
-        sourcePath: filePath,
-        aspectRatioPresets: Platform.isAndroid
-            ? [
-                CropAspectRatioPreset.square,
-                CropAspectRatioPreset.ratio3x2,
-                CropAspectRatioPreset.original,
-                CropAspectRatioPreset.ratio4x3,
-                CropAspectRatioPreset.ratio16x9
-              ]
-            : [
-                CropAspectRatioPreset.original,
-                CropAspectRatioPreset.square,
-                CropAspectRatioPreset.ratio3x2,
-                CropAspectRatioPreset.ratio4x3,
-                CropAspectRatioPreset.ratio5x3,
-                CropAspectRatioPreset.ratio5x4,
-                CropAspectRatioPreset.ratio7x5,
-                CropAspectRatioPreset.ratio16x9
-              ],
-        androidUiSettings: AndroidUiSettings(
-            toolbarTitle: 'Cortar Imagen',
-            toolbarColor: Color(0XFFFF0036),
-            toolbarWidgetColor: Colors.white,
-            initAspectRatio: CropAspectRatioPreset.original,
-            showCropGrid: true,
-            lockAspectRatio: false),
-        iosUiSettings: IOSUiSettings(minimumAspectRatio: 1.0, title: 'Cortar Imagen'));
-    if (croppedImage != null) {
-      _controller.changeImage(croppedImage);
-    }
-  }
-
-  Future getImageCamera() async {
-    final pickedFile = await picker.getImage(source: ImageSource.camera, imageQuality: 70);
-
-    if (pickedFile != null) {
-      _cropImage(pickedFile.path);
-    }
-  }
-
-  Future getImageGallery() async {
-    final pickedFile = await picker.getImage(source: ImageSource.gallery, imageQuality: 70);
-
-    if (pickedFile != null) {
-      _cropImage(pickedFile.path);
-    }
-    /**/
-  }
-
   showModalBottomSheet(
       context: context,
       isScrollControlled: true,
@@ -349,157 +297,40 @@ void _newProductModal(BuildContext context, String idCategoria, String nameCateg
                                   Row(
                                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                     children: [
-                                      InkWell(
-                                        onTap: () {
-                                          showModalBottomSheet(
-                                            context: context,
-                                            isScrollControlled: true,
-                                            backgroundColor: Colors.transparent,
-                                            builder: (context) {
-                                              return GestureDetector(
-                                                onTap: () => Navigator.of(context).pop(),
-                                                child: Container(
-                                                  color: Color.fromRGBO(0, 0, 0, 0.001),
-                                                  child: GestureDetector(
-                                                    onTap: () {},
-                                                    child: DraggableScrollableSheet(
-                                                      initialChildSize: 0.2,
-                                                      minChildSize: 0.2,
-                                                      maxChildSize: 0.2,
-                                                      builder: (_, controller) {
-                                                        return Container(
-                                                          decoration: BoxDecoration(
-                                                            color: Colors.white,
-                                                            borderRadius: BorderRadius.only(
-                                                              topLeft: const Radius.circular(25.0),
-                                                              topRight: const Radius.circular(25.0),
-                                                            ),
-                                                          ),
-                                                          child: Padding(
-                                                            padding: EdgeInsets.symmetric(
-                                                              horizontal: ScreenUtil().setWidth(24),
-                                                            ),
-                                                            child: Column(
-                                                              crossAxisAlignment: CrossAxisAlignment.start,
-                                                              children: [
-                                                                SizedBox(
-                                                                  height: ScreenUtil().setHeight(24),
-                                                                ),
-                                                                InkWell(
-                                                                  onTap: () {
-                                                                    Navigator.pop(context);
-                                                                    getImageGallery();
-                                                                  },
-                                                                  child: Row(
-                                                                    children: [
-                                                                      Text(
-                                                                        'Seleccionar foto',
-                                                                        style: GoogleFonts.poppins(
-                                                                          fontStyle: FontStyle.normal,
-                                                                          color: Color(0XFF585858),
-                                                                          fontWeight: FontWeight.w400,
-                                                                          fontSize: ScreenUtil().setSp(16),
-                                                                          letterSpacing: ScreenUtil().setSp(0.016),
-                                                                        ),
-                                                                      ),
-                                                                      Spacer(),
-                                                                      Icon(
-                                                                        Icons.photo_album_outlined,
-                                                                        color: Color(0XFFFF0036),
-                                                                        size: ScreenUtil().setHeight(24),
-                                                                      )
-                                                                    ],
-                                                                  ),
-                                                                ),
-                                                                Divider(
-                                                                  thickness: 1,
-                                                                ),
-                                                                SizedBox(
-                                                                  height: ScreenUtil().setHeight(10),
-                                                                ),
-                                                                InkWell(
-                                                                  onTap: () {
-                                                                    Navigator.pop(context);
-                                                                    getImageCamera();
-                                                                  },
-                                                                  child: Row(
-                                                                    children: [
-                                                                      Text(
-                                                                        'Tomar foto',
-                                                                        style: GoogleFonts.poppins(
-                                                                          fontStyle: FontStyle.normal,
-                                                                          fontWeight: FontWeight.w400,
-                                                                          color: Color(0XFF585858),
-                                                                          fontSize: ScreenUtil().setSp(16),
-                                                                          letterSpacing: ScreenUtil().setSp(0.016),
-                                                                        ),
-                                                                      ),
-                                                                      Spacer(),
-                                                                      Icon(
-                                                                        Icons.photo_camera_outlined,
-                                                                        color: Color(0XFFFF0036),
-                                                                        size: ScreenUtil().setHeight(24),
-                                                                      )
-                                                                    ],
-                                                                  ),
-                                                                ),
-                                                                Divider(
-                                                                  thickness: 1,
-                                                                ),
-                                                              ],
-                                                            ),
-                                                          ),
-                                                        );
-                                                      },
-                                                    ),
+                                      Container(
+                                        height: ScreenUtil().setHeight(150),
+                                        width: ScreenUtil().setWidth(150),
+                                        decoration: BoxDecoration(
+                                          color: Color(0XFFEEEEEE),
+                                          shape: BoxShape.circle,
+                                          boxShadow: [
+                                            BoxShadow(
+                                              color: Color.fromRGBO(88, 88, 88, 0.3),
+                                              blurRadius: 20,
+                                            ),
+                                          ],
+                                        ),
+                                        child: Stack(
+                                          children: [
+                                            Align(
+                                              alignment: Alignment.center,
+                                              child: Container(
+                                                  height: ScreenUtil().setHeight(120),
+                                                  width: ScreenUtil().setWidth(120),
+                                                  decoration: BoxDecoration(
+                                                    color: Color(0XFFEEEEEE),
+                                                    shape: BoxShape.circle,
+                                                    boxShadow: [
+                                                      BoxShadow(
+                                                        offset: Offset(-1, -1),
+                                                        color: Color.fromRGBO(0, 0, 0, 0.2),
+                                                        blurRadius: 5,
+                                                      ),
+                                                    ],
                                                   ),
-                                                ),
-                                              );
-                                            },
-                                          );
-                                        },
-                                        child: Container(
-                                          height: ScreenUtil().setHeight(150),
-                                          width: ScreenUtil().setWidth(150),
-                                          decoration: BoxDecoration(
-                                            color: Color(0XFFEEEEEE),
-                                            shape: BoxShape.circle,
-                                            boxShadow: [
-                                              BoxShadow(
-                                                color: Color.fromRGBO(88, 88, 88, 0.3),
-                                                blurRadius: 20,
-                                              ),
-                                            ],
-                                          ),
-                                          child: Stack(
-                                            children: [
-                                              Align(
-                                                alignment: Alignment.center,
-                                                child: Container(
-                                                    height: ScreenUtil().setHeight(120),
-                                                    width: ScreenUtil().setWidth(120),
-                                                    decoration: BoxDecoration(
-                                                      color: Color(0XFFEEEEEE),
-                                                      shape: BoxShape.circle,
-                                                      boxShadow: [
-                                                        BoxShadow(
-                                                          offset: Offset(-1, -1),
-                                                          color: Color.fromRGBO(0, 0, 0, 0.2),
-                                                          blurRadius: 5,
-                                                        ),
-                                                      ],
-                                                    ),
-                                                    child: SvgPicture.asset('assets/food_svg/food.svg')),
-                                              ),
-                                              Align(
-                                                alignment: Alignment.bottomRight,
-                                                child: Container(
-                                                    height: ScreenUtil().setHeight(23),
-                                                    width: ScreenUtil().setWidth(23),
-                                                    child: SvgPicture.asset('assets/food_svg/add_image.svg')),
-                                              ),
-                                            ],
-                                          ),
+                                                  child: SvgPicture.asset('assets/food_svg/food.svg')),
+                                            ),
+                                          ],
                                         ),
                                       ),
                                       Container(
@@ -593,7 +424,7 @@ void _newProductModal(BuildContext context, String idCategoria, String nameCateg
                                       }
                                     },
                                     decoration: InputDecoration(
-                                      hintText: 'Ingrese nombre de comida',
+                                      hintText: 'Ingrese nombre de $nameCategory',
                                       hintStyle: TextStyle(
                                         color: Color(0XFFBEBEBE),
                                         fontWeight: FontWeight.w400,
@@ -875,7 +706,7 @@ void _newProductModal(BuildContext context, String idCategoria, String nameCateg
                                               ),
                                               child: Center(
                                                 child: Text(
-                                                  'Agregar comida',
+                                                  'Agregar $nameCategory',
                                                   style: TextStyle(
                                                     color: Colors.white,
                                                     fontWeight: FontWeight.w600,
@@ -1772,6 +1603,168 @@ void editProductModal(BuildContext context, ProductoLineaModel productData, Stri
           ],
         );
       });
+}
+
+void updatePhotoProductModal(BuildContext context, String idCategoria, String idProducto) {
+  final _controller = ChangeController();
+  final picker = ImagePicker();
+  Future<Null> _cropImage(filePath) async {
+    File croppedImage = await ImageCropper.cropImage(
+        sourcePath: filePath,
+        aspectRatioPresets: Platform.isAndroid
+            ? [
+                CropAspectRatioPreset.square,
+                CropAspectRatioPreset.ratio3x2,
+                CropAspectRatioPreset.original,
+                CropAspectRatioPreset.ratio4x3,
+                CropAspectRatioPreset.ratio16x9
+              ]
+            : [
+                CropAspectRatioPreset.original,
+                CropAspectRatioPreset.square,
+                CropAspectRatioPreset.ratio3x2,
+                CropAspectRatioPreset.ratio4x3,
+                CropAspectRatioPreset.ratio5x3,
+                CropAspectRatioPreset.ratio5x4,
+                CropAspectRatioPreset.ratio7x5,
+                CropAspectRatioPreset.ratio16x9
+              ],
+        androidUiSettings: AndroidUiSettings(
+            toolbarTitle: 'Cortar Imagen',
+            toolbarColor: Color(0XFFFF0036),
+            toolbarWidgetColor: Colors.white,
+            initAspectRatio: CropAspectRatioPreset.original,
+            showCropGrid: true,
+            lockAspectRatio: false),
+        iosUiSettings: IOSUiSettings(minimumAspectRatio: 1.0, title: 'Cortar Imagen'));
+    if (croppedImage != null) {
+      _controller.changeImage(croppedImage);
+    }
+  }
+
+  Future getImageCamera() async {
+    final pickedFile = await picker.getImage(source: ImageSource.camera, imageQuality: 70);
+
+    if (pickedFile != null) {
+      _cropImage(pickedFile.path);
+    }
+  }
+
+  Future getImageGallery() async {
+    final pickedFile = await picker.getImage(source: ImageSource.gallery, imageQuality: 70);
+
+    if (pickedFile != null) {
+      _cropImage(pickedFile.path);
+    }
+    /**/
+  }
+
+  showModalBottomSheet(
+    context: context,
+    isScrollControlled: true,
+    backgroundColor: Colors.transparent,
+    builder: (context) {
+      return GestureDetector(
+        onTap: () => Navigator.of(context).pop(),
+        child: Container(
+          color: Color.fromRGBO(0, 0, 0, 0.001),
+          child: GestureDetector(
+            onTap: () {},
+            child: DraggableScrollableSheet(
+              initialChildSize: 0.2,
+              minChildSize: 0.2,
+              maxChildSize: 0.2,
+              builder: (_, controller) {
+                return Container(
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.only(
+                      topLeft: const Radius.circular(25.0),
+                      topRight: const Radius.circular(25.0),
+                    ),
+                  ),
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(
+                      horizontal: ScreenUtil().setWidth(24),
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        SizedBox(
+                          height: ScreenUtil().setHeight(24),
+                        ),
+                        InkWell(
+                          onTap: () {
+                            Navigator.pop(context);
+                            getImageGallery();
+                          },
+                          child: Row(
+                            children: [
+                              Text(
+                                'Seleccionar foto',
+                                style: GoogleFonts.poppins(
+                                  fontStyle: FontStyle.normal,
+                                  color: Color(0XFF585858),
+                                  fontWeight: FontWeight.w400,
+                                  fontSize: ScreenUtil().setSp(16),
+                                  letterSpacing: ScreenUtil().setSp(0.016),
+                                ),
+                              ),
+                              Spacer(),
+                              Icon(
+                                Icons.photo_album_outlined,
+                                color: Color(0XFFFF0036),
+                                size: ScreenUtil().setHeight(24),
+                              )
+                            ],
+                          ),
+                        ),
+                        Divider(
+                          thickness: 1,
+                        ),
+                        SizedBox(
+                          height: ScreenUtil().setHeight(10),
+                        ),
+                        InkWell(
+                          onTap: () {
+                            Navigator.pop(context);
+                            getImageCamera();
+                          },
+                          child: Row(
+                            children: [
+                              Text(
+                                'Tomar foto',
+                                style: GoogleFonts.poppins(
+                                  fontStyle: FontStyle.normal,
+                                  fontWeight: FontWeight.w400,
+                                  color: Color(0XFF585858),
+                                  fontSize: ScreenUtil().setSp(16),
+                                  letterSpacing: ScreenUtil().setSp(0.016),
+                                ),
+                              ),
+                              Spacer(),
+                              Icon(
+                                Icons.photo_camera_outlined,
+                                color: Color(0XFFFF0036),
+                                size: ScreenUtil().setHeight(24),
+                              )
+                            ],
+                          ),
+                        ),
+                        Divider(
+                          thickness: 1,
+                        ),
+                      ],
+                    ),
+                  ),
+                );
+              },
+            ),
+          ),
+        ),
+      );
+    },
+  );
 }
 
 _showLoading() {

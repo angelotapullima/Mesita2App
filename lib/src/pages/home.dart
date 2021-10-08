@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:mesita_aplication_2/src/bloc/inicio_bloc.dart';
+import 'package:mesita_aplication_2/src/pages/Bebidas.dart/bebidas_page.dart';
 import 'package:mesita_aplication_2/src/pages/Comidas/comidas_page.dart';
 import 'package:mesita_aplication_2/src/pages/Mesas/mesas_page.dart';
 
@@ -64,7 +65,9 @@ class _HomeState extends State<Home> {
                         ? MesasPage()
                         : (bloc.optionsInicio == OptionsInicio.comida)
                             ? ComidasPage()
-                            : Container(),
+                            : (bloc.optionsInicio == OptionsInicio.bebida)
+                                ? BebidasPage()
+                                : Container(),
                   ),
                 ),
               ),

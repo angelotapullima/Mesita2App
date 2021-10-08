@@ -54,6 +54,7 @@ class LineaApi {
       });
 
       final decodedData = json.decode(resp.body);
+      print(decodedData);
       if (decodedData["result"] == 1) {
         return 1;
       } else {

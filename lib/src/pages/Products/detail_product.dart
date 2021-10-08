@@ -5,6 +5,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:image_cropper/image_cropper.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:mesita_aplication_2/src/api/producto_linea_api.dart';
 import 'package:mesita_aplication_2/src/bloc/provider.dart';
 import 'package:mesita_aplication_2/src/models/producto_linea_model.dart';
@@ -26,6 +29,69 @@ class DetailProduct extends StatefulWidget {
 class _DetailProductState extends State<DetailProduct> {
   final _controller = ChangeController();
   final _productoApi = ProductoLineaApi();
+
+  final picker = ImagePicker();
+  Future<Null> _cropImage(filePath, String idProducto, String idLinea) async {
+    File croppedImage = await ImageCropper.cropImage(
+        sourcePath: filePath,
+        aspectRatioPresets: Platform.isAndroid
+            ? [
+                CropAspectRatioPreset.square,
+                CropAspectRatioPreset.ratio3x2,
+                CropAspectRatioPreset.original,
+                CropAspectRatioPreset.ratio4x3,
+                CropAspectRatioPreset.ratio16x9
+              ]
+            : [
+                CropAspectRatioPreset.original,
+                CropAspectRatioPreset.square,
+                CropAspectRatioPreset.ratio3x2,
+                CropAspectRatioPreset.ratio4x3,
+                CropAspectRatioPreset.ratio5x3,
+                CropAspectRatioPreset.ratio5x4,
+                CropAspectRatioPreset.ratio7x5,
+                CropAspectRatioPreset.ratio16x9
+              ],
+        androidUiSettings: AndroidUiSettings(
+            toolbarTitle: 'Cortar Imagen',
+            toolbarColor: Color(0XFFFF0036),
+            toolbarWidgetColor: Colors.white,
+            initAspectRatio: CropAspectRatioPreset.original,
+            showCropGrid: true,
+            lockAspectRatio: false),
+        iosUiSettings: IOSUiSettings(minimumAspectRatio: 1.0, title: 'Cortar Imagen'));
+    if (croppedImage != null) {
+      _controller.changeCargando(true);
+      final res = await _productoApi.cambiarFotoProducto(croppedImage, idProducto);
+
+      if (res == 1) {
+        final productoBloc = ProviderBloc.productosLinea(context);
+        productoBloc.obtenerProductoPorIdProducto(idProducto, idLinea);
+        productoBloc.obtenerProductosPorLinea(idLinea);
+      }
+
+      _controller.changeCargando(false);
+      //_controller.changeImage(croppedImage);
+    }
+  }
+
+  Future getImageCamera(String idProducto, String idLinea) async {
+    final pickedFile = await picker.getImage(source: ImageSource.camera, imageQuality: 70);
+
+    if (pickedFile != null) {
+      _cropImage(pickedFile.path, idProducto, idLinea);
+    }
+  }
+
+  Future getImageGallery(String idProducto, String idLinea) async {
+    final pickedFile = await picker.getImage(source: ImageSource.gallery, imageQuality: 70);
+
+    if (pickedFile != null) {
+      _cropImage(pickedFile.path, idProducto, idLinea);
+    }
+    /**/
+  }
+
   @override
   Widget build(BuildContext context) {
     final productoBloc = ProviderBloc.productosLinea(context);
@@ -237,40 +303,165 @@ class _DetailProductState extends State<DetailProduct> {
                           children: [
                             Hero(
                               tag: widget.producto.idProducto,
-                              child: Container(
-                                height: ScreenUtil().setHeight(200),
-                                width: ScreenUtil().setWidth(200),
-                                decoration: BoxDecoration(
-                                  color: Color(0XFFEEEEEE),
-                                  shape: BoxShape.circle,
-                                  boxShadow: [
-                                    BoxShadow(
-                                      offset: Offset(-1, -1),
-                                      color: Color.fromRGBO(0, 0, 0, 0.2),
-                                      blurRadius: 5,
-                                    ),
-                                  ],
-                                ),
-                                child: CachedNetworkImage(
-                                  placeholder: (context, url) => Container(
-                                    child: SvgPicture.asset('assets/food_svg/food.svg'),
-                                  ),
-                                  errorWidget: (context, url, error) => Container(
-                                    child: Container(
-                                      child: SvgPicture.asset(
-                                        'assets/food_svg/food.svg',
+                              child: InkWell(
+                                onTap: () {
+                                  showModalBottomSheet(
+                                    context: context,
+                                    isScrollControlled: true,
+                                    backgroundColor: Colors.transparent,
+                                    builder: (context) {
+                                      return GestureDetector(
+                                        onTap: () => Navigator.of(context).pop(),
+                                        child: Container(
+                                          color: Color.fromRGBO(0, 0, 0, 0.001),
+                                          child: GestureDetector(
+                                            onTap: () {},
+                                            child: DraggableScrollableSheet(
+                                              initialChildSize: 0.2,
+                                              minChildSize: 0.2,
+                                              maxChildSize: 0.2,
+                                              builder: (_, controller) {
+                                                return Container(
+                                                  decoration: BoxDecoration(
+                                                    color: Colors.white,
+                                                    borderRadius: BorderRadius.only(
+                                                      topLeft: const Radius.circular(25.0),
+                                                      topRight: const Radius.circular(25.0),
+                                                    ),
+                                                  ),
+                                                  child: Padding(
+                                                    padding: EdgeInsets.symmetric(
+                                                      horizontal: ScreenUtil().setWidth(24),
+                                                    ),
+                                                    child: Column(
+                                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                                      children: [
+                                                        SizedBox(
+                                                          height: ScreenUtil().setHeight(24),
+                                                        ),
+                                                        InkWell(
+                                                          onTap: () {
+                                                            Navigator.pop(context);
+                                                            getImageGallery(prod[0].idProducto, prod[0].idLinea);
+                                                          },
+                                                          child: Row(
+                                                            children: [
+                                                              Text(
+                                                                'Seleccionar foto',
+                                                                style: GoogleFonts.poppins(
+                                                                  fontStyle: FontStyle.normal,
+                                                                  color: Color(0XFF585858),
+                                                                  fontWeight: FontWeight.w400,
+                                                                  fontSize: ScreenUtil().setSp(16),
+                                                                  letterSpacing: ScreenUtil().setSp(0.016),
+                                                                ),
+                                                              ),
+                                                              Spacer(),
+                                                              Icon(
+                                                                Icons.photo_album_outlined,
+                                                                color: Color(0XFFFF0036),
+                                                                size: ScreenUtil().setHeight(24),
+                                                              )
+                                                            ],
+                                                          ),
+                                                        ),
+                                                        Divider(
+                                                          thickness: 1,
+                                                        ),
+                                                        SizedBox(
+                                                          height: ScreenUtil().setHeight(10),
+                                                        ),
+                                                        InkWell(
+                                                          onTap: () {
+                                                            Navigator.pop(context);
+                                                            getImageCamera(prod[0].idProducto, prod[0].idLinea);
+                                                          },
+                                                          child: Row(
+                                                            children: [
+                                                              Text(
+                                                                'Tomar foto',
+                                                                style: GoogleFonts.poppins(
+                                                                  fontStyle: FontStyle.normal,
+                                                                  fontWeight: FontWeight.w400,
+                                                                  color: Color(0XFF585858),
+                                                                  fontSize: ScreenUtil().setSp(16),
+                                                                  letterSpacing: ScreenUtil().setSp(0.016),
+                                                                ),
+                                                              ),
+                                                              Spacer(),
+                                                              Icon(
+                                                                Icons.photo_camera_outlined,
+                                                                color: Color(0XFFFF0036),
+                                                                size: ScreenUtil().setHeight(24),
+                                                              )
+                                                            ],
+                                                          ),
+                                                        ),
+                                                        Divider(
+                                                          thickness: 1,
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ),
+                                                );
+                                              },
+                                            ),
+                                          ),
+                                        ),
+                                      );
+                                    },
+                                  );
+                                },
+                                child: Container(
+                                  height: ScreenUtil().setHeight(200),
+                                  width: ScreenUtil().setWidth(200),
+                                  child: Stack(
+                                    children: [
+                                      Container(
+                                        height: ScreenUtil().setHeight(200),
+                                        width: ScreenUtil().setWidth(200),
+                                        decoration: BoxDecoration(
+                                          color: Color(0XFFEEEEEE),
+                                          shape: BoxShape.circle,
+                                          boxShadow: [
+                                            BoxShadow(
+                                              offset: Offset(-1, -1),
+                                              color: Color.fromRGBO(0, 0, 0, 0.2),
+                                              blurRadius: 5,
+                                            ),
+                                          ],
+                                        ),
+                                        child: CachedNetworkImage(
+                                          placeholder: (context, url) => Container(
+                                            child: SvgPicture.asset('assets/food_svg/food.svg'),
+                                          ),
+                                          errorWidget: (context, url, error) => Container(
+                                            child: Container(
+                                              child: SvgPicture.asset(
+                                                'assets/food_svg/food.svg',
+                                              ),
+                                            ),
+                                          ),
+                                          imageUrl: '$apiBaseURL/${prod[0].productoFoto}',
+                                          imageBuilder: (context, imageProvider) => Container(
+                                            decoration: BoxDecoration(
+                                              shape: BoxShape.circle,
+                                              image: DecorationImage(
+                                                image: imageProvider,
+                                                fit: BoxFit.cover,
+                                              ),
+                                            ),
+                                          ),
+                                        ),
                                       ),
-                                    ),
-                                  ),
-                                  imageUrl: '$apiBaseURL/${prod[0].productoFoto}',
-                                  imageBuilder: (context, imageProvider) => Container(
-                                    decoration: BoxDecoration(
-                                      shape: BoxShape.circle,
-                                      image: DecorationImage(
-                                        image: imageProvider,
-                                        fit: BoxFit.cover,
+                                      Align(
+                                        alignment: Alignment.bottomRight,
+                                        child: Container(
+                                            height: ScreenUtil().setHeight(30),
+                                            width: ScreenUtil().setWidth(30),
+                                            child: SvgPicture.asset('assets/food_svg/add_image.svg')),
                                       ),
-                                    ),
+                                    ],
                                   ),
                                 ),
                               ),

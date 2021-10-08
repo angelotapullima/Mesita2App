@@ -98,6 +98,55 @@ class ProductoLineaApi {
   //   }
   // }
 
+  Future<int> cambiarFotoProducto(File _image, String idProducto) async {
+    try {
+      int resp;
+      final uri = Uri.parse('$apiBaseURL/api/Negocio/cambiar_foto_producto');
+
+      var multipartFile;
+
+      if (_image != null) {
+        var stream = new http.ByteStream(Stream.castFrom(_image.openRead()));
+
+        var length = await _image.length();
+
+        multipartFile = new http.MultipartFile('imagen', stream, length, filename: basename(_image.path));
+      }
+
+      var request = new http.MultipartRequest("POST", uri);
+
+      request.fields["app"] = 'true';
+      request.fields["tn"] = '${_prefs.token}';
+      request.fields["id_producto"] = '$idProducto';
+      request.fields["id"] = '$idProducto';
+
+      if (_image != null) {
+        request.files.add(multipartFile);
+      }
+
+      await request.send().then((response) async {
+        // listen for response
+        response.stream.transform(utf8.decoder).listen((value) {
+          final decodedData = json.decode(value);
+          print(decodedData);
+
+          if (decodedData["result"] == 1) {
+            resp = 1;
+          } else {
+            resp = 2;
+          }
+        });
+      }).catchError((e) {
+        print(e);
+        return 2;
+      });
+
+      return resp;
+    } catch (e) {
+      return 2;
+    }
+  }
+
   Future<int> guardarProducto(ProductoLineaModel producto) async {
     try {
       final url = Uri.parse('$apiBaseURL/api/Negocio/guardar_producto');
