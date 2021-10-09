@@ -71,4 +71,32 @@ class MesaApi {
       return 2;
     }
   }
+
+  Future<int> editarMesa(MesaModel mesa) async {
+    try {
+      final url = Uri.parse('$apiBaseURL/api/Negocio/guardar_mesa');
+
+      final resp = await http.post(
+        url,
+        body: {
+          'tn': _prefs.token,
+          'id_mesa': '${mesa.idMesa}',
+          'id_negocio': _prefs.idNegocio,
+          'mesa_nombre': '${mesa.mesaNombre}',
+          'mesa_capacidad': '${mesa.mesaCapacidad}',
+          'app': 'true',
+        },
+      );
+
+      final decodedData = json.decode(resp.body);
+      if (decodedData["result"] == 1) {
+        return 1;
+      } else {
+        return 2;
+      }
+    } catch (e) {
+      print(e);
+      return 2;
+    }
+  }
 }

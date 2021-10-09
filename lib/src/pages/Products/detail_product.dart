@@ -170,7 +170,8 @@ class _DetailProductState extends State<DetailProduct> {
                       child: SafeArea(
                         child: InkWell(
                           onTap: () {
-                            editProductModal(context, prod[0], widget.idCategory, widget.nameCategory);
+                            editProductModal(
+                                context, prod[0], widget.idCategory, widget.nameCategory, (widget.nameCategory == 'comida') ? 'food' : 'drink_image');
                           },
                           child: Container(
                             height: ScreenUtil().setHeight(45),

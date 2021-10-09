@@ -41,7 +41,7 @@ class _BebidasPageState extends State<BebidasPage> {
         actions: [
           InkWell(
             onTap: () {
-              addModal(context, idCategoria, 'bebida');
+              addModal(context, idCategoria, 'bebida', 'drink_icon');
             },
             child: Container(
               width: ScreenUtil().setWidth(20),

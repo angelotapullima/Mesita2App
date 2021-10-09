@@ -41,7 +41,7 @@ class _ComidasPageState extends State<ComidasPage> {
         actions: [
           InkWell(
             onTap: () {
-              addModal(context, idCategoria, 'comida');
+              addModal(context, idCategoria, 'comida', 'new_food');
             },
             child: Container(
               width: ScreenUtil().setWidth(20),

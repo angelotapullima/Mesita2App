@@ -70,7 +70,7 @@ class ChangeController extends ChangeNotifier {
   }
 }
 
-void addModal(BuildContext context, String idCategoria, String nameCategory) {
+void addModal(BuildContext context, String idCategoria, String nameCategory, String iconProduct) {
   showModalBottomSheet(
     context: context,
     isScrollControlled: true,
@@ -141,12 +141,12 @@ void addModal(BuildContext context, String idCategoria, String nameCategory) {
                         InkWell(
                           onTap: () {
                             Navigator.pop(context);
-                            _newProductModal(context, idCategoria, nameCategory);
+                            _newProductModal(context, idCategoria, nameCategory, (nameCategory == 'comida') ? 'food' : 'drink_image');
                           },
                           child: Row(
                             children: [
                               SvgPicture.asset(
-                                'assets/food_svg/new_food.svg',
+                                'assets/food_svg/$iconProduct.svg',
                                 fit: BoxFit.cover,
                                 height: ScreenUtil().setHeight(20),
                                 width: ScreenUtil().setWidth(20),
@@ -218,7 +218,7 @@ void addModal(BuildContext context, String idCategoria, String nameCategory) {
   );
 }
 
-void _newProductModal(BuildContext context, String idCategoria, String nameCategory) {
+void _newProductModal(BuildContext context, String idCategoria, String nameCategory, String iconProduct) {
   final lineasBloc = ProviderBloc.lineas(context);
   lineasBloc.obtenerLineasPorNegocio(idCategoria);
   final _controller = ChangeController();
@@ -328,7 +328,7 @@ void _newProductModal(BuildContext context, String idCategoria, String nameCateg
                                                       ),
                                                     ],
                                                   ),
-                                                  child: SvgPicture.asset('assets/food_svg/food.svg')),
+                                                  child: SvgPicture.asset('assets/food_svg/$iconProduct.svg')),
                                             ),
                                           ],
                                         ),
@@ -1000,7 +1000,7 @@ void _addCategoryModal(BuildContext context, String idCategoria) {
       });
 }
 
-void editProductModal(BuildContext context, ProductoLineaModel productData, String idCategoria, String nameCategory) {
+void editProductModal(BuildContext context, ProductoLineaModel productData, String idCategoria, String nameCategory, String iconProduct) {
   final lineasBloc = ProviderBloc.lineas(context);
   lineasBloc.obtenerLineasPorNegocio(idCategoria);
   final _controller = ChangeController();
@@ -1102,12 +1102,12 @@ void editProductModal(BuildContext context, ProductoLineaModel productData, Stri
                                         ),
                                         child: CachedNetworkImage(
                                           placeholder: (context, url) => Container(
-                                            child: SvgPicture.asset('assets/food_svg/food.svg'),
+                                            child: SvgPicture.asset('assets/food_svg/$iconProduct.svg'),
                                           ),
                                           errorWidget: (context, url, error) => Container(
                                             child: Container(
                                               child: SvgPicture.asset(
-                                                'assets/food_svg/food.svg',
+                                                'assets/food_svg/$iconProduct.svg',
                                               ),
                                             ),
                                           ),
@@ -1250,7 +1250,7 @@ void editProductModal(BuildContext context, ProductoLineaModel productData, Stri
                                       }
                                     },
                                     decoration: InputDecoration(
-                                      hintText: 'Ingrese nombre de comida',
+                                      hintText: 'Ingrese nombre de $nameCategory',
                                       hintStyle: TextStyle(
                                         color: Color(0XFFBEBEBE),
                                         fontWeight: FontWeight.w400,

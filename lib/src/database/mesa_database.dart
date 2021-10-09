@@ -25,6 +25,14 @@ class MesaDatabase {
     return list;
   }
 
+  Future<List<MesaModel>> obtenerMesaPorIdMesa(String idMesa) async {
+    final db = await dbprovider.database;
+    final res = await db.rawQuery("SELECT * FROM Mesas WHERE idMesa='$idMesa'");
+
+    List<MesaModel> list = res.isNotEmpty ? res.map((c) => MesaModel.fromJson(c)).toList() : [];
+    return list;
+  }
+
   deleteMesas() async {
     final db = await dbprovider.database;
 
