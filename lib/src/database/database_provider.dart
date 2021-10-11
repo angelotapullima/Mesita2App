@@ -21,7 +21,7 @@ class DatabaseProvider {
   initDB() async {
     Directory documentsDirectory = await getApplicationDocumentsDirectory();
 
-    final path = join(documentsDirectory.path, 'messitasv3.db');
+    final path = join(documentsDirectory.path, 'messitasv4.db');
     Future _onConfigure(Database db) async {
       await db.execute('PRAGMA foreign_keys = ON');
     }
