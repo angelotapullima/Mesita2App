@@ -15,16 +15,16 @@ import 'package:mesita_aplication_2/src/pages/Products/detail_product.dart';
 import 'package:mesita_aplication_2/src/preferences/preferences.dart';
 import 'package:mesita_aplication_2/src/utils/constants.dart';
 
-class ComidasPage extends StatefulWidget {
-  const ComidasPage({Key key}) : super(key: key);
+class BebidasPage extends StatefulWidget {
+  const BebidasPage({Key key}) : super(key: key);
 
   @override
-  _ComidasPageState createState() => _ComidasPageState();
+  _BebidasPageState createState() => _BebidasPageState();
 }
 
-class _ComidasPageState extends State<ComidasPage> {
+class _BebidasPageState extends State<BebidasPage> {
   final _controller = CategoryController();
-  final String idCategoria = '1';
+  final String idCategoria = '2';
   @override
   Widget build(BuildContext context) {
     final prefs = Preferences();
@@ -41,7 +41,7 @@ class _ComidasPageState extends State<ComidasPage> {
         actions: [
           InkWell(
             onTap: () {
-              addModal(context, idCategoria, 'comida', 'new_food');
+              addModal(context, idCategoria, 'bebida', 'drink_icon');
             },
             child: Container(
               width: ScreenUtil().setWidth(20),
@@ -90,7 +90,7 @@ class _ComidasPageState extends State<ComidasPage> {
         ],
         elevation: 0,
         title: Text(
-          'Comidas',
+          'Bebidas',
           style: GoogleFonts.poppins(
             color: Colors.black,
             fontWeight: FontWeight.w600,
@@ -206,7 +206,7 @@ class _ComidasPageState extends State<ComidasPage> {
                               );
                             } else {
                               return Center(
-                                child: Text('Aún no existen comidas para esta línea'),
+                                child: Text('Aún no existen bebidas para esta línea'),
                               );
                             }
                           } else {
@@ -259,7 +259,7 @@ class _ComidasPageState extends State<ComidasPage> {
             pageBuilder: (context, animation, secondaryAnimation) {
               return DetailProduct(
                 producto: food,
-                nameCategory: 'comida',
+                nameCategory: 'bebida',
                 idCategory: idCategoria,
               );
             },

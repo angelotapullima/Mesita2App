@@ -44,6 +44,7 @@ class DatabaseProvider {
       await db.execute(' CREATE TABLE Lineas('
           ' idLinea TEXT PRIMARY KEY,'
           ' idNegocio TEXT,'
+          ' idCategoria TEXT,'
           ' lineaNombre TEXT,'
           ' lineaEstado TEXT'
           ')');

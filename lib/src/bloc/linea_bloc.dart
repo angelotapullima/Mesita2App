@@ -1,5 +1,5 @@
 import 'package:mesita_aplication_2/src/api/linea_api.dart';
-import 'package:mesita_aplication_2/src/database/linea_model.dart';
+import 'package:mesita_aplication_2/src/database/linea_database.dart';
 import 'package:mesita_aplication_2/src/models/linea_model.dart';
 import 'package:mesita_aplication_2/src/preferences/preferences.dart';
 import 'package:rxdart/rxdart.dart';
@@ -13,10 +13,10 @@ class LineaBloc {
 
   Stream<List<LineaModel>> get lineasStream => _lineasController.stream;
 
-  void obtenerLineasPorNegocio() async {
-    _lineasController.sink.add(await _lineaDatabase.obtenerLineasPorNegocio(_prefs.idNegocio));
+  void obtenerLineasPorNegocio(String idCategoria) async {
+    _lineasController.sink.add(await _lineaDatabase.obtenerLineasPorNegocio(_prefs.idNegocio, idCategoria));
     await _lineaApi.obtenerLineasPorNegocio();
-    _lineasController.sink.add(await _lineaDatabase.obtenerLineasPorNegocio(_prefs.idNegocio));
+    _lineasController.sink.add(await _lineaDatabase.obtenerLineasPorNegocio(_prefs.idNegocio, idCategoria));
   }
 
   dispose() {

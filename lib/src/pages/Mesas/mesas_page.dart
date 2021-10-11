@@ -8,6 +8,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mesita_aplication_2/src/bloc/provider.dart';
 import 'package:mesita_aplication_2/src/models/mesa_model.dart';
+import 'package:mesita_aplication_2/src/pages/Mesas/detalle_mesa_page.dart';
 import 'package:mesita_aplication_2/src/pages/Mesas/modal_agregar_mesa.dart';
 import 'package:mesita_aplication_2/src/preferences/preferences.dart';
 
@@ -157,109 +158,137 @@ class MesasPage extends StatelessWidget {
                           itemCount: snapsdhot.data.length,
                           itemBuilder: (BuildContext context, int index) {
                             return LayoutBuilder(builder: (context, constraints) {
-                              return Container(
-                                padding: EdgeInsets.only(
-                                  right: ScreenUtil().setWidth(10),
-                                  left: ScreenUtil().setWidth(10),
-                                ),
-                                width: constraints.maxWidth,
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Container(
-                                      width: constraints.maxWidth * 0.12,
-                                      child: Padding(
-                                        padding: EdgeInsets.symmetric(vertical: ScreenUtil().setHeight(10)),
-                                        child: Container(
-                                          decoration: BoxDecoration(
-                                            color: (index.isOdd) ? Colors.white : Color(0xffff0036),
-                                            borderRadius: BorderRadius.circular(5),
-                                          ),
-                                          height: constraints.maxHeight * 0.55,
-                                          width: constraints.maxWidth * 0.2,
-                                        ),
-                                      ),
-                                    ),
-                                    SizedBox(
-                                      width: constraints.maxWidth * 0.05,
-                                    ),
-                                    Container(
-                                      height: constraints.maxHeight - constraints.maxHeight * 0.20,
-                                      width: constraints.maxWidth * 0.52,
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(5),
-                                        gradient: LinearGradient(
-                                          begin: Alignment.bottomLeft,
-                                          end: Alignment.topRight,
-                                          colors: [
-                                            (index.isOdd) ? Colors.white : Color(0xffff6787),
-                                            (index.isOdd) ? Colors.white : Color(0xffff0036),
-                                          ],
+                              return InkWell(
+                                onTap: () {
+                                  Navigator.push(
+                                    context,
+                                    PageRouteBuilder(
+                                      pageBuilder: (context, animation, secondaryAnimation) {
+                                        return DetalleMesaPage(
+                                          mesa: snapsdhot.data[index],
+                                        );
+                                      },
+                                      transitionsBuilder: (context, animation, secondaryAnimation, child) {
+                                        var begin = Offset(0.0, 1.0);
+                                        var end = Offset.zero;
+                                        var curve = Curves.ease;
 
-                                          //
-                                        ),
-                                        boxShadow: [
-                                          BoxShadow(
-                                            offset: Offset(0, 0),
-                                            blurRadius: 20.0,
-                                            color: (index.isOdd) ? Color(0xff585858).withOpacity(.15) : Color(0xffff0036).withOpacity(.3),
-                                          ),
-                                        ],
-                                      ),
-                                      child: Padding(
-                                        padding: EdgeInsets.symmetric(
-                                          horizontal: ScreenUtil().setWidth(10),
-                                        ),
-                                        child: Column(
-                                          crossAxisAlignment: CrossAxisAlignment.start,
-                                          children: [
-                                            Row(
-                                              children: [
-                                                Text(
-                                                  '${snapsdhot.data[index].idMesa}',
-                                                  style: TextStyle(
-                                                    fontSize: ScreenUtil().setSp(45),
-                                                    color: (index.isOdd) ? Color(0xfff9708d) : Colors.white,
-                                                    fontWeight: FontWeight.bold,
-                                                  ),
-                                                ),
-                                              ],
+                                        var tween = Tween(begin: begin, end: end).chain(
+                                          CurveTween(curve: curve),
+                                        );
+
+                                        return SlideTransition(
+                                          position: animation.drive(tween),
+                                          child: child,
+                                        );
+                                      },
+                                    ),
+                                  );
+                                },
+                                child: Container(
+                                  padding: EdgeInsets.only(
+                                    right: ScreenUtil().setWidth(10),
+                                    left: ScreenUtil().setWidth(10),
+                                  ),
+                                  width: constraints.maxWidth,
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Container(
+                                        width: constraints.maxWidth * 0.12,
+                                        child: Padding(
+                                          padding: EdgeInsets.symmetric(vertical: ScreenUtil().setHeight(10)),
+                                          child: Container(
+                                            decoration: BoxDecoration(
+                                              color: (index.isOdd) ? Colors.white : Color(0xffff0036),
+                                              borderRadius: BorderRadius.circular(5),
                                             ),
-                                            Spacer(),
-                                            Row(
-                                              children: [
-                                                Spacer(),
-                                                Text(
-                                                  'cap .${snapsdhot.data[index].mesaCapacidad}',
-                                                  style: TextStyle(
-                                                      color: (index.isOdd) ? Color(0xff585858) : Colors.white,
-                                                      fontWeight: FontWeight.bold,
-                                                      fontSize: ScreenUtil().setSp(18)),
-                                                ),
-                                              ],
+                                            height: constraints.maxHeight * 0.55,
+                                            width: constraints.maxWidth * 0.2,
+                                          ),
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        width: constraints.maxWidth * 0.05,
+                                      ),
+                                      Container(
+                                        height: constraints.maxHeight - constraints.maxHeight * 0.20,
+                                        width: constraints.maxWidth * 0.52,
+                                        decoration: BoxDecoration(
+                                          borderRadius: BorderRadius.circular(5),
+                                          gradient: LinearGradient(
+                                            begin: Alignment.bottomLeft,
+                                            end: Alignment.topRight,
+                                            colors: [
+                                              (index.isOdd) ? Colors.white : Color(0xffff6787),
+                                              (index.isOdd) ? Colors.white : Color(0xffff0036),
+                                            ],
+
+                                            //
+                                          ),
+                                          boxShadow: [
+                                            BoxShadow(
+                                              offset: Offset(0, 0),
+                                              blurRadius: 20.0,
+                                              color: (index.isOdd) ? Color(0xff585858).withOpacity(.15) : Color(0xffff0036).withOpacity(.3),
                                             ),
                                           ],
                                         ),
-                                      ),
-                                    ),
-                                    SizedBox(
-                                      width: constraints.maxWidth * 0.05,
-                                    ),
-                                    Container(
-                                      width: constraints.maxWidth * 0.12,
-                                      child: Padding(
-                                        padding: EdgeInsets.symmetric(vertical: ScreenUtil().setHeight(10)),
-                                        child: Container(
-                                          decoration: BoxDecoration(
-                                            color: (index.isOdd) ? Colors.white : Color(0xffff0036),
-                                            borderRadius: BorderRadius.circular(5),
+                                        child: Padding(
+                                          padding: EdgeInsets.symmetric(
+                                            horizontal: ScreenUtil().setWidth(10),
                                           ),
-                                          height: constraints.maxHeight * 0.55,
-                                          width: constraints.maxWidth * 0.2,
+                                          child: Column(
+                                            crossAxisAlignment: CrossAxisAlignment.start,
+                                            children: [
+                                              Row(
+                                                children: [
+                                                  Text(
+                                                    '${snapsdhot.data[index].mesaNombre}',
+                                                    style: TextStyle(
+                                                      fontSize: ScreenUtil().setSp(40),
+                                                      color: (index.isOdd) ? Color(0xfff9708d) : Colors.white,
+                                                      fontWeight: FontWeight.bold,
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                              Spacer(),
+                                              Row(
+                                                children: [
+                                                  Spacer(),
+                                                  Text(
+                                                    'cap .${snapsdhot.data[index].mesaCapacidad}',
+                                                    style: TextStyle(
+                                                        color: (index.isOdd) ? Color(0xff585858) : Colors.white,
+                                                        fontWeight: FontWeight.bold,
+                                                        fontSize: ScreenUtil().setSp(18)),
+                                                  ),
+                                                ],
+                                              ),
+                                            ],
+                                          ),
                                         ),
                                       ),
-                                    ),
-                                  ],
+                                      SizedBox(
+                                        width: constraints.maxWidth * 0.05,
+                                      ),
+                                      Container(
+                                        width: constraints.maxWidth * 0.12,
+                                        child: Padding(
+                                          padding: EdgeInsets.symmetric(vertical: ScreenUtil().setHeight(10)),
+                                          child: Container(
+                                            decoration: BoxDecoration(
+                                              color: (index.isOdd) ? Colors.white : Color(0xffff0036),
+                                              borderRadius: BorderRadius.circular(5),
+                                            ),
+                                            height: constraints.maxHeight * 0.55,
+                                            width: constraints.maxWidth * 0.2,
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
                                 ),
                               );
                             });

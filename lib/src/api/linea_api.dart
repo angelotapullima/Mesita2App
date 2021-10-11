@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
-import 'package:mesita_aplication_2/src/database/linea_model.dart';
+import 'package:mesita_aplication_2/src/database/linea_database.dart';
 import 'package:mesita_aplication_2/src/models/linea_model.dart';
 import 'package:mesita_aplication_2/src/preferences/preferences.dart';
 import 'package:mesita_aplication_2/src/utils/constants.dart';
@@ -27,6 +27,7 @@ class LineaApi {
           LineaModel linea = LineaModel();
           linea.idLinea = decodedData['result'][i]['id_linea'];
           linea.idNegocio = decodedData['result'][i]['id_negocio'];
+          linea.idCategoria = decodedData['result'][i]['id_categoria'];
           linea.lineaNombre = decodedData['result'][i]['linea_nombre'];
           linea.lineaEstado = decodedData['result'][i]['linea_estado'];
           await _lineaDatabase.insertarLinea(linea);
@@ -40,7 +41,7 @@ class LineaApi {
     }
   }
 
-  Future<int> agregarNuevaLinea(String nombreLinea) async {
+  Future<int> agregarNuevaLinea(String nombreLinea, String idCategoria) async {
     try {
       final url = Uri.parse('$apiBaseURL/api/Negocio/guardar_linea');
 
@@ -48,12 +49,59 @@ class LineaApi {
         'tn': '${_prefs.token}',
         'id_negocio': '${_prefs.idNegocio}',
         'linea_nombre': '$nombreLinea',
+        'id_categoria': '$idCategoria',
         'app': 'true',
       });
 
       final decodedData = json.decode(resp.body);
       print(decodedData);
       if (decodedData["result"] == 1) {
+        return 1;
+      } else {
+        return 2;
+      }
+    } catch (e) {
+      return 2;
+    }
+  }
+
+  Future<int> editarLinea(String idLinea, String nombreLinea, String idCategoria) async {
+    try {
+      final url = Uri.parse('$apiBaseURL/api/Negocio/guardar_linea');
+
+      final resp = await http.post(url, body: {
+        'tn': '${_prefs.token}',
+        'id_negocio': '${_prefs.idNegocio}',
+        'linea_nombre': '$nombreLinea',
+        'id_linea': '$idLinea',
+        'id_categoria': '$idCategoria',
+        'app': 'true',
+      });
+
+      final decodedData = json.decode(resp.body);
+      if (decodedData["result"] == 1) {
+        return 1;
+      } else {
+        return 2;
+      }
+    } catch (e) {
+      return 2;
+    }
+  }
+
+  Future<int> eliminarLinea(String idLinea) async {
+    try {
+      final url = Uri.parse('$apiBaseURL/api/Negocio/eliminar_linea');
+
+      final resp = await http.post(url, body: {
+        'tn': '${_prefs.token}',
+        'id': '$idLinea',
+        'app': 'true',
+      });
+
+      final decodedData = json.decode(resp.body);
+      if (decodedData["result"] == 1) {
+        await _lineaDatabase.deleteLineaPorIdLinea(idLinea);
         return 1;
       } else {
         return 2;

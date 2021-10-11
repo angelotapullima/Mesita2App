@@ -20,16 +20,32 @@ class ProductoLineaDatabase {
 
   Future<List<ProductoLineaModel>> obtenerProductosPorIdLinea(String idLinea) async {
     final db = await dbprovider.database;
-    final res = await db.rawQuery("SELECT * FROM ProductosLinea WHERE idLinea='$idLinea'");
+    final res = await db.rawQuery("SELECT * FROM ProductosLinea WHERE idLinea='$idLinea'AND productoEstado!='3'");
 
     List<ProductoLineaModel> list = res.isNotEmpty ? res.map((c) => ProductoLineaModel.fromJson(c)).toList() : [];
     return list;
   }
 
-  deleteLineas() async {
+  Future<List<ProductoLineaModel>> obtenerProductosPorIdProducto(String idProducto) async {
+    final db = await dbprovider.database;
+    final res = await db.rawQuery("SELECT * FROM ProductosLinea WHERE idProducto='$idProducto' AND productoEstado!='3'");
+
+    List<ProductoLineaModel> list = res.isNotEmpty ? res.map((c) => ProductoLineaModel.fromJson(c)).toList() : [];
+    return list;
+  }
+
+  deleteProductos() async {
     final db = await dbprovider.database;
 
     final res = await db.rawDelete('DELETE FROM ProductosLinea');
+
+    return res;
+  }
+
+  deleteProductoPorIdProducto(String idProducto) async {
+    final db = await dbprovider.database;
+
+    final res = await db.rawDelete("DELETE FROM ProductosLinea WHERE idProducto='$idProducto'");
 
     return res;
   }
