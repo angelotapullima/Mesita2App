@@ -13,6 +13,7 @@ import 'package:mesita_aplication_2/src/pages/Products/modals_products.dart';
 import 'package:mesita_aplication_2/src/pages/Lineas_Categories/settings_lines_category.dart';
 import 'package:mesita_aplication_2/src/pages/Products/detail_product.dart';
 import 'package:mesita_aplication_2/src/preferences/preferences.dart';
+import 'package:mesita_aplication_2/src/utils/circle_user_porfile.dart';
 import 'package:mesita_aplication_2/src/utils/constants.dart';
 
 class ComidasPage extends StatefulWidget {
@@ -52,38 +53,7 @@ class _ComidasPageState extends State<ComidasPage> {
           SizedBox(
             width: ScreenUtil().setWidth(24),
           ),
-          InkWell(
-            child: Container(
-              width: ScreenUtil().setWidth(32),
-              height: ScreenUtil().setHeight(32),
-              child: CachedNetworkImage(
-                placeholder: (context, url) => Container(
-                  child: SvgPicture.asset('assets/settings_svg/porfile.svg'),
-                ),
-                errorWidget: (context, url, error) => Container(
-                  child: Container(
-                    child: SvgPicture.asset(
-                      'assets/settings_svg/porfile.svg',
-                    ),
-                  ),
-                ),
-                imageUrl: '${prefs.userImage}',
-                imageBuilder: (context, imageProvider) => Container(
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    border: Border.all(
-                      color: Colors.white,
-                      width: 2,
-                    ),
-                    image: DecorationImage(
-                      image: imageProvider,
-                      fit: BoxFit.cover,
-                    ),
-                  ),
-                ),
-              ),
-            ),
-          ),
+          circleUser(context, prefs),
           SizedBox(
             width: ScreenUtil().setWidth(24),
           ),
