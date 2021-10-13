@@ -144,7 +144,7 @@ class PedidosPage extends StatelessWidget {
 
   Widget _datoPedido() {
     return Padding(
-      padding: EdgeInsets.all(8),
+      padding: EdgeInsets.symmetric(vertical: ScreenUtil().setHeight(8)),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [

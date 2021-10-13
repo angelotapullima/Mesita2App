@@ -58,6 +58,25 @@ class DatabaseProvider {
           ' productoPrecio TEXT,'
           ' productoEstado TEXT'
           ')');
+
+      await db.execute(' CREATE TABLE Pedidos('
+          ' idPedido TEXT PRIMARY KEY,'
+          ' idMesa TEXT,'
+          ' total TEXT,'
+          ' fecha TEXT,'
+          ' estado TEXT'
+          ')');
+
+      await db.execute(' CREATE TABLE DetallePedidos('
+          ' idDetalle TEXT PRIMARY KEY,'
+          ' idPedido TEXT,'
+          ' idProducto TEXT,'
+          ' cantidad TEXT,'
+          ' subtotal TEXT,'
+          ' totalDetalle TEXT,'
+          ' observaciones TEXT,'
+          ' estado TEXT'
+          ')');
     });
   }
 }

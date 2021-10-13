@@ -6,6 +6,8 @@ import 'package:mesita_aplication_2/src/pages/Bebidas/bebidas_page.dart';
 import 'package:mesita_aplication_2/src/pages/Comidas/comidas_page.dart';
 import 'package:mesita_aplication_2/src/pages/Mesas/mesas_page.dart';
 import 'package:mesita_aplication_2/src/pages/Pedidos/pedidos_page.dart';
+import 'package:mesita_aplication_2/src/pages/Reportes/reportes_page.dart';
+import 'package:mesita_aplication_2/src/pages/Ventas/ventas_page.dart';
 
 class Home extends StatefulWidget {
   const Home({Key key}) : super(key: key);
@@ -70,7 +72,11 @@ class _HomeState extends State<Home> {
                                 ? BebidasPage()
                                 : (bloc.optionsInicio == OptionsInicio.pedidos)
                                     ? PedidosPage()
-                                    : Container(),
+                                    : (bloc.optionsInicio == OptionsInicio.ventas)
+                                        ? VentasPage()
+                                        : (bloc.optionsInicio == OptionsInicio.reportes)
+                                            ? ReportesPage()
+                                            : Container(),
                   ),
                 ),
               ),

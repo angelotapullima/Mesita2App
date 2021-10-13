@@ -99,6 +99,7 @@ class ProductoLineaApi {
   // }
 
   Future<int> cambiarFotoProducto(File _image, String idProducto) async {
+    print('Entré para cambiar foto WEB SERVICE');
     try {
       int resp;
       final uri = Uri.parse('$apiBaseURL/api/Negocio/cambiar_foto_producto');
@@ -138,11 +139,11 @@ class ProductoLineaApi {
         });
       }).catchError((e) {
         print(e);
-        return 2;
+        resp = 2;
       });
-
       return resp;
     } catch (e) {
+      print('Exeption cambiar foto: $e');
       return 2;
     }
   }

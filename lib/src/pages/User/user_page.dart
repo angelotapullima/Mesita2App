@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:mesita_aplication_2/src/pages/User/cuenta_page.dart';
 import 'package:mesita_aplication_2/src/preferences/preferences.dart';
 import 'package:mesita_aplication_2/src/utils/utils.dart';
 
@@ -81,11 +82,36 @@ class UserPage extends StatelessWidget {
             SizedBox(
               height: ScreenUtil().setHeight(32),
             ),
-            _itemsConfig('user', 'Cuenta'),
+            InkWell(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    PageRouteBuilder(
+                      pageBuilder: (context, animation, secondaryAnimation) {
+                        return CuentaPage();
+                      },
+                      transitionsBuilder: (context, animation, secondaryAnimation, child) {
+                        var begin = Offset(0.0, 1.0);
+                        var end = Offset.zero;
+                        var curve = Curves.ease;
+
+                        var tween = Tween(begin: begin, end: end).chain(
+                          CurveTween(curve: curve),
+                        );
+
+                        return SlideTransition(
+                          position: animation.drive(tween),
+                          child: child,
+                        );
+                      },
+                    ),
+                  );
+                },
+                child: _itemsConfig('user', 'Cuenta')),
             SizedBox(
               height: ScreenUtil().setHeight(32),
             ),
-            _itemsConfig('bussiness', 'Mi negocio'),
+            _itemsConfig('business', 'Mi negocio'),
             SizedBox(
               height: ScreenUtil().setHeight(32),
             ),

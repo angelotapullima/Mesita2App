@@ -60,9 +60,13 @@ class _DetailProductState extends State<DetailProduct> {
             showCropGrid: true,
             lockAspectRatio: false),
         iosUiSettings: IOSUiSettings(minimumAspectRatio: 1.0, title: 'Cortar Imagen'));
+    _controller.changeCargando(true);
     if (croppedImage != null) {
-      _controller.changeCargando(true);
+      print('Entré para cambiar foto');
+
       final res = await _productoApi.cambiarFotoProducto(croppedImage, idProducto);
+
+      print('respuesta p : $res');
 
       if (res == 1) {
         final productoBloc = ProviderBloc.productosLinea(context);
@@ -70,9 +74,9 @@ class _DetailProductState extends State<DetailProduct> {
         productoBloc.obtenerProductosPorLinea(idLinea);
       }
 
-      _controller.changeCargando(false);
       //_controller.changeImage(croppedImage);
     }
+    _controller.changeCargando(false);
   }
 
   Future getImageCamera(String idProducto, String idLinea) async {
