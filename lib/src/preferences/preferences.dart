@@ -59,6 +59,22 @@ class Preferences {
     _prefs.setString('person_surname', value);
   }
 
+  get personApellidoPaterno {
+    return _prefs.getString('personApellidoPaterno');
+  }
+
+  set personApellidoPaterno(String value) {
+    _prefs.setString('personApellidoPaterno', value);
+  }
+
+  get personApellidoMaterno {
+    return _prefs.getString('personApellidoMaterno');
+  }
+
+  set personApellidoMaterno(String value) {
+    _prefs.setString('personApellidoMaterno', value);
+  }
+
   get token {
     return _prefs.getString('token');
   }

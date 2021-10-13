@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:mesita_aplication_2/src/bloc/inicio_bloc.dart';
-import 'package:mesita_aplication_2/src/pages/Bebidas.dart/bebidas_page.dart';
+import 'package:mesita_aplication_2/src/pages/Bebidas/bebidas_page.dart';
 import 'package:mesita_aplication_2/src/pages/Comidas/comidas_page.dart';
 import 'package:mesita_aplication_2/src/pages/Mesas/mesas_page.dart';
+import 'package:mesita_aplication_2/src/pages/Pedidos/pedidos_page.dart';
 
 class Home extends StatefulWidget {
   const Home({Key key}) : super(key: key);
@@ -67,7 +68,9 @@ class _HomeState extends State<Home> {
                             ? ComidasPage()
                             : (bloc.optionsInicio == OptionsInicio.bebida)
                                 ? BebidasPage()
-                                : Container(),
+                                : (bloc.optionsInicio == OptionsInicio.pedidos)
+                                    ? PedidosPage()
+                                    : Container(),
                   ),
                 ),
               ),
