@@ -21,12 +21,15 @@ class DatabaseProvider {
   initDB() async {
     Directory documentsDirectory = await getApplicationDocumentsDirectory();
 
-    final path = join(documentsDirectory.path, 'messitasv4.db');
+    final path = join(documentsDirectory.path, 'messitasv1.db');
     Future _onConfigure(Database db) async {
       await db.execute('PRAGMA foreign_keys = ON');
     }
 
-    return await openDatabase(path, version: 1, onOpen: (db) {}, onConfigure: _onConfigure, onCreate: (Database db, int version) async {
+    return await openDatabase(path, version: 1, onOpen: (db) {}, onConfigure: _onConfigure, onCreate: (
+      Database db,
+      int version,
+    ) async {
       await db.execute(' CREATE TABLE Mesas('
           ' idMesa TEXT PRIMARY KEY,'
           ' idNegocio TEXT,'
@@ -71,6 +74,8 @@ class DatabaseProvider {
           ' idDetalle TEXT PRIMARY KEY,'
           ' idPedido TEXT,'
           ' idProducto TEXT,'
+          ' nombreProducto TEXT,'
+          ' fotoProducto TEXT,'
           ' cantidad TEXT,'
           ' subtotal TEXT,'
           ' totalDetalle TEXT,'

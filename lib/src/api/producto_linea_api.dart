@@ -12,7 +12,7 @@ class ProductoLineaApi {
   final _prefs = Preferences();
   final _productoDatabase = ProductoLineaDatabase();
 
-  Future<bool> obtenerProductosPorLinea(String idLinea) async {
+  /* Future<bool> obtenerProductosPorLinea(String idLinea) async {
     try {
       final url = Uri.parse('$apiBaseURL/api/Negocio/listar_productos_por_linea');
 
@@ -44,7 +44,7 @@ class ProductoLineaApi {
       return false;
     }
   }
-
+ */
   // Future<int> agregarNuevoProductoPorLinea(File _image, ProductoLineaModel producto) async {
   //   try {
   //     int resp;

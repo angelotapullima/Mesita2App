@@ -61,5 +61,7 @@ class DetallePedidoModel {
         observaciones: json["observaciones"],
         estado: json["estado"],
         llevar: json["llevar"],
+        nombreProducto: json["nombreProducto"],
+        fotoProducto: json["fotoProducto"],
       );
 }

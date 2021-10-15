@@ -24,7 +24,7 @@ class LineaApi {
       });
 
       final decodedData = json.decode(resp.body);
-      print(decodedData);
+      //print(decodedData);
 
       if (decodedData['result'].length > 0) {
         for (var i = 0; i < decodedData['result'].length; i++) {

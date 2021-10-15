@@ -51,13 +51,13 @@ class _AgregarProductoPageState extends State<AgregarProductoPage> {
           Column(
             children: [
               Container(
-                height: ScreenUtil().setHeight(235),
+                height: ScreenUtil().setHeight(260),
                 child: Stack(
                   children: [
                     ClipPath(
                       clipper: HeaderFormaClipper(),
                       child: Container(
-                        height: ScreenUtil().setHeight(235),
+                        height: ScreenUtil().setHeight(270),
                         decoration: BoxDecoration(
                           color: Color(0xFFF9708D),
                         ),
@@ -66,7 +66,7 @@ class _AgregarProductoPageState extends State<AgregarProductoPage> {
                     ClipPath(
                       clipper: HeaderFormaClipper(),
                       child: Container(
-                        height: ScreenUtil().setHeight(220),
+                        height: ScreenUtil().setHeight(250),
                         decoration: BoxDecoration(
                           color: Color(0XFFFF0036),
                         ),

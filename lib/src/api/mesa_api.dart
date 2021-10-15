@@ -57,9 +57,11 @@ class MesaApi {
                 detallePedido.cantidad = detalle["pedido_detalle_cantidad"];
                 detallePedido.subtotal = detalle["pedido_detalle_subtotal"];
                 detallePedido.totalDetalle = detalle["pedido_detalle_subtotal"];
-                detallePedido.observaciones = detalle["pedido_detalle_observaciones"];
+                detallePedido.observaciones = detalle["pedido_detalle_observaciones"].toString();
                 detallePedido.estado = detalle["pedido_detalle_estado"];
                 detallePedido.llevar = detalle["pedido_detalle_llevar"];
+                detallePedido.nombreProducto = detalle["producto_nombre"];
+                detallePedido.fotoProducto = detalle["producto_foto"];
 
                 await _pedidosDatabase.insertarDetallePedido(detallePedido);
               }

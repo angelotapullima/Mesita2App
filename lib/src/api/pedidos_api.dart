@@ -5,7 +5,7 @@ import 'package:mesita_aplication_2/src/models/pedidos_model.dart';
 class PedidosApi {
   final _pedidosDatabase = PedidosDatabase();
   final _productosDatabase = ProductoLineaDatabase();
-
+/* 
   Future<List<PedidoModel>> obtenerPedidosPorIdMesa(String idMesa) async {
     final List<PedidoModel> listaReturnPedidos = [];
 
@@ -54,4 +54,7 @@ class PedidosApi {
     }
     return listaReturnPedidos;
   }
+
+ */
+
 }

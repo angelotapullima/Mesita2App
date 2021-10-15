@@ -22,8 +22,11 @@ class PedidosDatabase {
       final db = await dbprovider.database;
 
       final res = await db.rawInsert(
-          "INSERT OR REPLACE INTO DetallePedidos (idDetalle,idPedido,idProducto,cantidad,subtotal,totalDetalle,observaciones,estado,llevar) "
-          "VALUES ('${detalle.idDetalle}','${detalle.idPedido}','${detalle.idProducto}','${detalle.cantidad}','${detalle.subtotal}','${detalle.totalDetalle}','${detalle.observaciones}','${detalle.estado}','${detalle.llevar}')");
+          "INSERT OR REPLACE INTO DetallePedidos (idDetalle,idPedido,idProducto,nombreProducto,fotoProducto,"
+          "cantidad,subtotal,""totalDetalle,observaciones,estado,llevar) "
+          "VALUES ('${detalle.idDetalle}','${detalle.idPedido}','${detalle.idProducto}','${detalle.nombreProducto}',"
+          "'${detalle.fotoProducto}','${detalle.cantidad}','${detalle.subtotal}','${detalle.totalDetalle}','${detalle.observaciones}',"
+          "'${detalle.estado}','${detalle.llevar}')");
 
       return res;
     } catch (exception) {
