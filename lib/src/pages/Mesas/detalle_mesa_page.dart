@@ -257,11 +257,11 @@ class DetalleMesaPage extends StatelessWidget {
                                         Expanded(
                                           child: ListView.builder(
                                               shrinkWrap: true,
+                                              padding: EdgeInsets.zero,
                                               itemCount: pedidos[0].detallesPedido.length,
                                               itemBuilder: (context, index) {
                                                 return Container(
-                                                  padding: EdgeInsets.symmetric(
-                                                      horizontal: ScreenUtil().setWidth(24), vertical: ScreenUtil().setHeight(8)),
+                                                  padding: EdgeInsets.symmetric(horizontal: ScreenUtil().setWidth(24), vertical: ScreenUtil().setHeight(8)),
                                                   child: Row(
                                                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                                     children: [
@@ -501,14 +501,17 @@ class DetalleMesaPage extends StatelessWidget {
         builder: (context, constraints) {
           return Flex(
             children: List.generate(
-                (constraints.constrainWidth() / 10).floor(),
-                (index) => SizedBox(
-                      height: ScreenUtil().setHeight(1),
-                      width: ScreenUtil().setWidth(5),
-                      child: DecoratedBox(
-                        decoration: BoxDecoration(color: Color(0xFFC4C4C4)),
-                      ),
-                    )),
+              (constraints.constrainWidth() / 10).floor(),
+              (index) => SizedBox(
+                height: ScreenUtil().setHeight(1),
+                width: ScreenUtil().setWidth(5),
+                child: DecoratedBox(
+                  decoration: BoxDecoration(
+                    color: Color(0xFFC4C4C4),
+                  ),
+                ),
+              ),
+            ),
             direction: Axis.horizontal,
             mainAxisSize: MainAxisSize.max,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
