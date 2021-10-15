@@ -2,13 +2,16 @@ import 'dart:convert';
 
 import 'package:http/http.dart' as http;
 import 'package:mesita_aplication_2/src/database/linea_database.dart';
+import 'package:mesita_aplication_2/src/database/productos_linea_database.dart';
 import 'package:mesita_aplication_2/src/models/linea_model.dart';
+import 'package:mesita_aplication_2/src/models/producto_linea_model.dart';
 import 'package:mesita_aplication_2/src/preferences/preferences.dart';
 import 'package:mesita_aplication_2/src/utils/constants.dart';
 
 class LineaApi {
   final _prefs = Preferences();
   final _lineaDatabase = LineaDatabase();
+  final _productoDatabase = ProductoLineaDatabase();
 
   Future<bool> obtenerLineasPorNegocio() async {
     try {
@@ -21,6 +24,7 @@ class LineaApi {
       });
 
       final decodedData = json.decode(resp.body);
+      print(decodedData);
 
       if (decodedData['result'].length > 0) {
         for (var i = 0; i < decodedData['result'].length; i++) {
@@ -31,6 +35,20 @@ class LineaApi {
           linea.lineaNombre = decodedData['result'][i]['linea_nombre'];
           linea.lineaEstado = decodedData['result'][i]['linea_estado'];
           await _lineaDatabase.insertarLinea(linea);
+
+          for (var x = 0; x < decodedData['result'][i]['productos'].length; x++) {
+            var product = decodedData['result'][i]['productos'][x];
+
+            ProductoLineaModel producto = ProductoLineaModel();
+            producto.idProducto = product['id_producto'];
+            producto.idLinea = product['id_linea'];
+            producto.productoNombre = product['producto_nombre'];
+            producto.productoDescripcion = product['producto_descripcion'];
+            producto.productoFoto = product['producto_foto'];
+            producto.productoPrecio = product['producto_precio'];
+            producto.productoEstado = product['producto_estado'];
+            await _productoDatabase.insertarProducto(producto);
+          }
         }
         return true;
       } else {

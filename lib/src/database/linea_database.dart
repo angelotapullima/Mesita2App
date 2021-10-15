@@ -33,6 +33,14 @@ class LineaDatabase {
     return list;
   }
 
+  Future<List<LineaModel>> obtenerAllLines(String idNegocio) async {
+    final db = await dbprovider.database;
+    final res = await db.rawQuery("SELECT * FROM Lineas WHERE idNegocio='$idNegocio'");
+
+    List<LineaModel> list = res.isNotEmpty ? res.map((c) => LineaModel.fromJson(c)).toList() : [];
+    return list;
+  }
+
   deleteLinea() async {
     final db = await dbprovider.database;
 

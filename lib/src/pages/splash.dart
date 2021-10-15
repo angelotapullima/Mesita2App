@@ -2,6 +2,7 @@ import 'package:after_layout/after_layout.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:mesita_aplication_2/src/api/linea_api.dart';
 import 'package:mesita_aplication_2/src/preferences/preferences.dart';
 
 class Splash extends StatefulWidget {
@@ -20,10 +21,13 @@ class _SplashState extends State<Splash> with AfterLayoutMixin<Splash> {
     WidgetsBinding.instance.addPostFrameCallback(
       (_) async {
         final preferences = Preferences();
+        final _lineaApi = LineaApi();
 
         if (preferences.idUser.toString().isEmpty || preferences.idUser == null || preferences.idUser == '0') {
           Navigator.pushReplacementNamed(context, 'login');
         } else {
+          await _lineaApi.obtenerLineasPorNegocio();
+
           Navigator.pushReplacementNamed(context, 'home');
         }
       },

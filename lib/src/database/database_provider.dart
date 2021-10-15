@@ -75,7 +75,19 @@ class DatabaseProvider {
           ' subtotal TEXT,'
           ' totalDetalle TEXT,'
           ' observaciones TEXT,'
-          ' estado TEXT'
+          ' estado TEXT,'
+          ' llevar TEXT'
+          ')');
+
+      await db.execute(' CREATE TABLE DetallePedidosTemporales('
+          ' id INTEGER PRIMARY KEY AUTOINCREMENT,'
+          ' idMesa TEXT,'
+          ' idProducto TEXT,'
+          ' cantidad TEXT,'
+          ' subtotal TEXT,'
+          ' observaciones TEXT,'
+          ' estado TEXT,'
+          ' llevar TEXT'
           ')');
     });
   }

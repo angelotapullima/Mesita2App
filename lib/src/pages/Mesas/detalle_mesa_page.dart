@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -7,9 +8,12 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mesita_aplication_2/src/bloc/provider.dart';
 import 'package:mesita_aplication_2/src/models/mesa_model.dart';
+import 'package:mesita_aplication_2/src/models/pedidos_model.dart';
 import 'package:mesita_aplication_2/src/pages/Busqueda/buscar_page.dart';
 import 'package:mesita_aplication_2/src/pages/Mesas/delete_mesa.dart';
 import 'package:mesita_aplication_2/src/pages/Mesas/modal_agregar_mesa.dart';
+import 'package:mesita_aplication_2/src/pages/Pedidos/agregar_producto_page.dart';
+import 'package:mesita_aplication_2/src/utils/constants.dart';
 
 class DetalleMesaPage extends StatelessWidget {
   final MesaModel mesa;
@@ -19,6 +23,9 @@ class DetalleMesaPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final mesaBloc = ProviderBloc.mesas(context);
     mesaBloc.obtenerMesaPorId(mesa.idMesa);
+
+    final pedidosBloc = ProviderBloc.pedidos(context);
+    pedidosBloc.obtenerPedidosPorIdMesa(mesa.idMesa);
     return StreamBuilder(
         stream: mesaBloc.mesaStream,
         builder: (context, AsyncSnapshot<List<MesaModel>> snapshot) {
@@ -193,12 +200,41 @@ class DetalleMesaPage extends StatelessWidget {
                                         height: ScreenUtil().setHeight(16),
                                       ),
                                       Center(
-                                        child: Text(
-                                          'Atendido por mesero',
-                                          style: GoogleFonts.poppins(
-                                            color: Colors.white,
-                                            fontWeight: FontWeight.w500,
-                                            fontSize: ScreenUtil().setSp(14),
+                                        child: InkWell(
+                                          onTap: () {
+                                            Navigator.push(
+                                              context,
+                                              PageRouteBuilder(
+                                                opaque: false,
+                                                pageBuilder: (context, animation, secondaryAnimation) {
+                                                  return AgregarProductoPage(
+                                                    mesa: mesaData[0],
+                                                  );
+                                                },
+                                                transitionsBuilder: (context, animation, secondaryAnimation, child) {
+                                                  var begin = Offset(0.0, 1.0);
+                                                  var end = Offset.zero;
+                                                  var curve = Curves.ease;
+
+                                                  var tween = Tween(begin: begin, end: end).chain(
+                                                    CurveTween(curve: curve),
+                                                  );
+
+                                                  return SlideTransition(
+                                                    position: animation.drive(tween),
+                                                    child: child,
+                                                  );
+                                                },
+                                              ),
+                                            );
+                                          },
+                                          child: Text(
+                                            'Agregar productos',
+                                            style: GoogleFonts.poppins(
+                                              color: Colors.white,
+                                              fontWeight: FontWeight.w500,
+                                              fontSize: ScreenUtil().setSp(14),
+                                            ),
                                           ),
                                         ),
                                       ),
@@ -209,105 +245,230 @@ class DetalleMesaPage extends StatelessWidget {
                             ],
                           ),
                         ),
-                        Container(
-                          padding: EdgeInsets.symmetric(horizontal: ScreenUtil().setWidth(24)),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Container(
-                                height: ScreenUtil().setHeight(80),
-                                width: ScreenUtil().setWidth(80),
-                                decoration: BoxDecoration(
-                                  color: Color(0XFFEEEEEE),
-                                  shape: BoxShape.circle,
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color: Color.fromRGBO(88, 88, 88, 0.5),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    'Sopa a la minuta',
-                                    style: GoogleFonts.poppins(
-                                      color: Color(0XFF585858),
-                                      fontWeight: FontWeight.w500,
-                                      fontSize: ScreenUtil().setSp(16),
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    height: ScreenUtil().setHeight(13),
-                                  ),
-                                  Text(
-                                    'S/15.00',
-                                    style: GoogleFonts.poppins(
-                                      fontWeight: FontWeight.w700,
-                                      fontSize: ScreenUtil().setSp(16),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              Container(
-                                padding: EdgeInsets.symmetric(horizontal: ScreenUtil().setWidth(16)),
-                                height: ScreenUtil().setHeight(32),
-                                //width: ScreenUtil().setWidth(86),
-                                decoration: BoxDecoration(
-                                  color: Color(0XFFFF0036),
-                                  borderRadius: BorderRadius.circular(30),
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color: Color.fromRGBO(88, 88, 88, 0.5),
-                                    ),
-                                  ],
-                                ),
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Text(
-                                      '-',
-                                      style: GoogleFonts.poppins(
-                                        fontWeight: FontWeight.w700,
-                                        fontSize: ScreenUtil().setSp(16),
-                                      ),
-                                    ),
-                                    Container(
-                                      margin: EdgeInsets.symmetric(horizontal: 8),
-                                      height: ScreenUtil().setHeight(22),
-                                      width: ScreenUtil().setWidth(22),
-                                      decoration: BoxDecoration(
-                                        color: Colors.white,
-                                        shape: BoxShape.circle,
-                                        boxShadow: [
-                                          BoxShadow(
-                                            color: Color.fromRGBO(88, 88, 88, 0.5),
-                                          ),
-                                        ],
-                                      ),
-                                      child: Center(
-                                        child: Text(
-                                          '1',
-                                          style: GoogleFonts.poppins(
-                                            fontWeight: FontWeight.w700,
-                                            fontSize: ScreenUtil().setSp(16),
+                        Expanded(
+                          child: StreamBuilder(
+                              stream: pedidosBloc.pedidosPorMesaStream,
+                              builder: (context, AsyncSnapshot<List<PedidoModel>> snapshot) {
+                                if (snapshot.hasData) {
+                                  if (snapshot.data.length > 0) {
+                                    var pedidos = snapshot.data;
+                                    return Column(
+                                      children: [
+                                        Expanded(
+                                          child: ListView.builder(
+                                              shrinkWrap: true,
+                                              itemCount: pedidos[0].detallesPedido.length,
+                                              itemBuilder: (context, index) {
+                                                return Container(
+                                                  padding: EdgeInsets.symmetric(
+                                                      horizontal: ScreenUtil().setWidth(24), vertical: ScreenUtil().setHeight(8)),
+                                                  child: Row(
+                                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                    children: [
+                                                      Container(
+                                                        height: ScreenUtil().setHeight(80),
+                                                        width: ScreenUtil().setWidth(80),
+                                                        decoration: BoxDecoration(
+                                                          color: Color(0XFFEEEEEE),
+                                                          shape: BoxShape.circle,
+                                                          boxShadow: [
+                                                            BoxShadow(
+                                                              color: Color.fromRGBO(88, 88, 88, 0.3),
+                                                              blurRadius: 20,
+                                                            ),
+                                                          ],
+                                                        ),
+                                                        child: Stack(
+                                                          children: [
+                                                            Align(
+                                                              alignment: Alignment.center,
+                                                              child: Hero(
+                                                                tag: pedidos[0].detallesPedido[index].idDetalle,
+                                                                child: Container(
+                                                                  height: ScreenUtil().setHeight(64),
+                                                                  width: ScreenUtil().setWidth(64),
+                                                                  decoration: BoxDecoration(
+                                                                    color: Color(0XFFEEEEEE),
+                                                                    shape: BoxShape.circle,
+                                                                    boxShadow: [
+                                                                      BoxShadow(
+                                                                        offset: Offset(-1, -1),
+                                                                        color: Color.fromRGBO(0, 0, 0, 0.2),
+                                                                        blurRadius: 5,
+                                                                      ),
+                                                                    ],
+                                                                  ),
+                                                                  child: CachedNetworkImage(
+                                                                    placeholder: (context, url) => Container(
+                                                                      child: SvgPicture.asset('assets/food_svg/food.svg'),
+                                                                    ),
+                                                                    errorWidget: (context, url, error) => Container(
+                                                                      child: Container(
+                                                                        child: SvgPicture.asset(
+                                                                          'assets/food_svg/food.svg',
+                                                                        ),
+                                                                      ),
+                                                                    ),
+                                                                    imageUrl: '$apiBaseURL/${pedidos[0].detallesPedido[index].fotoProducto}',
+                                                                    imageBuilder: (context, imageProvider) => Container(
+                                                                      decoration: BoxDecoration(
+                                                                        shape: BoxShape.circle,
+                                                                        image: DecorationImage(
+                                                                          image: imageProvider,
+                                                                          fit: BoxFit.cover,
+                                                                        ),
+                                                                      ),
+                                                                    ),
+                                                                  ),
+                                                                ),
+                                                              ),
+                                                              //child: SvgPicture.asset('assets/food_svg/food.svg')),
+                                                            ),
+                                                          ],
+                                                        ),
+                                                      ),
+                                                      Column(
+                                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                                        children: [
+                                                          Text(
+                                                            '${pedidos[0].detallesPedido[index].nombreProducto}',
+                                                            style: GoogleFonts.poppins(
+                                                              color: Color(0XFF585858),
+                                                              fontWeight: FontWeight.w500,
+                                                              fontSize: ScreenUtil().setSp(16),
+                                                            ),
+                                                          ),
+                                                          SizedBox(
+                                                            height: ScreenUtil().setHeight(13),
+                                                          ),
+                                                          Text(
+                                                            'S/${pedidos[0].detallesPedido[index].totalDetalle}',
+                                                            style: GoogleFonts.poppins(
+                                                              fontWeight: FontWeight.w700,
+                                                              fontSize: ScreenUtil().setSp(16),
+                                                            ),
+                                                          ),
+                                                        ],
+                                                      ),
+                                                      Container(
+                                                        padding: EdgeInsets.symmetric(horizontal: ScreenUtil().setWidth(16)),
+                                                        height: ScreenUtil().setHeight(32),
+                                                        //width: ScreenUtil().setWidth(86),
+                                                        decoration: BoxDecoration(
+                                                          color: Color(0XFFFF0036),
+                                                          borderRadius: BorderRadius.circular(30),
+                                                          boxShadow: [
+                                                            BoxShadow(
+                                                              color: Color.fromRGBO(88, 88, 88, 0.5),
+                                                            ),
+                                                          ],
+                                                        ),
+                                                        child: Row(
+                                                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                          children: [
+                                                            Text(
+                                                              '-',
+                                                              style: GoogleFonts.poppins(
+                                                                fontWeight: FontWeight.w700,
+                                                                fontSize: ScreenUtil().setSp(16),
+                                                              ),
+                                                            ),
+                                                            Container(
+                                                              margin: EdgeInsets.symmetric(horizontal: 8),
+                                                              height: ScreenUtil().setHeight(22),
+                                                              width: ScreenUtil().setWidth(22),
+                                                              decoration: BoxDecoration(
+                                                                color: Colors.white,
+                                                                shape: BoxShape.circle,
+                                                                boxShadow: [
+                                                                  BoxShadow(
+                                                                    color: Color.fromRGBO(88, 88, 88, 0.5),
+                                                                  ),
+                                                                ],
+                                                              ),
+                                                              child: Center(
+                                                                child: Text(
+                                                                  '${pedidos[0].detallesPedido[index].cantidad}',
+                                                                  style: GoogleFonts.poppins(
+                                                                    fontWeight: FontWeight.w700,
+                                                                    fontSize: ScreenUtil().setSp(16),
+                                                                  ),
+                                                                ),
+                                                              ),
+                                                            ),
+                                                            Text(
+                                                              '+',
+                                                              style: GoogleFonts.poppins(
+                                                                fontWeight: FontWeight.w700,
+                                                                fontSize: ScreenUtil().setSp(16),
+                                                              ),
+                                                            ),
+                                                          ],
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                );
+                                              }),
+                                        ),
+                                        _rayas(),
+                                        Padding(
+                                          padding: EdgeInsets.symmetric(horizontal: ScreenUtil().setWidth(24), vertical: ScreenUtil().setHeight(8)),
+                                          child: Row(
+                                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              Text(
+                                                'Total',
+                                                style: GoogleFonts.poppins(
+                                                  fontWeight: FontWeight.w600,
+                                                  fontSize: ScreenUtil().setSp(16),
+                                                ),
+                                              ),
+                                              Text(
+                                                'S/${pedidos[0].total}',
+                                                style: GoogleFonts.poppins(
+                                                  fontWeight: FontWeight.w600,
+                                                  fontSize: ScreenUtil().setSp(16),
+                                                ),
+                                              ),
+                                            ],
                                           ),
                                         ),
-                                      ),
-                                    ),
-                                    Text(
-                                      '+',
-                                      style: GoogleFonts.poppins(
-                                        fontWeight: FontWeight.w700,
-                                        fontSize: ScreenUtil().setSp(16),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ],
-                          ),
+                                        _rayas(),
+                                        Container(
+                                          margin: EdgeInsets.symmetric(horizontal: ScreenUtil().setWidth(24), vertical: ScreenUtil().setHeight(16)),
+                                          width: double.infinity,
+                                          child: MaterialButton(
+                                            color: Color(0XFFFF0036),
+                                            textColor: Colors.white,
+                                            elevation: 10,
+                                            onPressed: () {},
+                                            shape: const RoundedRectangleBorder(
+                                              borderRadius: BorderRadius.all(
+                                                Radius.circular(20.0),
+                                              ),
+                                            ),
+                                            child: Text(
+                                              'Pagar pedido',
+                                              style: GoogleFonts.poppins(
+                                                color: Colors.white,
+                                                fontWeight: FontWeight.w500,
+                                                fontSize: ScreenUtil().setSp(16),
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    );
+                                  } else {
+                                    return Center(
+                                      child: Text('Agregar pedidos'),
+                                    );
+                                  }
+                                } else {
+                                  return _showLoading();
+                                }
+                              }),
                         ),
                       ],
                     ),
@@ -316,97 +477,7 @@ class DetalleMesaPage extends StatelessWidget {
                       left: ScreenUtil().setWidth(24),
                       right: ScreenUtil().setWidth(24),
                       child: Column(
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                            child: LayoutBuilder(
-                              builder: (context, constraints) {
-                                return Flex(
-                                  children: List.generate(
-                                      (constraints.constrainWidth() / 10).floor(),
-                                      (index) => SizedBox(
-                                            height: ScreenUtil().setHeight(1),
-                                            width: ScreenUtil().setWidth(5),
-                                            child: DecoratedBox(
-                                              decoration: BoxDecoration(color: Color(0xFFC4C4C4)),
-                                            ),
-                                          )),
-                                  direction: Axis.horizontal,
-                                  mainAxisSize: MainAxisSize.max,
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                );
-                              },
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text(
-                                  'Total',
-                                  style: GoogleFonts.poppins(
-                                    fontWeight: FontWeight.w600,
-                                    fontSize: ScreenUtil().setSp(16),
-                                  ),
-                                ),
-                                Text(
-                                  'S/ 00.00',
-                                  style: GoogleFonts.poppins(
-                                    fontWeight: FontWeight.w600,
-                                    fontSize: ScreenUtil().setSp(16),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                            child: LayoutBuilder(
-                              builder: (context, constraints) {
-                                return Flex(
-                                  children: List.generate(
-                                      (constraints.constrainWidth() / 10).floor(),
-                                      (index) => SizedBox(
-                                            height: ScreenUtil().setHeight(1),
-                                            width: ScreenUtil().setWidth(5),
-                                            child: DecoratedBox(
-                                              decoration: BoxDecoration(color: Color(0xFFC4C4C4)),
-                                            ),
-                                          )),
-                                  direction: Axis.horizontal,
-                                  mainAxisSize: MainAxisSize.max,
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                );
-                              },
-                            ),
-                          ),
-                          SizedBox(
-                            height: ScreenUtil().setHeight(24),
-                          ),
-                          SizedBox(
-                            width: double.infinity,
-                            child: MaterialButton(
-                              color: Color(0XFFFF0036),
-                              textColor: Colors.white,
-                              elevation: 10,
-                              onPressed: () {},
-                              shape: const RoundedRectangleBorder(
-                                borderRadius: BorderRadius.all(
-                                  Radius.circular(20.0),
-                                ),
-                              ),
-                              child: Text(
-                                'Generar pedido',
-                                style: GoogleFonts.poppins(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.w500,
-                                  fontSize: ScreenUtil().setSp(16),
-                                ),
-                              ),
-                            ),
-                          )
-                        ],
+                        children: [],
                       ),
                     )
                   ],
@@ -421,6 +492,30 @@ class DetalleMesaPage extends StatelessWidget {
             );
           }
         });
+  }
+
+  Widget _rayas() {
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: ScreenUtil().setWidth(24), vertical: ScreenUtil().setHeight(8)),
+      child: LayoutBuilder(
+        builder: (context, constraints) {
+          return Flex(
+            children: List.generate(
+                (constraints.constrainWidth() / 10).floor(),
+                (index) => SizedBox(
+                      height: ScreenUtil().setHeight(1),
+                      width: ScreenUtil().setWidth(5),
+                      child: DecoratedBox(
+                        decoration: BoxDecoration(color: Color(0xFFC4C4C4)),
+                      ),
+                    )),
+            direction: Axis.horizontal,
+            mainAxisSize: MainAxisSize.max,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          );
+        },
+      ),
+    );
   }
 
   _showLoading() {

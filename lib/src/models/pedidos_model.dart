@@ -4,6 +4,7 @@ class PedidoModel {
   String total;
   String fecha;
   String estado;
+  List<DetallePedidoModel> detallesPedido;
 
   PedidoModel({
     this.idPedido,
@@ -11,6 +12,7 @@ class PedidoModel {
     this.idMesa,
     this.fecha,
     this.estado,
+    this.detallesPedido,
   });
 
   factory PedidoModel.fromJson(Map<String, dynamic> json) => PedidoModel(
@@ -31,6 +33,9 @@ class DetallePedidoModel {
   String totalDetalle;
   String observaciones;
   String estado;
+  String llevar;
+  String nombreProducto;
+  String fotoProducto;
 
   DetallePedidoModel({
     this.idDetalle,
@@ -41,6 +46,9 @@ class DetallePedidoModel {
     this.totalDetalle,
     this.observaciones,
     this.estado,
+    this.llevar,
+    this.nombreProducto,
+    this.fotoProducto,
   });
 
   factory DetallePedidoModel.fromJson(Map<String, dynamic> json) => DetallePedidoModel(
@@ -52,5 +60,6 @@ class DetallePedidoModel {
         totalDetalle: json["totalDetalle"],
         observaciones: json["observaciones"],
         estado: json["estado"],
+        llevar: json["llevar"],
       );
 }

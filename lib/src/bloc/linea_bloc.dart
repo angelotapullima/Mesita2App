@@ -10,8 +10,11 @@ class LineaBloc {
   final _prefs = Preferences();
 
   final _lineasController = BehaviorSubject<List<LineaModel>>();
+  final _lineasAllController = BehaviorSubject<List<LineaModel>>();
 
   Stream<List<LineaModel>> get lineasStream => _lineasController.stream;
+
+  Stream<List<LineaModel>> get allLineasStream => _lineasAllController.stream;
 
   void obtenerLineasPorNegocio(String idCategoria) async {
     _lineasController.sink.add(await _lineaDatabase.obtenerLineasPorNegocio(_prefs.idNegocio, idCategoria));
@@ -19,7 +22,14 @@ class LineaBloc {
     _lineasController.sink.add(await _lineaDatabase.obtenerLineasPorNegocio(_prefs.idNegocio, idCategoria));
   }
 
+  void obtenerTodasLasLineasPorNegocio() async {
+    _lineasAllController.sink.add(await _lineaDatabase.obtenerAllLines(_prefs.idNegocio));
+    await _lineaApi.obtenerLineasPorNegocio();
+    _lineasAllController.sink.add(await _lineaDatabase.obtenerAllLines(_prefs.idNegocio));
+  }
+
   dispose() {
     _lineasController?.close();
+    _lineasAllController?.close();
   }
 }

@@ -32,7 +32,7 @@ class LoginApi {
           _prefs.personName = decodedData['data']['p_n'];
           _prefs.personSurname = '${decodedData['data']['p_p']} ${decodedData['data']['p_m']}';
           _prefs.personApellidoPaterno = '${decodedData['data']['p_p']}';
-          _prefs.personApellidoPaterno = decodedData['data']['p_m'];
+          _prefs.personApellidoPaterno = '${decodedData['data']['p_m']}';
           _prefs.token = decodedData['data']['tn'];
           //Guardar rol Usuario
           _prefs.idRol = decodedData['data']['ru'];

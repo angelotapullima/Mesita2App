@@ -2,7 +2,9 @@ import 'dart:convert';
 
 import 'package:http/http.dart' as http;
 import 'package:mesita_aplication_2/src/database/mesa_database.dart';
+import 'package:mesita_aplication_2/src/database/pedidos_database.dart';
 import 'package:mesita_aplication_2/src/models/mesa_model.dart';
+import 'package:mesita_aplication_2/src/models/pedidos_model.dart';
 import 'package:mesita_aplication_2/src/preferences/preferences.dart';
 import 'package:mesita_aplication_2/src/utils/constants.dart';
 
@@ -11,6 +13,7 @@ class MesaApi {
   final _mesaDatabase = MesaDatabase();
 
   Future<bool> obtenerMesasPorNegocio() async {
+    final _pedidosDatabase = PedidosDatabase();
     try {
       final url = Uri.parse('$apiBaseURL/api/Negocio/listar_mesas_por_negocio');
 
@@ -24,7 +27,6 @@ class MesaApi {
       );
 
       final decodedData = json.decode(resp.body);
-      print(decodedData);
 
       if (decodedData['result'].length > 0) {
         for (var i = 0; i < decodedData['result'].length; i++) {
@@ -35,6 +37,36 @@ class MesaApi {
           mesa.mesaCapacidad = decodedData['result'][i]['mesa_capacidad'];
           mesa.mesaEstado = decodedData['result'][i]['mesa_estado'];
           await _mesaDatabase.insertarMesa(mesa);
+
+          if (decodedData['result'][i]["pedido"]["id_pedido"] != 0) {
+            PedidoModel pedido = PedidoModel();
+
+            pedido.idPedido = decodedData['result'][i]["pedido"]["id_pedido"];
+            pedido.idMesa = decodedData['result'][i]['id_mesa'];
+            pedido.total = decodedData['result'][i]["pedido"]["pedido_total"];
+
+            if (decodedData['result'][i]["pedido"]["detalle"].length > 0) {
+              pedido.estado = decodedData['result'][i]["pedido"]["detalle"][0]["pedido_estado"];
+              pedido.fecha = decodedData['result'][i]["pedido"]["detalle"][0]["pedido_datetime"];
+              for (var x = 0; x < decodedData['result'][i]["pedido"]["detalle"].length; x++) {
+                var detalle = decodedData['result'][i]["pedido"]["detalle"][x];
+                DetallePedidoModel detallePedido = DetallePedidoModel();
+                detallePedido.idDetalle = detalle["id_pedido_detalle"];
+                detallePedido.idPedido = detalle["id_pedido"];
+                detallePedido.idProducto = detalle["id_producto"];
+                detallePedido.cantidad = detalle["pedido_detalle_cantidad"];
+                detallePedido.subtotal = detalle["pedido_detalle_subtotal"];
+                detallePedido.totalDetalle = detalle["pedido_detalle_subtotal"];
+                detallePedido.observaciones = detalle["pedido_detalle_observaciones"];
+                detallePedido.estado = detalle["pedido_detalle_estado"];
+                detallePedido.llevar = detalle["pedido_detalle_llevar"];
+
+                await _pedidosDatabase.insertarDetallePedido(detallePedido);
+              }
+
+              await _pedidosDatabase.insertarPedido(pedido);
+            }
+          }
         }
         return true;
       } else {
