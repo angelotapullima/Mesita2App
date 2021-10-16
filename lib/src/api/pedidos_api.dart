@@ -53,7 +53,11 @@ class PedidosApi {
         //   'app': 'true',
         // };
 
-        final resp = await http.post(url, body: envio);
+        final resp = await http.post(url, body: {
+          'tn': '${_prefs.token}',
+          'detalle': envio,
+          'app': 'true',
+        });
 
         if (resp.statusCode == 401) {
           ApiModel apiModel = ApiModel();

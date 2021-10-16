@@ -90,7 +90,9 @@ class _HomeState extends State<Home> {
                         color: Colors.transparent,
                         child: SafeArea(
                           child: Padding(
-                            padding: EdgeInsets.only(left: ScreenUtil().setWidth(8)),
+                            padding: EdgeInsets.only(
+                              left: ScreenUtil().setWidth(8),
+                            ),
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
@@ -98,16 +100,21 @@ class _HomeState extends State<Home> {
                                   height: ScreenUtil().setHeight(90),
                                 ),
                                 Container(
+                                  //color: Colors.black,
                                   height: ScreenUtil().setHeight(70),
                                   child: Stack(
                                     children: [
                                       (bloc.optionsInicio == OptionsInicio.table)
                                           ? Center(
                                               child: Container(
-                                                transform: Matrix4.translationValues(0, -ScreenUtil().setHeight(14), 0),
+                                                transform: Matrix4.translationValues(
+                                                  0,
+                                                  -ScreenUtil().setHeight(10),
+                                                  0,
+                                                ),
                                                 child: ClipOval(
                                                   child: Container(
-                                                    height: ScreenUtil().setHeight(100),
+                                                    height: ScreenUtil().setHeight(50),
                                                     color: Color(0xffFF0036),
                                                     //color: Colors.blue,
                                                     child: Row(
@@ -143,7 +150,7 @@ class _HomeState extends State<Home> {
                                   ),
                                 ),
                                 SizedBox(
-                                  height: ScreenUtil().setHeight(50),
+                                  height: ScreenUtil().setHeight(30),
                                 ),
                                 Container(
                                   height: ScreenUtil().setHeight(70),
@@ -191,7 +198,7 @@ class _HomeState extends State<Home> {
                                   ),
                                 ),
                                 SizedBox(
-                                  height: ScreenUtil().setHeight(50),
+                                  height: ScreenUtil().setHeight(30),
                                 ),
                                 Container(
                                   height: ScreenUtil().setHeight(70),
@@ -239,7 +246,7 @@ class _HomeState extends State<Home> {
                                   ),
                                 ),
                                 SizedBox(
-                                  height: ScreenUtil().setHeight(50),
+                                  height: ScreenUtil().setHeight(30),
                                 ),
                                 Container(
                                   height: ScreenUtil().setHeight(70),
@@ -287,7 +294,7 @@ class _HomeState extends State<Home> {
                                   ),
                                 ),
                                 SizedBox(
-                                  height: ScreenUtil().setHeight(50),
+                                  height: ScreenUtil().setHeight(30),
                                 ),
                                 Container(
                                   height: ScreenUtil().setHeight(70),
@@ -335,7 +342,7 @@ class _HomeState extends State<Home> {
                                   ),
                                 ),
                                 SizedBox(
-                                  height: ScreenUtil().setHeight(50),
+                                  height: ScreenUtil().setHeight(30),
                                 ),
                                 Container(
                                   height: ScreenUtil().setHeight(70),
