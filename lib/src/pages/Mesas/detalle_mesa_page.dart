@@ -13,19 +13,34 @@ import 'package:mesita_aplication_2/src/pages/Busqueda/buscar_page.dart';
 import 'package:mesita_aplication_2/src/pages/Mesas/delete_mesa.dart';
 import 'package:mesita_aplication_2/src/pages/Mesas/modal_agregar_mesa.dart';
 import 'package:mesita_aplication_2/src/pages/Pedidos/agregar_producto_page.dart';
+import 'package:mesita_aplication_2/src/pages/Pedidos/comanda_mesa_page.dart';
 import 'package:mesita_aplication_2/src/utils/constants.dart';
 
-class DetalleMesaPage extends StatelessWidget {
+class DetalleMesaPage extends StatefulWidget {
   final MesaModel mesa;
   const DetalleMesaPage({Key key, @required this.mesa}) : super(key: key);
 
   @override
+  _DetalleMesaPageState createState() => _DetalleMesaPageState();
+}
+
+class _DetalleMesaPageState extends State<DetalleMesaPage> {
+  bool esComanda;
+  String idEnviar;
+  @override
+  void initState() {
+    esComanda = true;
+    idEnviar = '';
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final mesaBloc = ProviderBloc.mesas(context);
-    mesaBloc.obtenerMesaPorId(mesa.idMesa);
+    mesaBloc.obtenerMesaPorId(widget.mesa.idMesa);
 
     final pedidosBloc = ProviderBloc.pedidos(context);
-    pedidosBloc.obtenerPedidosPorIdMesa(mesa.idMesa);
+    pedidosBloc.obtenerPedidosPorIdMesa(widget.mesa.idMesa);
     return StreamBuilder(
         stream: mesaBloc.mesaStream,
         builder: (context, AsyncSnapshot<List<MesaModel>> snapshot) {
@@ -209,6 +224,8 @@ class DetalleMesaPage extends StatelessWidget {
                                                 pageBuilder: (context, animation, secondaryAnimation) {
                                                   return AgregarProductoPage(
                                                     mesa: mesaData[0],
+                                                    esComanda: esComanda,
+                                                    idEnviar: idEnviar,
                                                   );
                                                 },
                                                 transitionsBuilder: (context, animation, secondaryAnimation, child) {
@@ -251,7 +268,10 @@ class DetalleMesaPage extends StatelessWidget {
                               builder: (context, AsyncSnapshot<List<PedidoModel>> snapshot) {
                                 if (snapshot.hasData) {
                                   if (snapshot.data.length > 0) {
+                                    //Mostrar el pedido que ya existe en el back
+                                    esComanda = false;
                                     var pedidos = snapshot.data;
+                                    idEnviar = pedidos[0].idPedido;
                                     return Column(
                                       children: [
                                         Expanded(
@@ -261,7 +281,8 @@ class DetalleMesaPage extends StatelessWidget {
                                               itemCount: pedidos[0].detallesPedido.length,
                                               itemBuilder: (context, index) {
                                                 return Container(
-                                                  padding: EdgeInsets.symmetric(horizontal: ScreenUtil().setWidth(24), vertical: ScreenUtil().setHeight(8)),
+                                                  padding: EdgeInsets.symmetric(
+                                                      horizontal: ScreenUtil().setWidth(24), vertical: ScreenUtil().setHeight(8)),
                                                   child: Row(
                                                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                                     children: [
@@ -461,8 +482,11 @@ class DetalleMesaPage extends StatelessWidget {
                                       ],
                                     );
                                   } else {
-                                    return Center(
-                                      child: Text('Agregar pedidos'),
+                                    //Se creará la nueva comanda en db interna
+                                    esComanda = true;
+                                    idEnviar = mesaData[0].idMesa;
+                                    return ComandaPage(
+                                      mesa: mesaData[0],
                                     );
                                   }
                                 } else {

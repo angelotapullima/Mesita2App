@@ -1,10 +1,8 @@
-import 'package:mesita_aplication_2/src/api/pedidos_api.dart';
 import 'package:mesita_aplication_2/src/database/pedidos_database.dart';
 import 'package:mesita_aplication_2/src/models/pedidos_model.dart';
 import 'package:rxdart/rxdart.dart';
 
 class PedidosBloc {
-  //final _pedidosApi = PedidosApi();
   final pedidosDatabase = PedidosDatabase();
 
   final _pedidosPorMesaController = BehaviorSubject<List<PedidoModel>>();
@@ -51,8 +49,6 @@ class PedidosBloc {
 
       pedixt.add(pedidoModel);
     }
-
-    print('jfjf');
     _pedidosPorMesaController.sink.add(pedixt);
   }
 }

@@ -1,11 +1,9 @@
-import 'package:mesita_aplication_2/src/api/producto_linea_api.dart';
 import 'package:mesita_aplication_2/src/database/productos_linea_database.dart';
 import 'package:mesita_aplication_2/src/models/producto_linea_model.dart';
 import 'package:rxdart/rxdart.dart';
 
 class ProductosLineaBloc {
   final _productoDatabase = ProductoLineaDatabase();
-  final _productoApi = ProductoLineaApi();
 
   final _productosLineaController = BehaviorSubject<List<ProductoLineaModel>>();
   final _productoController = BehaviorSubject<List<ProductoLineaModel>>();

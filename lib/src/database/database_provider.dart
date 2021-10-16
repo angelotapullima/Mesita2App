@@ -88,6 +88,8 @@ class DatabaseProvider {
           ' id INTEGER PRIMARY KEY AUTOINCREMENT,'
           ' idMesa TEXT,'
           ' idProducto TEXT,'
+          ' foto TEXT,'
+          ' nombre TEXT,'
           ' cantidad TEXT,'
           ' subtotal TEXT,'
           ' observaciones TEXT,'

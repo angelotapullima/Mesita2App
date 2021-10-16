@@ -1,7 +1,7 @@
 import 'package:mesita_aplication_2/src/database/database_provider.dart';
 import 'package:mesita_aplication_2/src/models/pedido_temporal_model.dart';
 
-class PedidosDatabase {
+class PedidosTemporalDatabase {
   final dbprovider = DatabaseProvider.db;
 
   insertarDetallePedidoTemporal(DetallePedidoTemporalModel detalle) async {
@@ -9,8 +9,8 @@ class PedidosDatabase {
       final db = await dbprovider.database;
 
       final res = await db.rawInsert(
-          "INSERT OR REPLACE INTO DetallePedidosTemporales (id,idMesa,idProducto,cantidad,subtotal,observaciones,estado, llevar) "
-          "VALUES ('${detalle.id}','${detalle.idMesa}','${detalle.idProducto}','${detalle.cantidad}','${detalle.subtotal}','${detalle.observaciones}','${detalle.estado}',,'${detalle.llevar}')");
+          "INSERT OR REPLACE INTO DetallePedidosTemporales (idMesa,idProducto,foto,nombre,cantidad,subtotal,observaciones,estado, llevar) "
+          "VALUES ('${detalle.idMesa}','${detalle.idProducto}','${detalle.foto}','${detalle.nombre}','${detalle.cantidad}','${detalle.subtotal}','${detalle.observaciones}','${detalle.estado}','${detalle.llevar}')");
 
       return res;
     } catch (exception) {
@@ -18,9 +18,9 @@ class PedidosDatabase {
     }
   }
 
-  Future<List<DetallePedidoTemporalModel>> obtenerDetallesPedidoTemporales() async {
+  Future<List<DetallePedidoTemporalModel>> obtenerDetallesPedidoTemporales(String idMesa) async {
     final db = await dbprovider.database;
-    final res = await db.rawQuery("SELECT * FROM DetallePedidosTemporales");
+    final res = await db.rawQuery("SELECT * FROM DetallePedidosTemporales WHERE idMesa='$idMesa'");
 
     List<DetallePedidoTemporalModel> list = res.isNotEmpty ? res.map((c) => DetallePedidoTemporalModel.fromJson(c)).toList() : [];
     return list;

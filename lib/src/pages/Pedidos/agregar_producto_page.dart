@@ -17,7 +17,9 @@ import 'package:mesita_aplication_2/src/utils/constants.dart';
 
 class AgregarProductoPage extends StatefulWidget {
   final MesaModel mesa;
-  const AgregarProductoPage({Key key, @required this.mesa}) : super(key: key);
+  final String idEnviar;
+  final bool esComanda;
+  const AgregarProductoPage({Key key, @required this.mesa, @required this.idEnviar, @required this.esComanda}) : super(key: key);
 
   @override
   _AgregarProductoPageState createState() => _AgregarProductoPageState();
@@ -277,6 +279,8 @@ class _AgregarProductoPageState extends State<AgregarProductoPage> {
             pageBuilder: (context, animation, secondaryAnimation) {
               return AgregarDetalleProducto(
                 producto: food,
+                idEnviar: widget.idEnviar,
+                esComanda: widget.esComanda,
                 idMesa: widget.mesa.idMesa,
               );
             },
