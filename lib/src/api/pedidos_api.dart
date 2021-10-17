@@ -42,27 +42,26 @@ class PedidosApi {
         comanda.total = totalPedido.toStringAsFixed(2);
 
         comanda.detalles = detallesList;
-        comanda.token = '${_prefs.token}';
+        comanda.token = _prefs.token;
 
         var envio = jsonEncode(comanda.toJson());
         print(envio);
-        final url = Uri.parse('${apiBaseURL}/api/Negocio/guardar_pedido');
-        // Map<String, String> headers = {
-        //   'Content-Type': 'application/json',
-        //   'tn': '${_prefs.token}',
-        //   'app': 'true',
-        // };
+        final url = Uri.parse('$apiBaseURL/api/Negocio/guardar_pedido');
+        Map<String, String> headers = {
+          'Content-Type': 'application/json',
+          'Authorization': ' Bearer ${_prefs.token}',
+        };
 
-        final resp = await http.post(url, body: envio);
+        final resp = await http.post(url, headers: headers, body: envio);
 
-        if (resp.statusCode == 401) {
-          ApiModel apiModel = ApiModel();
-          apiModel.error = true;
-          apiModel.resultadoPeticion = false;
-          apiModel.mensaje = 'token inválido';
+        // if (resp.statusCode == 401) {
+        //   ApiModel apiModel = ApiModel();
+        //   apiModel.error = true;
+        //   apiModel.resultadoPeticion = false;
+        //   apiModel.mensaje = 'token inválido';
 
-          return apiModel;
-        }
+        //   return apiModel;
+        // }
 
         final decodedData = json.decode(resp.body);
 
@@ -114,11 +113,11 @@ class PedidosApi {
       pedido.idPedido = idPedido;
 
       pedido.detalles = detallesList;
-      pedido.token = '${_prefs.token}';
+      pedido.token = _prefs.token;
 
       var envio = jsonEncode(pedido.toJson());
       print(envio);
-      final url = Uri.parse('${apiBaseURL}/api/Negocio/guardar_pedido_detalle');
+      final url = Uri.parse('$apiBaseURL/api/Negocio/guardar_pedido_detalle');
       // Map<String, String> headers = {
       //   'Content-Type': 'application/json',
       //   'tn': '${_prefs.token}',

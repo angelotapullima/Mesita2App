@@ -13,12 +13,12 @@ class ComandaModel {
   });
 
   Map<String, dynamic> toJson() => {
-        'id_mesa': idMesa,
-        'id_usuario': idUsuario,
-        'pedido_total': total,
-        'app': 'true',
-        'tn': token,
-        'detalle': List<dynamic>.from(detalles.map((x) => x.toJson())),
+        "id_mesa": idMesa,
+        "id_usuario": idUsuario,
+        "pedido_total": total,
+        "app": 'true',
+        "tn": token,
+        "detalle": List<dynamic>.from(detalles.map((x) => x.toJson())),
       };
 }
 
