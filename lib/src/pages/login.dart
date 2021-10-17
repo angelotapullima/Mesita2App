@@ -188,7 +188,7 @@ class _LoginState extends State<Login> {
                   child: Container(
                     padding: EdgeInsets.symmetric(
                       vertical: ScreenUtil().setHeight(5),
-                      horizontal: ScreenUtil().setWidth(5),
+                      horizontal: ScreenUtil().setWidth(2),
                     ),
                     decoration: BoxDecoration(
                       color: Colors.red,
@@ -200,7 +200,7 @@ class _LoginState extends State<Login> {
                         'Iniciar sesión',
                         style: TextStyle(
                           color: Colors.white,
-                          fontSize: ScreenUtil().setSp(17),
+                          fontSize: ScreenUtil().setSp(16),
                         ),
                       ),
                     ),
@@ -219,7 +219,7 @@ class _LoginState extends State<Login> {
                     child: Container(
                       padding: EdgeInsets.symmetric(
                         vertical: ScreenUtil().setHeight(5),
-                        horizontal: ScreenUtil().setWidth(5),
+                        horizontal: ScreenUtil().setWidth(2),
                       ),
                       decoration: BoxDecoration(
                         color: Colors.white,
@@ -231,7 +231,7 @@ class _LoginState extends State<Login> {
                           'Registrarse',
                           style: TextStyle(
                             color: Colors.black,
-                            fontSize: ScreenUtil().setSp(17),
+                            fontSize: ScreenUtil().setSp(16),
                           ),
                         ),
                       ),
@@ -418,7 +418,7 @@ class _LoginState extends State<Login> {
                     child: Container(
                       padding: EdgeInsets.symmetric(
                         vertical: ScreenUtil().setHeight(5),
-                        horizontal: ScreenUtil().setWidth(5),
+                        horizontal: ScreenUtil().setWidth(2),
                       ),
                       decoration: BoxDecoration(
                         color: Colors.white,
@@ -430,7 +430,7 @@ class _LoginState extends State<Login> {
                           'Iniciar sesión',
                           style: TextStyle(
                             color: Colors.black,
-                            fontSize: ScreenUtil().setSp(17),
+                            fontSize: ScreenUtil().setSp(16),
                           ),
                         ),
                       ),
@@ -444,7 +444,7 @@ class _LoginState extends State<Login> {
                   child: Container(
                     padding: EdgeInsets.symmetric(
                       vertical: ScreenUtil().setHeight(5),
-                      horizontal: ScreenUtil().setWidth(5),
+                      horizontal: ScreenUtil().setWidth(2),
                     ),
                     decoration: BoxDecoration(
                       color: Colors.red,
@@ -456,7 +456,7 @@ class _LoginState extends State<Login> {
                         'Registrar',
                         style: TextStyle(
                           color: Colors.white,
-                          fontSize: ScreenUtil().setSp(17),
+                          fontSize: ScreenUtil().setSp(16),
                         ),
                       ),
                     ),

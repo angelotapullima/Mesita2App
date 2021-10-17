@@ -52,7 +52,11 @@ class PedidosApi {
           'Authorization': ' Bearer ${_prefs.token}',
         };
 
-        final resp = await http.post(url, headers: headers, body: envio);
+        final resp = await http.post(url, body: {
+          'tn': '${_prefs.token}',
+          'detalle': envio,
+          'app': 'true',
+        });
 
         // if (resp.statusCode == 401) {
         //   ApiModel apiModel = ApiModel();
