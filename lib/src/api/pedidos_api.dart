@@ -47,32 +47,22 @@ class PedidosApi {
         var envio = jsonEncode(comanda.toJson());
         print(envio);
         final url = Uri.parse('$apiBaseURL/api/Negocio/guardar_pedido');
-        Map<String, String> headers = {
-          'Content-Type': 'application/json',
-          'Authorization': ' Bearer ${_prefs.token}',
-        };
 
         final resp = await http.post(url, body: {
           'tn': '${_prefs.token}',
           'detalle': envio,
+          'id_mesa': idMesa,
+          'id_usuario': _prefs.idUser,
+          'pedido_total': comanda.total,
           'app': 'true',
         });
-
-        // if (resp.statusCode == 401) {
-        //   ApiModel apiModel = ApiModel();
-        //   apiModel.error = true;
-        //   apiModel.resultadoPeticion = false;
-        //   apiModel.mensaje = 'token inválido';
-
-        //   return apiModel;
-        // }
 
         final decodedData = json.decode(resp.body);
 
         print(decodedData);
 
         print(decodedData['exito']);
-        if (decodedData['result']['code'] == 1) {
+        if (decodedData['result'] == 1) {
           await _comandaDatabase.deleteDetallesPedidoTemporal();
           ApiModel apiModel = ApiModel();
           apiModel.error = false;
