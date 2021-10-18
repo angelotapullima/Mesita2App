@@ -3,7 +3,6 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:mesita_aplication_2/src/database/pedidos_temporales_database.dart';
 import 'package:mesita_aplication_2/src/models/agregar_producto_pedido_model.dart';
-import 'package:mesita_aplication_2/src/models/api_model.dart';
 import 'package:mesita_aplication_2/src/models/pedido_temporal_model.dart';
 import 'package:mesita_aplication_2/src/preferences/preferences.dart';
 import 'package:mesita_aplication_2/src/utils/constants.dart';
@@ -13,7 +12,7 @@ class PedidosApi {
 
   final _prefs = Preferences();
 
-  Future<ApiModel> enviarComanda(String idMesa, String total) async {
+  Future<bool> enviarComanda(String idMesa, String total) async {
     try {
       final comandaList = await _comandaDatabase.obtenerDetallesPedidoTemporales(idMesa);
 
@@ -47,7 +46,6 @@ class PedidosApi {
         var envio = jsonEncode(comanda.toJson());
         print(envio);
         final url = Uri.parse('${apiBaseURL}/api/Negocio/guardar_pedido');
-       
 
         final resp = await http.post(url, body: {
           'tn': '${_prefs.token}',
@@ -55,57 +53,27 @@ class PedidosApi {
           'app': 'true',
         });
 
-        if (resp.statusCode == 401) {
-          ApiModel apiModel = ApiModel();
-          apiModel.error = true;
-          apiModel.resultadoPeticion = false;
-          apiModel.mensaje = 'token inválido';
-
-          return apiModel;
-        }
-
         final decodedData = json.decode(resp.body);
 
         print(decodedData);
 
         print(decodedData['exito']);
         if (decodedData['result']['code'] == 1) {
-          await _comandaDatabase.deleteDetallesPedidoTemporal();
-          ApiModel apiModel = ApiModel();
-          apiModel.error = false;
-          apiModel.resultadoPeticion = true;
-          apiModel.mensaje = 'Respuesta correcta';
-
-          return apiModel;
+          return true;
         } else {
-          ApiModel apiModel = ApiModel();
-          apiModel.error = false;
-          apiModel.resultadoPeticion = false;
-          apiModel.mensaje = 'El envío no fue exitoso';
-
-          return apiModel;
+          return false;
         }
       } else {
-        ApiModel apiModel = ApiModel();
-        apiModel.error = false;
-        apiModel.resultadoPeticion = false;
-        apiModel.mensaje = 'El envío no fue exitoso';
-
-        return apiModel;
+        return false;
       }
     } catch (error, stacktrace) {
       print("Exception occured: $error stackTrace: $stacktrace");
 
-      ApiModel apiModel = ApiModel();
-      apiModel.error = false;
-      apiModel.resultadoPeticion = false;
-      apiModel.mensaje = 'Error al realizar la petición';
-
-      return apiModel;
+      return false;
     }
   }
 
-  Future<ApiModel> agregarDetallePedido(String idPedido, DetalleProductoModel detalle) async {
+  Future<bool> agregarDetallePedido(String idPedido, DetalleProductoModel detalle) async {
     try {
       final List<DetalleProductoModel> detallesList = [];
       detallesList.add(detalle);
@@ -127,44 +95,20 @@ class PedidosApi {
 
       final resp = await http.post(url, body: envio);
 
-      if (resp.statusCode == 401) {
-        ApiModel apiModel = ApiModel();
-        apiModel.error = true;
-        apiModel.resultadoPeticion = false;
-        apiModel.mensaje = 'token inválido';
-
-        return apiModel;
-      }
-
       final decodedData = json.decode(resp.body);
 
       print(decodedData);
 
       print(decodedData['exito']);
       if (decodedData['result']['code'] == 1) {
-        ApiModel apiModel = ApiModel();
-        apiModel.error = false;
-        apiModel.resultadoPeticion = true;
-        apiModel.mensaje = 'Respuesta correcta';
-
-        return apiModel;
+        return true;
       } else {
-        ApiModel apiModel = ApiModel();
-        apiModel.error = false;
-        apiModel.resultadoPeticion = false;
-        apiModel.mensaje = 'El envío no fue exitoso';
-
-        return apiModel;
+        return false;
       }
     } catch (error, stacktrace) {
       print("Exception occured: $error stackTrace: $stacktrace");
 
-      ApiModel apiModel = ApiModel();
-      apiModel.error = false;
-      apiModel.resultadoPeticion = false;
-      apiModel.mensaje = 'Error al realizar la petición';
-
-      return apiModel;
+      return false;
     }
   }
 /* 
