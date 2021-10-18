@@ -295,7 +295,7 @@ class _AgregarDetalleProductoState extends State<AgregarDetalleProducto> {
                                   detalle.llevar = '0';
 
                                   final res = await _pedidosApi.agregarDetallePedido(widget.idEnviar, detalle);
-                                  if (res.resultadoPeticion) {
+                                  if (res) {
                                     final pedidosBloc = ProviderBloc.pedidos(context);
                                     pedidosBloc.obtenerPedidosPorIdMesa(widget.idMesa);
                                   }

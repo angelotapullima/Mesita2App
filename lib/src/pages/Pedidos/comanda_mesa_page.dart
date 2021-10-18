@@ -37,94 +37,149 @@ class _ComandaPageState extends State<ComandaPage> {
                 children: [
                   Expanded(
                     child: ListView.builder(
-                        shrinkWrap: true,
-                        padding: EdgeInsets.zero,
-                        itemCount: comanda.length,
-                        itemBuilder: (context, index) {
-                          total = total + double.parse(comanda[index].subtotal);
-                          return Container(
-                            padding: EdgeInsets.symmetric(horizontal: ScreenUtil().setWidth(24), vertical: ScreenUtil().setHeight(8)),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Container(
-                                  height: ScreenUtil().setHeight(80),
-                                  width: ScreenUtil().setWidth(80),
-                                  decoration: BoxDecoration(
-                                    color: Color(0XFFEEEEEE),
-                                    shape: BoxShape.circle,
-                                    boxShadow: [
-                                      BoxShadow(
-                                        color: Color.fromRGBO(88, 88, 88, 0.3),
-                                        blurRadius: 20,
-                                      ),
-                                    ],
-                                  ),
-                                  child: Stack(
-                                    children: [
-                                      Align(
-                                        alignment: Alignment.center,
-                                        child: Hero(
-                                          tag: comanda[index].id,
-                                          child: Container(
-                                            height: ScreenUtil().setHeight(64),
-                                            width: ScreenUtil().setWidth(64),
-                                            decoration: BoxDecoration(
-                                              color: Color(0XFFEEEEEE),
-                                              shape: BoxShape.circle,
-                                              boxShadow: [
-                                                BoxShadow(
-                                                  offset: Offset(-1, -1),
-                                                  color: Color.fromRGBO(0, 0, 0, 0.2),
-                                                  blurRadius: 5,
-                                                ),
-                                              ],
+                      shrinkWrap: true,
+                      padding: EdgeInsets.zero,
+                      itemCount: comanda.length,
+                      itemBuilder: (context, index) {
+                        total = total + (double.parse(comanda[index].subtotal) );
+                        return Container(
+                          padding: EdgeInsets.symmetric(horizontal: ScreenUtil().setWidth(24), vertical: ScreenUtil().setHeight(8)),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Container(
+                                height: ScreenUtil().setHeight(80),
+                                width: ScreenUtil().setWidth(80),
+                                decoration: BoxDecoration(
+                                  color: Color(0XFFEEEEEE),
+                                  shape: BoxShape.circle,
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Color.fromRGBO(88, 88, 88, 0.3),
+                                      blurRadius: 20,
+                                    ),
+                                  ],
+                                ),
+                                child: Stack(
+                                  children: [
+                                    Align(
+                                      alignment: Alignment.center,
+                                      child: Hero(
+                                        tag: comanda[index].id,
+                                        child: Container(
+                                          height: ScreenUtil().setHeight(64),
+                                          width: ScreenUtil().setWidth(64),
+                                          decoration: BoxDecoration(
+                                            color: Color(0XFFEEEEEE),
+                                            shape: BoxShape.circle,
+                                            boxShadow: [
+                                              BoxShadow(
+                                                offset: Offset(-1, -1),
+                                                color: Color.fromRGBO(0, 0, 0, 0.2),
+                                                blurRadius: 5,
+                                              ),
+                                            ],
+                                          ),
+                                          child: CachedNetworkImage(
+                                            placeholder: (context, url) => Container(
+                                              child: SvgPicture.asset('assets/food_svg/food.svg'),
                                             ),
-                                            child: CachedNetworkImage(
-                                              placeholder: (context, url) => Container(
-                                                child: SvgPicture.asset('assets/food_svg/food.svg'),
-                                              ),
-                                              errorWidget: (context, url, error) => Container(
-                                                child: Container(
-                                                  child: SvgPicture.asset(
-                                                    'assets/food_svg/food.svg',
-                                                  ),
+                                            errorWidget: (context, url, error) => Container(
+                                              child: Container(
+                                                child: SvgPicture.asset(
+                                                  'assets/food_svg/food.svg',
                                                 ),
                                               ),
-                                              imageUrl: '$apiBaseURL/${comanda[index].foto}',
-                                              imageBuilder: (context, imageProvider) => Container(
-                                                decoration: BoxDecoration(
-                                                  shape: BoxShape.circle,
-                                                  image: DecorationImage(
-                                                    image: imageProvider,
-                                                    fit: BoxFit.cover,
-                                                  ),
+                                            ),
+                                            imageUrl: '$apiBaseURL/${comanda[index].foto}',
+                                            imageBuilder: (context, imageProvider) => Container(
+                                              decoration: BoxDecoration(
+                                                shape: BoxShape.circle,
+                                                image: DecorationImage(
+                                                  image: imageProvider,
+                                                  fit: BoxFit.cover,
                                                 ),
                                               ),
                                             ),
                                           ),
                                         ),
-                                        //child: SvgPicture.asset('assets/food_svg/food.svg')),
                                       ),
-                                    ],
-                                  ),
+                                      //child: SvgPicture.asset('assets/food_svg/food.svg')),
+                                    ),
+                                  ],
                                 ),
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
+                              ),
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    '${comanda[index].nombre}',
+                                    style: GoogleFonts.poppins(
+                                      color: Color(0XFF585858),
+                                      fontWeight: FontWeight.w500,
+                                      fontSize: ScreenUtil().setSp(16),
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    height: ScreenUtil().setHeight(13),
+                                  ),
+                                  Text(
+                                    'S/${comanda[index].subtotal}',
+                                    style: GoogleFonts.poppins(
+                                      fontWeight: FontWeight.w700,
+                                      fontSize: ScreenUtil().setSp(16),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              Container(
+                                padding: EdgeInsets.symmetric(horizontal: ScreenUtil().setWidth(16)),
+                                height: ScreenUtil().setHeight(32),
+                                //width: ScreenUtil().setWidth(86),
+                                decoration: BoxDecoration(
+                                  color: Color(0XFFFF0036),
+                                  borderRadius: BorderRadius.circular(30),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Color.fromRGBO(88, 88, 88, 0.5),
+                                    ),
+                                  ],
+                                ),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                   children: [
                                     Text(
-                                      '${comanda[index].nombre}',
+                                      '-',
                                       style: GoogleFonts.poppins(
-                                        color: Color(0XFF585858),
-                                        fontWeight: FontWeight.w500,
+                                        fontWeight: FontWeight.w700,
                                         fontSize: ScreenUtil().setSp(16),
                                       ),
                                     ),
-                                    SizedBox(
-                                      height: ScreenUtil().setHeight(13),
+                                    Container(
+                                      margin: EdgeInsets.symmetric(horizontal: 8),
+                                      height: ScreenUtil().setHeight(22),
+                                      width: ScreenUtil().setWidth(22),
+                                      decoration: BoxDecoration(
+                                        color: Colors.white,
+                                        shape: BoxShape.circle,
+                                        boxShadow: [
+                                          BoxShadow(
+                                            color: Color.fromRGBO(88, 88, 88, 0.5),
+                                          ),
+                                        ],
+                                      ),
+                                      child: Center(
+                                        child: Text(
+                                          '${comanda[index].cantidad}',
+                                          style: GoogleFonts.poppins(
+                                            fontWeight: FontWeight.w700,
+                                            fontSize: ScreenUtil().setSp(16),
+                                          ),
+                                        ),
+                                      ),
                                     ),
                                     Text(
-                                      'S/${comanda[index].subtotal}',
+                                      '+',
                                       style: GoogleFonts.poppins(
                                         fontWeight: FontWeight.w700,
                                         fontSize: ScreenUtil().setSp(16),
@@ -132,66 +187,12 @@ class _ComandaPageState extends State<ComandaPage> {
                                     ),
                                   ],
                                 ),
-                                Container(
-                                  padding: EdgeInsets.symmetric(horizontal: ScreenUtil().setWidth(16)),
-                                  height: ScreenUtil().setHeight(32),
-                                  //width: ScreenUtil().setWidth(86),
-                                  decoration: BoxDecoration(
-                                    color: Color(0XFFFF0036),
-                                    borderRadius: BorderRadius.circular(30),
-                                    boxShadow: [
-                                      BoxShadow(
-                                        color: Color.fromRGBO(88, 88, 88, 0.5),
-                                      ),
-                                    ],
-                                  ),
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Text(
-                                        '-',
-                                        style: GoogleFonts.poppins(
-                                          fontWeight: FontWeight.w700,
-                                          fontSize: ScreenUtil().setSp(16),
-                                        ),
-                                      ),
-                                      Container(
-                                        margin: EdgeInsets.symmetric(horizontal: 8),
-                                        height: ScreenUtil().setHeight(22),
-                                        width: ScreenUtil().setWidth(22),
-                                        decoration: BoxDecoration(
-                                          color: Colors.white,
-                                          shape: BoxShape.circle,
-                                          boxShadow: [
-                                            BoxShadow(
-                                              color: Color.fromRGBO(88, 88, 88, 0.5),
-                                            ),
-                                          ],
-                                        ),
-                                        child: Center(
-                                          child: Text(
-                                            '${comanda[index].cantidad}',
-                                            style: GoogleFonts.poppins(
-                                              fontWeight: FontWeight.w700,
-                                              fontSize: ScreenUtil().setSp(16),
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                      Text(
-                                        '+',
-                                        style: GoogleFonts.poppins(
-                                          fontWeight: FontWeight.w700,
-                                          fontSize: ScreenUtil().setSp(16),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ],
-                            ),
-                          );
-                        }),
+                              ),
+                            ],
+                          ),
+                        );
+                      },
+                    ),
                   ),
                   _rayas(),
                   Padding(
@@ -229,7 +230,7 @@ class _ComandaPageState extends State<ComandaPage> {
 
                         final res = await _pedidoApi.enviarComanda(widget.mesa.idMesa, total.toString());
 
-                        if (res.resultadoPeticion) {
+                        if (res) {
                           final pedidosBloc = ProviderBloc.pedidos(context);
                           pedidosBloc.obtenerPedidosPorIdMesa(widget.mesa.idMesa);
                         }

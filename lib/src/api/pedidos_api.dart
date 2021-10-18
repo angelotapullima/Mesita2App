@@ -17,48 +17,38 @@ class PedidosApi {
       final comandaList = await _comandaDatabase.obtenerDetallesPedidoTemporales(idMesa);
 
       if (comandaList.length > 0) {
-        final List<DetallePedidoTemporalModel> detallesList = [];
-
         double totalPedido = 0.0;
 
-        ComandaModel comanda = ComandaModel();
-        comanda.idMesa = idMesa;
-        comanda.idUsuario = _prefs.idUser;
+        var detalle = '';
 
         for (var i = 0; i < comandaList.length; i++) {
-          DetallePedidoTemporalModel detalles = DetallePedidoTemporalModel();
-          detalles.idProducto = comandaList[i].idProducto;
-          detalles.cantidad = comandaList[i].cantidad;
-          detalles.subtotal = comandaList[i].subtotal;
-          detalles.observaciones = comandaList[i].observaciones;
-          detalles.llevar = comandaList[i].llevar;
-
           totalPedido = totalPedido + double.parse(comandaList[i].subtotal);
 
-          detallesList.add(detalles);
+          detalle += '${comandaList[i].idProducto};;;${comandaList[i].cantidad};;;${comandaList[i].subtotal};;;${comandaList[i].observaciones};;;${comandaList[i].llevar}//';
         }
 
-        comanda.total = totalPedido.toStringAsFixed(2);
-
-        comanda.detalles = detallesList;
-        comanda.token = '${_prefs.token}';
-
-        var envio = jsonEncode(comanda.toJson());
-        print(envio);
         final url = Uri.parse('${apiBaseURL}/api/Negocio/guardar_pedido');
 
-        final resp = await http.post(url, body: {
-          'tn': '${_prefs.token}',
-          'detalle': envio,
-          'app': 'true',
-        });
+        final resp = await http.post(
+          url,
+          body: {
+            'tn': '${_prefs.token}',
+            'id_mesa': '$idMesa',
+            'id_usuario': '${_prefs.idUser}',
+            'pedido_total': '$totalPedido',
+            'detalle': '$detalle',
+            'app': 'true',
+          },
+        );
 
         final decodedData = json.decode(resp.body);
 
         print(decodedData);
 
         print(decodedData['exito']);
-        if (decodedData['result']['code'] == 1) {
+        if (decodedData['result']== '1') {
+
+          await _comandaDatabase.deleteDetallesPedidoTemporal();
           return true;
         } else {
           return false;
