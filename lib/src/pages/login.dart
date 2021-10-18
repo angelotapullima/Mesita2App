@@ -17,7 +17,7 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
-  PageMostrar _currentPage = PageMostrar.registro;
+  PageMostrar _currentPage = PageMostrar.inicioSesion;
   bool _passwordVisible;
   String mensaje = '';
   final _controller = ControllerNotifier();
