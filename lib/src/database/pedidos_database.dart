@@ -21,9 +21,9 @@ class PedidosDatabase {
     try {
       final db = await dbprovider.database;
 
-      final res = await db.rawInsert(
-          "INSERT OR REPLACE INTO DetallePedidos (idDetalle,idPedido,idProducto,nombreProducto,fotoProducto,"
-          "cantidad,subtotal,""totalDetalle,observaciones,estado,llevar) "
+      final res = await db.rawInsert("INSERT OR REPLACE INTO DetallePedidos (idDetalle,idPedido,idProducto,nombreProducto,fotoProducto,"
+          "cantidad,subtotal,"
+          "totalDetalle,observaciones,estado,llevar) "
           "VALUES ('${detalle.idDetalle}','${detalle.idPedido}','${detalle.idProducto}','${detalle.nombreProducto}',"
           "'${detalle.fotoProducto}','${detalle.cantidad}','${detalle.subtotal}','${detalle.totalDetalle}','${detalle.observaciones}',"
           "'${detalle.estado}','${detalle.llevar}')");
@@ -62,6 +62,16 @@ class PedidosDatabase {
     final db = await dbprovider.database;
 
     final res = await db.rawDelete('DELETE FROM DetallePedidos');
+
+    return res;
+  }
+
+  deleteDetallesPedidoPorId(String id) async {
+    final db = await dbprovider.database;
+
+    final res = await db.rawDelete("DELETE FROM DetallePedidos WHERE idDetalle='$id'");
+
+    print(res);
 
     return res;
   }

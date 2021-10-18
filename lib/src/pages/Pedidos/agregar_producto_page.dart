@@ -273,33 +273,35 @@ class _AgregarProductoPageState extends State<AgregarProductoPage> {
     }
     return InkWell(
       onTap: () {
-        Navigator.push(
-          context,
-          PageRouteBuilder(
-            pageBuilder: (context, animation, secondaryAnimation) {
-              return AgregarDetalleProducto(
-                producto: food,
-                idEnviar: widget.idEnviar,
-                esComanda: widget.esComanda,
-                idMesa: widget.mesa.idMesa,
-              );
-            },
-            transitionsBuilder: (context, animation, secondaryAnimation, child) {
-              var begin = Offset(0.0, 1.0);
-              var end = Offset.zero;
-              var curve = Curves.ease;
+        if (food.productoEstado == '1') {
+          Navigator.push(
+            context,
+            PageRouteBuilder(
+              pageBuilder: (context, animation, secondaryAnimation) {
+                return AgregarDetalleProducto(
+                  producto: food,
+                  idEnviar: widget.idEnviar,
+                  esComanda: widget.esComanda,
+                  idMesa: widget.mesa.idMesa,
+                );
+              },
+              transitionsBuilder: (context, animation, secondaryAnimation, child) {
+                var begin = Offset(0.0, 1.0);
+                var end = Offset.zero;
+                var curve = Curves.ease;
 
-              var tween = Tween(begin: begin, end: end).chain(
-                CurveTween(curve: curve),
-              );
+                var tween = Tween(begin: begin, end: end).chain(
+                  CurveTween(curve: curve),
+                );
 
-              return SlideTransition(
-                position: animation.drive(tween),
-                child: child,
-              );
-            },
-          ),
-        );
+                return SlideTransition(
+                  position: animation.drive(tween),
+                  child: child,
+                );
+              },
+            ),
+          );
+        }
       },
       child: Container(
         margin: const EdgeInsets.all(24),

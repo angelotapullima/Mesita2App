@@ -1,15 +1,18 @@
+import 'package:mesita_aplication_2/src/api/mesa_api.dart';
 import 'package:mesita_aplication_2/src/database/pedidos_database.dart';
 import 'package:mesita_aplication_2/src/models/pedidos_model.dart';
 import 'package:rxdart/rxdart.dart';
 
 class PedidosBloc {
   final pedidosDatabase = PedidosDatabase();
+  final _mesaApi = MesaApi();
 
   final _pedidosPorMesaController = BehaviorSubject<List<PedidoModel>>();
 
   Stream<List<PedidoModel>> get pedidosPorMesaStream => _pedidosPorMesaController.stream;
 
   void obtenerPedidosPorIdMesa(String idMesa) async {
+    await _mesaApi.obtenerMesasPorNegocio();
     final List<PedidoModel> pedixt = [];
 
     final pedido = await await pedidosDatabase.obtenerPedidosPorIdMesa(idMesa);

@@ -536,10 +536,11 @@ class _DetailProductState extends State<DetailProduct> {
                       ),
                     ),
                     AnimatedBuilder(
-                        animation: _controller,
-                        builder: (_, s) {
-                          return (_controller.boton) ? _showLoading() : Container();
-                        })
+                      animation: _controller,
+                      builder: (_, s) {
+                        return (_controller.boton) ? _showLoading() : Container();
+                      },
+                    ),
                   ],
                 );
               } else {

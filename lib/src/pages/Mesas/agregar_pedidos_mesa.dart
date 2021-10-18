@@ -1,6 +1,4 @@
 import 'dart:io';
-
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -8,12 +6,10 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mesita_aplication_2/src/bloc/provider.dart';
 import 'package:mesita_aplication_2/src/models/mesa_model.dart';
-import 'package:mesita_aplication_2/src/models/pedidos_model.dart';
 import 'package:mesita_aplication_2/src/pages/Busqueda/buscar_page.dart';
 import 'package:mesita_aplication_2/src/pages/Mesas/delete_mesa.dart';
 import 'package:mesita_aplication_2/src/pages/Mesas/modal_agregar_mesa.dart';
 import 'package:mesita_aplication_2/src/pages/Pedidos/comanda_mesa_page.dart';
-import 'package:mesita_aplication_2/src/utils/constants.dart';
 
 class AgregarePedidoMesa extends StatefulWidget {
   final MesaModel mesa;
@@ -124,7 +120,7 @@ class _DetalleMesaPageState extends State<AgregarePedidoMesa> {
                             child: Container(
                               height: ScreenUtil().setHeight(200),
                               decoration: BoxDecoration(
-                                 color: Color(0xFFF9708D),
+                                color: Color(0xFFF9708D),
                               ),
                             ),
                           ),
@@ -133,7 +129,7 @@ class _DetalleMesaPageState extends State<AgregarePedidoMesa> {
                             child: Container(
                               height: ScreenUtil().setHeight(185),
                               decoration: BoxDecoration(
-                                color:Color(0XFFFF0036),
+                                color: Color(0XFFFF0036),
                               ),
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -246,33 +242,6 @@ class _DetalleMesaPageState extends State<AgregarePedidoMesa> {
             );
           }
         });
-  }
-
-  Widget _rayas() {
-    return Padding(
-      padding: EdgeInsets.symmetric(horizontal: ScreenUtil().setWidth(24), vertical: ScreenUtil().setHeight(8)),
-      child: LayoutBuilder(
-        builder: (context, constraints) {
-          return Flex(
-            children: List.generate(
-              (constraints.constrainWidth() / 10).floor(),
-              (index) => SizedBox(
-                height: ScreenUtil().setHeight(1),
-                width: ScreenUtil().setWidth(5),
-                child: DecoratedBox(
-                  decoration: BoxDecoration(
-                    color: Color(0xFFC4C4C4),
-                  ),
-                ),
-              ),
-            ),
-            direction: Axis.horizontal,
-            mainAxisSize: MainAxisSize.max,
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          );
-        },
-      ),
-    );
   }
 
   _showLoading() {

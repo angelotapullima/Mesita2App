@@ -8,38 +8,32 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mesita_aplication_2/src/api/pedidos_api.dart';
 import 'package:mesita_aplication_2/src/bloc/provider.dart';
-import 'package:mesita_aplication_2/src/database/pedidos_temporales_database.dart';
-import 'package:mesita_aplication_2/src/models/agregar_producto_pedido_model.dart';
-import 'package:mesita_aplication_2/src/models/pedido_temporal_model.dart';
-import 'package:mesita_aplication_2/src/models/producto_linea_model.dart';
+import 'package:mesita_aplication_2/src/models/pedidos_model.dart';
+import 'package:mesita_aplication_2/src/pages/Pedidos/delete_detail_pedido.dart';
 import 'package:mesita_aplication_2/src/utils/constants.dart';
 
-class AgregarDetalleProducto extends StatefulWidget {
-  final ProductoLineaModel producto;
-  final String idEnviar;
-  final bool esComanda;
+class EditarDetalleProductoPedido extends StatefulWidget {
+  final DetallePedidoModel producto;
   final String idMesa;
 
-  const AgregarDetalleProducto({Key key, @required this.producto, @required this.idEnviar, @required this.esComanda, @required this.idMesa})
-      : super(key: key);
+  const EditarDetalleProductoPedido({Key key, @required this.producto, @required this.idMesa}) : super(key: key);
 
   @override
-  _AgregarDetalleProductoState createState() => _AgregarDetalleProductoState();
+  _EditarDetalleProductoPedidoState createState() => _EditarDetalleProductoPedidoState();
 }
 
-class _AgregarDetalleProductoState extends State<AgregarDetalleProducto> {
+class _EditarDetalleProductoPedidoState extends State<EditarDetalleProductoPedido> {
   final _controller = ChangeController();
   final TextEditingController _observacionesController = TextEditingController();
   @override
   void initState() {
-    _controller.changeCantidadPrecio(0, widget.producto.productoPrecio);
+    _controller.obtenerPrecioIncial(widget.producto.cantidad, widget.producto.subtotal);
+    _observacionesController.text = widget.producto.observaciones;
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    final productoBloc = ProviderBloc.productosLinea(context);
-    productoBloc.obtenerProductoPorIdProducto(widget.producto.idProducto, widget.producto.idLinea);
     return Scaffold(
       body: Stack(
         children: [
@@ -77,6 +71,53 @@ class _AgregarDetalleProductoState extends State<AgregarDetalleProducto> {
               ),
             ),
           ),
+          Positioned(
+            top: ScreenUtil().setHeight(25),
+            right: ScreenUtil().setWidth(10),
+            child: SafeArea(
+              child: InkWell(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    PageRouteBuilder(
+                      opaque: false,
+                      pageBuilder: (context, animation, secondaryAnimation) {
+                        return DeleteDetallePedido(
+                          pedidoDetalle: widget.producto,
+                          idMesa: widget.idMesa,
+                        );
+                      },
+                      transitionsBuilder: (context, animation, secondaryAnimation, child) {
+                        var begin = Offset(0.0, 1.0);
+                        var end = Offset.zero;
+                        var curve = Curves.ease;
+
+                        var tween = Tween(begin: begin, end: end).chain(
+                          CurveTween(curve: curve),
+                        );
+
+                        return SlideTransition(
+                          position: animation.drive(tween),
+                          child: child,
+                        );
+                      },
+                    ),
+                  );
+                },
+                child: Container(
+                  height: ScreenUtil().setHeight(45),
+                  width: ScreenUtil().setWidth(45),
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    shape: BoxShape.circle,
+                  ),
+                  child: SvgPicture.asset(
+                    'assets/food_svg/delete_food.svg',
+                  ),
+                ),
+              ),
+            ),
+          ),
           Container(
             margin: EdgeInsets.only(
               top: ScreenUtil().setHeight(200),
@@ -104,7 +145,7 @@ class _AgregarDetalleProductoState extends State<AgregarDetalleProducto> {
                     Align(
                       alignment: Alignment.center,
                       child: Text(
-                        '${widget.producto.productoNombre}',
+                        '${widget.producto.nombreProducto}',
                         style: TextStyle(
                           color: Color(0XFF585858),
                           fontSize: ScreenUtil().setSp(20),
@@ -124,7 +165,7 @@ class _AgregarDetalleProductoState extends State<AgregarDetalleProducto> {
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 Text(
-                                  (_controller.precioMuestra != '') ? 'S/. ${_controller.precioMuestra}' : 'S/. ${widget.producto.productoPrecio}',
+                                  (_controller.precioMuestra != '') ? 'S/. ${_controller.precioMuestra}' : 'S/. ${widget.producto.subtotal}',
                                   style: TextStyle(
                                     color: Color(0XFF585858),
                                     fontSize: ScreenUtil().setSp(30),
@@ -152,7 +193,7 @@ class _AgregarDetalleProductoState extends State<AgregarDetalleProducto> {
                                     children: [
                                       InkWell(
                                         onTap: () {
-                                          _controller.changeCantidadPrecio(-1, widget.producto.productoPrecio);
+                                          _controller.changeCantidadPrecio(-1);
                                         },
                                         child: Container(
                                           child: SvgPicture.asset('assets/food_svg/minus.svg'),
@@ -183,7 +224,7 @@ class _AgregarDetalleProductoState extends State<AgregarDetalleProducto> {
                                       ),
                                       InkWell(
                                           onTap: () {
-                                            _controller.changeCantidadPrecio(1, widget.producto.productoPrecio);
+                                            _controller.changeCantidadPrecio(1);
                                           },
                                           child: Container(
                                             child: SvgPicture.asset('assets/food_svg/plus.svg'),
@@ -198,25 +239,25 @@ class _AgregarDetalleProductoState extends State<AgregarDetalleProducto> {
                     SizedBox(
                       height: ScreenUtil().setHeight(32),
                     ),
-                    Text(
-                      'Descripción',
-                      style: TextStyle(
-                        color: Color(0XFF585858),
-                        fontSize: ScreenUtil().setSp(18),
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
-                    SizedBox(
-                      height: ScreenUtil().setHeight(16),
-                    ),
-                    Text(
-                      '${widget.producto.productoDescripcion} ',
-                      style: TextStyle(
-                        color: Color(0XFF585858),
-                        fontSize: ScreenUtil().setSp(16),
-                        fontWeight: FontWeight.w400,
-                      ),
-                    ),
+                    // Text(
+                    //   'Descripción',
+                    //   style: TextStyle(
+                    //     color: Color(0XFF585858),
+                    //     fontSize: ScreenUtil().setSp(18),
+                    //     fontWeight: FontWeight.w600,
+                    //   ),
+                    // ),
+                    // SizedBox(
+                    //   height: ScreenUtil().setHeight(16),
+                    // ),
+                    // Text(
+                    //   '${widget.producto.observaciones} ',
+                    //   style: TextStyle(
+                    //     color: Color(0XFF585858),
+                    //     fontSize: ScreenUtil().setSp(16),
+                    //     fontWeight: FontWeight.w400,
+                    //   ),
+                    // ),
                     SizedBox(
                       height: ScreenUtil().setHeight(16),
                     ),
@@ -238,8 +279,6 @@ class _AgregarDetalleProductoState extends State<AgregarDetalleProducto> {
                                     fontSize: ScreenUtil().setSp(12),
                                     letterSpacing: 0.16,
                                     fontStyle: FontStyle.normal),
-                                // contentPadding: EdgeInsets.only(
-                                //     left: ScreenUtil().setWidth(10), top: ScreenUtil().setHeight(10), bottom: ScreenUtil().setHeight(1)),
                                 enabledBorder: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(15),
                                   borderSide: BorderSide(color: Color(0XFFFF0036), width: ScreenUtil().setWidth(2)),
@@ -264,46 +303,24 @@ class _AgregarDetalleProductoState extends State<AgregarDetalleProducto> {
                             alignment: Alignment.bottomRight,
                             child: InkWell(
                               onTap: () async {
-                                if (widget.esComanda) {
-                                  final _comandaDatabase = PedidosTemporalDatabase();
-                                  DetallePedidoTemporalModel comanda = DetallePedidoTemporalModel();
+                                _controller.changeBoton(true);
+                                final _pedidosApi = PedidosApi();
 
-                                  comanda.idMesa = widget.idEnviar;
-                                  comanda.idProducto = widget.producto.idProducto;
-                                  comanda.subtotal = _controller.precioMuestra;
-                                  comanda.cantidad = _controller.cantidad.toString();
-                                  comanda.estado = '1';
-                                  comanda.llevar = '0';
-                                  comanda.observaciones = _observacionesController.text;
-                                  comanda.foto = widget.producto.productoFoto;
-                                  comanda.nombre = widget.producto.productoNombre;
+                                DetallePedidoModel detalle = DetallePedidoModel();
+                                detalle.idPedido = widget.producto.idPedido;
+                                detalle.idDetalle = widget.producto.idDetalle;
+                                detalle.subtotal = _controller.precioMuestra;
+                                detalle.cantidad = _controller.cantidad.toString();
+                                detalle.observaciones = _observacionesController.text;
+                                detalle.llevar = '0';
 
-                                  await _comandaDatabase.insertarDetallePedidoTemporal(comanda);
-                                  final comandaBloc = ProviderBloc.comanda(context);
-                                  comandaBloc.obtenerComandaPorMesa(widget.idMesa);
-
+                                final res = await _pedidosApi.editarDetallePedido(detalle);
+                                if (res) {
+                                  final pedidosBloc = ProviderBloc.pedidos(context);
+                                  pedidosBloc.obtenerPedidosPorIdMesa(widget.idMesa);
                                   Navigator.pop(context);
-                                  Navigator.pop(context);
-                                } else {
-                                  _controller.changeBoton(true);
-                                  final _pedidosApi = PedidosApi();
-
-                                  DetalleProductoModel detalle = DetalleProductoModel();
-                                  detalle.idProducto = widget.producto.idProducto;
-                                  detalle.subtotal = _controller.precioMuestra;
-                                  detalle.cantidad = _controller.cantidad.toString();
-                                  detalle.observaciones = _observacionesController.text;
-                                  detalle.llevar = '0';
-
-                                  final res = await _pedidosApi.agregarDetallePedido(widget.idEnviar, detalle);
-                                  if (res) {
-                                    final pedidosBloc = ProviderBloc.pedidos(context);
-                                    pedidosBloc.obtenerPedidosPorIdMesa(widget.idMesa);
-                                    Navigator.pop(context);
-                                    Navigator.pop(context);
-                                  }
-                                  _controller.changeBoton(false);
                                 }
+                                _controller.changeBoton(false);
                               },
                               child: Container(
                                 padding: EdgeInsets.symmetric(horizontal: ScreenUtil().setWidth(16)),
@@ -414,7 +431,7 @@ class _AgregarDetalleProductoState extends State<AgregarDetalleProducto> {
                               ),
                             ),
                           ),
-                          imageUrl: '$apiBaseURL/${widget.producto.productoFoto}',
+                          imageUrl: '$apiBaseURL/${widget.producto.fotoProducto}',
                           imageBuilder: (context, imageProvider) => Container(
                             decoration: BoxDecoration(
                               shape: BoxShape.circle,
@@ -466,9 +483,10 @@ class ChangeController extends ChangeNotifier {
   int cantidad = 1;
 
   double precio = 0;
+  double precioProducto = 0;
   String precioMuestra = '';
 
-  void changeCantidadPrecio(int c, String p) {
+  void changeCantidadPrecio(int c) {
     if (c > 0) {
       cantidad = cantidad + c;
     } else {
@@ -477,10 +495,26 @@ class ChangeController extends ChangeNotifier {
       }
     }
 
-    var pre = double.parse(p);
-    precio = cantidad * pre;
+    precio = cantidad * precioProducto;
 
     precioMuestra = precio.toStringAsFixed(2);
+
+    notifyListeners();
+  }
+
+  void obtenerPrecioIncial(String c, String p) {
+    if (cantidad == '1') {
+      precioMuestra = p;
+      cantidad = 1;
+    } else {
+      int cant = int.parse(c);
+      double pre = double.parse(p);
+
+      precioProducto = pre / cant;
+      cantidad = cant;
+
+      precioMuestra = (precioProducto * cantidad).toStringAsFixed(2);
+    }
 
     notifyListeners();
   }

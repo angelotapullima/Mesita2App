@@ -1,9 +1,11 @@
+import 'package:mesita_aplication_2/src/api/linea_api.dart';
 import 'package:mesita_aplication_2/src/database/productos_linea_database.dart';
 import 'package:mesita_aplication_2/src/models/producto_linea_model.dart';
 import 'package:rxdart/rxdart.dart';
 
 class ProductosLineaBloc {
   final _productoDatabase = ProductoLineaDatabase();
+  final _lineaApi = LineaApi();
 
   final _productosLineaController = BehaviorSubject<List<ProductoLineaModel>>();
   final _productoController = BehaviorSubject<List<ProductoLineaModel>>();
@@ -15,14 +17,14 @@ class ProductosLineaBloc {
 
   void obtenerProductosPorLinea(String idLinea) async {
     _productosLineaController.sink.add(await _productoDatabase.obtenerProductosPorIdLinea(idLinea));
-    /* await _productoApi.obtenerProductosPorLinea(idLinea);
-    _productosLineaController.sink.add(await _productoDatabase.obtenerProductosPorIdLinea(idLinea)); */
+    await _lineaApi.obtenerLineasPorNegocio();
+    _productosLineaController.sink.add(await _productoDatabase.obtenerProductosPorIdLinea(idLinea));
   }
 
   void obtenerProductoPorIdProducto(String idProducto, String idLinea) async {
     _productoController.sink.add(await _productoDatabase.obtenerProductosPorIdProducto(idProducto));
-    /* await _productoApi.obtenerProductosPorLinea(idLinea);
-    _productoController.sink.add(await _productoDatabase.obtenerProductosPorIdProducto(idProducto)); */
+    await _lineaApi.obtenerLineasPorNegocio();
+    _productoController.sink.add(await _productoDatabase.obtenerProductosPorIdProducto(idProducto));
   }
 
   void obtenerProductosPorLineaParaPedidos(String idLinea) async {

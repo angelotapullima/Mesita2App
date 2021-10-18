@@ -1,14 +1,16 @@
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
+import 'package:mesita_aplication_2/src/database/pedidos_database.dart';
 import 'package:mesita_aplication_2/src/database/pedidos_temporales_database.dart';
 import 'package:mesita_aplication_2/src/models/agregar_producto_pedido_model.dart';
-import 'package:mesita_aplication_2/src/models/pedido_temporal_model.dart';
+import 'package:mesita_aplication_2/src/models/pedidos_model.dart';
 import 'package:mesita_aplication_2/src/preferences/preferences.dart';
 import 'package:mesita_aplication_2/src/utils/constants.dart';
 
 class PedidosApi {
   final _comandaDatabase = PedidosTemporalDatabase();
+  final _pedidosDatabase = PedidosDatabase();
 
   final _prefs = Preferences();
 
@@ -24,7 +26,8 @@ class PedidosApi {
         for (var i = 0; i < comandaList.length; i++) {
           totalPedido = totalPedido + double.parse(comandaList[i].subtotal);
 
-          detalle += '${comandaList[i].idProducto};;;${comandaList[i].cantidad};;;${comandaList[i].subtotal};;;${comandaList[i].observaciones};;;${comandaList[i].llevar}//';
+          detalle +=
+              '${comandaList[i].idProducto};;;${comandaList[i].cantidad};;;${comandaList[i].subtotal};;;${comandaList[i].observaciones};;;${comandaList[i].llevar}//';
         }
 
         final url = Uri.parse('${apiBaseURL}/api/Negocio/guardar_pedido');
@@ -44,10 +47,7 @@ class PedidosApi {
         final decodedData = json.decode(resp.body);
 
         print(decodedData);
-
-        print(decodedData['exito']);
-        if (decodedData['result']== '1') {
-
+        if (decodedData['result'] == '1') {
           await _comandaDatabase.deleteDetallesPedidoTemporal();
           return true;
         } else {
@@ -63,34 +63,90 @@ class PedidosApi {
     }
   }
 
-  Future<bool> agregarDetallePedido(String idPedido, DetalleProductoModel detalle) async {
+  Future<bool> agregarDetallePedido(String idPedido, DetalleProductoModel detail) async {
     try {
-      final List<DetalleProductoModel> detallesList = [];
-      detallesList.add(detalle);
-
-      AgreparProductoPedidoModel pedido = AgreparProductoPedidoModel();
-      pedido.idPedido = idPedido;
-
-      pedido.detalles = detallesList;
-      pedido.token = '${_prefs.token}';
-
-      var envio = jsonEncode(pedido.toJson());
-      print(envio);
       final url = Uri.parse('${apiBaseURL}/api/Negocio/guardar_pedido_detalle');
-      // Map<String, String> headers = {
-      //   'Content-Type': 'application/json',
-      //   'tn': '${_prefs.token}',
-      //   'app': 'true',
-      // };
+      var detalle = '';
 
-      final resp = await http.post(url, body: envio);
+      detalle += '${detail.idProducto};;;${detail.cantidad};;;${detail.subtotal};;;${detail.observaciones};;;${detail.llevar}//';
+
+      final resp = await http.post(
+        url,
+        body: {
+          'tn': '${_prefs.token}',
+          'id_pedido': '$idPedido',
+          'detalle': '$detalle',
+          'app': 'true',
+        },
+      );
 
       final decodedData = json.decode(resp.body);
 
       print(decodedData);
+      if (decodedData['result'] == 1) {
+        return true;
+      } else {
+        return false;
+      }
+    } catch (error, stacktrace) {
+      print("Exception occured: $error stackTrace: $stacktrace");
 
-      print(decodedData['exito']);
-      if (decodedData['result']['code'] == 1) {
+      return false;
+    }
+  }
+
+  Future<bool> editarDetallePedido(DetallePedidoModel detail) async {
+    try {
+      final url = Uri.parse('${apiBaseURL}/api/Negocio/editar_pedido_detalle');
+
+      final resp = await http.post(
+        url,
+        body: {
+          'tn': '${_prefs.token}',
+          'id_pedido': '${detail.idPedido}',
+          'id_pedido_detalle': '${detail.idDetalle}',
+          'pedido_detalle_cantidad': '${detail.cantidad}',
+          'pedido_detalle_subtotal': '${detail.subtotal}',
+          'pedido_detalle_observaciones': '${detail.observaciones}',
+          'pedido_detalle_llevar': '${detail.llevar}',
+          'app': 'true',
+        },
+      );
+
+      final decodedData = json.decode(resp.body);
+
+      print(decodedData);
+      if (decodedData['result'] == 1) {
+        return true;
+      } else {
+        return false;
+      }
+    } catch (error, stacktrace) {
+      print("Exception occured: $error stackTrace: $stacktrace");
+
+      return false;
+    }
+  }
+
+  Future<bool> eliminarDetallePedido(DetallePedidoModel detail) async {
+    try {
+      final url = Uri.parse('${apiBaseURL}/api/Negocio/eliminar_pedido_detalle');
+
+      final resp = await http.post(
+        url,
+        body: {
+          'tn': '${_prefs.token}',
+          'id_pedido': '${detail.idPedido}',
+          'id_pedido_detalle': '${detail.idDetalle}',
+          'app': 'true',
+        },
+      );
+
+      final decodedData = json.decode(resp.body);
+
+      print(decodedData);
+      if (decodedData['result'] == 1) {
+        await _pedidosDatabase.deleteDetallesPedidoPorId(detail.idDetalle);
         return true;
       } else {
         return false;
