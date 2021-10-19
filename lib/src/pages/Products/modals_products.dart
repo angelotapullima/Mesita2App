@@ -238,531 +238,526 @@ void _newProductModal(BuildContext context, String idCategoria, String nameCateg
       builder: (context) {
         return Stack(
           children: [
-            GestureDetector(
-              onTap: () => Navigator.of(context).pop(),
-              child: Container(
-                color: Color.fromRGBO(0, 0, 0, 0.001),
-                child: DraggableScrollableSheet(
-                    initialChildSize: 0.93,
-                    minChildSize: 0.2,
-                    maxChildSize: 0.93,
-                    builder: (_, controller) {
-                      return Container(
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.only(
-                            topLeft: const Radius.circular(30),
-                            topRight: const Radius.circular(30),
-                          ),
+            Container(
+              color: Color.fromRGBO(0, 0, 0, 0.001),
+              child: DraggableScrollableSheet(
+                  initialChildSize: 0.93,
+                  minChildSize: 0.2,
+                  maxChildSize: 0.93,
+                  builder: (_, controller) {
+                    return Container(
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.only(
+                          topLeft: const Radius.circular(30),
+                          topRight: const Radius.circular(30),
                         ),
-                        child: KeyboardActions(
-                          config: KeyboardActionsConfig(keyboardSeparatorColor: Colors.white, keyboardBarColor: Colors.white, actions: [
-                            KeyboardActionsItem(focusNode: _focus1),
-                            KeyboardActionsItem(focusNode: _focus2),
-                            KeyboardActionsItem(focusNode: _focus3),
-                          ]),
-                          child: Padding(
-                            padding: EdgeInsets.symmetric(vertical: ScreenUtil().setHeight(10), horizontal: ScreenUtil().setWidth(24)),
-                            child: SingleChildScrollView(
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  SizedBox(
-                                    height: ScreenUtil().setWidth(4),
-                                    child: Center(
-                                      child: Container(
-                                        width: ScreenUtil().setWidth(48),
-                                        decoration: BoxDecoration(
-                                          color: Color(0XFFBABABA),
-                                        ),
+                      ),
+                      child: KeyboardActions(
+                        config: KeyboardActionsConfig(keyboardSeparatorColor: Colors.white, keyboardBarColor: Colors.white, actions: [
+                          KeyboardActionsItem(focusNode: _focus1),
+                          KeyboardActionsItem(focusNode: _focus2),
+                          KeyboardActionsItem(focusNode: _focus3),
+                        ]),
+                        child: Padding(
+                          padding: EdgeInsets.symmetric(vertical: ScreenUtil().setHeight(10), horizontal: ScreenUtil().setWidth(24)),
+                          child: SingleChildScrollView(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                SizedBox(
+                                  height: ScreenUtil().setWidth(4),
+                                  child: Center(
+                                    child: Container(
+                                      width: ScreenUtil().setWidth(48),
+                                      decoration: BoxDecoration(
+                                        color: Color(0XFFBABABA),
                                       ),
                                     ),
                                   ),
-                                  SizedBox(
-                                    height: ScreenUtil().setWidth(10),
-                                  ),
-                                  Center(
-                                    child: Text(
-                                      'Nueva $nameCategory',
-                                      style: GoogleFonts.poppins(
-                                        color: Color(0XFFFF0036),
-                                        fontWeight: FontWeight.w600,
-                                        fontSize: ScreenUtil().setSp(18),
-                                      ),
+                                ),
+                                SizedBox(
+                                  height: ScreenUtil().setWidth(10),
+                                ),
+                                Center(
+                                  child: Text(
+                                    'Nueva $nameCategory',
+                                    style: GoogleFonts.poppins(
+                                      color: Color(0XFFFF0036),
+                                      fontWeight: FontWeight.w600,
+                                      fontSize: ScreenUtil().setSp(18),
                                     ),
                                   ),
-                                  SizedBox(
-                                    height: ScreenUtil().setWidth(24),
-                                  ),
-                                  Row(
-                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Container(
-                                        height: ScreenUtil().setHeight(150),
-                                        width: ScreenUtil().setWidth(150),
-                                        decoration: BoxDecoration(
-                                          color: Color(0XFFEEEEEE),
-                                          shape: BoxShape.circle,
-                                          boxShadow: [
-                                            BoxShadow(
-                                              color: Color.fromRGBO(88, 88, 88, 0.3),
-                                              blurRadius: 20,
-                                            ),
-                                          ],
-                                        ),
-                                        child: Stack(
-                                          children: [
-                                            Align(
-                                              alignment: Alignment.center,
-                                              child: Container(
-                                                  height: ScreenUtil().setHeight(120),
-                                                  width: ScreenUtil().setWidth(120),
-                                                  decoration: BoxDecoration(
-                                                    color: Color(0XFFEEEEEE),
-                                                    shape: BoxShape.circle,
-                                                    boxShadow: [
-                                                      BoxShadow(
-                                                        offset: Offset(-1, -1),
-                                                        color: Color.fromRGBO(0, 0, 0, 0.2),
-                                                        blurRadius: 5,
-                                                      ),
-                                                    ],
-                                                  ),
-                                                  child: SvgPicture.asset('assets/food_svg/$iconProduct.svg')),
-                                            ),
-                                          ],
-                                        ),
+                                ),
+                                SizedBox(
+                                  height: ScreenUtil().setWidth(24),
+                                ),
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Container(
+                                      height: ScreenUtil().setHeight(150),
+                                      width: ScreenUtil().setWidth(150),
+                                      decoration: BoxDecoration(
+                                        color: Color(0XFFEEEEEE),
+                                        shape: BoxShape.circle,
+                                        boxShadow: [
+                                          BoxShadow(
+                                            color: Color.fromRGBO(88, 88, 88, 0.3),
+                                            blurRadius: 20,
+                                          ),
+                                        ],
                                       ),
-                                      Container(
-                                        width: ScreenUtil().setWidth(156),
-                                        child: Column(
-                                          children: [
-                                            Text(
-                                              'Precio',
-                                              style: GoogleFonts.poppins(
-                                                color: Color(0XFF585858),
-                                                fontWeight: FontWeight.w500,
-                                                fontSize: ScreenUtil().setSp(16),
-                                              ),
+                                      child: Stack(
+                                        children: [
+                                          Align(
+                                            alignment: Alignment.center,
+                                            child: Container(
+                                                height: ScreenUtil().setHeight(120),
+                                                width: ScreenUtil().setWidth(120),
+                                                decoration: BoxDecoration(
+                                                  color: Color(0XFFEEEEEE),
+                                                  shape: BoxShape.circle,
+                                                  boxShadow: [
+                                                    BoxShadow(
+                                                      offset: Offset(-1, -1),
+                                                      color: Color.fromRGBO(0, 0, 0, 0.2),
+                                                      blurRadius: 5,
+                                                    ),
+                                                  ],
+                                                ),
+                                                child: SvgPicture.asset('assets/food_svg/$iconProduct.svg')),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                    Container(
+                                      width: ScreenUtil().setWidth(156),
+                                      child: Column(
+                                        children: [
+                                          Text(
+                                            'Precio',
+                                            style: GoogleFonts.poppins(
+                                              color: Color(0XFF585858),
+                                              fontWeight: FontWeight.w500,
+                                              fontSize: ScreenUtil().setSp(16),
                                             ),
-                                            TextField(
-                                              focusNode: _focus1,
-                                              controller: _precioController,
-                                              maxLines: 1,
-                                              onChanged: (value) {
-                                                if (value.length > 0 &&
-                                                    _nombreController.text.length > 0 &&
-                                                    _descripcionController.text.length > 0 &&
-                                                    _controller.idLinea != '') {
-                                                  _controller.changeBoton(true);
-                                                } else {
-                                                  _controller.changeBoton(false);
-                                                }
-                                              },
-                                              keyboardType: TextInputType.number,
-                                              decoration: InputDecoration(
-                                                hintText: 'S/00.00',
-                                                hintStyle: TextStyle(
-                                                  color: Color(0XFFBEBEBE),
-                                                  fontWeight: FontWeight.w400,
-                                                  fontSize: ScreenUtil().setSp(16),
-                                                  fontStyle: FontStyle.normal,
-                                                ),
-                                                filled: true,
-                                                fillColor: Color(0XFFEDEDED),
-                                                contentPadding: EdgeInsets.only(
-                                                    left: ScreenUtil().setWidth(10),
-                                                    top: ScreenUtil().setHeight(5),
-                                                    bottom: ScreenUtil().setHeight(1)),
-                                                enabledBorder: OutlineInputBorder(
-                                                  borderRadius: BorderRadius.circular(15),
-                                                  borderSide: BorderSide(color: Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
-                                                ),
-                                                focusedBorder: OutlineInputBorder(
-                                                  borderRadius: BorderRadius.circular(15),
-                                                  borderSide: BorderSide(color: Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
-                                                ),
-                                                border: OutlineInputBorder(
-                                                  borderRadius: BorderRadius.circular(15),
-                                                  borderSide: BorderSide(color: Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
-                                                ),
-                                              ),
-                                              style: TextStyle(
-                                                color: Color(0XFF585858),
+                                          ),
+                                          TextField(
+                                            focusNode: _focus1,
+                                            controller: _precioController,
+                                            maxLines: 1,
+                                            onChanged: (value) {
+                                              if (value.length > 0 &&
+                                                  _nombreController.text.length > 0 &&
+                                                  _descripcionController.text.length > 0 &&
+                                                  _controller.idLinea != '') {
+                                                _controller.changeBoton(true);
+                                              } else {
+                                                _controller.changeBoton(false);
+                                              }
+                                            },
+                                            keyboardType: TextInputType.number,
+                                            decoration: InputDecoration(
+                                              hintText: 'S/00.00',
+                                              hintStyle: TextStyle(
+                                                color: Color(0XFFBEBEBE),
                                                 fontWeight: FontWeight.w400,
                                                 fontSize: ScreenUtil().setSp(16),
                                                 fontStyle: FontStyle.normal,
                                               ),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                  SizedBox(height: ScreenUtil().setHeight(8)),
-                                  Text(
-                                    'Nombre',
-                                    style: GoogleFonts.poppins(
-                                      color: Color(0XFF585858),
-                                      fontWeight: FontWeight.w500,
-                                      fontSize: ScreenUtil().setSp(16),
-                                    ),
-                                  ),
-                                  TextField(
-                                    focusNode: _focus2,
-                                    controller: _nombreController,
-                                    maxLines: 1,
-                                    keyboardType: TextInputType.text,
-                                    onChanged: (value) {
-                                      if (value.length > 0 &&
-                                          _precioController.text.length > 0 &&
-                                          _descripcionController.text.length > 0 &&
-                                          _controller.idLinea != '') {
-                                        _controller.changeBoton(true);
-                                      } else {
-                                        _controller.changeBoton(false);
-                                      }
-                                    },
-                                    decoration: InputDecoration(
-                                      hintText: 'Ingrese nombre de $nameCategory',
-                                      hintStyle: TextStyle(
-                                        color: Color(0XFFBEBEBE),
-                                        fontWeight: FontWeight.w400,
-                                        fontSize: ScreenUtil().setSp(16),
-                                        fontStyle: FontStyle.normal,
-                                      ),
-                                      filled: true,
-                                      fillColor: Color(0XFFEDEDED),
-                                      contentPadding: EdgeInsets.only(
-                                          left: ScreenUtil().setWidth(10), top: ScreenUtil().setHeight(5), bottom: ScreenUtil().setHeight(1)),
-                                      enabledBorder: OutlineInputBorder(
-                                        borderRadius: BorderRadius.circular(15),
-                                        borderSide: BorderSide(color: Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
-                                      ),
-                                      focusedBorder: OutlineInputBorder(
-                                        borderRadius: BorderRadius.circular(15),
-                                        borderSide: BorderSide(color: Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
-                                      ),
-                                      border: OutlineInputBorder(
-                                        borderRadius: BorderRadius.circular(15),
-                                        borderSide: BorderSide(color: Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
-                                      ),
-                                    ),
-                                    style: TextStyle(
-                                      color: Color(0XFF585858),
-                                      fontWeight: FontWeight.w400,
-                                      fontSize: ScreenUtil().setSp(16),
-                                      fontStyle: FontStyle.normal,
-                                    ),
-                                  ),
-                                  SizedBox(height: ScreenUtil().setHeight(8)),
-                                  Text(
-                                    'Categoría',
-                                    style: GoogleFonts.poppins(
-                                      color: Color(0XFF585858),
-                                      fontWeight: FontWeight.w500,
-                                      fontSize: ScreenUtil().setSp(16),
-                                    ),
-                                  ),
-                                  InkWell(
-                                    onTap: () {
-                                      showModalBottomSheet(
-                                        context: context,
-                                        isScrollControlled: true,
-                                        backgroundColor: Colors.transparent,
-                                        builder: (context) {
-                                          return StreamBuilder(
-                                              stream: lineasBloc.lineasStream,
-                                              builder: (BuildContext context, AsyncSnapshot<List<LineaModel>> snapshot) {
-                                                if (snapshot.hasData && snapshot.data.length >= 0) {
-                                                  return GestureDetector(
-                                                    onTap: () => Navigator.of(context).pop(),
-                                                    child: Container(
-                                                      color: Color.fromRGBO(0, 0, 0, 0.001),
-                                                      child: GestureDetector(
-                                                        onTap: () {},
-                                                        child: DraggableScrollableSheet(
-                                                          initialChildSize: 0.9,
-                                                          minChildSize: 0.2,
-                                                          maxChildSize: 0.9,
-                                                          builder: (_, controller) {
-                                                            return Container(
-                                                              decoration: BoxDecoration(
-                                                                color: Colors.white,
-                                                                borderRadius: BorderRadius.only(
-                                                                  topLeft: const Radius.circular(30),
-                                                                  topRight: const Radius.circular(30),
-                                                                ),
-                                                              ),
-                                                              child: Padding(
-                                                                padding: EdgeInsets.symmetric(
-                                                                    vertical: ScreenUtil().setHeight(24), horizontal: ScreenUtil().setWidth(24)),
-                                                                child: Column(
-                                                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                                                  children: [
-                                                                    Row(
-                                                                      children: [
-                                                                        IconButton(
-                                                                          icon: Icon(
-                                                                            Icons.arrow_back_ios,
-                                                                          ),
-                                                                          iconSize: ScreenUtil().setSp(20),
-                                                                          onPressed: () => Navigator.of(context).pop(),
-                                                                        ),
-                                                                        SizedBox(width: ScreenUtil().setWidth(30)),
-                                                                        Text(
-                                                                          'Seleccione una línea',
-                                                                          textAlign: TextAlign.center,
-                                                                          style: GoogleFonts.poppins(
-                                                                            color: Color(0XFF585858),
-                                                                            fontStyle: FontStyle.normal,
-                                                                            fontWeight: FontWeight.w700,
-                                                                            fontSize: ScreenUtil().setSp(18),
-                                                                          ),
-                                                                        ),
-                                                                      ],
-                                                                    ),
-                                                                    Expanded(
-                                                                      child: ListView.builder(
-                                                                        itemCount: snapshot.data.length,
-                                                                        shrinkWrap: true,
-                                                                        itemBuilder: (context, index2) {
-                                                                          return Column(
-                                                                            children: [
-                                                                              InkWell(
-                                                                                onTap: () {
-                                                                                  _controller.changeLinea(snapshot.data[index2].idLinea,
-                                                                                      snapshot.data[index2].lineaNombre);
-                                                                                  if (_precioController.text.length > 0 &&
-                                                                                      _nombreController.text.length > 0 &&
-                                                                                      _descripcionController.text.length > 0 &&
-                                                                                      _controller.idLinea != '') {
-                                                                                    _controller.changeBoton(true);
-                                                                                  } else {
-                                                                                    _controller.changeBoton(false);
-                                                                                  }
-                                                                                  Navigator.pop(context);
-                                                                                },
-                                                                                child: Row(
-                                                                                  children: [
-                                                                                    SizedBox(
-                                                                                      width: ScreenUtil().setWidth(8),
-                                                                                    ),
-                                                                                    Text(
-                                                                                      '${snapshot.data[index2].lineaNombre}',
-                                                                                      style: GoogleFonts.poppins(
-                                                                                        color: Color(0XFF585858),
-                                                                                        fontWeight: FontWeight.w500,
-                                                                                        fontSize: ScreenUtil().setSp(16),
-                                                                                        letterSpacing: ScreenUtil().setSp(0.016),
-                                                                                      ),
-                                                                                    ),
-                                                                                  ],
-                                                                                ),
-                                                                              ),
-                                                                              Divider(),
-                                                                            ],
-                                                                          );
-                                                                        },
-                                                                      ),
-                                                                    ),
-                                                                  ],
-                                                                ),
-                                                              ),
-                                                            );
-                                                          },
-                                                        ),
-                                                      ),
-                                                    ),
-                                                  );
-                                                } else {
-                                                  return Container();
-                                                }
-                                              });
-                                        },
-                                      );
-                                    },
-                                    child: AnimatedBuilder(
-                                        animation: _controller,
-                                        builder: (context, snapshot) {
-                                          return Container(
-                                            height: ScreenUtil().setHeight(48),
-                                            width: double.infinity,
-                                            decoration: BoxDecoration(color: Color(0XFFEDEDED), borderRadius: BorderRadius.circular(15)),
-                                            padding: EdgeInsets.symmetric(horizontal: ScreenUtil().setWidth(10)),
-                                            child: Row(
-                                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                              children: [
-                                                Text(
-                                                  _controller.linea,
-                                                  style: TextStyle(
-                                                    color: (_controller.idLinea != '') ? Color(0XFF585858) : Color(0XFFBEBEBE),
-                                                    fontWeight: FontWeight.w400,
-                                                    fontSize: ScreenUtil().setSp(16),
-                                                    fontStyle: FontStyle.normal,
-                                                  ),
-                                                ),
-                                                Icon(
-                                                  Icons.arrow_drop_down,
-                                                  size: ScreenUtil().setHeight(20),
-                                                  color: Color(0XFF585858),
-                                                ),
-                                              ],
-                                            ),
-                                          );
-                                        }),
-                                  ),
-                                  SizedBox(height: ScreenUtil().setHeight(8)),
-                                  Text(
-                                    'Descripción',
-                                    style: GoogleFonts.poppins(
-                                      color: Color(0XFF585858),
-                                      fontWeight: FontWeight.w500,
-                                      fontSize: ScreenUtil().setSp(16),
-                                    ),
-                                  ),
-                                  TextField(
-                                    focusNode: _focus3,
-                                    controller: _descripcionController,
-                                    maxLines: null,
-                                    keyboardType: TextInputType.multiline,
-                                    onChanged: (value) {
-                                      if (value.length > 0 &&
-                                          _precioController.text.length > 0 &&
-                                          _nombreController.text.length > 0 &&
-                                          _controller.idLinea != '') {
-                                        _controller.changeBoton(true);
-                                      } else {
-                                        _controller.changeBoton(false);
-                                      }
-                                    },
-                                    decoration: InputDecoration(
-                                      hintText: 'Ingredientes, tiempo de preparación, etc.',
-                                      hintStyle: TextStyle(
-                                        color: Color(0XFFBEBEBE),
-                                        fontWeight: FontWeight.w400,
-                                        fontSize: ScreenUtil().setSp(16),
-                                        fontStyle: FontStyle.normal,
-                                      ),
-                                      filled: true,
-                                      fillColor: Color(0XFFEDEDED),
-                                      contentPadding: EdgeInsets.only(
-                                          left: ScreenUtil().setWidth(10), top: ScreenUtil().setHeight(5), bottom: ScreenUtil().setHeight(1)),
-                                      enabledBorder: OutlineInputBorder(
-                                        borderRadius: BorderRadius.circular(15),
-                                        borderSide: BorderSide(color: Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
-                                      ),
-                                      focusedBorder: OutlineInputBorder(
-                                        borderRadius: BorderRadius.circular(15),
-                                        borderSide: BorderSide(color: Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
-                                      ),
-                                      border: OutlineInputBorder(
-                                        borderRadius: BorderRadius.circular(15),
-                                        borderSide: BorderSide(color: Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
-                                      ),
-                                    ),
-                                    style: TextStyle(
-                                      color: Color(0XFF585858),
-                                      fontWeight: FontWeight.w400,
-                                      fontSize: ScreenUtil().setSp(16),
-                                      fontStyle: FontStyle.normal,
-                                    ),
-                                  ),
-                                  SizedBox(height: ScreenUtil().setHeight(48)),
-                                  InkWell(
-                                    onTap: () async {
-                                      _controller.changeCargando(true);
-                                      _controller.changeText('');
-                                      if (_controller.boton) {
-                                        final _productoLineaApi = ProductoLineaApi();
-                                        ProductoLineaModel producto = ProductoLineaModel();
-                                        producto.idLinea = _controller.idLinea;
-                                        producto.productoNombre = _nombreController.text;
-                                        producto.productoPrecio = _precioController.text;
-                                        producto.productoDescripcion = _descripcionController.text;
-                                        producto.productoEstado = '1';
-                                        producto.productoCocina = '1';
-
-                                        final res = await _productoLineaApi.guardarProducto(producto);
-                                        if (res == 1) {
-                                          final productosLineaBloc = ProviderBloc.productosLinea(context);
-                                          productosLineaBloc.obtenerProductosPorLinea(_controller.idLinea);
-                                          Navigator.pop(context);
-                                        } else {
-                                          _controller.changeText('Ocurrió un error. inténtelo nuevamente');
-                                        }
-                                      }
-
-                                      _controller.changeCargando(false);
-                                    },
-                                    child: AnimatedBuilder(
-                                        animation: _controller,
-                                        builder: (_, s) {
-                                          return Center(
-                                            child: Container(
-                                              decoration: BoxDecoration(
-                                                borderRadius: BorderRadius.circular(50),
-                                                color: (_controller.boton) ? Color(0XFFFF0036) : Color(0XFFFF0036).withOpacity(0.6),
+                                              filled: true,
+                                              fillColor: Color(0XFFEDEDED),
+                                              contentPadding: EdgeInsets.only(
+                                                  left: ScreenUtil().setWidth(10), top: ScreenUtil().setHeight(5), bottom: ScreenUtil().setHeight(1)),
+                                              enabledBorder: OutlineInputBorder(
+                                                borderRadius: BorderRadius.circular(15),
+                                                borderSide: BorderSide(color: Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
                                               ),
-                                              child: Center(
-                                                child: Text(
-                                                  'Agregar $nameCategory',
-                                                  style: TextStyle(
-                                                    color: Colors.white,
-                                                    fontWeight: FontWeight.w600,
-                                                    fontSize: ScreenUtil().setSp(16),
-                                                    fontStyle: FontStyle.normal,
-                                                    letterSpacing: 1.5,
-                                                  ),
-                                                ),
+                                              focusedBorder: OutlineInputBorder(
+                                                borderRadius: BorderRadius.circular(15),
+                                                borderSide: BorderSide(color: Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
                                               ),
-                                              height: ScreenUtil().setHeight(44),
-                                              width: ScreenUtil().setWidth(255),
+                                              border: OutlineInputBorder(
+                                                borderRadius: BorderRadius.circular(15),
+                                                borderSide: BorderSide(color: Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
+                                              ),
                                             ),
-                                          );
-                                        }),
-                                  ),
-                                  SizedBox(height: ScreenUtil().setHeight(8)),
-                                  Center(
-                                    child: AnimatedBuilder(
-                                        animation: _controller,
-                                        builder: (_, s) {
-                                          return Text(
-                                            _controller.text,
                                             style: TextStyle(
-                                              color: Color(0XFFFF0036),
-                                              fontWeight: FontWeight.w600,
+                                              color: Color(0XFF585858),
+                                              fontWeight: FontWeight.w400,
                                               fontSize: ScreenUtil().setSp(16),
                                               fontStyle: FontStyle.normal,
-                                              letterSpacing: ScreenUtil().setSp(0.016),
                                             ),
-                                          );
-                                        }),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                SizedBox(height: ScreenUtil().setHeight(8)),
+                                Text(
+                                  'Nombre',
+                                  style: GoogleFonts.poppins(
+                                    color: Color(0XFF585858),
+                                    fontWeight: FontWeight.w500,
+                                    fontSize: ScreenUtil().setSp(16),
                                   ),
-                                  SizedBox(height: ScreenUtil().setHeight(10)),
-                                  Center(
-                                    child: InkWell(
-                                      onTap: () {
-                                        Navigator.pop(context);
+                                ),
+                                TextField(
+                                  focusNode: _focus2,
+                                  controller: _nombreController,
+                                  maxLines: 1,
+                                  keyboardType: TextInputType.text,
+                                  onChanged: (value) {
+                                    if (value.length > 0 &&
+                                        _precioController.text.length > 0 &&
+                                        _descripcionController.text.length > 0 &&
+                                        _controller.idLinea != '') {
+                                      _controller.changeBoton(true);
+                                    } else {
+                                      _controller.changeBoton(false);
+                                    }
+                                  },
+                                  decoration: InputDecoration(
+                                    hintText: 'Ingrese nombre de $nameCategory',
+                                    hintStyle: TextStyle(
+                                      color: Color(0XFFBEBEBE),
+                                      fontWeight: FontWeight.w400,
+                                      fontSize: ScreenUtil().setSp(16),
+                                      fontStyle: FontStyle.normal,
+                                    ),
+                                    filled: true,
+                                    fillColor: Color(0XFFEDEDED),
+                                    contentPadding: EdgeInsets.only(
+                                        left: ScreenUtil().setWidth(10), top: ScreenUtil().setHeight(5), bottom: ScreenUtil().setHeight(1)),
+                                    enabledBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(15),
+                                      borderSide: BorderSide(color: Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
+                                    ),
+                                    focusedBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(15),
+                                      borderSide: BorderSide(color: Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
+                                    ),
+                                    border: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(15),
+                                      borderSide: BorderSide(color: Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
+                                    ),
+                                  ),
+                                  style: TextStyle(
+                                    color: Color(0XFF585858),
+                                    fontWeight: FontWeight.w400,
+                                    fontSize: ScreenUtil().setSp(16),
+                                    fontStyle: FontStyle.normal,
+                                  ),
+                                ),
+                                SizedBox(height: ScreenUtil().setHeight(8)),
+                                Text(
+                                  'Categoría',
+                                  style: GoogleFonts.poppins(
+                                    color: Color(0XFF585858),
+                                    fontWeight: FontWeight.w500,
+                                    fontSize: ScreenUtil().setSp(16),
+                                  ),
+                                ),
+                                InkWell(
+                                  onTap: () {
+                                    showModalBottomSheet(
+                                      context: context,
+                                      isScrollControlled: true,
+                                      backgroundColor: Colors.transparent,
+                                      builder: (context) {
+                                        return StreamBuilder(
+                                            stream: lineasBloc.lineasStream,
+                                            builder: (BuildContext context, AsyncSnapshot<List<LineaModel>> snapshot) {
+                                              if (snapshot.hasData && snapshot.data.length >= 0) {
+                                                return GestureDetector(
+                                                  onTap: () => Navigator.of(context).pop(),
+                                                  child: Container(
+                                                    color: Color.fromRGBO(0, 0, 0, 0.001),
+                                                    child: GestureDetector(
+                                                      onTap: () {},
+                                                      child: DraggableScrollableSheet(
+                                                        initialChildSize: 0.9,
+                                                        minChildSize: 0.2,
+                                                        maxChildSize: 0.9,
+                                                        builder: (_, controller) {
+                                                          return Container(
+                                                            decoration: BoxDecoration(
+                                                              color: Colors.white,
+                                                              borderRadius: BorderRadius.only(
+                                                                topLeft: const Radius.circular(30),
+                                                                topRight: const Radius.circular(30),
+                                                              ),
+                                                            ),
+                                                            child: Padding(
+                                                              padding: EdgeInsets.symmetric(
+                                                                  vertical: ScreenUtil().setHeight(24), horizontal: ScreenUtil().setWidth(24)),
+                                                              child: Column(
+                                                                crossAxisAlignment: CrossAxisAlignment.start,
+                                                                children: [
+                                                                  Row(
+                                                                    children: [
+                                                                      IconButton(
+                                                                        icon: Icon(
+                                                                          Icons.arrow_back_ios,
+                                                                        ),
+                                                                        iconSize: ScreenUtil().setSp(20),
+                                                                        onPressed: () => Navigator.of(context).pop(),
+                                                                      ),
+                                                                      SizedBox(width: ScreenUtil().setWidth(30)),
+                                                                      Text(
+                                                                        'Seleccione una línea',
+                                                                        textAlign: TextAlign.center,
+                                                                        style: GoogleFonts.poppins(
+                                                                          color: Color(0XFF585858),
+                                                                          fontStyle: FontStyle.normal,
+                                                                          fontWeight: FontWeight.w700,
+                                                                          fontSize: ScreenUtil().setSp(18),
+                                                                        ),
+                                                                      ),
+                                                                    ],
+                                                                  ),
+                                                                  Expanded(
+                                                                    child: ListView.builder(
+                                                                      itemCount: snapshot.data.length,
+                                                                      shrinkWrap: true,
+                                                                      itemBuilder: (context, index2) {
+                                                                        return Column(
+                                                                          children: [
+                                                                            InkWell(
+                                                                              onTap: () {
+                                                                                _controller.changeLinea(
+                                                                                    snapshot.data[index2].idLinea, snapshot.data[index2].lineaNombre);
+                                                                                if (_precioController.text.length > 0 &&
+                                                                                    _nombreController.text.length > 0 &&
+                                                                                    _descripcionController.text.length > 0 &&
+                                                                                    _controller.idLinea != '') {
+                                                                                  _controller.changeBoton(true);
+                                                                                } else {
+                                                                                  _controller.changeBoton(false);
+                                                                                }
+                                                                                Navigator.pop(context);
+                                                                              },
+                                                                              child: Row(
+                                                                                children: [
+                                                                                  SizedBox(
+                                                                                    width: ScreenUtil().setWidth(8),
+                                                                                  ),
+                                                                                  Text(
+                                                                                    '${snapshot.data[index2].lineaNombre}',
+                                                                                    style: GoogleFonts.poppins(
+                                                                                      color: Color(0XFF585858),
+                                                                                      fontWeight: FontWeight.w500,
+                                                                                      fontSize: ScreenUtil().setSp(16),
+                                                                                      letterSpacing: ScreenUtil().setSp(0.016),
+                                                                                    ),
+                                                                                  ),
+                                                                                ],
+                                                                              ),
+                                                                            ),
+                                                                            Divider(),
+                                                                          ],
+                                                                        );
+                                                                      },
+                                                                    ),
+                                                                  ),
+                                                                ],
+                                                              ),
+                                                            ),
+                                                          );
+                                                        },
+                                                      ),
+                                                    ),
+                                                  ),
+                                                );
+                                              } else {
+                                                return Container();
+                                              }
+                                            });
                                       },
-                                      child: Text(
-                                        'Cancelar',
-                                        style: GoogleFonts.poppins(
-                                          color: Color(0XFF8A8A8A),
-                                          fontWeight: FontWeight.w500,
-                                          fontSize: ScreenUtil().setSp(16),
-                                        ),
+                                    );
+                                  },
+                                  child: AnimatedBuilder(
+                                      animation: _controller,
+                                      builder: (context, snapshot) {
+                                        return Container(
+                                          height: ScreenUtil().setHeight(48),
+                                          width: double.infinity,
+                                          decoration: BoxDecoration(color: Color(0XFFEDEDED), borderRadius: BorderRadius.circular(15)),
+                                          padding: EdgeInsets.symmetric(horizontal: ScreenUtil().setWidth(10)),
+                                          child: Row(
+                                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              Text(
+                                                _controller.linea,
+                                                style: TextStyle(
+                                                  color: (_controller.idLinea != '') ? Color(0XFF585858) : Color(0XFFBEBEBE),
+                                                  fontWeight: FontWeight.w400,
+                                                  fontSize: ScreenUtil().setSp(16),
+                                                  fontStyle: FontStyle.normal,
+                                                ),
+                                              ),
+                                              Icon(
+                                                Icons.arrow_drop_down,
+                                                size: ScreenUtil().setHeight(20),
+                                                color: Color(0XFF585858),
+                                              ),
+                                            ],
+                                          ),
+                                        );
+                                      }),
+                                ),
+                                SizedBox(height: ScreenUtil().setHeight(8)),
+                                Text(
+                                  'Descripción',
+                                  style: GoogleFonts.poppins(
+                                    color: Color(0XFF585858),
+                                    fontWeight: FontWeight.w500,
+                                    fontSize: ScreenUtil().setSp(16),
+                                  ),
+                                ),
+                                TextField(
+                                  focusNode: _focus3,
+                                  controller: _descripcionController,
+                                  maxLines: null,
+                                  keyboardType: TextInputType.multiline,
+                                  onChanged: (value) {
+                                    if (value.length > 0 &&
+                                        _precioController.text.length > 0 &&
+                                        _nombreController.text.length > 0 &&
+                                        _controller.idLinea != '') {
+                                      _controller.changeBoton(true);
+                                    } else {
+                                      _controller.changeBoton(false);
+                                    }
+                                  },
+                                  decoration: InputDecoration(
+                                    hintText: 'Ingredientes, tiempo de preparación, etc.',
+                                    hintStyle: TextStyle(
+                                      color: Color(0XFFBEBEBE),
+                                      fontWeight: FontWeight.w400,
+                                      fontSize: ScreenUtil().setSp(16),
+                                      fontStyle: FontStyle.normal,
+                                    ),
+                                    filled: true,
+                                    fillColor: Color(0XFFEDEDED),
+                                    contentPadding: EdgeInsets.only(
+                                        left: ScreenUtil().setWidth(10), top: ScreenUtil().setHeight(5), bottom: ScreenUtil().setHeight(1)),
+                                    enabledBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(15),
+                                      borderSide: BorderSide(color: Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
+                                    ),
+                                    focusedBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(15),
+                                      borderSide: BorderSide(color: Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
+                                    ),
+                                    border: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(15),
+                                      borderSide: BorderSide(color: Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
+                                    ),
+                                  ),
+                                  style: TextStyle(
+                                    color: Color(0XFF585858),
+                                    fontWeight: FontWeight.w400,
+                                    fontSize: ScreenUtil().setSp(16),
+                                    fontStyle: FontStyle.normal,
+                                  ),
+                                ),
+                                SizedBox(height: ScreenUtil().setHeight(48)),
+                                InkWell(
+                                  onTap: () async {
+                                    _controller.changeCargando(true);
+                                    _controller.changeText('');
+                                    if (_controller.boton) {
+                                      final _productoLineaApi = ProductoLineaApi();
+                                      ProductoLineaModel producto = ProductoLineaModel();
+                                      producto.idLinea = _controller.idLinea;
+                                      producto.productoNombre = _nombreController.text;
+                                      producto.productoPrecio = _precioController.text;
+                                      producto.productoDescripcion = _descripcionController.text;
+                                      producto.productoEstado = '1';
+                                      producto.productoCocina = '1';
+
+                                      final res = await _productoLineaApi.guardarProducto(producto);
+                                      if (res == 1) {
+                                        final productosLineaBloc = ProviderBloc.productosLinea(context);
+                                        productosLineaBloc.obtenerProductosPorLinea(_controller.idLinea);
+                                        Navigator.pop(context);
+                                      } else {
+                                        _controller.changeText('Ocurrió un error. inténtelo nuevamente');
+                                      }
+                                    }
+
+                                    _controller.changeCargando(false);
+                                  },
+                                  child: AnimatedBuilder(
+                                      animation: _controller,
+                                      builder: (_, s) {
+                                        return Center(
+                                          child: Container(
+                                            decoration: BoxDecoration(
+                                              borderRadius: BorderRadius.circular(50),
+                                              color: (_controller.boton) ? Color(0XFFFF0036) : Color(0XFFFF0036).withOpacity(0.6),
+                                            ),
+                                            child: Center(
+                                              child: Text(
+                                                'Agregar $nameCategory',
+                                                style: TextStyle(
+                                                  color: Colors.white,
+                                                  fontWeight: FontWeight.w600,
+                                                  fontSize: ScreenUtil().setSp(16),
+                                                  fontStyle: FontStyle.normal,
+                                                  letterSpacing: 1.5,
+                                                ),
+                                              ),
+                                            ),
+                                            height: ScreenUtil().setHeight(44),
+                                            width: ScreenUtil().setWidth(255),
+                                          ),
+                                        );
+                                      }),
+                                ),
+                                SizedBox(height: ScreenUtil().setHeight(8)),
+                                Center(
+                                  child: AnimatedBuilder(
+                                      animation: _controller,
+                                      builder: (_, s) {
+                                        return Text(
+                                          _controller.text,
+                                          style: TextStyle(
+                                            color: Color(0XFFFF0036),
+                                            fontWeight: FontWeight.w600,
+                                            fontSize: ScreenUtil().setSp(16),
+                                            fontStyle: FontStyle.normal,
+                                            letterSpacing: ScreenUtil().setSp(0.016),
+                                          ),
+                                        );
+                                      }),
+                                ),
+                                SizedBox(height: ScreenUtil().setHeight(10)),
+                                Center(
+                                  child: InkWell(
+                                    onTap: () {
+                                      Navigator.pop(context);
+                                    },
+                                    child: Text(
+                                      'Cancelar',
+                                      style: GoogleFonts.poppins(
+                                        color: Color(0XFF8A8A8A),
+                                        fontWeight: FontWeight.w500,
+                                        fontSize: ScreenUtil().setSp(16),
                                       ),
                                     ),
                                   ),
-                                ],
-                              ),
+                                ),
+                              ],
                             ),
                           ),
                         ),
-                      );
-                    }),
-              ),
+                      ),
+                    );
+                  }),
             ),
             AnimatedBuilder(
                 animation: _controller,
@@ -792,199 +787,196 @@ void _addCategoryModal(BuildContext context, String idCategoria) {
       builder: (context) {
         return Stack(
           children: [
-            GestureDetector(
-              onTap: () => Navigator.of(context).pop(),
-              child: Container(
-                color: Color.fromRGBO(0, 0, 0, 0.001),
-                child: DraggableScrollableSheet(
-                    initialChildSize: 0.93,
-                    minChildSize: 0.2,
-                    maxChildSize: 0.93,
-                    builder: (_, controller) {
-                      return Container(
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.only(
-                            topLeft: const Radius.circular(30),
-                            topRight: const Radius.circular(30),
-                          ),
+            Container(
+              color: Color.fromRGBO(0, 0, 0, 0.001),
+              child: DraggableScrollableSheet(
+                  initialChildSize: 0.93,
+                  minChildSize: 0.2,
+                  maxChildSize: 0.93,
+                  builder: (_, controller) {
+                    return Container(
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.only(
+                          topLeft: const Radius.circular(30),
+                          topRight: const Radius.circular(30),
                         ),
-                        child: KeyboardActions(
-                          config: KeyboardActionsConfig(keyboardSeparatorColor: Colors.white, keyboardBarColor: Colors.white, actions: [
-                            KeyboardActionsItem(focusNode: _focus1),
-                          ]),
-                          child: Padding(
-                            padding: EdgeInsets.symmetric(vertical: ScreenUtil().setHeight(10), horizontal: ScreenUtil().setWidth(24)),
-                            child: SingleChildScrollView(
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  SizedBox(
-                                    height: ScreenUtil().setWidth(4),
-                                    child: Center(
-                                      child: Container(
-                                        width: ScreenUtil().setWidth(48),
-                                        decoration: BoxDecoration(
-                                          color: Color(0XFFBABABA),
-                                        ),
+                      ),
+                      child: KeyboardActions(
+                        config: KeyboardActionsConfig(keyboardSeparatorColor: Colors.white, keyboardBarColor: Colors.white, actions: [
+                          KeyboardActionsItem(focusNode: _focus1),
+                        ]),
+                        child: Padding(
+                          padding: EdgeInsets.symmetric(vertical: ScreenUtil().setHeight(10), horizontal: ScreenUtil().setWidth(24)),
+                          child: SingleChildScrollView(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                SizedBox(
+                                  height: ScreenUtil().setWidth(4),
+                                  child: Center(
+                                    child: Container(
+                                      width: ScreenUtil().setWidth(48),
+                                      decoration: BoxDecoration(
+                                        color: Color(0XFFBABABA),
                                       ),
                                     ),
                                   ),
-                                  SizedBox(
-                                    height: ScreenUtil().setWidth(10),
-                                  ),
-                                  Center(
-                                    child: Text(
-                                      'Nueva categoría',
-                                      style: GoogleFonts.poppins(
-                                        color: Color(0XFFFF0036),
-                                        fontWeight: FontWeight.w600,
-                                        fontSize: ScreenUtil().setSp(18),
-                                      ),
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    height: ScreenUtil().setWidth(24),
-                                  ),
-                                  Text(
-                                    'Categoría',
+                                ),
+                                SizedBox(
+                                  height: ScreenUtil().setWidth(10),
+                                ),
+                                Center(
+                                  child: Text(
+                                    'Nueva categoría',
                                     style: GoogleFonts.poppins(
-                                      color: Color(0XFF585858),
-                                      fontWeight: FontWeight.w500,
-                                      fontSize: ScreenUtil().setSp(16),
+                                      color: Color(0XFFFF0036),
+                                      fontWeight: FontWeight.w600,
+                                      fontSize: ScreenUtil().setSp(18),
                                     ),
                                   ),
-                                  TextField(
-                                    focusNode: _focus1,
-                                    controller: _nombreLineaController,
-                                    maxLines: 1,
-                                    onChanged: (value) {
-                                      if (value.length > 0) {
-                                        _controller.changeBoton(true);
-                                      } else {
-                                        _controller.changeBoton(false);
-                                      }
-                                    },
-                                    keyboardType: TextInputType.text,
-                                    decoration: InputDecoration(
-                                      hintText: 'Ingrese nombre de la categoría',
-                                      hintStyle: TextStyle(
-                                        color: Color(0XFFBEBEBE),
-                                        fontWeight: FontWeight.w400,
-                                        fontSize: ScreenUtil().setSp(16),
-                                        fontStyle: FontStyle.normal,
-                                      ),
-                                      filled: true,
-                                      fillColor: Color(0XFFEDEDED),
-                                      contentPadding: EdgeInsets.only(
-                                          left: ScreenUtil().setWidth(10), top: ScreenUtil().setHeight(5), bottom: ScreenUtil().setHeight(1)),
-                                      enabledBorder: OutlineInputBorder(
-                                        borderRadius: BorderRadius.circular(15),
-                                        borderSide: BorderSide(color: Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
-                                      ),
-                                      focusedBorder: OutlineInputBorder(
-                                        borderRadius: BorderRadius.circular(15),
-                                        borderSide: BorderSide(color: Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
-                                      ),
-                                      border: OutlineInputBorder(
-                                        borderRadius: BorderRadius.circular(15),
-                                        borderSide: BorderSide(color: Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
-                                      ),
-                                    ),
-                                    style: TextStyle(
-                                      color: Color(0XFF585858),
+                                ),
+                                SizedBox(
+                                  height: ScreenUtil().setWidth(24),
+                                ),
+                                Text(
+                                  'Categoría',
+                                  style: GoogleFonts.poppins(
+                                    color: Color(0XFF585858),
+                                    fontWeight: FontWeight.w500,
+                                    fontSize: ScreenUtil().setSp(16),
+                                  ),
+                                ),
+                                TextField(
+                                  focusNode: _focus1,
+                                  controller: _nombreLineaController,
+                                  maxLines: 1,
+                                  onChanged: (value) {
+                                    if (value.length > 0) {
+                                      _controller.changeBoton(true);
+                                    } else {
+                                      _controller.changeBoton(false);
+                                    }
+                                  },
+                                  keyboardType: TextInputType.text,
+                                  decoration: InputDecoration(
+                                    hintText: 'Ingrese nombre de la categoría',
+                                    hintStyle: TextStyle(
+                                      color: Color(0XFFBEBEBE),
                                       fontWeight: FontWeight.w400,
                                       fontSize: ScreenUtil().setSp(16),
                                       fontStyle: FontStyle.normal,
                                     ),
+                                    filled: true,
+                                    fillColor: Color(0XFFEDEDED),
+                                    contentPadding: EdgeInsets.only(
+                                        left: ScreenUtil().setWidth(10), top: ScreenUtil().setHeight(5), bottom: ScreenUtil().setHeight(1)),
+                                    enabledBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(15),
+                                      borderSide: BorderSide(color: Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
+                                    ),
+                                    focusedBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(15),
+                                      borderSide: BorderSide(color: Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
+                                    ),
+                                    border: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(15),
+                                      borderSide: BorderSide(color: Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
+                                    ),
                                   ),
-                                  SizedBox(height: ScreenUtil().setHeight(48)),
-                                  InkWell(
-                                    onTap: () async {
-                                      _controller.changeCargando(true);
-                                      _controller.changeText('');
-                                      if (_controller.boton) {
-                                        final _lineaApi = LineaApi();
-                                        final res = await _lineaApi.agregarNuevaLinea(_nombreLineaController.text, idCategoria);
-                                        if (res == 1) {
-                                          final lineasBloc = ProviderBloc.lineas(context);
-                                          lineasBloc.obtenerLineasPorNegocio(idCategoria);
-                                          Navigator.pop(context);
-                                        } else {
-                                          _controller.changeText('Ocurrió un error, inténtelo nuevamente');
-                                        }
+                                  style: TextStyle(
+                                    color: Color(0XFF585858),
+                                    fontWeight: FontWeight.w400,
+                                    fontSize: ScreenUtil().setSp(16),
+                                    fontStyle: FontStyle.normal,
+                                  ),
+                                ),
+                                SizedBox(height: ScreenUtil().setHeight(48)),
+                                InkWell(
+                                  onTap: () async {
+                                    _controller.changeCargando(true);
+                                    _controller.changeText('');
+                                    if (_controller.boton) {
+                                      final _lineaApi = LineaApi();
+                                      final res = await _lineaApi.agregarNuevaLinea(_nombreLineaController.text, idCategoria);
+                                      if (res == 1) {
+                                        final lineasBloc = ProviderBloc.lineas(context);
+                                        lineasBloc.obtenerLineasPorNegocio(idCategoria);
+                                        Navigator.pop(context);
+                                      } else {
+                                        _controller.changeText('Ocurrió un error, inténtelo nuevamente');
                                       }
+                                    }
 
-                                      _controller.changeCargando(false);
-                                    },
-                                    child: AnimatedBuilder(
-                                        animation: _controller,
-                                        builder: (_, s) {
-                                          return Center(
-                                            child: Container(
-                                              decoration: BoxDecoration(
-                                                borderRadius: BorderRadius.circular(50),
-                                                color: (_controller.boton) ? Color(0XFFFF0036) : Color(0XFFFF0036).withOpacity(0.6),
-                                              ),
-                                              child: Center(
-                                                child: Text(
-                                                  'Agregar categoría',
-                                                  style: TextStyle(
-                                                    color: Colors.white,
-                                                    fontWeight: FontWeight.w600,
-                                                    fontSize: ScreenUtil().setSp(16),
-                                                    fontStyle: FontStyle.normal,
-                                                    letterSpacing: 1.5,
-                                                  ),
+                                    _controller.changeCargando(false);
+                                  },
+                                  child: AnimatedBuilder(
+                                      animation: _controller,
+                                      builder: (_, s) {
+                                        return Center(
+                                          child: Container(
+                                            decoration: BoxDecoration(
+                                              borderRadius: BorderRadius.circular(50),
+                                              color: (_controller.boton) ? Color(0XFFFF0036) : Color(0XFFFF0036).withOpacity(0.6),
+                                            ),
+                                            child: Center(
+                                              child: Text(
+                                                'Agregar categoría',
+                                                style: TextStyle(
+                                                  color: Colors.white,
+                                                  fontWeight: FontWeight.w600,
+                                                  fontSize: ScreenUtil().setSp(16),
+                                                  fontStyle: FontStyle.normal,
+                                                  letterSpacing: 1.5,
                                                 ),
                                               ),
-                                              height: ScreenUtil().setHeight(44),
-                                              width: ScreenUtil().setWidth(255),
                                             ),
-                                          );
-                                        }),
-                                  ),
-                                  SizedBox(height: ScreenUtil().setHeight(8)),
-                                  Center(
-                                    child: AnimatedBuilder(
-                                        animation: _controller,
-                                        builder: (_, s) {
-                                          return Text(
-                                            _controller.text,
-                                            style: TextStyle(
-                                              color: Color(0XFFFF0036),
-                                              fontWeight: FontWeight.w600,
-                                              fontSize: ScreenUtil().setSp(16),
-                                              fontStyle: FontStyle.normal,
-                                              letterSpacing: ScreenUtil().setSp(0.016),
-                                            ),
-                                          );
-                                        }),
-                                  ),
-                                  SizedBox(height: ScreenUtil().setHeight(10)),
-                                  Center(
-                                    child: InkWell(
-                                      onTap: () {
-                                        Navigator.pop(context);
-                                      },
-                                      child: Text(
-                                        'Cancelar',
-                                        style: GoogleFonts.poppins(
-                                          color: Color(0XFF8A8A8A),
-                                          fontWeight: FontWeight.w500,
-                                          fontSize: ScreenUtil().setSp(16),
-                                        ),
+                                            height: ScreenUtil().setHeight(44),
+                                            width: ScreenUtil().setWidth(255),
+                                          ),
+                                        );
+                                      }),
+                                ),
+                                SizedBox(height: ScreenUtil().setHeight(8)),
+                                Center(
+                                  child: AnimatedBuilder(
+                                      animation: _controller,
+                                      builder: (_, s) {
+                                        return Text(
+                                          _controller.text,
+                                          style: TextStyle(
+                                            color: Color(0XFFFF0036),
+                                            fontWeight: FontWeight.w600,
+                                            fontSize: ScreenUtil().setSp(16),
+                                            fontStyle: FontStyle.normal,
+                                            letterSpacing: ScreenUtil().setSp(0.016),
+                                          ),
+                                        );
+                                      }),
+                                ),
+                                SizedBox(height: ScreenUtil().setHeight(10)),
+                                Center(
+                                  child: InkWell(
+                                    onTap: () {
+                                      Navigator.pop(context);
+                                    },
+                                    child: Text(
+                                      'Cancelar',
+                                      style: GoogleFonts.poppins(
+                                        color: Color(0XFF8A8A8A),
+                                        fontWeight: FontWeight.w500,
+                                        fontSize: ScreenUtil().setSp(16),
                                       ),
                                     ),
                                   ),
-                                ],
-                              ),
+                                ),
+                              ],
                             ),
                           ),
                         ),
-                      );
-                    }),
-              ),
+                      ),
+                    );
+                  }),
             ),
             AnimatedBuilder(
                 animation: _controller,
@@ -1027,569 +1019,564 @@ void editProductModal(BuildContext context, ProductoLineaModel productData, Stri
       builder: (context) {
         return Stack(
           children: [
-            GestureDetector(
-              onTap: () => Navigator.of(context).pop(),
-              child: Container(
-                color: Color.fromRGBO(0, 0, 0, 0.001),
-                child: DraggableScrollableSheet(
-                    initialChildSize: 0.93,
-                    minChildSize: 0.2,
-                    maxChildSize: 0.93,
-                    builder: (_, controller) {
-                      return Container(
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.only(
-                            topLeft: const Radius.circular(30),
-                            topRight: const Radius.circular(30),
-                          ),
+            Container(
+              color: Color.fromRGBO(0, 0, 0, 0.001),
+              child: DraggableScrollableSheet(
+                  initialChildSize: 0.93,
+                  minChildSize: 0.2,
+                  maxChildSize: 0.93,
+                  builder: (_, controller) {
+                    return Container(
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.only(
+                          topLeft: const Radius.circular(30),
+                          topRight: const Radius.circular(30),
                         ),
-                        child: KeyboardActions(
-                          config: KeyboardActionsConfig(keyboardSeparatorColor: Colors.white, keyboardBarColor: Colors.white, actions: [
-                            KeyboardActionsItem(focusNode: _focus1),
-                            KeyboardActionsItem(focusNode: _focus2),
-                            KeyboardActionsItem(focusNode: _focus3),
-                          ]),
-                          child: Padding(
-                            padding: EdgeInsets.symmetric(vertical: ScreenUtil().setHeight(10), horizontal: ScreenUtil().setWidth(24)),
-                            child: SingleChildScrollView(
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  SizedBox(
-                                    height: ScreenUtil().setWidth(4),
-                                    child: Center(
-                                      child: Container(
-                                        width: ScreenUtil().setWidth(48),
-                                        decoration: BoxDecoration(
-                                          color: Color(0XFFBABABA),
-                                        ),
+                      ),
+                      child: KeyboardActions(
+                        config: KeyboardActionsConfig(keyboardSeparatorColor: Colors.white, keyboardBarColor: Colors.white, actions: [
+                          KeyboardActionsItem(focusNode: _focus1),
+                          KeyboardActionsItem(focusNode: _focus2),
+                          KeyboardActionsItem(focusNode: _focus3),
+                        ]),
+                        child: Padding(
+                          padding: EdgeInsets.symmetric(vertical: ScreenUtil().setHeight(10), horizontal: ScreenUtil().setWidth(24)),
+                          child: SingleChildScrollView(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                SizedBox(
+                                  height: ScreenUtil().setWidth(4),
+                                  child: Center(
+                                    child: Container(
+                                      width: ScreenUtil().setWidth(48),
+                                      decoration: BoxDecoration(
+                                        color: Color(0XFFBABABA),
                                       ),
                                     ),
                                   ),
-                                  SizedBox(
-                                    height: ScreenUtil().setWidth(10),
-                                  ),
-                                  Center(
-                                    child: Text(
-                                      'Editar $nameCategory',
-                                      style: GoogleFonts.poppins(
-                                        color: Color(0XFFFF0036),
-                                        fontWeight: FontWeight.w600,
-                                        fontSize: ScreenUtil().setSp(18),
-                                      ),
+                                ),
+                                SizedBox(
+                                  height: ScreenUtil().setWidth(10),
+                                ),
+                                Center(
+                                  child: Text(
+                                    'Editar $nameCategory',
+                                    style: GoogleFonts.poppins(
+                                      color: Color(0XFFFF0036),
+                                      fontWeight: FontWeight.w600,
+                                      fontSize: ScreenUtil().setSp(18),
                                     ),
                                   ),
-                                  SizedBox(
-                                    height: ScreenUtil().setWidth(24),
-                                  ),
-                                  Row(
-                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Container(
-                                        height: ScreenUtil().setHeight(150),
-                                        width: ScreenUtil().setWidth(150),
-                                        decoration: BoxDecoration(
-                                          color: Color(0XFFEEEEEE),
-                                          shape: BoxShape.circle,
-                                          boxShadow: [
-                                            BoxShadow(
-                                              offset: Offset(-1, -1),
-                                              color: Color.fromRGBO(0, 0, 0, 0.2),
-                                              blurRadius: 5,
-                                            ),
-                                          ],
+                                ),
+                                SizedBox(
+                                  height: ScreenUtil().setWidth(24),
+                                ),
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Container(
+                                      height: ScreenUtil().setHeight(150),
+                                      width: ScreenUtil().setWidth(150),
+                                      decoration: BoxDecoration(
+                                        color: Color(0XFFEEEEEE),
+                                        shape: BoxShape.circle,
+                                        boxShadow: [
+                                          BoxShadow(
+                                            offset: Offset(-1, -1),
+                                            color: Color.fromRGBO(0, 0, 0, 0.2),
+                                            blurRadius: 5,
+                                          ),
+                                        ],
+                                      ),
+                                      child: CachedNetworkImage(
+                                        placeholder: (context, url) => Container(
+                                          child: SvgPicture.asset('assets/food_svg/$iconProduct.svg'),
                                         ),
-                                        child: CachedNetworkImage(
-                                          placeholder: (context, url) => Container(
-                                            child: SvgPicture.asset('assets/food_svg/$iconProduct.svg'),
-                                          ),
-                                          errorWidget: (context, url, error) => Container(
-                                            child: Container(
-                                              child: SvgPicture.asset(
-                                                'assets/food_svg/$iconProduct.svg',
-                                              ),
+                                        errorWidget: (context, url, error) => Container(
+                                          child: Container(
+                                            child: SvgPicture.asset(
+                                              'assets/food_svg/$iconProduct.svg',
                                             ),
                                           ),
-                                          imageUrl: '$apiBaseURL/${productData.productoFoto}',
-                                          imageBuilder: (context, imageProvider) => Container(
-                                            decoration: BoxDecoration(
-                                              shape: BoxShape.circle,
-                                              image: DecorationImage(
-                                                image: imageProvider,
-                                                fit: BoxFit.cover,
-                                              ),
+                                        ),
+                                        imageUrl: '$apiBaseURL/${productData.productoFoto}',
+                                        imageBuilder: (context, imageProvider) => Container(
+                                          decoration: BoxDecoration(
+                                            shape: BoxShape.circle,
+                                            image: DecorationImage(
+                                              image: imageProvider,
+                                              fit: BoxFit.cover,
                                             ),
                                           ),
                                         ),
                                       ),
-                                      // Container(
-                                      //   height: ScreenUtil().setHeight(150),
-                                      //   width: ScreenUtil().setWidth(150),
-                                      //   decoration: BoxDecoration(
-                                      //     color: Color(0XFFEEEEEE),
-                                      //     shape: BoxShape.circle,
-                                      //     boxShadow: [
-                                      //       BoxShadow(
-                                      //         color: Color.fromRGBO(88, 88, 88, 0.3),
-                                      //         blurRadius: 20,
-                                      //       ),
-                                      //     ],
-                                      //   ),
-                                      //   child: Stack(
-                                      //     children: [
-                                      //       Align(
-                                      //         alignment: Alignment.center,
-                                      //         child: Container(
-                                      //             height: ScreenUtil().setHeight(120),
-                                      //             width: ScreenUtil().setWidth(120),
-                                      //             decoration: BoxDecoration(
-                                      //               color: Color(0XFFEEEEEE),
-                                      //               shape: BoxShape.circle,
-                                      //               boxShadow: [
-                                      //                 BoxShadow(
-                                      //                   offset: Offset(-1, -1),
-                                      //                   color: Color.fromRGBO(0, 0, 0, 0.2),
-                                      //                   blurRadius: 5,
-                                      //                 ),
-                                      //               ],
-                                      //             ),
-                                      //             child: SvgPicture.asset('assets/food_svg/food.svg')),
-                                      //       ),
-                                      //     ],
-                                      //   ),
-                                      // ),
-                                      Container(
-                                        width: ScreenUtil().setWidth(156),
-                                        child: Column(
-                                          children: [
-                                            Text(
-                                              'Precio',
-                                              style: GoogleFonts.poppins(
-                                                color: Color(0XFF585858),
-                                                fontWeight: FontWeight.w500,
-                                                fontSize: ScreenUtil().setSp(16),
-                                              ),
+                                    ),
+                                    // Container(
+                                    //   height: ScreenUtil().setHeight(150),
+                                    //   width: ScreenUtil().setWidth(150),
+                                    //   decoration: BoxDecoration(
+                                    //     color: Color(0XFFEEEEEE),
+                                    //     shape: BoxShape.circle,
+                                    //     boxShadow: [
+                                    //       BoxShadow(
+                                    //         color: Color.fromRGBO(88, 88, 88, 0.3),
+                                    //         blurRadius: 20,
+                                    //       ),
+                                    //     ],
+                                    //   ),
+                                    //   child: Stack(
+                                    //     children: [
+                                    //       Align(
+                                    //         alignment: Alignment.center,
+                                    //         child: Container(
+                                    //             height: ScreenUtil().setHeight(120),
+                                    //             width: ScreenUtil().setWidth(120),
+                                    //             decoration: BoxDecoration(
+                                    //               color: Color(0XFFEEEEEE),
+                                    //               shape: BoxShape.circle,
+                                    //               boxShadow: [
+                                    //                 BoxShadow(
+                                    //                   offset: Offset(-1, -1),
+                                    //                   color: Color.fromRGBO(0, 0, 0, 0.2),
+                                    //                   blurRadius: 5,
+                                    //                 ),
+                                    //               ],
+                                    //             ),
+                                    //             child: SvgPicture.asset('assets/food_svg/food.svg')),
+                                    //       ),
+                                    //     ],
+                                    //   ),
+                                    // ),
+                                    Container(
+                                      width: ScreenUtil().setWidth(156),
+                                      child: Column(
+                                        children: [
+                                          Text(
+                                            'Precio',
+                                            style: GoogleFonts.poppins(
+                                              color: Color(0XFF585858),
+                                              fontWeight: FontWeight.w500,
+                                              fontSize: ScreenUtil().setSp(16),
                                             ),
-                                            TextField(
-                                              focusNode: _focus1,
-                                              controller: _precioController,
-                                              maxLines: 1,
-                                              onChanged: (value) {
-                                                if (value.length > 0 &&
-                                                    _nombreController.text.length > 0 &&
-                                                    _descripcionController.text.length > 0 &&
-                                                    _controller.idLinea != '') {
-                                                  _controller.changeBoton(true);
-                                                } else {
-                                                  _controller.changeBoton(false);
-                                                }
-                                              },
-                                              keyboardType: TextInputType.number,
-                                              decoration: InputDecoration(
-                                                hintText: 'S/00.00',
-                                                hintStyle: TextStyle(
-                                                  color: Color(0XFFBEBEBE),
-                                                  fontWeight: FontWeight.w400,
-                                                  fontSize: ScreenUtil().setSp(16),
-                                                  fontStyle: FontStyle.normal,
-                                                ),
-                                                filled: true,
-                                                fillColor: Color(0XFFEDEDED),
-                                                contentPadding: EdgeInsets.only(
-                                                    left: ScreenUtil().setWidth(10),
-                                                    top: ScreenUtil().setHeight(5),
-                                                    bottom: ScreenUtil().setHeight(1)),
-                                                enabledBorder: OutlineInputBorder(
-                                                  borderRadius: BorderRadius.circular(15),
-                                                  borderSide: BorderSide(color: Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
-                                                ),
-                                                focusedBorder: OutlineInputBorder(
-                                                  borderRadius: BorderRadius.circular(15),
-                                                  borderSide: BorderSide(color: Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
-                                                ),
-                                                border: OutlineInputBorder(
-                                                  borderRadius: BorderRadius.circular(15),
-                                                  borderSide: BorderSide(color: Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
-                                                ),
-                                              ),
-                                              style: TextStyle(
-                                                color: Color(0XFF585858),
+                                          ),
+                                          TextField(
+                                            focusNode: _focus1,
+                                            controller: _precioController,
+                                            maxLines: 1,
+                                            onChanged: (value) {
+                                              if (value.length > 0 &&
+                                                  _nombreController.text.length > 0 &&
+                                                  _descripcionController.text.length > 0 &&
+                                                  _controller.idLinea != '') {
+                                                _controller.changeBoton(true);
+                                              } else {
+                                                _controller.changeBoton(false);
+                                              }
+                                            },
+                                            keyboardType: TextInputType.number,
+                                            decoration: InputDecoration(
+                                              hintText: 'S/00.00',
+                                              hintStyle: TextStyle(
+                                                color: Color(0XFFBEBEBE),
                                                 fontWeight: FontWeight.w400,
                                                 fontSize: ScreenUtil().setSp(16),
                                                 fontStyle: FontStyle.normal,
                                               ),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                  SizedBox(height: ScreenUtil().setHeight(8)),
-                                  Text(
-                                    'Nombre',
-                                    style: GoogleFonts.poppins(
-                                      color: Color(0XFF585858),
-                                      fontWeight: FontWeight.w500,
-                                      fontSize: ScreenUtil().setSp(16),
-                                    ),
-                                  ),
-                                  TextField(
-                                    focusNode: _focus2,
-                                    controller: _nombreController,
-                                    maxLines: 1,
-                                    keyboardType: TextInputType.text,
-                                    onChanged: (value) {
-                                      if (value.length > 0 &&
-                                          _precioController.text.length > 0 &&
-                                          _descripcionController.text.length > 0 &&
-                                          _controller.idLinea != '') {
-                                        _controller.changeBoton(true);
-                                      } else {
-                                        _controller.changeBoton(false);
-                                      }
-                                    },
-                                    decoration: InputDecoration(
-                                      hintText: 'Ingrese nombre de $nameCategory',
-                                      hintStyle: TextStyle(
-                                        color: Color(0XFFBEBEBE),
-                                        fontWeight: FontWeight.w400,
-                                        fontSize: ScreenUtil().setSp(16),
-                                        fontStyle: FontStyle.normal,
-                                      ),
-                                      filled: true,
-                                      fillColor: Color(0XFFEDEDED),
-                                      contentPadding: EdgeInsets.only(
-                                          left: ScreenUtil().setWidth(10), top: ScreenUtil().setHeight(5), bottom: ScreenUtil().setHeight(1)),
-                                      enabledBorder: OutlineInputBorder(
-                                        borderRadius: BorderRadius.circular(15),
-                                        borderSide: BorderSide(color: Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
-                                      ),
-                                      focusedBorder: OutlineInputBorder(
-                                        borderRadius: BorderRadius.circular(15),
-                                        borderSide: BorderSide(color: Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
-                                      ),
-                                      border: OutlineInputBorder(
-                                        borderRadius: BorderRadius.circular(15),
-                                        borderSide: BorderSide(color: Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
-                                      ),
-                                    ),
-                                    style: TextStyle(
-                                      color: Color(0XFF585858),
-                                      fontWeight: FontWeight.w400,
-                                      fontSize: ScreenUtil().setSp(16),
-                                      fontStyle: FontStyle.normal,
-                                    ),
-                                  ),
-                                  SizedBox(height: ScreenUtil().setHeight(8)),
-                                  Text(
-                                    'Categoría',
-                                    style: GoogleFonts.poppins(
-                                      color: Color(0XFF585858),
-                                      fontWeight: FontWeight.w500,
-                                      fontSize: ScreenUtil().setSp(16),
-                                    ),
-                                  ),
-                                  InkWell(
-                                    onTap: () {
-                                      showModalBottomSheet(
-                                        context: context,
-                                        isScrollControlled: true,
-                                        backgroundColor: Colors.transparent,
-                                        builder: (context) {
-                                          return StreamBuilder(
-                                              stream: lineasBloc.lineasStream,
-                                              builder: (BuildContext context, AsyncSnapshot<List<LineaModel>> snapshot) {
-                                                if (snapshot.hasData && snapshot.data.length >= 0) {
-                                                  return GestureDetector(
-                                                    onTap: () => Navigator.of(context).pop(),
-                                                    child: Container(
-                                                      color: Color.fromRGBO(0, 0, 0, 0.001),
-                                                      child: GestureDetector(
-                                                        onTap: () {},
-                                                        child: DraggableScrollableSheet(
-                                                          initialChildSize: 0.9,
-                                                          minChildSize: 0.2,
-                                                          maxChildSize: 0.9,
-                                                          builder: (_, controller) {
-                                                            return Container(
-                                                              decoration: BoxDecoration(
-                                                                color: Colors.white,
-                                                                borderRadius: BorderRadius.only(
-                                                                  topLeft: const Radius.circular(30),
-                                                                  topRight: const Radius.circular(30),
-                                                                ),
-                                                              ),
-                                                              child: Padding(
-                                                                padding: EdgeInsets.symmetric(
-                                                                    vertical: ScreenUtil().setHeight(24), horizontal: ScreenUtil().setWidth(24)),
-                                                                child: Column(
-                                                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                                                  children: [
-                                                                    Row(
-                                                                      children: [
-                                                                        IconButton(
-                                                                          icon: Icon(
-                                                                            Icons.arrow_back_ios,
-                                                                          ),
-                                                                          iconSize: ScreenUtil().setSp(20),
-                                                                          onPressed: () => Navigator.of(context).pop(),
-                                                                        ),
-                                                                        SizedBox(width: ScreenUtil().setWidth(30)),
-                                                                        Text(
-                                                                          'Seleccione una línea',
-                                                                          textAlign: TextAlign.center,
-                                                                          style: GoogleFonts.poppins(
-                                                                            color: Color(0XFF585858),
-                                                                            fontStyle: FontStyle.normal,
-                                                                            fontWeight: FontWeight.w700,
-                                                                            fontSize: ScreenUtil().setSp(18),
-                                                                          ),
-                                                                        ),
-                                                                      ],
-                                                                    ),
-                                                                    Expanded(
-                                                                      child: ListView.builder(
-                                                                        itemCount: snapshot.data.length,
-                                                                        shrinkWrap: true,
-                                                                        itemBuilder: (context, index2) {
-                                                                          return Column(
-                                                                            children: [
-                                                                              InkWell(
-                                                                                onTap: () {
-                                                                                  _controller.changeLinea(snapshot.data[index2].idLinea,
-                                                                                      snapshot.data[index2].lineaNombre);
-                                                                                  if (_precioController.text.length > 0 &&
-                                                                                      _nombreController.text.length > 0 &&
-                                                                                      _descripcionController.text.length > 0 &&
-                                                                                      _controller.idLinea != '') {
-                                                                                    _controller.changeBoton(true);
-                                                                                  } else {
-                                                                                    _controller.changeBoton(false);
-                                                                                  }
-                                                                                  Navigator.pop(context);
-                                                                                },
-                                                                                child: Row(
-                                                                                  children: [
-                                                                                    SizedBox(
-                                                                                      width: ScreenUtil().setWidth(8),
-                                                                                    ),
-                                                                                    Text(
-                                                                                      '${snapshot.data[index2].lineaNombre}',
-                                                                                      style: GoogleFonts.poppins(
-                                                                                        color: Color(0XFF585858),
-                                                                                        fontWeight: FontWeight.w500,
-                                                                                        fontSize: ScreenUtil().setSp(16),
-                                                                                        letterSpacing: ScreenUtil().setSp(0.016),
-                                                                                      ),
-                                                                                    ),
-                                                                                  ],
-                                                                                ),
-                                                                              ),
-                                                                              Divider(),
-                                                                            ],
-                                                                          );
-                                                                        },
-                                                                      ),
-                                                                    ),
-                                                                  ],
-                                                                ),
-                                                              ),
-                                                            );
-                                                          },
-                                                        ),
-                                                      ),
-                                                    ),
-                                                  );
-                                                } else {
-                                                  return Container();
-                                                }
-                                              });
-                                        },
-                                      );
-                                    },
-                                    child: AnimatedBuilder(
-                                        animation: _controller,
-                                        builder: (context, snapshot) {
-                                          return Container(
-                                            height: ScreenUtil().setHeight(48),
-                                            width: double.infinity,
-                                            decoration: BoxDecoration(color: Color(0XFFEDEDED), borderRadius: BorderRadius.circular(15)),
-                                            padding: EdgeInsets.symmetric(horizontal: ScreenUtil().setWidth(10)),
-                                            child: Row(
-                                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                              children: [
-                                                Text(
-                                                  _controller.linea,
-                                                  style: TextStyle(
-                                                    color: (_controller.idLinea != '') ? Color(0XFF585858) : Color(0XFFBEBEBE),
-                                                    fontWeight: FontWeight.w400,
-                                                    fontSize: ScreenUtil().setSp(16),
-                                                    fontStyle: FontStyle.normal,
-                                                  ),
-                                                ),
-                                                Icon(
-                                                  Icons.arrow_drop_down,
-                                                  size: ScreenUtil().setHeight(20),
-                                                  color: Color(0XFF585858),
-                                                ),
-                                              ],
-                                            ),
-                                          );
-                                        }),
-                                  ),
-                                  SizedBox(height: ScreenUtil().setHeight(8)),
-                                  Text(
-                                    'Descripción',
-                                    style: GoogleFonts.poppins(
-                                      color: Color(0XFF585858),
-                                      fontWeight: FontWeight.w500,
-                                      fontSize: ScreenUtil().setSp(16),
-                                    ),
-                                  ),
-                                  TextField(
-                                    focusNode: _focus3,
-                                    controller: _descripcionController,
-                                    maxLines: null,
-                                    keyboardType: TextInputType.multiline,
-                                    onChanged: (value) {
-                                      if (value.length > 0 &&
-                                          _precioController.text.length > 0 &&
-                                          _nombreController.text.length > 0 &&
-                                          _controller.idLinea != '') {
-                                        _controller.changeBoton(true);
-                                      } else {
-                                        _controller.changeBoton(false);
-                                      }
-                                    },
-                                    decoration: InputDecoration(
-                                      hintText: 'Ingredientes, tiempo de preparación, etc.',
-                                      hintStyle: TextStyle(
-                                        color: Color(0XFFBEBEBE),
-                                        fontWeight: FontWeight.w400,
-                                        fontSize: ScreenUtil().setSp(16),
-                                        fontStyle: FontStyle.normal,
-                                      ),
-                                      filled: true,
-                                      fillColor: Color(0XFFEDEDED),
-                                      contentPadding: EdgeInsets.only(
-                                          left: ScreenUtil().setWidth(10), top: ScreenUtil().setHeight(5), bottom: ScreenUtil().setHeight(1)),
-                                      enabledBorder: OutlineInputBorder(
-                                        borderRadius: BorderRadius.circular(15),
-                                        borderSide: BorderSide(color: Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
-                                      ),
-                                      focusedBorder: OutlineInputBorder(
-                                        borderRadius: BorderRadius.circular(15),
-                                        borderSide: BorderSide(color: Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
-                                      ),
-                                      border: OutlineInputBorder(
-                                        borderRadius: BorderRadius.circular(15),
-                                        borderSide: BorderSide(color: Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
-                                      ),
-                                    ),
-                                    style: TextStyle(
-                                      color: Color(0XFF585858),
-                                      fontWeight: FontWeight.w400,
-                                      fontSize: ScreenUtil().setSp(16),
-                                      fontStyle: FontStyle.normal,
-                                    ),
-                                  ),
-                                  SizedBox(height: ScreenUtil().setHeight(48)),
-                                  InkWell(
-                                    onTap: () async {
-                                      _controller.changeCargando(true);
-                                      _controller.changeText('');
-                                      if (_controller.boton) {
-                                        final _productoLineaApi = ProductoLineaApi();
-                                        ProductoLineaModel producto = ProductoLineaModel();
-                                        producto.idLinea = _controller.idLinea;
-                                        producto.productoNombre = _nombreController.text;
-                                        producto.productoPrecio = _precioController.text;
-                                        producto.productoDescripcion = _descripcionController.text;
-                                        producto.productoEstado = productData.productoEstado;
-                                        producto.idProducto = productData.idProducto;
-
-                                        final res = await _productoLineaApi.editarProducto(producto);
-                                        if (res == 1) {
-                                          final productosLineaBloc = ProviderBloc.productosLinea(context);
-                                          productosLineaBloc.obtenerProductoPorIdProducto(productData.idProducto, _controller.idLinea);
-                                          productosLineaBloc.obtenerProductosPorLinea(_controller.idLinea);
-                                          Navigator.pop(context);
-                                        } else {
-                                          _controller.changeText('Ocurrió un error. inténtelo nuevamente');
-                                        }
-                                      }
-
-                                      _controller.changeCargando(false);
-                                    },
-                                    child: AnimatedBuilder(
-                                        animation: _controller,
-                                        builder: (_, s) {
-                                          return Center(
-                                            child: Container(
-                                              decoration: BoxDecoration(
-                                                borderRadius: BorderRadius.circular(50),
-                                                color: (_controller.boton) ? Color(0XFFFF0036) : Color(0XFFFF0036).withOpacity(0.6),
+                                              filled: true,
+                                              fillColor: Color(0XFFEDEDED),
+                                              contentPadding: EdgeInsets.only(
+                                                  left: ScreenUtil().setWidth(10), top: ScreenUtil().setHeight(5), bottom: ScreenUtil().setHeight(1)),
+                                              enabledBorder: OutlineInputBorder(
+                                                borderRadius: BorderRadius.circular(15),
+                                                borderSide: BorderSide(color: Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
                                               ),
-                                              child: Center(
-                                                child: Text(
-                                                  'Guardar cambios',
-                                                  style: TextStyle(
-                                                    color: Colors.white,
-                                                    fontWeight: FontWeight.w600,
-                                                    fontSize: ScreenUtil().setSp(16),
-                                                    fontStyle: FontStyle.normal,
-                                                    letterSpacing: 1.5,
-                                                  ),
-                                                ),
+                                              focusedBorder: OutlineInputBorder(
+                                                borderRadius: BorderRadius.circular(15),
+                                                borderSide: BorderSide(color: Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
                                               ),
-                                              height: ScreenUtil().setHeight(44),
-                                              width: ScreenUtil().setWidth(255),
+                                              border: OutlineInputBorder(
+                                                borderRadius: BorderRadius.circular(15),
+                                                borderSide: BorderSide(color: Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
+                                              ),
                                             ),
-                                          );
-                                        }),
-                                  ),
-                                  SizedBox(height: ScreenUtil().setHeight(8)),
-                                  Center(
-                                    child: AnimatedBuilder(
-                                        animation: _controller,
-                                        builder: (_, s) {
-                                          return Text(
-                                            _controller.text,
                                             style: TextStyle(
-                                              color: Color(0XFFFF0036),
-                                              fontWeight: FontWeight.w600,
+                                              color: Color(0XFF585858),
+                                              fontWeight: FontWeight.w400,
                                               fontSize: ScreenUtil().setSp(16),
                                               fontStyle: FontStyle.normal,
-                                              letterSpacing: ScreenUtil().setSp(0.016),
                                             ),
-                                          );
-                                        }),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                SizedBox(height: ScreenUtil().setHeight(8)),
+                                Text(
+                                  'Nombre',
+                                  style: GoogleFonts.poppins(
+                                    color: Color(0XFF585858),
+                                    fontWeight: FontWeight.w500,
+                                    fontSize: ScreenUtil().setSp(16),
                                   ),
-                                  SizedBox(height: ScreenUtil().setHeight(10)),
-                                  Center(
-                                    child: InkWell(
-                                      onTap: () {
-                                        Navigator.pop(context);
+                                ),
+                                TextField(
+                                  focusNode: _focus2,
+                                  controller: _nombreController,
+                                  maxLines: 1,
+                                  keyboardType: TextInputType.text,
+                                  onChanged: (value) {
+                                    if (value.length > 0 &&
+                                        _precioController.text.length > 0 &&
+                                        _descripcionController.text.length > 0 &&
+                                        _controller.idLinea != '') {
+                                      _controller.changeBoton(true);
+                                    } else {
+                                      _controller.changeBoton(false);
+                                    }
+                                  },
+                                  decoration: InputDecoration(
+                                    hintText: 'Ingrese nombre de $nameCategory',
+                                    hintStyle: TextStyle(
+                                      color: Color(0XFFBEBEBE),
+                                      fontWeight: FontWeight.w400,
+                                      fontSize: ScreenUtil().setSp(16),
+                                      fontStyle: FontStyle.normal,
+                                    ),
+                                    filled: true,
+                                    fillColor: Color(0XFFEDEDED),
+                                    contentPadding: EdgeInsets.only(
+                                        left: ScreenUtil().setWidth(10), top: ScreenUtil().setHeight(5), bottom: ScreenUtil().setHeight(1)),
+                                    enabledBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(15),
+                                      borderSide: BorderSide(color: Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
+                                    ),
+                                    focusedBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(15),
+                                      borderSide: BorderSide(color: Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
+                                    ),
+                                    border: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(15),
+                                      borderSide: BorderSide(color: Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
+                                    ),
+                                  ),
+                                  style: TextStyle(
+                                    color: Color(0XFF585858),
+                                    fontWeight: FontWeight.w400,
+                                    fontSize: ScreenUtil().setSp(16),
+                                    fontStyle: FontStyle.normal,
+                                  ),
+                                ),
+                                SizedBox(height: ScreenUtil().setHeight(8)),
+                                Text(
+                                  'Categoría',
+                                  style: GoogleFonts.poppins(
+                                    color: Color(0XFF585858),
+                                    fontWeight: FontWeight.w500,
+                                    fontSize: ScreenUtil().setSp(16),
+                                  ),
+                                ),
+                                InkWell(
+                                  onTap: () {
+                                    showModalBottomSheet(
+                                      context: context,
+                                      isScrollControlled: true,
+                                      backgroundColor: Colors.transparent,
+                                      builder: (context) {
+                                        return StreamBuilder(
+                                            stream: lineasBloc.lineasStream,
+                                            builder: (BuildContext context, AsyncSnapshot<List<LineaModel>> snapshot) {
+                                              if (snapshot.hasData && snapshot.data.length >= 0) {
+                                                return GestureDetector(
+                                                  onTap: () => Navigator.of(context).pop(),
+                                                  child: Container(
+                                                    color: Color.fromRGBO(0, 0, 0, 0.001),
+                                                    child: GestureDetector(
+                                                      onTap: () {},
+                                                      child: DraggableScrollableSheet(
+                                                        initialChildSize: 0.9,
+                                                        minChildSize: 0.2,
+                                                        maxChildSize: 0.9,
+                                                        builder: (_, controller) {
+                                                          return Container(
+                                                            decoration: BoxDecoration(
+                                                              color: Colors.white,
+                                                              borderRadius: BorderRadius.only(
+                                                                topLeft: const Radius.circular(30),
+                                                                topRight: const Radius.circular(30),
+                                                              ),
+                                                            ),
+                                                            child: Padding(
+                                                              padding: EdgeInsets.symmetric(
+                                                                  vertical: ScreenUtil().setHeight(24), horizontal: ScreenUtil().setWidth(24)),
+                                                              child: Column(
+                                                                crossAxisAlignment: CrossAxisAlignment.start,
+                                                                children: [
+                                                                  Row(
+                                                                    children: [
+                                                                      IconButton(
+                                                                        icon: Icon(
+                                                                          Icons.arrow_back_ios,
+                                                                        ),
+                                                                        iconSize: ScreenUtil().setSp(20),
+                                                                        onPressed: () => Navigator.of(context).pop(),
+                                                                      ),
+                                                                      SizedBox(width: ScreenUtil().setWidth(30)),
+                                                                      Text(
+                                                                        'Seleccione una línea',
+                                                                        textAlign: TextAlign.center,
+                                                                        style: GoogleFonts.poppins(
+                                                                          color: Color(0XFF585858),
+                                                                          fontStyle: FontStyle.normal,
+                                                                          fontWeight: FontWeight.w700,
+                                                                          fontSize: ScreenUtil().setSp(18),
+                                                                        ),
+                                                                      ),
+                                                                    ],
+                                                                  ),
+                                                                  Expanded(
+                                                                    child: ListView.builder(
+                                                                      itemCount: snapshot.data.length,
+                                                                      shrinkWrap: true,
+                                                                      itemBuilder: (context, index2) {
+                                                                        return Column(
+                                                                          children: [
+                                                                            InkWell(
+                                                                              onTap: () {
+                                                                                _controller.changeLinea(
+                                                                                    snapshot.data[index2].idLinea, snapshot.data[index2].lineaNombre);
+                                                                                if (_precioController.text.length > 0 &&
+                                                                                    _nombreController.text.length > 0 &&
+                                                                                    _descripcionController.text.length > 0 &&
+                                                                                    _controller.idLinea != '') {
+                                                                                  _controller.changeBoton(true);
+                                                                                } else {
+                                                                                  _controller.changeBoton(false);
+                                                                                }
+                                                                                Navigator.pop(context);
+                                                                              },
+                                                                              child: Row(
+                                                                                children: [
+                                                                                  SizedBox(
+                                                                                    width: ScreenUtil().setWidth(8),
+                                                                                  ),
+                                                                                  Text(
+                                                                                    '${snapshot.data[index2].lineaNombre}',
+                                                                                    style: GoogleFonts.poppins(
+                                                                                      color: Color(0XFF585858),
+                                                                                      fontWeight: FontWeight.w500,
+                                                                                      fontSize: ScreenUtil().setSp(16),
+                                                                                      letterSpacing: ScreenUtil().setSp(0.016),
+                                                                                    ),
+                                                                                  ),
+                                                                                ],
+                                                                              ),
+                                                                            ),
+                                                                            Divider(),
+                                                                          ],
+                                                                        );
+                                                                      },
+                                                                    ),
+                                                                  ),
+                                                                ],
+                                                              ),
+                                                            ),
+                                                          );
+                                                        },
+                                                      ),
+                                                    ),
+                                                  ),
+                                                );
+                                              } else {
+                                                return Container();
+                                              }
+                                            });
                                       },
-                                      child: Text(
-                                        'Cancelar',
-                                        style: GoogleFonts.poppins(
-                                          color: Color(0XFF8A8A8A),
-                                          fontWeight: FontWeight.w500,
-                                          fontSize: ScreenUtil().setSp(16),
-                                        ),
+                                    );
+                                  },
+                                  child: AnimatedBuilder(
+                                      animation: _controller,
+                                      builder: (context, snapshot) {
+                                        return Container(
+                                          height: ScreenUtil().setHeight(48),
+                                          width: double.infinity,
+                                          decoration: BoxDecoration(color: Color(0XFFEDEDED), borderRadius: BorderRadius.circular(15)),
+                                          padding: EdgeInsets.symmetric(horizontal: ScreenUtil().setWidth(10)),
+                                          child: Row(
+                                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              Text(
+                                                _controller.linea,
+                                                style: TextStyle(
+                                                  color: (_controller.idLinea != '') ? Color(0XFF585858) : Color(0XFFBEBEBE),
+                                                  fontWeight: FontWeight.w400,
+                                                  fontSize: ScreenUtil().setSp(16),
+                                                  fontStyle: FontStyle.normal,
+                                                ),
+                                              ),
+                                              Icon(
+                                                Icons.arrow_drop_down,
+                                                size: ScreenUtil().setHeight(20),
+                                                color: Color(0XFF585858),
+                                              ),
+                                            ],
+                                          ),
+                                        );
+                                      }),
+                                ),
+                                SizedBox(height: ScreenUtil().setHeight(8)),
+                                Text(
+                                  'Descripción',
+                                  style: GoogleFonts.poppins(
+                                    color: Color(0XFF585858),
+                                    fontWeight: FontWeight.w500,
+                                    fontSize: ScreenUtil().setSp(16),
+                                  ),
+                                ),
+                                TextField(
+                                  focusNode: _focus3,
+                                  controller: _descripcionController,
+                                  maxLines: null,
+                                  keyboardType: TextInputType.multiline,
+                                  onChanged: (value) {
+                                    if (value.length > 0 &&
+                                        _precioController.text.length > 0 &&
+                                        _nombreController.text.length > 0 &&
+                                        _controller.idLinea != '') {
+                                      _controller.changeBoton(true);
+                                    } else {
+                                      _controller.changeBoton(false);
+                                    }
+                                  },
+                                  decoration: InputDecoration(
+                                    hintText: 'Ingredientes, tiempo de preparación, etc.',
+                                    hintStyle: TextStyle(
+                                      color: Color(0XFFBEBEBE),
+                                      fontWeight: FontWeight.w400,
+                                      fontSize: ScreenUtil().setSp(16),
+                                      fontStyle: FontStyle.normal,
+                                    ),
+                                    filled: true,
+                                    fillColor: Color(0XFFEDEDED),
+                                    contentPadding: EdgeInsets.only(
+                                        left: ScreenUtil().setWidth(10), top: ScreenUtil().setHeight(5), bottom: ScreenUtil().setHeight(1)),
+                                    enabledBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(15),
+                                      borderSide: BorderSide(color: Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
+                                    ),
+                                    focusedBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(15),
+                                      borderSide: BorderSide(color: Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
+                                    ),
+                                    border: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(15),
+                                      borderSide: BorderSide(color: Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
+                                    ),
+                                  ),
+                                  style: TextStyle(
+                                    color: Color(0XFF585858),
+                                    fontWeight: FontWeight.w400,
+                                    fontSize: ScreenUtil().setSp(16),
+                                    fontStyle: FontStyle.normal,
+                                  ),
+                                ),
+                                SizedBox(height: ScreenUtil().setHeight(48)),
+                                InkWell(
+                                  onTap: () async {
+                                    _controller.changeCargando(true);
+                                    _controller.changeText('');
+                                    if (_controller.boton) {
+                                      final _productoLineaApi = ProductoLineaApi();
+                                      ProductoLineaModel producto = ProductoLineaModel();
+                                      producto.idLinea = _controller.idLinea;
+                                      producto.productoNombre = _nombreController.text;
+                                      producto.productoPrecio = _precioController.text;
+                                      producto.productoDescripcion = _descripcionController.text;
+                                      producto.productoEstado = productData.productoEstado;
+                                      producto.idProducto = productData.idProducto;
+
+                                      final res = await _productoLineaApi.editarProducto(producto);
+                                      if (res == 1) {
+                                        final productosLineaBloc = ProviderBloc.productosLinea(context);
+                                        productosLineaBloc.obtenerProductoPorIdProducto(productData.idProducto, _controller.idLinea);
+                                        productosLineaBloc.obtenerProductosPorLinea(_controller.idLinea);
+                                        Navigator.pop(context);
+                                      } else {
+                                        _controller.changeText('Ocurrió un error. inténtelo nuevamente');
+                                      }
+                                    }
+
+                                    _controller.changeCargando(false);
+                                  },
+                                  child: AnimatedBuilder(
+                                      animation: _controller,
+                                      builder: (_, s) {
+                                        return Center(
+                                          child: Container(
+                                            decoration: BoxDecoration(
+                                              borderRadius: BorderRadius.circular(50),
+                                              color: (_controller.boton) ? Color(0XFFFF0036) : Color(0XFFFF0036).withOpacity(0.6),
+                                            ),
+                                            child: Center(
+                                              child: Text(
+                                                'Guardar cambios',
+                                                style: TextStyle(
+                                                  color: Colors.white,
+                                                  fontWeight: FontWeight.w600,
+                                                  fontSize: ScreenUtil().setSp(16),
+                                                  fontStyle: FontStyle.normal,
+                                                  letterSpacing: 1.5,
+                                                ),
+                                              ),
+                                            ),
+                                            height: ScreenUtil().setHeight(44),
+                                            width: ScreenUtil().setWidth(255),
+                                          ),
+                                        );
+                                      }),
+                                ),
+                                SizedBox(height: ScreenUtil().setHeight(8)),
+                                Center(
+                                  child: AnimatedBuilder(
+                                      animation: _controller,
+                                      builder: (_, s) {
+                                        return Text(
+                                          _controller.text,
+                                          style: TextStyle(
+                                            color: Color(0XFFFF0036),
+                                            fontWeight: FontWeight.w600,
+                                            fontSize: ScreenUtil().setSp(16),
+                                            fontStyle: FontStyle.normal,
+                                            letterSpacing: ScreenUtil().setSp(0.016),
+                                          ),
+                                        );
+                                      }),
+                                ),
+                                SizedBox(height: ScreenUtil().setHeight(10)),
+                                Center(
+                                  child: InkWell(
+                                    onTap: () {
+                                      Navigator.pop(context);
+                                    },
+                                    child: Text(
+                                      'Cancelar',
+                                      style: GoogleFonts.poppins(
+                                        color: Color(0XFF8A8A8A),
+                                        fontWeight: FontWeight.w500,
+                                        fontSize: ScreenUtil().setSp(16),
                                       ),
                                     ),
                                   ),
-                                ],
-                              ),
+                                ),
+                              ],
                             ),
                           ),
                         ),
-                      );
-                    }),
-              ),
+                      ),
+                    );
+                  }),
             ),
             AnimatedBuilder(
                 animation: _controller,

@@ -14,7 +14,8 @@ class PedidosAtenderBloc {
   Stream<List<PedidosAtenderModel>> get atenderStream => _atenderController.stream;
 
   void obtenerPedidosAtenderPorEmpresa() async {
-    _atenderController.sink.add(await _pedidosAtenderDatabase.obtenerPedidoAtender(_prefs.idNegocio));
+    _atenderController.sink.add([]);
+    //_atenderController.sink.add(await _pedidosAtenderDatabase.obtenerPedidoAtender(_prefs.idNegocio));
     await _pedidosApi.obtenerPedidosPorAtender();
     _atenderController.sink.add(await _pedidosAtenderDatabase.obtenerPedidoAtender(_prefs.idNegocio));
   }

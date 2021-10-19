@@ -16,7 +16,8 @@ class ProductosLineaBloc {
   Stream<List<ProductoLineaModel>> get productoPedidosStream => _productosPedidosController.stream;
 
   void obtenerProductosPorLinea(String idLinea) async {
-    _productosLineaController.sink.add(await _productoDatabase.obtenerProductosPorIdLinea(idLinea));
+    _productosLineaController.sink.add([]);
+    //_productosLineaController.sink.add(await _productoDatabase.obtenerProductosPorIdLinea(idLinea));
     await _lineaApi.obtenerLineasPorNegocio();
     _productosLineaController.sink.add(await _productoDatabase.obtenerProductosPorIdLinea(idLinea));
   }

@@ -16,6 +16,7 @@ class MesasBloc {
   Stream<List<MesaModel>> get mesaStream => _mesaController.stream;
 
   void obtenerMesasPorNegocio() async {
+    //_mesasController.sink.add([]);
     _mesasController.sink.add(await _mesaDatabase.obtenerMesasPorNegocio(_prefs.idNegocio));
     await _mesaApi.obtenerMesasPorNegocio();
     _mesasController.sink.add(await _mesaDatabase.obtenerMesasPorNegocio(_prefs.idNegocio));
@@ -28,8 +29,8 @@ class MesasBloc {
   }
 
   void actualizarMesas(String idMesa) async {
-    _mesaController.sink.add(await _mesaDatabase.obtenerMesaPorIdMesa(idMesa));
-    _mesasController.sink.add(await _mesaDatabase.obtenerMesasPorNegocio(_prefs.idNegocio));
+    // _mesaController.sink.add(await _mesaDatabase.obtenerMesaPorIdMesa(idMesa));
+    // _mesasController.sink.add(await _mesaDatabase.obtenerMesasPorNegocio(_prefs.idNegocio));
     await _mesaApi.obtenerMesasPorNegocio();
     _mesaController.sink.add(await _mesaDatabase.obtenerMesaPorIdMesa(idMesa));
     _mesasController.sink.add(await _mesaDatabase.obtenerMesasPorNegocio(_prefs.idNegocio));

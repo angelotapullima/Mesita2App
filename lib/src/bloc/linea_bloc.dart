@@ -17,7 +17,8 @@ class LineaBloc {
   Stream<List<LineaModel>> get allLineasStream => _lineasAllController.stream;
 
   void obtenerLineasPorNegocio(String idCategoria) async {
-    _lineasController.sink.add(await _lineaDatabase.obtenerLineasPorNegocio(_prefs.idNegocio, idCategoria));
+    _lineasController.sink.add([]);
+    //_lineasController.sink.add(await _lineaDatabase.obtenerLineasPorNegocio(_prefs.idNegocio, idCategoria));
     await _lineaApi.obtenerLineasPorNegocio();
     _lineasController.sink.add(await _lineaDatabase.obtenerLineasPorNegocio(_prefs.idNegocio, idCategoria));
   }

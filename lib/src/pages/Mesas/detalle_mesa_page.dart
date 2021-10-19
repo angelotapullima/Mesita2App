@@ -15,6 +15,7 @@ import 'package:mesita_aplication_2/src/pages/Mesas/modal_agregar_mesa.dart';
 import 'package:mesita_aplication_2/src/pages/Pedidos/agregar_producto_page.dart';
 import 'package:mesita_aplication_2/src/pages/Pedidos/comanda_mesa_page.dart';
 import 'package:mesita_aplication_2/src/pages/Pedidos/editar_producto_pedido.dart';
+import 'package:mesita_aplication_2/src/pages/Pedidos/modal_pagar_pedido.dart';
 import 'package:mesita_aplication_2/src/utils/constants.dart';
 
 class DetalleMesaPage extends StatefulWidget {
@@ -486,12 +487,17 @@ class _DetalleMesaPageState extends State<DetalleMesaPage> {
                                     ),
                                     _rayas(),
                                     Container(
-                                      margin: EdgeInsets.symmetric(horizontal: ScreenUtil().setWidth(24), vertical: ScreenUtil().setHeight(16)),
+                                      margin: EdgeInsets.only(
+                                        left: ScreenUtil().setWidth(24),
+                                        right: ScreenUtil().setWidth(24),
+                                        bottom: ScreenUtil().setHeight(4),
+                                        top: ScreenUtil().setHeight(16),
+                                      ),
                                       width: double.infinity,
                                       child: MaterialButton(
-                                        color: Color(0XFFFF0036),
-                                        textColor: Colors.white,
-                                        elevation: 10,
+                                        color: Colors.white,
+                                        textColor: Color(0XFF585858),
+                                        elevation: 1,
                                         onPressed: () {
                                           Navigator.push(
                                             context,
@@ -521,13 +527,40 @@ class _DetalleMesaPageState extends State<DetalleMesaPage> {
                                             ),
                                           );
                                         },
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius: BorderRadius.circular(22),
+                                          side: BorderSide(
+                                            color: Color(0XFFFF0036),
+                                          ),
+                                        ),
+                                        child: Text(
+                                          'Agregar pedidos',
+                                          style: GoogleFonts.poppins(
+                                            color: Color(0XFFFF0036),
+                                            fontWeight: FontWeight.w500,
+                                            fontSize: ScreenUtil().setSp(16),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                    Container(
+                                      margin: EdgeInsets.only(
+                                          left: ScreenUtil().setWidth(24), right: ScreenUtil().setWidth(24), bottom: ScreenUtil().setHeight(16)),
+                                      width: double.infinity,
+                                      child: MaterialButton(
+                                        color: Color(0XFFFF0036),
+                                        textColor: Colors.white,
+                                        elevation: 1,
+                                        onPressed: () {
+                                          pagarPedidoModal(context, pedidos[0]);
+                                        },
                                         shape: const RoundedRectangleBorder(
                                           borderRadius: BorderRadius.all(
                                             Radius.circular(20.0),
                                           ),
                                         ),
                                         child: Text(
-                                          'Agregar pedidos',
+                                          'Pagar pedidos',
                                           style: GoogleFonts.poppins(
                                             color: Colors.white,
                                             fontWeight: FontWeight.w500,
@@ -604,7 +637,7 @@ class _DetalleMesaPageState extends State<DetalleMesaPage> {
     return Container(
       height: double.infinity,
       width: double.infinity,
-      color: Color.fromRGBO(0, 0, 0, 0.5),
+      color: Color.fromRGBO(0, 0, 0, 0.2),
       child: Center(
         child: (Platform.isAndroid)
             ? CircularProgressIndicator(
