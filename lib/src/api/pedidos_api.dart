@@ -2,8 +2,10 @@ import 'dart:convert';
 
 import 'package:http/http.dart' as http;
 import 'package:mesita_aplication_2/src/database/pedidos_database.dart';
+import 'package:mesita_aplication_2/src/database/pedidos_por_atender_database.dart';
 import 'package:mesita_aplication_2/src/database/pedidos_temporales_database.dart';
 import 'package:mesita_aplication_2/src/models/agregar_producto_pedido_model.dart';
+import 'package:mesita_aplication_2/src/models/pedidos_atender_model.dart';
 import 'package:mesita_aplication_2/src/models/pedidos_model.dart';
 import 'package:mesita_aplication_2/src/preferences/preferences.dart';
 import 'package:mesita_aplication_2/src/utils/constants.dart';
@@ -147,6 +149,81 @@ class PedidosApi {
       print(decodedData);
       if (decodedData['result'] == 1) {
         await _pedidosDatabase.deleteDetallesPedidoPorId(detail.idDetalle);
+        return true;
+      } else {
+        return false;
+      }
+    } catch (error, stacktrace) {
+      print("Exception occured: $error stackTrace: $stacktrace");
+
+      return false;
+    }
+  }
+
+  Future<bool> obtenerPedidosPorAtender() async {
+    try {
+      final _pedidosAtenderDatabase = PedidosAtenderDatabase();
+
+      final url = Uri.parse('${apiBaseURL}/api/Negocio/pedidos_por_atender');
+
+      final resp = await http.post(
+        url,
+        body: {
+          'tn': '${_prefs.token}',
+          'id_negocio': '${_prefs.idNegocio}',
+          'app': 'true',
+        },
+      );
+
+      final decodedData = json.decode(resp.body);
+
+      if (decodedData['result'].length > 0) {
+        await _pedidosAtenderDatabase.deletePedidoAtender();
+        for (var i = 0; i < decodedData['result'].length; i++) {
+          var detallito = decodedData['result'][i];
+
+          PedidosAtenderModel pedido = PedidosAtenderModel();
+
+          pedido.idPedidoDetalle = detallito["id_pedido_detalle"];
+          pedido.idNegocio = detallito["id_negocio"];
+          pedido.idMesa = detallito["id_mesa"];
+          pedido.idProducto = detallito["id_producto"];
+          pedido.nombreProducto = detallito["producto_nombre"];
+          pedido.mesaNombre = detallito["mesa_nombre"];
+          pedido.fotoProducto = detallito["producto_foto"];
+          pedido.cantidad = detallito["pedido_detalle_cantidad"];
+          pedido.fecha = detallito["pedido_detalle_datetime"];
+          pedido.estado = detallito["pedido_detalle_estado"];
+
+          await _pedidosAtenderDatabase.insertarPedidoAtender(pedido);
+        }
+
+        return true;
+      } else {
+        return false;
+      }
+    } catch (e) {
+      return false;
+    }
+  }
+
+  Future<bool> atenderPedido(PedidosAtenderModel pedido) async {
+    try {
+      final url = Uri.parse('${apiBaseURL}/api/Negocio/atender_pedido');
+
+      final resp = await http.post(
+        url,
+        body: {
+          'tn': '${_prefs.token}',
+          'id_pedido_detalle': '${pedido.idPedidoDetalle}',
+          'app': 'true',
+        },
+      );
+
+      final decodedData = json.decode(resp.body);
+
+      print(decodedData);
+      if (decodedData['result'] == 1) {
         return true;
       } else {
         return false;

@@ -275,22 +275,64 @@ class _LoginState extends State<Login> {
           SizedBox(
             height: ScreenUtil().setHeight(30),
           ),
+          // SizedBox(
+          //   height: ScreenUtil().setHeight(50),
+          //   child: TextField(
+          //     controller: _passwdController,
+          //     cursorColor: Colors.transparent,
+          //     keyboardType: TextInputType.text,
+          //     maxLines: 1,
+          //     decoration: InputDecoration(
+          //         contentPadding: EdgeInsets.symmetric(
+          //           vertical: ScreenUtil().setHeight(5),
+          //           horizontal: ScreenUtil().setWidth(10),
+          //         ),
+          //         hintStyle: const TextStyle(
+          //           color: Color(0xffa8a7a7),
+          //         ),
+          //         hintText: 'Contraseña'),
+          //     enableInteractiveSelection: true,
+          //   ),
+          // ),
           SizedBox(
             height: ScreenUtil().setHeight(50),
             child: TextField(
+              obscureText: _passwordVisible,
               controller: _passwdController,
               cursorColor: Colors.transparent,
               keyboardType: TextInputType.text,
               maxLines: 1,
               decoration: InputDecoration(
-                  contentPadding: EdgeInsets.symmetric(
-                    vertical: ScreenUtil().setHeight(5),
-                    horizontal: ScreenUtil().setWidth(10),
-                  ),
-                  hintStyle: const TextStyle(
-                    color: Color(0xffa8a7a7),
-                  ),
-                  hintText: 'Contraseña'),
+                contentPadding: EdgeInsets.symmetric(
+                  vertical: ScreenUtil().setHeight(15),
+                  horizontal: ScreenUtil().setWidth(10),
+                ),
+                hintStyle: const TextStyle(
+                  color: Color(0xffa8a7a7),
+                ),
+                hintText: 'Contraseña',
+                suffixIcon: IconButton(
+                  padding: EdgeInsets.all(0),
+                  onPressed: () {
+                    setState(() {
+                      if (_passwordVisible) {
+                        _passwordVisible = false;
+                      } else {
+                        _passwordVisible = true;
+                      }
+                    });
+                  },
+                  icon: _passwordVisible
+                      ? Icon(
+                          Icons.visibility,
+                          color: Color(0xffa8a7a7),
+                        )
+                      : Icon(
+                          Icons.visibility_off,
+                          color: Color(0xffa8a7a7),
+                        ),
+                ),
+              ),
               enableInteractiveSelection: true,
             ),
           ),

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:mesita_aplication_2/src/bloc/comanda_bloc.dart';
 import 'package:mesita_aplication_2/src/bloc/linea_bloc.dart';
 import 'package:mesita_aplication_2/src/bloc/mesa_bloc.dart';
+import 'package:mesita_aplication_2/src/bloc/pedidos_atender_bloc.dart';
 import 'package:mesita_aplication_2/src/bloc/pedidos_bloc.dart';
 import 'package:mesita_aplication_2/src/bloc/productos_linea_bloc.dart';
 
@@ -13,6 +14,7 @@ class ProviderBloc extends InheritedWidget {
   final productosLineaBloc = ProductosLineaBloc();
   final pedidosBloc = PedidosBloc();
   final comandaBloc = ComandaBloc();
+  final atenderBloc = PedidosAtenderBloc();
 
   factory ProviderBloc({Key key, Widget child}) {
     if (_instancia == null) {
@@ -45,5 +47,9 @@ class ProviderBloc extends InheritedWidget {
 
   static ComandaBloc comanda(BuildContext context) {
     return (context.dependOnInheritedWidgetOfExactType<ProviderBloc>()).comandaBloc;
+  }
+
+  static PedidosAtenderBloc atender(BuildContext context) {
+    return (context.dependOnInheritedWidgetOfExactType<ProviderBloc>()).atenderBloc;
   }
 }

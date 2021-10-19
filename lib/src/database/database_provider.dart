@@ -96,6 +96,19 @@ class DatabaseProvider {
           ' estado TEXT,'
           ' llevar TEXT'
           ')');
+
+      await db.execute(' CREATE TABLE PedidosPorAtender('
+          ' idPedidoDetalle TEXT PRIMARY KEY,'
+          ' idNegocio TEXT,'
+          ' idMesa TEXT,'
+          ' idProducto TEXT,'
+          ' nombreProducto TEXT,'
+          ' mesaNombre TEXT,'
+          ' fotoProducto TEXT,'
+          ' cantidad TEXT,'
+          ' fecha TEXT,'
+          ' estado TEXT'
+          ')');
     });
   }
 }
