@@ -109,6 +109,25 @@ class DatabaseProvider {
           ' fecha TEXT,'
           ' estado TEXT'
           ')');
+
+      await db.execute(' CREATE TABLE Ventas('
+          ' idVenta TEXT PRIMARY KEY,'
+          ' idNegocio TEXT,'
+          ' idMesa TEXT,'
+          ' idPedido TEXT,'
+          ' envio TEXT,'
+          ' direccion TEXT,'
+          ' tipoDoc TEXT,'
+          ' serie TEXT,'
+          ' correlativo TEXT,'
+          ' igv TEXT,'
+          ' incluyeIGV TEXT,'
+          ' descuento TEXT,'
+          ' total TEXT,'
+          ' fecha TEXT,'
+          ' hora TEXT,'
+          ' estado TEXT'
+          ')');
     });
   }
 }

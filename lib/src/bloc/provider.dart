@@ -5,6 +5,7 @@ import 'package:mesita_aplication_2/src/bloc/mesa_bloc.dart';
 import 'package:mesita_aplication_2/src/bloc/pedidos_atender_bloc.dart';
 import 'package:mesita_aplication_2/src/bloc/pedidos_bloc.dart';
 import 'package:mesita_aplication_2/src/bloc/productos_linea_bloc.dart';
+import 'package:mesita_aplication_2/src/bloc/ventas_bloc.dart';
 
 class ProviderBloc extends InheritedWidget {
   static ProviderBloc _instancia;
@@ -15,6 +16,7 @@ class ProviderBloc extends InheritedWidget {
   final pedidosBloc = PedidosBloc();
   final comandaBloc = ComandaBloc();
   final atenderBloc = PedidosAtenderBloc();
+  final ventasBloc = VentasBloc();
 
   factory ProviderBloc({Key key, Widget child}) {
     if (_instancia == null) {
@@ -51,5 +53,9 @@ class ProviderBloc extends InheritedWidget {
 
   static PedidosAtenderBloc atender(BuildContext context) {
     return (context.dependOnInheritedWidgetOfExactType<ProviderBloc>()).atenderBloc;
+  }
+
+  static VentasBloc ventas(BuildContext context) {
+    return (context.dependOnInheritedWidgetOfExactType<ProviderBloc>()).ventasBloc;
   }
 }

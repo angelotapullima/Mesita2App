@@ -11,9 +11,12 @@ class ProductosLineaBloc {
   final _productoController = BehaviorSubject<List<ProductoLineaModel>>();
   final _productosPedidosController = BehaviorSubject<List<ProductoLineaModel>>();
 
+  final _productosBusquedaController = BehaviorSubject<List<ProductoLineaModel>>();
+
   Stream<List<ProductoLineaModel>> get productosLineaStream => _productosLineaController.stream;
   Stream<List<ProductoLineaModel>> get productoStream => _productoController.stream;
   Stream<List<ProductoLineaModel>> get productoPedidosStream => _productosPedidosController.stream;
+  Stream<List<ProductoLineaModel>> get productoBusquedaStream => _productosBusquedaController.stream;
 
   void obtenerProductosPorLinea(String idLinea) async {
     _productosLineaController.sink.add([]);
@@ -32,9 +35,14 @@ class ProductosLineaBloc {
     _productosPedidosController.sink.add(await _productoDatabase.obtenerProductosPorIdLinea(idLinea));
   }
 
+  void obtenerProductosPorQuery(String query) async {
+    _productosBusquedaController.sink.add(await _productoDatabase.buscarProducto(query));
+  }
+
   dispose() {
     _productosLineaController?.close();
     _productoController?.close();
     _productosPedidosController?.close();
+    _productosBusquedaController?.close();
   }
 }
