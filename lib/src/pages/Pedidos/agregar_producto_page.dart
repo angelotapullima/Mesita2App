@@ -96,7 +96,11 @@ class _AgregarProductoPageState extends State<AgregarProductoPage> {
                                     context,
                                     PageRouteBuilder(
                                       pageBuilder: (context, animation, secondaryAnimation) {
-                                        return BuscarPage();
+                                        return BuscarPage(
+                                          idEnviar: widget.idEnviar,
+                                          esComanda: widget.esComanda,
+                                          mesa: widget.mesa,
+                                        );
                                       },
                                       transitionsBuilder: (context, animation, secondaryAnimation, child) {
                                         var begin = Offset(0.0, 1.0);

@@ -162,7 +162,11 @@ class _DetalleMesaPageState extends State<DetalleMesaPage> {
                                           context,
                                           PageRouteBuilder(
                                             pageBuilder: (context, animation, secondaryAnimation) {
-                                              return BuscarPage();
+                                              return BuscarPage(
+                                                idEnviar: idEnviar,
+                                                esComanda: false,
+                                                mesa: widget.mesa,
+                                              );
                                             },
                                             transitionsBuilder: (context, animation, secondaryAnimation, child) {
                                               var begin = Offset(0.0, 1.0);
