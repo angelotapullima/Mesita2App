@@ -70,8 +70,8 @@ class _DetailProductState extends State<DetailProduct> {
 
       if (res == 1) {
         final productoBloc = ProviderBloc.productosLinea(context);
-        productoBloc.obtenerProductoPorIdProducto(idProducto, idLinea);
-        productoBloc.obtenerProductosPorLinea(idLinea);
+        productoBloc.updateProductoPorIdProducto(idProducto, idLinea);
+        productoBloc.updateProductosPorLinea(idLinea);
       }
 
       //_controller.changeImage(croppedImage);
@@ -524,8 +524,8 @@ class _DetailProductState extends State<DetailProduct> {
                                 final res = await _productoApi.editarProducto(producto);
 
                                 if (res == 1) {
-                                  productoBloc.obtenerProductoPorIdProducto(prod[0].idProducto, prod[0].idLinea);
-                                  productoBloc.obtenerProductosPorLinea(prod[0].idLinea);
+                                  productoBloc.updateProductoPorIdProducto(prod[0].idProducto, prod[0].idLinea);
+                                  productoBloc.updateProductosPorLinea(prod[0].idLinea);
                                 }
 
                                 _controller.changeBoton(false);

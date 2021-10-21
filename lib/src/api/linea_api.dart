@@ -76,7 +76,7 @@ class LineaApi {
       if (decodedData["result"] == 1) {
         return 1;
       } else {
-        return 2;
+        return decodedData["result"];
       }
     } catch (e) {
       return 2;

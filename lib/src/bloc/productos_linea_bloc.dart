@@ -20,12 +20,20 @@ class ProductosLineaBloc {
 
   void obtenerProductosPorLinea(String idLinea) async {
     _productosLineaController.sink.add([]);
-    //_productosLineaController.sink.add(await _productoDatabase.obtenerProductosPorIdLinea(idLinea));
+    _productosLineaController.sink.add(await _productoDatabase.obtenerProductosPorIdLinea(idLinea));
+  }
+
+  void updateProductosPorLinea(String idLinea) async {
+    _productosLineaController.sink.add([]);
     await _lineaApi.obtenerLineasPorNegocio();
     _productosLineaController.sink.add(await _productoDatabase.obtenerProductosPorIdLinea(idLinea));
   }
 
   void obtenerProductoPorIdProducto(String idProducto, String idLinea) async {
+    _productoController.sink.add(await _productoDatabase.obtenerProductosPorIdProducto(idProducto));
+  }
+
+  void updateProductoPorIdProducto(String idProducto, String idLinea) async {
     _productoController.sink.add(await _productoDatabase.obtenerProductosPorIdProducto(idProducto));
     await _lineaApi.obtenerLineasPorNegocio();
     _productoController.sink.add(await _productoDatabase.obtenerProductosPorIdProducto(idProducto));

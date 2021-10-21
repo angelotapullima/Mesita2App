@@ -47,7 +47,7 @@ class _DeleteProductState extends State<DeleteProduct> {
                     final res = await _productoApi.eliminarProducto(widget.productData.idProducto);
                     if (res == 1) {
                       final productosLineaBloc = ProviderBloc.productosLinea(context);
-                      productosLineaBloc.obtenerProductosPorLinea(widget.productData.idLinea);
+                      productosLineaBloc.updateProductosPorLinea(widget.productData.idLinea);
                       Navigator.pop(context);
                       Navigator.pop(context);
                     } else {

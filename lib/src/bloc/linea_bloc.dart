@@ -18,7 +18,11 @@ class LineaBloc {
 
   void obtenerLineasPorNegocio(String idCategoria) async {
     _lineasController.sink.add([]);
-    //_lineasController.sink.add(await _lineaDatabase.obtenerLineasPorNegocio(_prefs.idNegocio, idCategoria));
+    _lineasController.sink.add(await _lineaDatabase.obtenerLineasPorNegocio(_prefs.idNegocio, idCategoria));
+  }
+
+  void updateLineasPorNegocio(String idCategoria) async {
+    _lineasController.sink.add([]);
     await _lineaApi.obtenerLineasPorNegocio();
     _lineasController.sink.add(await _lineaDatabase.obtenerLineasPorNegocio(_prefs.idNegocio, idCategoria));
   }

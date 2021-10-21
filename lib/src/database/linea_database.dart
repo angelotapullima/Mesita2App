@@ -19,7 +19,7 @@ class LineaDatabase {
 
   Future<List<LineaModel>> obtenerLineasPorNegocio(String idNegocio, String idCategoria) async {
     final db = await dbprovider.database;
-    final res = await db.rawQuery("SELECT * FROM Lineas WHERE idNegocio='$idNegocio' AND idCategoria='$idCategoria'");
+    final res = await db.rawQuery("SELECT * FROM Lineas WHERE idNegocio='$idNegocio' AND idCategoria='$idCategoria' AND lineaEstado!='3'");
 
     List<LineaModel> list = res.isNotEmpty ? res.map((c) => LineaModel.fromJson(c)).toList() : [];
     return list;
@@ -27,7 +27,7 @@ class LineaDatabase {
 
   Future<List<LineaModel>> obtenerLineasPorIdLinea(String idLinea) async {
     final db = await dbprovider.database;
-    final res = await db.rawQuery("SELECT * FROM Lineas WHERE idLinea='$idLinea'");
+    final res = await db.rawQuery("SELECT * FROM Lineas WHERE idLinea='$idLinea'  AND lineaEstado!='3'");
 
     List<LineaModel> list = res.isNotEmpty ? res.map((c) => LineaModel.fromJson(c)).toList() : [];
     return list;
@@ -35,7 +35,7 @@ class LineaDatabase {
 
   Future<List<LineaModel>> obtenerAllLines(String idNegocio) async {
     final db = await dbprovider.database;
-    final res = await db.rawQuery("SELECT * FROM Lineas WHERE idNegocio='$idNegocio'");
+    final res = await db.rawQuery("SELECT * FROM Lineas WHERE idNegocio='$idNegocio'  AND lineaEstado!='3'");
 
     List<LineaModel> list = res.isNotEmpty ? res.map((c) => LineaModel.fromJson(c)).toList() : [];
     return list;

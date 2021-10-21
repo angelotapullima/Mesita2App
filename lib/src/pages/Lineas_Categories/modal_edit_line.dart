@@ -161,7 +161,7 @@ void editLineModal(BuildContext context, LineaModel lineaData) {
                                       final res = await _lineaApi.editarLinea(lineaData.idLinea, _nombreLineaController.text, lineaData.idCategoria);
                                       if (res == 1) {
                                         final lineasBloc = ProviderBloc.lineas(context);
-                                        lineasBloc.obtenerLineasPorNegocio(lineaData.idCategoria);
+                                        lineasBloc.updateLineasPorNegocio(lineaData.idCategoria);
                                         Navigator.pop(context);
                                       } else {
                                         _controller.changeText('Ocurrió un error, inténtelo nuevamente');

@@ -682,7 +682,7 @@ void _newProductModal(BuildContext context, String idCategoria, String nameCateg
                                       final res = await _productoLineaApi.guardarProducto(producto);
                                       if (res == 1) {
                                         final productosLineaBloc = ProviderBloc.productosLinea(context);
-                                        productosLineaBloc.obtenerProductosPorLinea(_controller.idLinea);
+                                        productosLineaBloc.updateProductosPorLinea(_controller.idLinea);
                                         Navigator.pop(context);
                                       } else {
                                         _controller.changeText('Ocurrió un error. inténtelo nuevamente');
@@ -901,8 +901,10 @@ void _addCategoryModal(BuildContext context, String idCategoria) {
                                       final res = await _lineaApi.agregarNuevaLinea(_nombreLineaController.text, idCategoria);
                                       if (res == 1) {
                                         final lineasBloc = ProviderBloc.lineas(context);
-                                        lineasBloc.obtenerLineasPorNegocio(idCategoria);
+                                        lineasBloc.updateLineasPorNegocio(idCategoria);
                                         Navigator.pop(context);
+                                      } else if (res == 3) {
+                                        _controller.changeText('Ya existe una categoría con ese nombre');
                                       } else {
                                         _controller.changeText('Ocurrió un error, inténtelo nuevamente');
                                       }
@@ -1500,8 +1502,8 @@ void editProductModal(BuildContext context, ProductoLineaModel productData, Stri
                                       final res = await _productoLineaApi.editarProducto(producto);
                                       if (res == 1) {
                                         final productosLineaBloc = ProviderBloc.productosLinea(context);
-                                        productosLineaBloc.obtenerProductoPorIdProducto(productData.idProducto, _controller.idLinea);
-                                        productosLineaBloc.obtenerProductosPorLinea(_controller.idLinea);
+                                        productosLineaBloc.updateProductoPorIdProducto(productData.idProducto, _controller.idLinea);
+                                        productosLineaBloc.updateProductosPorLinea(_controller.idLinea);
                                         Navigator.pop(context);
                                       } else {
                                         _controller.changeText('Ocurrió un error. inténtelo nuevamente');
