@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mesita_aplication_2/src/bloc/provider.dart';
@@ -38,6 +39,20 @@ class MyApp extends StatelessWidget {
               ),
               child: child,
             );
+          },
+          localizationsDelegates: [
+            GlobalMaterialLocalizations.delegate,
+            GlobalWidgetsLocalizations.delegate,
+            GlobalCupertinoLocalizations.delegate,
+          ],
+          supportedLocales: [
+            const Locale('es'),
+            const Locale('es', 'ES'), // Spanish, no country code
+            //const Locale('en', 'EN'), // English, no country code
+          ],
+          localeResolutionCallback: (Locale locale, Iterable<Locale> supportedLocales) {
+            //print("change language");
+            return locale;
           },
           initialRoute: 'splash',
           routes: {

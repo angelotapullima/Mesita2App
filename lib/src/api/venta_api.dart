@@ -29,7 +29,6 @@ class VentaApi {
       );
 
       final decodedData = json.decode(resp.body);
-      print(decodedData);
 
       if (decodedData['result'] == 1) {
         return true;
@@ -57,7 +56,6 @@ class VentaApi {
       );
 
       final decodedData = json.decode(resp.body);
-      print(decodedData);
       if (decodedData["result"].length > 0) {
         for (var i = 0; i < decodedData["result"].length; i++) {
           var data = decodedData["result"][i];

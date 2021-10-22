@@ -128,6 +128,30 @@ class DatabaseProvider {
           ' hora TEXT,'
           ' estado TEXT'
           ')');
+
+      await db.execute(' CREATE TABLE ReportesLineas('
+          ' idLinea TEXT PRIMARY KEY,'
+          ' idNegocio TEXT,'
+          ' idCategoria TEXT,'
+          ' nombre TEXT,'
+          ' estado TEXT,'
+          ' cantidad TEXT,'
+          ' suma TEXT'
+          ')');
+
+      await db.execute(' CREATE TABLE ReportesProductos('
+          ' idProducto TEXT PRIMARY KEY,'
+          ' idNegocio TEXT,'
+          ' estado TEXT,'
+          ' cantidad TEXT,'
+          ' suma TEXT'
+          ')');
+
+      await db.execute(' CREATE TABLE ReporteGeneral('
+          ' id TEXT PRIMARY KEY,'
+          ' cantidad TEXT,'
+          ' sumaTotal TEXT'
+          ')');
     });
   }
 }
