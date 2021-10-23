@@ -1,7 +1,9 @@
 import 'package:mesita_aplication_2/src/database/reporte_general_database.dart';
 import 'package:mesita_aplication_2/src/database/reporte_linea_database.dart';
+import 'package:mesita_aplication_2/src/database/reporte_producto_database.dart';
 import 'package:mesita_aplication_2/src/models/reporte_general_model.dart';
 import 'package:mesita_aplication_2/src/models/reporte_linea_model.dart';
+import 'package:mesita_aplication_2/src/models/reporte_producto_model.dart';
 import 'package:mesita_aplication_2/src/preferences/preferences.dart';
 
 import 'dart:convert';
@@ -13,6 +15,7 @@ class ReportesApi {
   final _prefs = Preferences();
   final _reporteGeneralDB = ReporteGeneralDatabase();
   final _reporteLineaDB = ReporteLineaDatabase();
+  final _reporteProductoDB = ReporteProductoDatabase();
 
   Future<bool> obtenerReportesLinea(String fechaI, String fechaF, int idItem) async {
     try {
@@ -58,6 +61,47 @@ class ReportesApi {
       }
 
       return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  Future<bool> obtenerReportesProductos(String fechaI, String fechaF) async {
+    try {
+      final url = Uri.parse('${apiBaseURL}/api/Negocio/productos_mas_vendidos');
+
+      final resp = await http.post(
+        url,
+        body: {
+          'tn': '${_prefs.token}',
+          'app': 'true',
+          'id_negocio': '${_prefs.idNegocio}',
+          'fecha_i': '$fechaI',
+          'fecha_f': '$fechaF',
+        },
+      );
+
+      final decodedData = json.decode(resp.body);
+      print(decodedData);
+
+      if (decodedData["result"].length > 0) {
+        await _reporteProductoDB.deleteReportProduct();
+        for (var i = 0; i < decodedData["result"].length; i++) {
+          var producto = decodedData["result"][i];
+          ReporteProductoModel prodR = ReporteProductoModel();
+
+          prodR.idProducto = producto["id_producto"];
+          prodR.idNegocio = '${_prefs.idNegocio}';
+          prodR.estado = '1';
+          prodR.suma = producto["suma"];
+          prodR.cantidad = producto["cantidad"];
+
+          await _reporteProductoDB.insertarReportProducto(prodR);
+        }
+        return true;
+      } else {
+        return false;
+      }
     } catch (e) {
       return false;
     }

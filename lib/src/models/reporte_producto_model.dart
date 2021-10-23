@@ -4,6 +4,8 @@ class ReporteProductoModel {
   String estado;
   String cantidad;
   String suma;
+  String nombreProducto;
+  String fotoProducto;
 
   ReporteProductoModel({
     this.idProducto,
@@ -11,6 +13,8 @@ class ReporteProductoModel {
     this.estado,
     this.cantidad,
     this.suma,
+    this.nombreProducto,
+    this.fotoProducto,
   });
 
   factory ReporteProductoModel.fromJson(Map<String, dynamic> json) => ReporteProductoModel(
