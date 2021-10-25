@@ -19,12 +19,12 @@ class ProductosLineaBloc {
   Stream<List<ProductoLineaModel>> get productoBusquedaStream => _productosBusquedaController.stream;
 
   void obtenerProductosPorLinea(String idLinea) async {
-    _productosLineaController.sink.add([]);
+    //_productosLineaController.sink.add([]);
     _productosLineaController.sink.add(await _productoDatabase.obtenerProductosPorIdLinea(idLinea));
   }
 
   void updateProductosPorLinea(String idLinea) async {
-    _productosLineaController.sink.add([]);
+    //_productosLineaController.sink.add([]);
     await _lineaApi.obtenerLineasPorNegocio();
     _productosLineaController.sink.add(await _productoDatabase.obtenerProductosPorIdLinea(idLinea));
   }

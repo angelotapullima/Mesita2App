@@ -17,12 +17,12 @@ class LineaBloc {
   Stream<List<LineaModel>> get allLineasStream => _lineasAllController.stream;
 
   void obtenerLineasPorNegocio(String idCategoria) async {
-    _lineasController.sink.add([]);
+    //_lineasController.sink.add([]);
     _lineasController.sink.add(await _lineaDatabase.obtenerLineasPorNegocio(_prefs.idNegocio, idCategoria));
   }
 
   void updateLineasPorNegocio(String idCategoria) async {
-    _lineasController.sink.add([]);
+    //_lineasController.sink.add([]);
     await _lineaApi.obtenerLineasPorNegocio();
     _lineasController.sink.add(await _lineaDatabase.obtenerLineasPorNegocio(_prefs.idNegocio, idCategoria));
   }

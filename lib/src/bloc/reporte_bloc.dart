@@ -31,7 +31,7 @@ class ReporteBloc {
   }
 
   void obtenerReporteLinea() async {
-    _reportesLineaController.sink.add([]);
+    //_reportesLineaController.sink.add([]);
     _reportesLineaController.sink.add(await _reporteLineaDB.obtenerReportLinea(_prefs.idNegocio));
   }
 
