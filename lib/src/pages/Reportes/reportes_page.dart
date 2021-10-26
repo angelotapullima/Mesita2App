@@ -130,6 +130,7 @@ class _ReportesPageState extends State<ReportesPage> {
                               reporteBloc.obtenerReporteProductos(fechaI.text, fechaF.text);
                               _controller.changePage(PageMostrar.productos);
                             } else if (itemsList[index].id == 4) {
+                              reporteBloc.obtenerReporteUtilidadesLineas(fechaI.text, fechaF.text);
                               _controller.changePage(PageMostrar.utilidades);
                             }
                           },

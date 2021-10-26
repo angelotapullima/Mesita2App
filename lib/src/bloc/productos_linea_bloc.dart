@@ -24,7 +24,7 @@ class ProductosLineaBloc {
   }
 
   void updateProductosPorLinea(String idLinea) async {
-    //_productosLineaController.sink.add([]);
+    _productosLineaController.sink.add(null);
     await _lineaApi.obtenerLineasPorNegocio();
     _productosLineaController.sink.add(await _productoDatabase.obtenerProductosPorIdLinea(idLinea));
   }

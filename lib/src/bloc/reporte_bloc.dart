@@ -3,9 +3,11 @@ import 'package:mesita_aplication_2/src/database/productos_linea_database.dart';
 import 'package:mesita_aplication_2/src/database/reporte_general_database.dart';
 import 'package:mesita_aplication_2/src/database/reporte_linea_database.dart';
 import 'package:mesita_aplication_2/src/database/reporte_producto_database.dart';
+import 'package:mesita_aplication_2/src/database/reporte_utilidades_linea_database.dart';
 import 'package:mesita_aplication_2/src/models/reporte_general_model.dart';
 import 'package:mesita_aplication_2/src/models/reporte_linea_model.dart';
 import 'package:mesita_aplication_2/src/models/reporte_producto_model.dart';
+import 'package:mesita_aplication_2/src/models/reporte_utilidades_linea_model.dart';
 import 'package:mesita_aplication_2/src/preferences/preferences.dart';
 import 'package:rxdart/rxdart.dart';
 
@@ -15,17 +17,21 @@ class ReporteBloc {
   final _reportGDB = ReporteGeneralDatabase();
   final _reporteLineaDB = ReporteLineaDatabase();
   final _reporteProductoDB = ReporteProductoDatabase();
+  final _reporteUtilidadesLineaDB = ReporteUtilidadesLineaDatabase();
 
   final _reporteGeneralController = BehaviorSubject<List<ReporteGeneralModel>>();
   final _reportesLineaController = BehaviorSubject<List<ReporteLineaModel>>();
+  final _reportesUtilidadesLineaController = BehaviorSubject<List<ReporteUtilidadesLineaModel>>();
   final _reporteProductosController = BehaviorSubject<List<ReporteProductoModel>>();
 
   Stream<List<ReporteGeneralModel>> get reporteGeneralStream => _reporteGeneralController.stream;
   Stream<List<ReporteLineaModel>> get reporteLineaStream => _reportesLineaController.stream;
+  Stream<List<ReporteUtilidadesLineaModel>> get reporteUtilidadesLineaStream => _reportesUtilidadesLineaController.stream;
   Stream<List<ReporteProductoModel>> get reporteProductoStream => _reporteProductosController.stream;
 
   void obtenerReporteGeneralPorIdItem(String fechaI, String fechaF, int idItem) async {
-    _reporteGeneralController.sink.add(await _reportGDB.obtenerReporteGeneralPorId(idItem.toString()));
+    _reporteGeneralController.sink.add(null);
+    //_reporteGeneralController.sink.add(await _reportGDB.obtenerReporteGeneralPorId(idItem.toString()));
     await _reportesApi.obtenerReportesLinea(fechaI, fechaF, idItem);
     _reporteGeneralController.sink.add(await _reportGDB.obtenerReporteGeneralPorId(idItem.toString()));
   }
@@ -40,9 +46,15 @@ class ReporteBloc {
   }
 
   void obtenerReporteProductos(String fechaI, String fechaF) async {
-    _reporteProductosController.sink.add([]);
+    _reporteProductosController.sink.add(null);
     await _reportesApi.obtenerReportesProductos(fechaI, fechaF);
     _reporteProductosController.sink.add(await obtenerReporteProducto());
+  }
+
+  void obtenerReporteUtilidadesLineas(String fechaI, String fechaF) async {
+    _reportesUtilidadesLineaController.sink.add(null);
+    await _reportesApi.obtenerReportesUtilidadesLinea(fechaI, fechaF);
+    _reportesUtilidadesLineaController.sink.add(await _reporteUtilidadesLineaDB.obtenerReportUtilidadLinea(_prefs.idNegocio));
   }
 
   Future<List<ReporteProductoModel>> obtenerReporteProducto() async {
@@ -77,5 +89,7 @@ class ReporteBloc {
   dispose() {
     _reporteGeneralController?.close();
     _reportesLineaController?.close();
+    _reporteProductosController?.close();
+    _reportesUtilidadesLineaController?.close();
   }
 }

@@ -22,7 +22,7 @@ class LineaBloc {
   }
 
   void updateLineasPorNegocio(String idCategoria) async {
-    //_lineasController.sink.add([]);
+    _lineasController.sink.add(null);
     await _lineaApi.obtenerLineasPorNegocio();
     _lineasController.sink.add(await _lineaDatabase.obtenerLineasPorNegocio(_prefs.idNegocio, idCategoria));
   }

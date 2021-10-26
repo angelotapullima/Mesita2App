@@ -30,8 +30,14 @@ class VentasBloc {
     }
 
     _ventasController.sink.add(await _ventaDatabase.obtenerVentasPorFecha(_prefs.idNegocio, fecha1, fecha2));
-    _ventaApi.listarVentas(fecha1, fecha2);
+    await _ventaApi.listarVentas(fecha1, fecha2);
     _ventasController.sink.add(await _ventaDatabase.obtenerVentasPorFecha(_prefs.idNegocio, fecha1, fecha2));
+  }
+
+  void obtenerVentasPorFecha(String fechaI, String fechaF) async {
+    _ventasController.sink.add(null);
+    await _ventaApi.listarVentas(fechaI, fechaI);
+    _ventasController.sink.add(await _ventaDatabase.obtenerVentasPorFecha(_prefs.idNegocio, fechaI, fechaF));
   }
 
   dispose() {

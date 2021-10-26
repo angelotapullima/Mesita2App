@@ -153,6 +153,16 @@ class DatabaseProvider {
           ' cantidad TEXT,'
           ' sumaTotal TEXT'
           ')');
+
+      await db.execute(' CREATE TABLE ReportesUtilidadesLineas('
+          ' idLinea TEXT PRIMARY KEY,'
+          ' idNegocio TEXT,'
+          ' idCategoria TEXT,'
+          ' nombre TEXT,'
+          ' estado TEXT,'
+          ' cantidad TEXT,'
+          ' suma TEXT'
+          ')');
     });
   }
 }
