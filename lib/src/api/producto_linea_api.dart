@@ -160,6 +160,7 @@ class ProductoLineaApi {
         'producto_precio': '${producto.productoPrecio}',
         'producto_estado': '${producto.productoEstado}',
         'producto_cocina': '${producto.productoCocina}',
+        'producto_costo': '${producto.productoCosto}',
         'app': 'true',
       });
 
@@ -188,6 +189,7 @@ class ProductoLineaApi {
         'producto_descripcion': '${producto.productoDescripcion}',
         'producto_precio': '${producto.productoPrecio}',
         'producto_estado': '${producto.productoEstado}',
+        'producto_costo': '${producto.productoCosto}',
         'app': 'true',
       });
 

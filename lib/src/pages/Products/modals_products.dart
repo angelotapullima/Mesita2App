@@ -224,12 +224,14 @@ void _newProductModal(BuildContext context, String idCategoria, String nameCateg
   final _controller = ChangeController();
 
   TextEditingController _precioController = new TextEditingController();
+  TextEditingController _costoController = new TextEditingController();
   TextEditingController _nombreController = new TextEditingController();
   TextEditingController _descripcionController = new TextEditingController();
 
   FocusNode _focus1 = FocusNode();
   FocusNode _focus2 = FocusNode();
   FocusNode _focus3 = FocusNode();
+  FocusNode _focus4 = FocusNode();
 
   showModalBottomSheet(
       context: context,
@@ -258,6 +260,7 @@ void _newProductModal(BuildContext context, String idCategoria, String nameCateg
                           KeyboardActionsItem(focusNode: _focus1),
                           KeyboardActionsItem(focusNode: _focus2),
                           KeyboardActionsItem(focusNode: _focus3),
+                          KeyboardActionsItem(focusNode: _focus4),
                         ]),
                         child: Padding(
                           padding: EdgeInsets.symmetric(vertical: ScreenUtil().setHeight(10), horizontal: ScreenUtil().setWidth(24)),
@@ -390,6 +393,61 @@ void _newProductModal(BuildContext context, String idCategoria, String nameCateg
                                               fontStyle: FontStyle.normal,
                                             ),
                                           ),
+                                          Text(
+                                            'Costo',
+                                            style: GoogleFonts.poppins(
+                                              color: Color(0XFF585858),
+                                              fontWeight: FontWeight.w500,
+                                              fontSize: ScreenUtil().setSp(16),
+                                            ),
+                                          ),
+                                          TextField(
+                                            focusNode: _focus2,
+                                            controller: _costoController,
+                                            maxLines: 1,
+                                            onChanged: (value) {
+                                              if (value.length > 0 &&
+                                                  _nombreController.text.length > 0 &&
+                                                  _descripcionController.text.length > 0 &&
+                                                  _controller.idLinea != '') {
+                                                _controller.changeBoton(true);
+                                              } else {
+                                                _controller.changeBoton(false);
+                                              }
+                                            },
+                                            keyboardType: TextInputType.number,
+                                            decoration: InputDecoration(
+                                              hintText: 'S/00.00',
+                                              hintStyle: TextStyle(
+                                                color: Color(0XFFBEBEBE),
+                                                fontWeight: FontWeight.w400,
+                                                fontSize: ScreenUtil().setSp(16),
+                                                fontStyle: FontStyle.normal,
+                                              ),
+                                              filled: true,
+                                              fillColor: Color(0XFFEDEDED),
+                                              contentPadding: EdgeInsets.only(
+                                                  left: ScreenUtil().setWidth(10), top: ScreenUtil().setHeight(5), bottom: ScreenUtil().setHeight(1)),
+                                              enabledBorder: OutlineInputBorder(
+                                                borderRadius: BorderRadius.circular(15),
+                                                borderSide: BorderSide(color: Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
+                                              ),
+                                              focusedBorder: OutlineInputBorder(
+                                                borderRadius: BorderRadius.circular(15),
+                                                borderSide: BorderSide(color: Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
+                                              ),
+                                              border: OutlineInputBorder(
+                                                borderRadius: BorderRadius.circular(15),
+                                                borderSide: BorderSide(color: Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
+                                              ),
+                                            ),
+                                            style: TextStyle(
+                                              color: Color(0XFF585858),
+                                              fontWeight: FontWeight.w400,
+                                              fontSize: ScreenUtil().setSp(16),
+                                              fontStyle: FontStyle.normal,
+                                            ),
+                                          ),
                                         ],
                                       ),
                                     ),
@@ -405,7 +463,7 @@ void _newProductModal(BuildContext context, String idCategoria, String nameCateg
                                   ),
                                 ),
                                 TextField(
-                                  focusNode: _focus2,
+                                  focusNode: _focus3,
                                   controller: _nombreController,
                                   maxLines: 1,
                                   keyboardType: TextInputType.text,
@@ -618,7 +676,7 @@ void _newProductModal(BuildContext context, String idCategoria, String nameCateg
                                   ),
                                 ),
                                 TextField(
-                                  focusNode: _focus3,
+                                  focusNode: _focus4,
                                   controller: _descripcionController,
                                   maxLines: null,
                                   keyboardType: TextInputType.multiline,
@@ -670,6 +728,9 @@ void _newProductModal(BuildContext context, String idCategoria, String nameCateg
                                     _controller.changeCargando(true);
                                     _controller.changeText('');
                                     if (_controller.boton) {
+                                      if (_costoController.text.length < 1) {
+                                        _costoController.text = '0';
+                                      }
                                       final _productoLineaApi = ProductoLineaApi();
                                       ProductoLineaModel producto = ProductoLineaModel();
                                       producto.idLinea = _controller.idLinea;
@@ -678,6 +739,7 @@ void _newProductModal(BuildContext context, String idCategoria, String nameCateg
                                       producto.productoDescripcion = _descripcionController.text;
                                       producto.productoEstado = '1';
                                       producto.productoCocina = '1';
+                                      producto.productoCosto = _costoController.text;
 
                                       final res = await _productoLineaApi.guardarProducto(producto);
                                       if (res == 1) {
@@ -1000,16 +1062,19 @@ void editProductModal(BuildContext context, ProductoLineaModel productData, Stri
   final _controller = ChangeController();
 
   TextEditingController _precioController = new TextEditingController();
+  TextEditingController _costoController = new TextEditingController();
   TextEditingController _nombreController = new TextEditingController();
   TextEditingController _descripcionController = new TextEditingController();
 
   FocusNode _focus1 = FocusNode();
   FocusNode _focus2 = FocusNode();
   FocusNode _focus3 = FocusNode();
+  FocusNode _focus4 = FocusNode();
 
   _precioController.text = productData.productoPrecio;
   _nombreController.text = productData.productoNombre;
   _descripcionController.text = productData.productoDescripcion;
+  _costoController.text = productData.productoCosto;
 
   _controller.changeLineaEdit(productData.idLinea);
   _controller.changeBoton(true);
@@ -1041,6 +1106,7 @@ void editProductModal(BuildContext context, ProductoLineaModel productData, Stri
                           KeyboardActionsItem(focusNode: _focus1),
                           KeyboardActionsItem(focusNode: _focus2),
                           KeyboardActionsItem(focusNode: _focus3),
+                          KeyboardActionsItem(focusNode: _focus4),
                         ]),
                         child: Padding(
                           padding: EdgeInsets.symmetric(vertical: ScreenUtil().setHeight(10), horizontal: ScreenUtil().setWidth(24)),
@@ -1210,6 +1276,61 @@ void editProductModal(BuildContext context, ProductoLineaModel productData, Stri
                                               fontStyle: FontStyle.normal,
                                             ),
                                           ),
+                                          Text(
+                                            'Costo',
+                                            style: GoogleFonts.poppins(
+                                              color: Color(0XFF585858),
+                                              fontWeight: FontWeight.w500,
+                                              fontSize: ScreenUtil().setSp(16),
+                                            ),
+                                          ),
+                                          TextField(
+                                            focusNode: _focus2,
+                                            controller: _costoController,
+                                            maxLines: 1,
+                                            onChanged: (value) {
+                                              if (value.length > 0 &&
+                                                  _nombreController.text.length > 0 &&
+                                                  _descripcionController.text.length > 0 &&
+                                                  _controller.idLinea != '') {
+                                                _controller.changeBoton(true);
+                                              } else {
+                                                _controller.changeBoton(false);
+                                              }
+                                            },
+                                            keyboardType: TextInputType.number,
+                                            decoration: InputDecoration(
+                                              hintText: 'S/00.00',
+                                              hintStyle: TextStyle(
+                                                color: Color(0XFFBEBEBE),
+                                                fontWeight: FontWeight.w400,
+                                                fontSize: ScreenUtil().setSp(16),
+                                                fontStyle: FontStyle.normal,
+                                              ),
+                                              filled: true,
+                                              fillColor: Color(0XFFEDEDED),
+                                              contentPadding: EdgeInsets.only(
+                                                  left: ScreenUtil().setWidth(10), top: ScreenUtil().setHeight(5), bottom: ScreenUtil().setHeight(1)),
+                                              enabledBorder: OutlineInputBorder(
+                                                borderRadius: BorderRadius.circular(15),
+                                                borderSide: BorderSide(color: Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
+                                              ),
+                                              focusedBorder: OutlineInputBorder(
+                                                borderRadius: BorderRadius.circular(15),
+                                                borderSide: BorderSide(color: Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
+                                              ),
+                                              border: OutlineInputBorder(
+                                                borderRadius: BorderRadius.circular(15),
+                                                borderSide: BorderSide(color: Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
+                                              ),
+                                            ),
+                                            style: TextStyle(
+                                              color: Color(0XFF585858),
+                                              fontWeight: FontWeight.w400,
+                                              fontSize: ScreenUtil().setSp(16),
+                                              fontStyle: FontStyle.normal,
+                                            ),
+                                          ),
                                         ],
                                       ),
                                     ),
@@ -1225,7 +1346,7 @@ void editProductModal(BuildContext context, ProductoLineaModel productData, Stri
                                   ),
                                 ),
                                 TextField(
-                                  focusNode: _focus2,
+                                  focusNode: _focus3,
                                   controller: _nombreController,
                                   maxLines: 1,
                                   keyboardType: TextInputType.text,
@@ -1438,7 +1559,7 @@ void editProductModal(BuildContext context, ProductoLineaModel productData, Stri
                                   ),
                                 ),
                                 TextField(
-                                  focusNode: _focus3,
+                                  focusNode: _focus4,
                                   controller: _descripcionController,
                                   maxLines: null,
                                   keyboardType: TextInputType.multiline,
@@ -1490,6 +1611,9 @@ void editProductModal(BuildContext context, ProductoLineaModel productData, Stri
                                     _controller.changeCargando(true);
                                     _controller.changeText('');
                                     if (_controller.boton) {
+                                      if (_costoController.text.length < 1) {
+                                        _costoController.text = '0';
+                                      }
                                       final _productoLineaApi = ProductoLineaApi();
                                       ProductoLineaModel producto = ProductoLineaModel();
                                       producto.idLinea = _controller.idLinea;
@@ -1498,6 +1622,7 @@ void editProductModal(BuildContext context, ProductoLineaModel productData, Stri
                                       producto.productoDescripcion = _descripcionController.text;
                                       producto.productoEstado = productData.productoEstado;
                                       producto.idProducto = productData.idProducto;
+                                      producto.productoCosto = _costoController.text;
 
                                       final res = await _productoLineaApi.editarProducto(producto);
                                       if (res == 1) {

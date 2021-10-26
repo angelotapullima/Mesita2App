@@ -7,6 +7,7 @@ class ProductoLineaModel {
   String productoPrecio;
   String productoEstado;
   String productoCocina;
+  String productoCosto;
 
   ProductoLineaModel({
     this.idProducto,
@@ -17,6 +18,7 @@ class ProductoLineaModel {
     this.productoPrecio,
     this.productoEstado,
     this.productoCocina,
+    this.productoCosto,
   });
 
   factory ProductoLineaModel.fromJson(Map<String, dynamic> json) => ProductoLineaModel(
@@ -27,5 +29,6 @@ class ProductoLineaModel {
         productoFoto: json['productoFoto'],
         productoPrecio: json['productoPrecio'],
         productoEstado: json['productoEstado'],
+        productoCosto: json["productoCosto"],
       );
 }

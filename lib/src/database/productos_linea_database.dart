@@ -9,8 +9,8 @@ class ProductoLineaDatabase {
       final db = await dbprovider.database;
 
       final res = await db.rawInsert(
-          "INSERT OR REPLACE INTO ProductosLinea (idProducto,idLinea,productoNombre,productoDescripcion,productoFoto,productoPrecio,productoEstado) "
-          "VALUES ('${producto.idProducto}','${producto.idLinea}','${producto.productoNombre}','${producto.productoDescripcion}','${producto.productoFoto}','${producto.productoPrecio}','${producto.productoEstado}')");
+          "INSERT OR REPLACE INTO ProductosLinea (idProducto,idLinea,productoNombre,productoDescripcion,productoFoto,productoPrecio,productoEstado,productoCosto) "
+          "VALUES ('${producto.idProducto}','${producto.idLinea}','${producto.productoNombre}','${producto.productoDescripcion}','${producto.productoFoto}','${producto.productoPrecio}','${producto.productoEstado}','${producto.productoCosto}')");
 
       return res;
     } catch (exception) {

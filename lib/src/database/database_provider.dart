@@ -59,7 +59,8 @@ class DatabaseProvider {
           ' productoDescripcion TEXT,'
           ' productoFoto TEXT,'
           ' productoPrecio TEXT,'
-          ' productoEstado TEXT'
+          ' productoEstado TEXT,'
+          ' productoCosto TEXT'
           ')');
 
       await db.execute(' CREATE TABLE Pedidos('

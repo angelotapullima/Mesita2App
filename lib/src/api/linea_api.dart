@@ -47,6 +47,7 @@ class LineaApi {
             producto.productoFoto = product['producto_foto'];
             producto.productoPrecio = product['producto_precio'];
             producto.productoEstado = product['producto_estado'];
+            producto.productoCosto = product['producto_costo'];
             await _productoDatabase.insertarProducto(producto);
           }
         }
