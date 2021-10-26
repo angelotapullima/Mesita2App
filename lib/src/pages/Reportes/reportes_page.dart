@@ -28,6 +28,15 @@ class _ReportesPageState extends State<ReportesPage> {
   TextEditingController fechaI = TextEditingController();
   TextEditingController fechaF = TextEditingController();
   final _controller = ReportesController();
+  void initState() {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      final reporteBloc = ProviderBloc.reporte(context);
+      reporteBloc.obtenerReporteGeneralPorIdItem(fechaI.text, fechaF.text, 0);
+      reporteBloc.obtenerReporteLineaFirts();
+    });
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     final reporteBloc = ProviderBloc.reporte(context);

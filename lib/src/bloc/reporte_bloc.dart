@@ -35,6 +35,10 @@ class ReporteBloc {
     _reportesLineaController.sink.add(await _reporteLineaDB.obtenerReportLinea(_prefs.idNegocio));
   }
 
+  void obtenerReporteLineaFirts() async {
+    _reportesLineaController.sink.add([]);
+  }
+
   void obtenerReporteProductos(String fechaI, String fechaF) async {
     _reporteProductosController.sink.add([]);
     await _reportesApi.obtenerReportesProductos(fechaI, fechaF);
