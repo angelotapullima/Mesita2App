@@ -296,45 +296,43 @@ class _LoginState extends State<Login> {
           // ),
           SizedBox(
             height: ScreenUtil().setHeight(50),
-            child: TextField(
-              obscureText: _passwordVisible,
-              controller: _passwdController,
-              cursorColor: Colors.transparent,
-              keyboardType: TextInputType.text,
-              maxLines: 1,
-              decoration: InputDecoration(
-                contentPadding: EdgeInsets.symmetric(
-                  vertical: ScreenUtil().setHeight(15),
-                  horizontal: ScreenUtil().setWidth(10),
-                ),
-                hintStyle: const TextStyle(
-                  color: Color(0xffa8a7a7),
-                ),
-                hintText: 'Contraseña',
-                suffixIcon: IconButton(
-                  padding: EdgeInsets.all(0),
-                  onPressed: () {
-                    setState(() {
-                      if (_passwordVisible) {
-                        _passwordVisible = false;
-                      } else {
-                        _passwordVisible = true;
-                      }
-                    });
-                  },
-                  icon: _passwordVisible
-                      ? Icon(
-                          Icons.visibility,
-                          color: Color(0xffa8a7a7),
-                        )
-                      : Icon(
-                          Icons.visibility_off,
-                          color: Color(0xffa8a7a7),
-                        ),
-                ),
-              ),
-              enableInteractiveSelection: true,
-            ),
+            child: AnimatedBuilder(
+                animation: _controller,
+                builder: (_, f) {
+                  return TextField(
+                    obscureText: _controller.passwdDisable,
+                    controller: _passwdController,
+                    cursorColor: Colors.transparent,
+                    keyboardType: TextInputType.text,
+                    maxLines: 1,
+                    decoration: InputDecoration(
+                      contentPadding: EdgeInsets.symmetric(
+                        vertical: ScreenUtil().setHeight(15),
+                        horizontal: ScreenUtil().setWidth(10),
+                      ),
+                      hintStyle: const TextStyle(
+                        color: Color(0xffa8a7a7),
+                      ),
+                      hintText: 'Contraseña',
+                      suffixIcon: IconButton(
+                        padding: EdgeInsets.all(0),
+                        onPressed: () {
+                          _controller.changePasswdDisable(!_controller.passwdDisable);
+                        },
+                        icon: _controller.passwdDisable
+                            ? Icon(
+                                Icons.visibility,
+                                color: Color(0xffa8a7a7),
+                              )
+                            : Icon(
+                                Icons.visibility_off,
+                                color: Color(0xffa8a7a7),
+                              ),
+                      ),
+                    ),
+                    enableInteractiveSelection: true,
+                  );
+                }),
           ),
           SizedBox(
             height: ScreenUtil().setHeight(30),
@@ -651,6 +649,13 @@ class _LoginState extends State<Login> {
 class ControllerNotifier extends ChangeNotifier {
   bool cargando = false;
   String mensaje = '';
+
+  bool passwdDisable = true;
+
+  void changePasswdDisable(bool v) {
+    passwdDisable = v;
+    notifyListeners();
+  }
 
   void changeCargando(bool c) {
     cargando = c;

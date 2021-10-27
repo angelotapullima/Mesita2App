@@ -217,19 +217,28 @@ class UserPage extends StatelessWidget {
             SizedBox(
               height: ScreenUtil().setHeight(46),
             ),
-            Container(
-              margin: EdgeInsets.symmetric(horizontal: ScreenUtil().setWidth(75)),
-              padding: EdgeInsets.symmetric(horizontal: ScreenUtil().setWidth(50), vertical: ScreenUtil().setHeight(10)),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(22),
-                color: Color(0XFFFF0036),
-              ),
-              child: Text(
-                'Cerrar sesión',
-                style: GoogleFonts.poppins(
-                  color: Colors.white,
-                  fontSize: ScreenUtil().setSp(16),
-                  fontWeight: FontWeight.w600,
+            InkWell(
+              onTap: () {
+                Preferences prefs = Preferences();
+
+                prefs.clearPreferences();
+
+                Navigator.pushNamedAndRemoveUntil(context, 'login', (route) => false);
+              },
+              child: Container(
+                margin: EdgeInsets.symmetric(horizontal: ScreenUtil().setWidth(75)),
+                padding: EdgeInsets.symmetric(horizontal: ScreenUtil().setWidth(50), vertical: ScreenUtil().setHeight(10)),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(22),
+                  color: Color(0XFFFF0036),
+                ),
+                child: Text(
+                  'Cerrar sesión',
+                  style: GoogleFonts.poppins(
+                    color: Colors.white,
+                    fontSize: ScreenUtil().setSp(16),
+                    fontWeight: FontWeight.w600,
+                  ),
                 ),
               ),
             ),

@@ -124,7 +124,7 @@ class _ReportesPageState extends State<ReportesPage> {
                               _controller.changePage(PageMostrar.general);
                               reporteBloc.obtenerReporteGeneralPorIdItem(fechaI.text, fechaF.text, itemsList[index].id);
                             } else if (itemsList[index].id == 2) {
-                              reporteBloc.obtenerReporteLinea();
+                              reporteBloc.obtenerReporteLinea(fechaI.text);
                               _controller.changePage(PageMostrar.categorias);
                             } else if (itemsList[index].id == 3) {
                               reporteBloc.obtenerReporteProductos(fechaI.text, fechaF.text);

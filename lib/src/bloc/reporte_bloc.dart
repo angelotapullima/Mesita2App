@@ -31,14 +31,21 @@ class ReporteBloc {
 
   void obtenerReporteGeneralPorIdItem(String fechaI, String fechaF, int idItem) async {
     _reporteGeneralController.sink.add(null);
-    //_reporteGeneralController.sink.add(await _reportGDB.obtenerReporteGeneralPorId(idItem.toString()));
-    await _reportesApi.obtenerReportesLinea(fechaI, fechaF, idItem);
-    _reporteGeneralController.sink.add(await _reportGDB.obtenerReporteGeneralPorId(idItem.toString()));
+    if (fechaI.length > 0) {
+      await _reportesApi.obtenerReportesLinea(fechaI, fechaF, idItem);
+      _reporteGeneralController.sink.add(await _reportGDB.obtenerReporteGeneralPorId(idItem.toString()));
+    } else {
+      _reporteGeneralController.sink.add([]);
+    }
   }
 
-  void obtenerReporteLinea() async {
-    //_reportesLineaController.sink.add([]);
-    _reportesLineaController.sink.add(await _reporteLineaDB.obtenerReportLinea(_prefs.idNegocio));
+  void obtenerReporteLinea(String fechaI) async {
+    if (fechaI.length > 0) {
+      _reportesLineaController.sink.add(await _reporteLineaDB.obtenerReportLinea(_prefs.idNegocio));
+    } else {
+      _reportesLineaController.sink.add([]);
+    }
+    //
   }
 
   void obtenerReporteLineaFirts() async {
@@ -47,14 +54,22 @@ class ReporteBloc {
 
   void obtenerReporteProductos(String fechaI, String fechaF) async {
     _reporteProductosController.sink.add(null);
-    await _reportesApi.obtenerReportesProductos(fechaI, fechaF);
-    _reporteProductosController.sink.add(await obtenerReporteProducto());
+    if (fechaI.length > 0) {
+      await _reportesApi.obtenerReportesProductos(fechaI, fechaF);
+      _reporteProductosController.sink.add(await obtenerReporteProducto());
+    } else {
+      _reporteProductosController.sink.add([]);
+    }
   }
 
   void obtenerReporteUtilidadesLineas(String fechaI, String fechaF) async {
     _reportesUtilidadesLineaController.sink.add(null);
-    await _reportesApi.obtenerReportesUtilidadesLinea(fechaI, fechaF);
-    _reportesUtilidadesLineaController.sink.add(await _reporteUtilidadesLineaDB.obtenerReportUtilidadLinea(_prefs.idNegocio));
+    if (fechaI.length > 0) {
+      await _reportesApi.obtenerReportesUtilidadesLinea(fechaI, fechaF);
+      _reportesUtilidadesLineaController.sink.add(await _reporteUtilidadesLineaDB.obtenerReportUtilidadLinea(_prefs.idNegocio));
+    } else {
+      _reportesUtilidadesLineaController.sink.add([]);
+    }
   }
 
   Future<List<ReporteProductoModel>> obtenerReporteProducto() async {
