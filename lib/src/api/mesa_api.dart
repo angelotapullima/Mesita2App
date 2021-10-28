@@ -38,7 +38,7 @@ class MesaApi {
           mesa.mesaEstado = decodedData['result'][i]['mesa_estado'];
           await _mesaDatabase.insertarMesa(mesa);
 
-          if (decodedData['result'][i]["pedido"]["id_pedido"] != 0 && decodedData['result'][i]['mesa_estado'] != '1') {
+          if (decodedData['result'][i]["pedido"]["id_pedido"] != 0 && decodedData['result'][i]['mesa_estado'] == '2') {
             PedidoModel pedido = PedidoModel();
 
             pedido.idPedido = decodedData['result'][i]["pedido"]["id_pedido"];

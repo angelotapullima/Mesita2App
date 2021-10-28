@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:mesita_aplication_2/src/pages/User/Recibos/detalle_recibo.dart';
 
 class RecibosPage extends StatelessWidget {
   const RecibosPage({Key key}) : super(key: key);
@@ -75,64 +76,93 @@ class RecibosPage extends StatelessWidget {
             SizedBox(
               height: ScreenUtil().setHeight(32),
             ),
-            itemRecibo(),
+            itemRecibo(context),
           ],
         ),
       ),
     );
   }
 
-  Widget itemRecibo() {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        Container(
-          child: Text(
-            '25/10/21',
-            style: GoogleFonts.poppins(
-              color: Color(0XFF585858),
-              fontSize: ScreenUtil().setSp(14),
-              fontWeight: FontWeight.w400,
-              letterSpacing: 0.16,
+  Widget itemRecibo(BuildContext context) {
+    return InkWell(
+      onTap: () {
+        Navigator.push(
+          context,
+          PageRouteBuilder(
+            pageBuilder: (context, animation, secondaryAnimation) {
+              return DetalleRecibo();
+            },
+            transitionsBuilder: (context, animation, secondaryAnimation, child) {
+              var begin = Offset(0.0, 1.0);
+              var end = Offset.zero;
+              var curve = Curves.ease;
+
+              var tween = Tween(begin: begin, end: end).chain(
+                CurveTween(curve: curve),
+              );
+
+              return SlideTransition(
+                position: animation.drive(tween),
+                child: child,
+              );
+            },
+          ),
+        );
+      },
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Container(
+            child: Text(
+              '25/10/21',
+              style: GoogleFonts.poppins(
+                color: Color(0XFF585858),
+                fontSize: ScreenUtil().setSp(14),
+                fontWeight: FontWeight.w400,
+                letterSpacing: 0.16,
+              ),
             ),
           ),
-        ),
-        Container(
-          child: Text(
-            '12345678910111213',
-            style: GoogleFonts.poppins(
-              color: Color(0XFF585858),
-              fontSize: ScreenUtil().setSp(14),
-              fontWeight: FontWeight.w400,
-              letterSpacing: 0.16,
+          Container(
+            child: Text(
+              '12345678910111213',
+              style: GoogleFonts.poppins(
+                color: Color(0XFF585858),
+                fontSize: ScreenUtil().setSp(14),
+                fontWeight: FontWeight.w400,
+                letterSpacing: 0.16,
+              ),
             ),
           ),
-        ),
-        Container(
-          child: Row(
-            children: [
-              Text(
-                'S/ 3.00',
-                style: GoogleFonts.poppins(
-                  color: Color(0XFF585858),
-                  fontSize: ScreenUtil().setSp(14),
-                  fontWeight: FontWeight.w400,
-                  letterSpacing: 0.16,
+          Container(
+            child: Row(
+              children: [
+                Text(
+                  'S/ 3.00',
+                  style: GoogleFonts.poppins(
+                    color: Color(0XFF585858),
+                    fontSize: ScreenUtil().setSp(14),
+                    fontWeight: FontWeight.w400,
+                    letterSpacing: 0.16,
+                  ),
                 ),
-              ),
-              Text(
-                'VER',
-                style: GoogleFonts.poppins(
-                  color: Color(0XFFFF0036),
-                  fontSize: ScreenUtil().setSp(14),
-                  fontWeight: FontWeight.w500,
-                  letterSpacing: 0.16,
+                SizedBox(
+                  width: ScreenUtil().setWidth(8),
                 ),
-              ),
-            ],
+                Text(
+                  'VER',
+                  style: GoogleFonts.poppins(
+                    color: Color(0XFFFF0036),
+                    fontSize: ScreenUtil().setSp(14),
+                    fontWeight: FontWeight.w500,
+                    letterSpacing: 0.16,
+                  ),
+                ),
+              ],
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }
