@@ -49,8 +49,9 @@ class PedidosApi {
         final decodedData = json.decode(resp.body);
 
         print(decodedData);
-        if (decodedData['result'] == '1') {
+        if (decodedData['result'] == 1) {
           await _comandaDatabase.deleteDetallesPedidoTemporal();
+          print('Voy a retornar true');
           return true;
         } else {
           return false;

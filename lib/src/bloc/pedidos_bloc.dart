@@ -12,6 +12,7 @@ class PedidosBloc {
   Stream<List<PedidoModel>> get pedidosPorMesaStream => _pedidosPorMesaController.stream;
 
   void obtenerPedidosPorIdMesa(String idMesa) async {
+    _pedidosPorMesaController.sink.add(null);
     await _mesaApi.obtenerMesasPorNegocio();
     final List<PedidoModel> pedixt = [];
 

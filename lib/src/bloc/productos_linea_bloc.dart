@@ -44,7 +44,11 @@ class ProductosLineaBloc {
   }
 
   void obtenerProductosPorQuery(String query) async {
-    _productosBusquedaController.sink.add(await _productoDatabase.buscarProducto(query));
+    if (query.length > 0) {
+      _productosBusquedaController.sink.add(await _productoDatabase.buscarProducto(query));
+    } else {
+      _productosBusquedaController.sink.add([]);
+    }
   }
 
   dispose() {

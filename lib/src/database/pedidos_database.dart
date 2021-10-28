@@ -66,6 +66,14 @@ class PedidosDatabase {
     return res;
   }
 
+  deletePedidoPorIdMesa(String idMesa) async {
+    final db = await dbprovider.database;
+
+    final res = await db.rawDelete("DELETE FROM Pedidos WHERE idMesa='$idMesa'");
+
+    return res;
+  }
+
   deleteDetallesPedidoPorId(String id) async {
     final db = await dbprovider.database;
 

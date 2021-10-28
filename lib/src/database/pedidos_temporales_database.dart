@@ -33,4 +33,12 @@ class PedidosTemporalDatabase {
 
     return res;
   }
+
+  deleteDetallesPedidoTemporalPorId(int id) async {
+    final db = await dbprovider.database;
+
+    final res = await db.rawDelete("DELETE FROM DetallePedidosTemporales WHERE id='$id'");
+
+    return res;
+  }
 }

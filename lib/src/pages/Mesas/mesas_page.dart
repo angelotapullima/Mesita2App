@@ -130,57 +130,81 @@ class MesasPage extends StatelessWidget {
                             return LayoutBuilder(builder: (context, constraints) {
                               return InkWell(
                                 onTap: () {
-                                  if (snapsdhot.data[index].mesaEstado == '2') {
-                                    Navigator.push(
-                                      context,
-                                      PageRouteBuilder(
-                                        pageBuilder: (context, animation, secondaryAnimation) {
-                                          return DetalleMesaPage(
-                                            mesa: snapsdhot.data[index],
-                                          );
-                                        },
-                                        transitionsBuilder: (context, animation, secondaryAnimation, child) {
-                                          var begin = Offset(0.0, 1.0);
-                                          var end = Offset.zero;
-                                          var curve = Curves.ease;
+                                  Navigator.push(
+                                    context,
+                                    PageRouteBuilder(
+                                      pageBuilder: (context, animation, secondaryAnimation) {
+                                        return DetalleMesaPage(
+                                          mesa: snapsdhot.data[index],
+                                        );
+                                      },
+                                      transitionsBuilder: (context, animation, secondaryAnimation, child) {
+                                        var begin = Offset(0.0, 1.0);
+                                        var end = Offset.zero;
+                                        var curve = Curves.ease;
 
-                                          var tween = Tween(begin: begin, end: end).chain(
-                                            CurveTween(curve: curve),
-                                          );
+                                        var tween = Tween(begin: begin, end: end).chain(
+                                          CurveTween(curve: curve),
+                                        );
 
-                                          return SlideTransition(
-                                            position: animation.drive(tween),
-                                            child: child,
-                                          );
-                                        },
-                                      ),
-                                    );
-                                  } else {
-                                    Navigator.push(
-                                      context,
-                                      PageRouteBuilder(
-                                        pageBuilder: (context, animation, secondaryAnimation) {
-                                          return AgregarePedidoMesa(
-                                            mesa: snapsdhot.data[index],
-                                          );
-                                        },
-                                        transitionsBuilder: (context, animation, secondaryAnimation, child) {
-                                          var begin = Offset(0.0, 1.0);
-                                          var end = Offset.zero;
-                                          var curve = Curves.ease;
+                                        return SlideTransition(
+                                          position: animation.drive(tween),
+                                          child: child,
+                                        );
+                                      },
+                                    ),
+                                  );
+                                  // if (snapsdhot.data[index].mesaEstado == '2') {
+                                  //   Navigator.push(
+                                  //     context,
+                                  //     PageRouteBuilder(
+                                  //       pageBuilder: (context, animation, secondaryAnimation) {
+                                  //         return DetalleMesaPage(
+                                  //           mesa: snapsdhot.data[index],
+                                  //         );
+                                  //       },
+                                  //       transitionsBuilder: (context, animation, secondaryAnimation, child) {
+                                  //         var begin = Offset(0.0, 1.0);
+                                  //         var end = Offset.zero;
+                                  //         var curve = Curves.ease;
 
-                                          var tween = Tween(begin: begin, end: end).chain(
-                                            CurveTween(curve: curve),
-                                          );
+                                  //         var tween = Tween(begin: begin, end: end).chain(
+                                  //           CurveTween(curve: curve),
+                                  //         );
 
-                                          return SlideTransition(
-                                            position: animation.drive(tween),
-                                            child: child,
-                                          );
-                                        },
-                                      ),
-                                    );
-                                  }
+                                  //         return SlideTransition(
+                                  //           position: animation.drive(tween),
+                                  //           child: child,
+                                  //         );
+                                  //       },
+                                  //     ),
+                                  //   );
+                                  // } else {
+                                  //   Navigator.push(
+                                  //     context,
+                                  //     PageRouteBuilder(
+                                  //       pageBuilder: (context, animation, secondaryAnimation) {
+                                  //         return AgregarePedidoMesa(
+                                  //           mesa: snapsdhot.data[index],
+                                  //         );
+                                  //       },
+                                  //       transitionsBuilder: (context, animation, secondaryAnimation, child) {
+                                  //         var begin = Offset(0.0, 1.0);
+                                  //         var end = Offset.zero;
+                                  //         var curve = Curves.ease;
+
+                                  //         var tween = Tween(begin: begin, end: end).chain(
+                                  //           CurveTween(curve: curve),
+                                  //         );
+
+                                  //         return SlideTransition(
+                                  //           position: animation.drive(tween),
+                                  //           child: child,
+                                  //         );
+                                  //       },
+                                  //     ),
+                                  //   );
+                                  // }
                                 },
                                 child: Container(
                                   padding: EdgeInsets.only(
@@ -229,7 +253,9 @@ class MesasPage extends StatelessWidget {
                                             BoxShadow(
                                               offset: Offset(0, 0),
                                               blurRadius: 20.0,
-                                              color: (snapsdhot.data[index].mesaEstado != '2') ? Color(0xff585858).withOpacity(.15) : Color(0xffff0036).withOpacity(.3),
+                                              color: (snapsdhot.data[index].mesaEstado != '2')
+                                                  ? Color(0xff585858).withOpacity(.15)
+                                                  : Color(0xffff0036).withOpacity(.3),
                                             ),
                                           ],
                                         ),

@@ -25,6 +25,15 @@ class BuscarPage extends StatefulWidget {
 class _BuscarPageState extends State<BuscarPage> {
   final TextEditingController _queryController = TextEditingController();
   @override
+  void initState() {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      print('${widget.esComanda}');
+      final busquedaBloc = ProviderBloc.productosLinea(context);
+      busquedaBloc.obtenerProductosPorQuery('');
+    });
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     final busquedaBloc = ProviderBloc.productosLinea(context);
@@ -82,9 +91,8 @@ class _BuscarPageState extends State<BuscarPage> {
                                 if (value != '') {
                                   busquedaBloc.obtenerProductosPorQuery(value);
                                 } else {
-                                  print('No debe mostrar nada');
                                   _queryController.text = '';
-                                  busquedaBloc.obtenerProductosPorQuery('  ');
+                                  busquedaBloc.obtenerProductosPorQuery('');
                                 }
                               },
                               borderRadius: BorderRadius.circular(20),

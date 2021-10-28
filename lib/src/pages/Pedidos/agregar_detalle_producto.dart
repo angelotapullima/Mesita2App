@@ -32,7 +32,10 @@ class _AgregarDetalleProductoState extends State<AgregarDetalleProducto> {
   final TextEditingController _observacionesController = TextEditingController();
   @override
   void initState() {
-    _controller.changeCantidadPrecio(0, widget.producto.productoPrecio);
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _controller.changeCantidadPrecio(0, widget.producto.productoPrecio);
+    });
+
     super.initState();
   }
 
@@ -268,7 +271,7 @@ class _AgregarDetalleProductoState extends State<AgregarDetalleProducto> {
                                   final _comandaDatabase = PedidosTemporalDatabase();
                                   DetallePedidoTemporalModel comanda = DetallePedidoTemporalModel();
 
-                                  comanda.idMesa = widget.idEnviar;
+                                  comanda.idMesa = widget.idMesa;
                                   comanda.idProducto = widget.producto.idProducto;
                                   comanda.subtotal = _controller.precioMuestra;
                                   comanda.cantidad = _controller.cantidad.toString();
