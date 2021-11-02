@@ -7,7 +7,6 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mesita_aplication_2/src/bloc/provider.dart';
 import 'package:mesita_aplication_2/src/models/mesa_model.dart';
-import 'package:mesita_aplication_2/src/pages/Mesas/agregar_pedidos_mesa.dart';
 import 'package:mesita_aplication_2/src/pages/Mesas/detalle_mesa_page.dart';
 import 'package:mesita_aplication_2/src/pages/Mesas/modal_agregar_mesa.dart';
 import 'package:mesita_aplication_2/src/preferences/preferences.dart';

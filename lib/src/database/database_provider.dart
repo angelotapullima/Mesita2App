@@ -163,6 +163,38 @@ class DatabaseProvider {
           ' cantidad TEXT,'
           ' suma TEXT'
           ')');
+
+      await db.execute(' CREATE TABLE Planes('
+          ' idPlan TEXT PRIMARY KEY,'
+          ' nombre TEXT,'
+          ' descripcion TEXT,'
+          ' costo TEXT,'
+          ' estado TEXT'
+          ')');
+
+      await db.execute(' CREATE TABLE PlanUser('
+          ' idUserPlan TEXT PRIMARY KEY,'
+          ' idUser TEXT,'
+          ' idNegocio TEXT,'
+          ' idPlan TEXT,'
+          ' inicioFecha TEXT,'
+          ' finFecha TEXT,'
+          ' voucher TEXT,'
+          ' estado TEXT'
+          ')');
+
+      await db.execute(' CREATE TABLE MiembrosPlan('
+          ' idMiembro TEXT PRIMARY KEY,'
+          ' idPlan TEXT,'
+          ' idUser TEXT,'
+          ' nombre TEXT,'
+          ' imagen TEXT,'
+          ' apellidoMaterno TEXT,'
+          ' apellidoPaterno TEXT,'
+          ' puesto TEXT,'
+          ' fechaCreacion TEXT,'
+          ' estado TEXT'
+          ')');
     });
   }
 }
