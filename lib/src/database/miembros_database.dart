@@ -33,4 +33,12 @@ class MiembrosDatabase {
 
     return res;
   }
+
+  deleteMiembroPlanPorId(String id) async {
+    final db = await dbprovider.database;
+
+    final res = await db.rawDelete("DELETE FROM MiembrosPlan WHERE idMiembro='$id' ");
+
+    return res;
+  }
 }

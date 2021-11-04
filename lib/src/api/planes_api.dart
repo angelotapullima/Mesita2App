@@ -130,4 +130,53 @@ class PlanesApi {
       return false;
     }
   }
+
+  Future<int> agregarMiembroAlPlan(String idPlan, String idUser) async {
+    try {
+      final url = Uri.parse('$apiBaseURL/api/Negocio/agregar_miembros');
+
+      final resp = await http.post(url, body: {
+        'tn': _prefs.token,
+        'app': 'true',
+        'id_plan': idPlan,
+        'id_usuario': idUser,
+      });
+
+      final decodedData = json.decode(resp.body);
+
+      print(decodedData);
+      if (decodedData["result"] == 1) {
+        return 1;
+      } else {
+        return 2;
+      }
+    } catch (e) {
+      return 2;
+    }
+  }
+
+  Future<int> quitarMiembroAlPlan(String idPlan, String idMiembro) async {
+    try {
+      final url = Uri.parse('$apiBaseURL/api/Negocio/eliminar_miembros');
+
+      final resp = await http.post(url, body: {
+        'tn': _prefs.token,
+        'app': 'true',
+        'id_plan': idPlan,
+        'id_miembro': idMiembro,
+      });
+
+      final decodedData = json.decode(resp.body);
+
+      print(decodedData);
+      if (decodedData["result"] == 1) {
+        await _miembrosDatabase.deleteMiembroPlanPorId(idMiembro);
+        return 1;
+      } else {
+        return 2;
+      }
+    } catch (e) {
+      return 2;
+    }
+  }
 }

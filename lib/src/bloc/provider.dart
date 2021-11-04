@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mesita_aplication_2/src/bloc/buscar_user_bloc.dart';
 import 'package:mesita_aplication_2/src/bloc/comanda_bloc.dart';
 import 'package:mesita_aplication_2/src/bloc/linea_bloc.dart';
 import 'package:mesita_aplication_2/src/bloc/mesa_bloc.dart';
@@ -8,6 +9,7 @@ import 'package:mesita_aplication_2/src/bloc/planes_bloc.dart';
 import 'package:mesita_aplication_2/src/bloc/productos_linea_bloc.dart';
 import 'package:mesita_aplication_2/src/bloc/reporte_bloc.dart';
 import 'package:mesita_aplication_2/src/bloc/ventas_bloc.dart';
+import 'package:mesita_aplication_2/src/pages/User/Planes/bloc.dart';
 
 class ProviderBloc extends InheritedWidget {
   static ProviderBloc _instancia;
@@ -21,6 +23,8 @@ class ProviderBloc extends InheritedWidget {
   final ventasBloc = VentasBloc();
   final reporteBloc = ReporteBloc();
   final planesBloc = PlanesBloc();
+  final blocMiembro = Bloc();
+  final buscarBloc = BuscarUserBloc();
 
   factory ProviderBloc({Key key, Widget child}) {
     if (_instancia == null) {
@@ -69,5 +73,13 @@ class ProviderBloc extends InheritedWidget {
 
   static PlanesBloc planes(BuildContext context) {
     return (context.dependOnInheritedWidgetOfExactType<ProviderBloc>()).planesBloc;
+  }
+
+  static Bloc bloc(BuildContext context) {
+    return (context.dependOnInheritedWidgetOfExactType<ProviderBloc>()).blocMiembro;
+  }
+
+  static BuscarUserBloc busqueda(BuildContext context) {
+    return (context.dependOnInheritedWidgetOfExactType<ProviderBloc>()).buscarBloc;
   }
 }

@@ -133,8 +133,11 @@ class DetallePlanPage extends StatelessWidget {
 
   Widget _itemMiembro(BuildContext context, MiembrosModel miembro) {
     return InkWell(
+      onTap: () {
+        verMiembroModal(context, miembro);
+      },
       child: Padding(
-        padding: EdgeInsets.symmetric(vertical: ScreenUtil().setHeight(32)),
+        padding: EdgeInsets.symmetric(vertical: ScreenUtil().setHeight(16)),
         child: Row(
           children: [
             Hero(
