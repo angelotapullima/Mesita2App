@@ -204,31 +204,31 @@ class PlanesPage extends StatelessWidget {
                     ? InkWell(
                         onTap: () {
                           // print(plan.idPlan);
-                          modalSeletPayMetod(context, plan, 'Renovar plan', true);
-                          // Navigator.push(
-                          //   context,
-                          //   PageRouteBuilder(
-                          //     pageBuilder: (context, animation, secondaryAnimation) {
-                          //       return DetallePlanPage(
-                          //         nombrePlan: plan.nombre,
-                          //       );
-                          //     },
-                          //     transitionsBuilder: (context, animation, secondaryAnimation, child) {
-                          //       var begin = Offset(0.0, 1.0);
-                          //       var end = Offset.zero;
-                          //       var curve = Curves.ease;
+                          // modalSeletPayMetod(context, plan, 'Renovar plan', true);
+                          Navigator.push(
+                            context,
+                            PageRouteBuilder(
+                              pageBuilder: (context, animation, secondaryAnimation) {
+                                return DetallePlanPage(
+                                  nombrePlan: plan.nombre,
+                                );
+                              },
+                              transitionsBuilder: (context, animation, secondaryAnimation, child) {
+                                var begin = Offset(0.0, 1.0);
+                                var end = Offset.zero;
+                                var curve = Curves.ease;
 
-                          //       var tween = Tween(begin: begin, end: end).chain(
-                          //         CurveTween(curve: curve),
-                          //       );
+                                var tween = Tween(begin: begin, end: end).chain(
+                                  CurveTween(curve: curve),
+                                );
 
-                          //       return SlideTransition(
-                          //         position: animation.drive(tween),
-                          //         child: child,
-                          //       );
-                          //     },
-                          //   ),
-                          // );
+                                return SlideTransition(
+                                  position: animation.drive(tween),
+                                  child: child,
+                                );
+                              },
+                            ),
+                          );
                         },
                         child: Container(
                           padding: EdgeInsets.symmetric(vertical: ScreenUtil().setHeight(8), horizontal: ScreenUtil().setWidth(16)),

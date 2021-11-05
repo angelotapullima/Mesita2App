@@ -19,7 +19,7 @@ class PlanUserDatabase {
 
   Future<List<PlanUserModel>> obtenerPlanUser(String idUser) async {
     final db = await dbprovider.database;
-    final res = await db.rawQuery("SELECT * FROM PlanUser WHERE idUser='$idUser' AND estado='1'");
+    final res = await db.rawQuery("SELECT * FROM PlanUser WHERE idUser='$idUser' AND estado!='2' ORDER BY cast(idUserPlan as int) DESC");
 
     List<PlanUserModel> list = res.isNotEmpty ? res.map((c) => PlanUserModel.fromJson(c)).toList() : [];
     return list;

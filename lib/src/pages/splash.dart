@@ -3,7 +3,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:mesita_aplication_2/src/api/linea_api.dart';
+import 'package:mesita_aplication_2/src/api/planes_api.dart';
 import 'package:mesita_aplication_2/src/preferences/preferences.dart';
+import 'package:mesita_aplication_2/src/utils/utils.dart';
 
 class Splash extends StatefulWidget {
   const Splash({Key key}) : super(key: key);
@@ -22,13 +24,22 @@ class _SplashState extends State<Splash> with AfterLayoutMixin<Splash> {
       (_) async {
         final preferences = Preferences();
         final _lineaApi = LineaApi();
+        final _planApi = PlanesApi();
 
         if (preferences.idUser.toString().isEmpty || preferences.idUser == null || preferences.idUser == '0') {
           Navigator.pushReplacementNamed(context, 'login');
         } else {
           await _lineaApi.obtenerLineasPorNegocio();
+          await _planApi.obtenerPlanUser();
 
-          Navigator.pushReplacementNamed(context, 'home');
+          final resp = compararFechaConActual(preferences.finPlan);
+
+          if (resp) {
+            print('Necesitar renovar');
+          } else {
+            print('No necesitas renovars');
+            Navigator.pushReplacementNamed(context, 'home');
+          }
         }
       },
     );

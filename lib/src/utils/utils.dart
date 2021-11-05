@@ -110,3 +110,20 @@ showLoading() {
         : CupertinoActivityIndicator(),
   );
 }
+
+compararFechaConActual(String fecha) {
+  var hoy = DateTime.now();
+
+  var fech = DateTime.parse(fecha);
+
+  var resp = hoy.difference(fech).inDays;
+
+  if (resp >= 0) {
+    //Renovar o cambiar de plan
+
+    return true;
+  } else {
+    //Aún no vence la suscripción actual
+    return false;
+  }
+}

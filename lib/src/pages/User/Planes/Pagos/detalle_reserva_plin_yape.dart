@@ -389,13 +389,15 @@ class _DetalleReservaPlinYapeState extends State<DetalleReservaPlinYape> {
                                             child: TextField(
                                               controller: _contactoController,
                                               maxLines: 1,
-                                              keyboardType: TextInputType.text,
+                                              keyboardType: TextInputType.number,
+                                              maxLength: 9,
                                               decoration: InputDecoration(
                                                 suffixIcon: Icon(
                                                   Icons.edit,
                                                   color: Color(0XFFC4C4C4),
                                                 ),
                                                 hintText: 'Ingresar número',
+                                                counterText: '',
                                                 hintStyle: GoogleFonts.poppins(
                                                     fontSize: ScreenUtil().setSp(14),
                                                     fontWeight: FontWeight.w400,

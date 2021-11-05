@@ -9,6 +9,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:mesita_aplication_2/src/api/planes_api.dart';
+import 'package:mesita_aplication_2/src/bloc/provider.dart';
 import 'package:mesita_aplication_2/src/models/planes_model.dart';
 import 'package:mesita_aplication_2/src/preferences/preferences.dart';
 import 'package:mesita_aplication_2/src/utils/utils.dart';
@@ -198,7 +199,11 @@ class _ValidarPagoPageState extends State<ValidarPagoPage> {
                                                     Container(
                                                       width: ScreenUtil().setWidth(120),
                                                       height: ScreenUtil().setHeight(103),
-                                                      child: SvgPicture.asset('assets/reservas/filePlus.svg'),
+                                                      child: Icon(
+                                                        Icons.file_copy,
+                                                        size: ScreenUtil().setHeight(50),
+                                                        color: Color(0XFF00C2FF),
+                                                      ),
                                                     ),
                                                     Text(
                                                       'Subir imagen',
@@ -428,7 +433,7 @@ class _ValidarPagoPageState extends State<ValidarPagoPage> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(
-                                      '${obtenerFechaFinSuscripcion(4)}',
+                                      '${obtenerFechaFinSuscripcion(widget.tiempoPlan)}',
                                       style: GoogleFonts.poppins(
                                         color: Color(0XFF585858),
                                         fontWeight: FontWeight.w500,
@@ -742,7 +747,10 @@ class _ValidarPagoPageState extends State<ValidarPagoPage> {
                         }
 
                         if (resp) {
+                          await api.obtenerPlanUser();
                           Navigator.pop(context);
+                          final planesBloc = ProviderBloc.planes(context);
+                          planesBloc.obtenerPlanes();
                           // Navigator.push(
                           //   context,
                           //   PageRouteBuilder(

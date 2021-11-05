@@ -139,6 +139,14 @@ class Preferences {
     _prefs.setString('tipoPlan', value);
   }
 
+  get idPlan {
+    return _prefs.getString('idPlan');
+  }
+
+  set idPlan(String value) {
+    _prefs.setString('idPlan', value);
+  }
+
   get inicioPlan {
     return _prefs.getString('inicioPlan');
   }

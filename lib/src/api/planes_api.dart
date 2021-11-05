@@ -78,9 +78,13 @@ class PlanesApi {
           plan.voucher = plancU["plan_voucher"];
           plan.estado = plancU["plan_estado"];
 
-          _prefs.tipoPlan = plancU["plan_tipo"];
-          _prefs.inicioPlan = plancU["plan_inicio"];
-          _prefs.finPlan = plancU["plan_fin"];
+          if (plan.estado != '2') {
+            _prefs.idPlan = plancU["id_plan"];
+            _prefs.tipoPlan = plancU["plan_tipo"];
+            _prefs.inicioPlan = plancU["plan_inicio"];
+            _prefs.finPlan = plancU["plan_fin"];
+          }
+
           await _planUserDatabase.insertarPlanUser(plan);
         }
 
@@ -210,7 +214,7 @@ class PlanesApi {
 
       request.fields["tn"] = _prefs.token;
       request.fields["app"] = 'true';
-      request.fields["id_plan"] = '${_prefs.tipoPlan}';
+      request.fields["id_plan"] = '${_prefs.idPlan}';
       request.fields["plan_tipo"] = '$idPlanNuevo';
       request.fields["plan_inicio"] = '$inicio';
       request.fields["plan_fin"] = '$fin';
@@ -265,7 +269,7 @@ class PlanesApi {
 
       request.fields["tn"] = _prefs.token;
       request.fields["app"] = 'true';
-      request.fields["id_plan"] = '${_prefs.tipoPlan}';
+      request.fields["id_plan"] = '${_prefs.idPlan}';
       request.fields["plan_inicio"] = '$inicio';
       request.fields["plan_fin"] = '$fin';
 
