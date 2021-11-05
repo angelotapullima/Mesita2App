@@ -53,6 +53,8 @@ dependencies:
   pull_to_refresh: ^2.0.0
   platform_date_picker: ^0.0.4+1
   date_format: ^2.0.2
+  provider:
+  fluttertoast: ^8.0.8
 
 
 

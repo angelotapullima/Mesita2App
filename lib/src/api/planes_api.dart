@@ -1,4 +1,7 @@
 import 'dart:convert';
+import 'dart:io';
+import 'package:mesita_aplication_2/src/utils/utils.dart';
+import 'package:path/path.dart';
 
 import 'package:mesita_aplication_2/src/database/miembros_database.dart';
 import 'package:mesita_aplication_2/src/database/plan_user_database.dart';
@@ -74,6 +77,10 @@ class PlanesApi {
           plan.finFecha = plancU["plan_fin"];
           plan.voucher = plancU["plan_voucher"];
           plan.estado = plancU["plan_estado"];
+
+          _prefs.tipoPlan = plancU["plan_tipo"];
+          _prefs.inicioPlan = plancU["plan_inicio"];
+          _prefs.finPlan = plancU["plan_fin"];
           await _planUserDatabase.insertarPlanUser(plan);
         }
 
@@ -177,6 +184,115 @@ class PlanesApi {
       }
     } catch (e) {
       return 2;
+    }
+  }
+
+  Future<bool> cambiarPlan(
+      File _image, String idPlanNuevo, int tiempo, String numContacto, String tipoDoc, String nrDoc, String razonSocial, String direccionDoc) async {
+    try {
+      final url = Uri.parse('$apiBaseURL/api/Negocio/cambiar_plan');
+      bool resp = false;
+
+      String inicio = obtenerFechaActualApi();
+      String fin = obtenerFechaFinSuscripcionApi(tiempo);
+
+      print('del $inicio - $fin');
+
+      var multipartFile;
+
+      if (_image != null) {
+        var stream = new http.ByteStream(Stream.castFrom(_image.openRead()));
+        var length = await _image.length();
+        multipartFile = new http.MultipartFile('imagen', stream, length, filename: basename(_image.path));
+      }
+
+      var request = new http.MultipartRequest("POST", url);
+
+      request.fields["tn"] = _prefs.token;
+      request.fields["app"] = 'true';
+      request.fields["id_plan"] = '${_prefs.tipoPlan}';
+      request.fields["plan_tipo"] = '$idPlanNuevo';
+      request.fields["plan_inicio"] = '$inicio';
+      request.fields["plan_fin"] = '$fin';
+
+      if (_image != null) {
+        request.files.add(multipartFile);
+      }
+
+      await request.send().then((response) async {
+        // listen for response
+        response.stream.transform(utf8.decoder).listen((value) {
+          final decodedData = json.decode(value);
+          print('Respuesta p $decodedData');
+          if (decodedData['result'] == 1) {
+            resp = true;
+          } else {
+            resp = false;
+          }
+        });
+      }).catchError((e) {
+        print(e);
+        resp = false;
+      });
+
+      return resp;
+    } catch (error, stacktrace) {
+      print("Exception occured: $error stackTrace: $stacktrace");
+      return false;
+    }
+  }
+
+  Future<bool> renovarPlan(
+      File _image, String idPlanNuevo, int tiempo, String numContacto, String tipoDoc, String nrDoc, String razonSocial, String direccionDoc) async {
+    try {
+      final url = Uri.parse('$apiBaseURL/api/Negocio/renovar_plan');
+      bool resp = false;
+
+      String inicio = obtenerFechaActualApi();
+      String fin = obtenerFechaFinSuscripcionApi(tiempo);
+
+      print('del $inicio - $fin');
+
+      var multipartFile;
+
+      if (_image != null) {
+        var stream = new http.ByteStream(Stream.castFrom(_image.openRead()));
+        var length = await _image.length();
+        multipartFile = new http.MultipartFile('imagen', stream, length, filename: basename(_image.path));
+      }
+
+      var request = new http.MultipartRequest("POST", url);
+
+      request.fields["tn"] = _prefs.token;
+      request.fields["app"] = 'true';
+      request.fields["id_plan"] = '${_prefs.tipoPlan}';
+      request.fields["plan_inicio"] = '$inicio';
+      request.fields["plan_fin"] = '$fin';
+
+      if (_image != null) {
+        request.files.add(multipartFile);
+      }
+
+      await request.send().then((response) async {
+        // listen for response
+        response.stream.transform(utf8.decoder).listen((value) {
+          final decodedData = json.decode(value);
+          print('Respuesta p $decodedData');
+          if (decodedData['result'] == 1) {
+            resp = true;
+          } else {
+            resp = false;
+          }
+        });
+      }).catchError((e) {
+        print(e);
+        resp = false;
+      });
+
+      return resp;
+    } catch (error, stacktrace) {
+      print("Exception occured: $error stackTrace: $stacktrace");
+      return false;
     }
   }
 }

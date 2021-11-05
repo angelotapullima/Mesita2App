@@ -6,6 +6,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mesita_aplication_2/src/bloc/provider.dart';
 import 'package:mesita_aplication_2/src/models/planes_model.dart';
+import 'package:mesita_aplication_2/src/pages/User/Planes/Pagos/modals_metodoPago.dart';
 import 'package:mesita_aplication_2/src/pages/User/Planes/detalle_plan.dart';
 import 'package:mesita_aplication_2/src/preferences/preferences.dart';
 
@@ -47,8 +48,7 @@ class PlanesPage extends StatelessWidget {
                       shrinkWrap: true,
                       physics: NeverScrollableScrollPhysics(),
                       itemBuilder: (context, index) {
-                        return planTarjeta(
-                            context, planes[index].nombre, planes[index].costo, prefs, planes[index].idPlan, planes[index].descripcion);
+                        return planTarjeta(context, planes[index], prefs);
                       }),
                 );
               } else {
@@ -73,14 +73,18 @@ class PlanesPage extends StatelessWidget {
     );
   }
 
-  Widget planTarjeta(BuildContext context, String titulo, String costo, Preferences prefs, String tipo, String decripcion) {
+  Widget planTarjeta(
+    BuildContext context,
+    PlanesModel plan,
+    Preferences prefs,
+  ) {
     Color color1;
     Color color2;
 
-    if (tipo == '1') {
+    if (plan.idPlan == '1') {
       color1 = Color(0XFF3DE8F3).withOpacity(.6);
       color2 = Color(0XFF00C2FF).withOpacity(.8);
-    } else if (tipo == '2') {
+    } else if (plan.idPlan == '2') {
       color1 = Color(0XFF5782F0).withOpacity(.6);
       color2 = Color(0XFF0047FF).withOpacity(.8);
     } else {
@@ -109,7 +113,7 @@ class PlanesPage extends StatelessWidget {
         ),
         child: Column(
           children: [
-            (prefs.tipoPlan == tipo)
+            (prefs.tipoPlan == plan.idPlan)
                 ? Container(
                     height: ScreenUtil().setHeight(40),
                     width: double.infinity,
@@ -140,7 +144,7 @@ class PlanesPage extends StatelessWidget {
                 : Container(),
             Spacer(),
             Text(
-              titulo,
+              plan.nombre,
               style: GoogleFonts.poppins(
                 color: Colors.white,
                 fontSize: ScreenUtil().setSp(24),
@@ -165,7 +169,7 @@ class PlanesPage extends StatelessWidget {
                   width: ScreenUtil().setWidth(8),
                 ),
                 Text(
-                  '$costo PEN',
+                  '${plan.costo} PEN',
                   style: GoogleFonts.poppins(
                     color: Colors.white,
                     fontSize: ScreenUtil().setSp(14),
@@ -181,7 +185,7 @@ class PlanesPage extends StatelessWidget {
             Padding(
               padding: EdgeInsets.symmetric(horizontal: ScreenUtil().setWidth(5)),
               child: Text(
-                decripcion,
+                plan.descripcion,
                 style: GoogleFonts.poppins(
                   color: Colors.white,
                   fontSize: ScreenUtil().setSp(12),
@@ -196,33 +200,35 @@ class PlanesPage extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
-                (prefs.tipoPlan == tipo)
+                (prefs.tipoPlan == plan.idPlan)
                     ? InkWell(
                         onTap: () {
-                          Navigator.push(
-                            context,
-                            PageRouteBuilder(
-                              pageBuilder: (context, animation, secondaryAnimation) {
-                                return DetallePlanPage(
-                                  nombrePlan: titulo,
-                                );
-                              },
-                              transitionsBuilder: (context, animation, secondaryAnimation, child) {
-                                var begin = Offset(0.0, 1.0);
-                                var end = Offset.zero;
-                                var curve = Curves.ease;
+                          // print(plan.idPlan);
+                          modalSeletPayMetod(context, plan, 'Renovar plan', true);
+                          // Navigator.push(
+                          //   context,
+                          //   PageRouteBuilder(
+                          //     pageBuilder: (context, animation, secondaryAnimation) {
+                          //       return DetallePlanPage(
+                          //         nombrePlan: plan.nombre,
+                          //       );
+                          //     },
+                          //     transitionsBuilder: (context, animation, secondaryAnimation, child) {
+                          //       var begin = Offset(0.0, 1.0);
+                          //       var end = Offset.zero;
+                          //       var curve = Curves.ease;
 
-                                var tween = Tween(begin: begin, end: end).chain(
-                                  CurveTween(curve: curve),
-                                );
+                          //       var tween = Tween(begin: begin, end: end).chain(
+                          //         CurveTween(curve: curve),
+                          //       );
 
-                                return SlideTransition(
-                                  position: animation.drive(tween),
-                                  child: child,
-                                );
-                              },
-                            ),
-                          );
+                          //       return SlideTransition(
+                          //         position: animation.drive(tween),
+                          //         child: child,
+                          //       );
+                          //     },
+                          //   ),
+                          // );
                         },
                         child: Container(
                           padding: EdgeInsets.symmetric(vertical: ScreenUtil().setHeight(8), horizontal: ScreenUtil().setWidth(16)),
@@ -242,6 +248,9 @@ class PlanesPage extends StatelessWidget {
                         ),
                       )
                     : InkWell(
+                        onTap: () {
+                          modalSeletPayMetod(context, plan, 'Cambiar plan', false);
+                        },
                         child: Container(
                           padding: EdgeInsets.all(8),
                           decoration: BoxDecoration(

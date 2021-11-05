@@ -147,6 +147,14 @@ class Preferences {
     _prefs.setString('inicioPlan', value);
   }
 
+  get finPlan {
+    return _prefs.getString('finPlan');
+  }
+
+  set finPlan(String value) {
+    _prefs.setString('finPlan', value);
+  }
+
   get estadoPlan {
     return _prefs.getString('estadoPlan');
   }

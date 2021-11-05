@@ -40,7 +40,8 @@ class LoginApi {
           //Guardar plan
           _prefs.tipoPlan = decodedData['data']['plan']['tipo'];
           _prefs.inicioPlan = decodedData['data']['plan']['inicio'];
-          _prefs.estadoPlan = decodedData['data']['plan']['estado'];
+          _prefs.finPlan = decodedData['data']['plan']['inicio'];
+          _prefs.estadoPlan = decodedData['data']['plan']['fin'];
           //Guardar Negocio
           _prefs.idNegocio = decodedData['data']['negocio']['id'];
           _prefs.negocioNombre = decodedData['data']['negocio']['nombre'];
