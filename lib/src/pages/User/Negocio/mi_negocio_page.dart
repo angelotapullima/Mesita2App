@@ -17,6 +17,7 @@ class _MiNegocioPageState extends State<MiNegocioPage> {
   TextEditingController _rucController = TextEditingController();
   TextEditingController _telefonoController = TextEditingController();
   TextEditingController _emailController = TextEditingController();
+  TextEditingController _razonController = TextEditingController();
 
   final _controller = NegocioController();
 
@@ -26,6 +27,9 @@ class _MiNegocioPageState extends State<MiNegocioPage> {
       final preferences = Preferences();
       _nombreNegocioController.text = preferences.negocioNombre;
       _direccionController.text = preferences.negocioDireccion;
+      _rucController.text = preferences.negocioRUC;
+      _telefonoController.text = preferences.negocioTelefono;
+      _razonController.text = preferences.negocioRazonSocial;
     });
     super.initState();
   }
@@ -227,7 +231,7 @@ class _MiNegocioPageState extends State<MiNegocioPage> {
                     ),
                     TextField(
                       readOnly: _controller.enableImput,
-                      controller: _rucController,
+                      controller: _razonController,
                       /* focusNode: _focus1,
                                         controller: _numberTableController,
                                         maxLines: 1,

@@ -45,7 +45,10 @@ class LoginApi {
           //Guardar Negocio
           _prefs.idNegocio = decodedData['data']['negocio']['id'];
           _prefs.negocioNombre = decodedData['data']['negocio']['nombre'];
-          _prefs.negocioDireccion = decodedData['data']['negocio']['direccion'];
+          _prefs.negocioDireccion = '${decodedData['data']['negocio']['direccion']}';
+          _prefs.negocioTelefono = '${decodedData['data']['negocio']['telefono']}';
+          _prefs.negocioRUC = '${decodedData['data']['negocio']['ruc']}';
+          _prefs.negocioRazonSocial = '${decodedData['data']['negocio']['razonsocial']}';
           // _prefs.negocioImage = '$apiBaseURL/${decodedData['data']['n_f']}';
 
         } else {

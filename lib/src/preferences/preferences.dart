@@ -107,6 +107,30 @@ class Preferences {
     _prefs.setString('negocioImage', value);
   }
 
+  get negocioRUC {
+    return _prefs.getString('negocioRUC');
+  }
+
+  set negocioRUC(String value) {
+    _prefs.setString('negocioRUC', value);
+  }
+
+  get negocioRazonSocial {
+    return _prefs.getString('negocioRazonSocial');
+  }
+
+  set negocioRazonSocial(String value) {
+    _prefs.setString('negocioRazonSocial', value);
+  }
+
+  get negocioDireccion {
+    return _prefs.getString('negocioDireccion');
+  }
+
+  set negocioDireccion(String value) {
+    _prefs.setString('negocioDireccion', value);
+  }
+
   get idRol {
     return _prefs.getString('idRol');
   }
@@ -123,12 +147,12 @@ class Preferences {
     _prefs.setString('rolName', value);
   }
 
-  get negocioDireccion {
-    return _prefs.getString('negocioDireccion');
+  get negocioTelefono {
+    return _prefs.getString('negocioTelefono');
   }
 
-  set negocioDireccion(String value) {
-    _prefs.setString('negocioDireccion', value);
+  set negocioTelefono(String value) {
+    _prefs.setString('negocioTelefono', value);
   }
 
   get tipoPlan {
