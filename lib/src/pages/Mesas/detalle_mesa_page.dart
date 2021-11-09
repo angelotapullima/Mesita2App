@@ -164,7 +164,7 @@ class _DetalleMesaPageState extends State<DetalleMesaPage> {
                                             pageBuilder: (context, animation, secondaryAnimation) {
                                               return BuscarPage(
                                                 idEnviar: idEnviar,
-                                                esComanda: false,
+                                                esComanda: esComanda,
                                                 mesa: widget.mesa,
                                               );
                                             },

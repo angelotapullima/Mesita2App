@@ -36,6 +36,7 @@ class _SplashState extends State<Splash> with AfterLayoutMixin<Splash> {
 
           if (resp) {
             print('Necesitar renovar');
+            Navigator.pushReplacementNamed(context, 'planes');
           } else {
             print('No necesitas renovars');
             Navigator.pushReplacementNamed(context, 'home');

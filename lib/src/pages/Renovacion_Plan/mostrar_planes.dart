@@ -7,11 +7,10 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:mesita_aplication_2/src/bloc/provider.dart';
 import 'package:mesita_aplication_2/src/models/planes_model.dart';
 import 'package:mesita_aplication_2/src/pages/User/Planes/Pagos/modals_metodoPago.dart';
-import 'package:mesita_aplication_2/src/pages/User/Planes/detalle_plan.dart';
 import 'package:mesita_aplication_2/src/preferences/preferences.dart';
 
-class PlanesPage extends StatelessWidget {
-  const PlanesPage({Key key}) : super(key: key);
+class MostrarPlanesPage extends StatelessWidget {
+  const MostrarPlanesPage({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -204,31 +203,7 @@ class PlanesPage extends StatelessWidget {
                     ? InkWell(
                         onTap: () {
                           // print(plan.idPlan);
-                          // modalSeletPayMetod(context, plan, 'Renovar plan', true);
-                          Navigator.push(
-                            context,
-                            PageRouteBuilder(
-                              pageBuilder: (context, animation, secondaryAnimation) {
-                                return DetallePlanPage(
-                                  nombrePlan: plan.nombre,
-                                );
-                              },
-                              transitionsBuilder: (context, animation, secondaryAnimation, child) {
-                                var begin = Offset(0.0, 1.0);
-                                var end = Offset.zero;
-                                var curve = Curves.ease;
-
-                                var tween = Tween(begin: begin, end: end).chain(
-                                  CurveTween(curve: curve),
-                                );
-
-                                return SlideTransition(
-                                  position: animation.drive(tween),
-                                  child: child,
-                                );
-                              },
-                            ),
-                          );
+                          modalSeletPayMetod(context, plan, 'Renovar plan', true, true);
                         },
                         child: Container(
                           padding: EdgeInsets.symmetric(vertical: ScreenUtil().setHeight(8), horizontal: ScreenUtil().setWidth(16)),
@@ -237,7 +212,7 @@ class PlanesPage extends StatelessWidget {
                             borderRadius: BorderRadius.circular(22),
                           ),
                           child: Text(
-                            'Ver',
+                            'Renovar',
                             style: GoogleFonts.poppins(
                               color: Colors.white,
                               fontSize: ScreenUtil().setSp(14),
@@ -249,7 +224,7 @@ class PlanesPage extends StatelessWidget {
                       )
                     : InkWell(
                         onTap: () {
-                          modalSeletPayMetod(context, plan, 'Cambiar plan', false, false);
+                          modalSeletPayMetod(context, plan, 'Cambiar plan', false, true);
                         },
                         child: Container(
                           padding: EdgeInsets.all(8),

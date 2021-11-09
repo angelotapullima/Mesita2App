@@ -27,6 +27,14 @@ class Preferences {
     _prefs.setString('idUser', value);
   }
 
+  get idPerson {
+    return _prefs.getString('idPerson');
+  }
+
+  set idPerson(String value) {
+    _prefs.setString('idPerson', value);
+  }
+
   get userNickname {
     return _prefs.getString('user_nickname');
   }

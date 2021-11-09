@@ -16,7 +16,9 @@ class DetalleReservaPlinYape extends StatefulWidget {
   final int tipoMetodoPago;
   final PlanesModel plan;
   final bool esRenovacion;
-  const DetalleReservaPlinYape({Key key, @required this.tipoMetodoPago, @required this.plan, @required this.esRenovacion}) : super(key: key);
+  final bool planVencido;
+  const DetalleReservaPlinYape({Key key, @required this.tipoMetodoPago, @required this.plan, @required this.esRenovacion, @required this.planVencido})
+      : super(key: key);
 
   @override
   _DetalleReservaPlinYapeState createState() => _DetalleReservaPlinYapeState();
@@ -449,6 +451,7 @@ class _DetalleReservaPlinYapeState extends State<DetalleReservaPlinYape> {
                                   pageBuilder: (context, animation, secondaryAnimation) {
                                     return ValidarPagoPage(
                                       tipoMetodoPago: widget.tipoMetodoPago,
+                                      planVencido: widget.planVencido,
                                       plan: widget.plan,
                                       numContacto: _contactoController.text,
                                       tiempoPlan: (widget.plan.idPlan == '1')

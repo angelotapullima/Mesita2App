@@ -27,6 +27,7 @@ class LoginApi {
         if (decodedData['data']['agente'] != 0) {
           //Guardar datos Usuario
           _prefs.idUser = decodedData['data']['c_u'];
+          _prefs.idPerson = decodedData['data']['c_p'];
           _prefs.userNickname = decodedData['data']['_n'];
           _prefs.userImage = '${decodedData['data']['u_i']}';
           _prefs.personName = decodedData['data']['p_n'];

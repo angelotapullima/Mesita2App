@@ -11,6 +11,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:mesita_aplication_2/src/api/planes_api.dart';
 import 'package:mesita_aplication_2/src/bloc/provider.dart';
 import 'package:mesita_aplication_2/src/models/planes_model.dart';
+import 'package:mesita_aplication_2/src/pages/home.dart';
 import 'package:mesita_aplication_2/src/preferences/preferences.dart';
 import 'package:mesita_aplication_2/src/utils/utils.dart';
 
@@ -20,13 +21,15 @@ class ValidarPagoPage extends StatefulWidget {
   final PlanesModel plan;
   final int tiempoPlan;
   final bool esRenovacion;
+  final bool planVencido;
   const ValidarPagoPage(
       {Key key,
       @required this.tipoMetodoPago,
       @required this.plan,
       @required this.numContacto,
       @required this.tiempoPlan,
-      @required this.esRenovacion})
+      @required this.esRenovacion,
+      @required this.planVencido})
       : super(key: key);
 
   @override
@@ -749,8 +752,37 @@ class _ValidarPagoPageState extends State<ValidarPagoPage> {
                         if (resp) {
                           await api.obtenerPlanUser();
                           Navigator.pop(context);
-                          final planesBloc = ProviderBloc.planes(context);
-                          planesBloc.obtenerPlanes();
+
+                          if (widget.planVencido) {
+                            Navigator.pushReplacementNamed(context, 'home');
+
+                            Navigator.push(
+                              context,
+                              PageRouteBuilder(
+                                pageBuilder: (context, animation, secondaryAnimation) {
+                                  return Home();
+                                },
+                                transitionsBuilder: (context, animation, secondaryAnimation, child) {
+                                  var begin = Offset(0.0, 1.0);
+                                  var end = Offset.zero;
+                                  var curve = Curves.ease;
+
+                                  var tween = Tween(begin: begin, end: end).chain(
+                                    CurveTween(curve: curve),
+                                  );
+
+                                  return SlideTransition(
+                                    position: animation.drive(tween),
+                                    child: child,
+                                  );
+                                },
+                              ),
+                            );
+                          } else {
+                            final planesBloc = ProviderBloc.planes(context);
+                            planesBloc.obtenerPlanes();
+                          }
+
                           // Navigator.push(
                           //   context,
                           //   PageRouteBuilder(

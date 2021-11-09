@@ -4,8 +4,16 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:keyboard_actions/keyboard_actions.dart';
+import 'package:mesita_aplication_2/src/api/linea_api.dart';
 import 'package:mesita_aplication_2/src/api/login_api.dart';
+import 'package:mesita_aplication_2/src/api/planes_api.dart';
+import 'package:mesita_aplication_2/src/api/user_api.dart';
+import 'package:mesita_aplication_2/src/pages/User/modal_edit_perfil.dart';
 import 'package:mesita_aplication_2/src/pages/home.dart';
+import 'package:mesita_aplication_2/src/preferences/preferences.dart';
+import 'package:mesita_aplication_2/src/utils/utils.dart';
 
 enum PageMostrar { inicioSesion, registro }
 
@@ -21,6 +29,16 @@ class _LoginState extends State<Login> {
   bool _passwordVisible;
   String mensaje = '';
   final _controller = ControllerNotifier();
+  final TextEditingController _nombreController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _userController = TextEditingController();
+  final TextEditingController _passwdController = TextEditingController();
+  final TextEditingController _confrimPasswdController = TextEditingController();
+
+  //COMPLETAR DATOS
+  TextEditingController _nombre2Controller = new TextEditingController();
+  TextEditingController _apellidoPaternoController = new TextEditingController();
+  TextEditingController _apellidoMaternoController = new TextEditingController();
 
   @override
   void initState() {
@@ -259,12 +277,6 @@ class _LoginState extends State<Login> {
                     vertical: ScreenUtil().setHeight(5),
                     horizontal: ScreenUtil().setWidth(10),
                   ),
-                  /* border: OutlineInputBorder(
-                    //borderSide: BorderSide(color: Colors.white),
-                    borderRadius: BorderRadius.all(
-                      Radius.circular(15),
-                    ),
-                  ), */
                   hintStyle: const TextStyle(
                     color: Color(0xffa8a7a7),
                   ),
@@ -275,25 +287,6 @@ class _LoginState extends State<Login> {
           SizedBox(
             height: ScreenUtil().setHeight(30),
           ),
-          // SizedBox(
-          //   height: ScreenUtil().setHeight(50),
-          //   child: TextField(
-          //     controller: _passwdController,
-          //     cursorColor: Colors.transparent,
-          //     keyboardType: TextInputType.text,
-          //     maxLines: 1,
-          //     decoration: InputDecoration(
-          //         contentPadding: EdgeInsets.symmetric(
-          //           vertical: ScreenUtil().setHeight(5),
-          //           horizontal: ScreenUtil().setWidth(10),
-          //         ),
-          //         hintStyle: const TextStyle(
-          //           color: Color(0xffa8a7a7),
-          //         ),
-          //         hintText: 'Contraseña'),
-          //     enableInteractiveSelection: true,
-          //   ),
-          // ),
           SizedBox(
             height: ScreenUtil().setHeight(50),
             child: AnimatedBuilder(
@@ -365,30 +358,45 @@ class _LoginState extends State<Login> {
                   final res = await _loginApi.login(_userNameController.text, _passwdController.text);
 
                   if (res.code == '1') {
-                    Navigator.pushReplacementNamed(context, 'home');
+                    final preferences = Preferences();
+                    final _lineaApi = LineaApi();
+                    final _planApi = PlanesApi();
+                    await _lineaApi.obtenerLineasPorNegocio();
+                    await _planApi.obtenerPlanUser();
 
-                    Navigator.push(
-                      context,
-                      PageRouteBuilder(
-                        pageBuilder: (context, animation, secondaryAnimation) {
-                          return Home();
-                        },
-                        transitionsBuilder: (context, animation, secondaryAnimation, child) {
-                          var begin = Offset(0.0, 1.0);
-                          var end = Offset.zero;
-                          var curve = Curves.ease;
+                    final resp = compararFechaConActual(preferences.finPlan);
 
-                          var tween = Tween(begin: begin, end: end).chain(
-                            CurveTween(curve: curve),
-                          );
+                    if (resp) {
+                      print('Necesitar renovar');
+                      Navigator.pushReplacementNamed(context, 'planes');
+                    } else {
+                      print('No necesitas renovars');
+                      Navigator.pushReplacementNamed(context, 'home');
 
-                          return SlideTransition(
-                            position: animation.drive(tween),
-                            child: child,
-                          );
-                        },
-                      ),
-                    );
+                      Navigator.push(
+                        context,
+                        PageRouteBuilder(
+                          pageBuilder: (context, animation, secondaryAnimation) {
+                            return Home();
+                          },
+                          transitionsBuilder: (context, animation, secondaryAnimation, child) {
+                            var begin = Offset(0.0, 1.0);
+                            var end = Offset.zero;
+                            var curve = Curves.ease;
+
+                            var tween = Tween(begin: begin, end: end).chain(
+                              CurveTween(curve: curve),
+                            );
+
+                            return SlideTransition(
+                              position: animation.drive(tween),
+                              child: child,
+                            );
+                          },
+                        ),
+                      );
+                    }
+
                     _controller.changeCargando(false);
                   } else {
                     _controller.changeMensaje(res.message);
@@ -436,9 +444,6 @@ class _LoginState extends State<Login> {
             height: ScreenUtil().setHeight(10),
           ),
           Container(
-            // margin: EdgeInsets.symmetric(
-            //   horizontal: ScreenUtil().setWidth(30),
-            // ),
             decoration: BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.circular(15),
@@ -511,24 +516,7 @@ class _LoginState extends State<Login> {
           SizedBox(
             height: ScreenUtil().setHeight(50),
             child: TextField(
-              cursorColor: Colors.transparent,
-              keyboardType: TextInputType.text,
-              maxLines: 1,
-              decoration: InputDecoration(
-                  contentPadding: EdgeInsets.symmetric(
-                    vertical: ScreenUtil().setHeight(5),
-                    horizontal: ScreenUtil().setWidth(10),
-                  ),
-                  hintStyle: const TextStyle(
-                    color: Color(0xffa8a7a7),
-                  ),
-                  hintText: 'Negocio'),
-              enableInteractiveSelection: true,
-            ),
-          ),
-          SizedBox(
-            height: ScreenUtil().setHeight(50),
-            child: TextField(
+              controller: _nombreController,
               cursorColor: Colors.transparent,
               keyboardType: TextInputType.text,
               maxLines: 1,
@@ -541,13 +529,18 @@ class _LoginState extends State<Login> {
                     color: Color(0xffa8a7a7),
                   ),
                   hintText: 'Nombre'),
-              enableInteractiveSelection: true,
+              enableInteractiveSelection: false,
+              onTap: () {
+                FocusScope.of(context).requestFocus(new FocusNode());
+                _completarDatosPersona(context);
+              },
             ),
           ),
           SizedBox(
             height: ScreenUtil().setHeight(50),
             child: TextField(
               cursorColor: Colors.transparent,
+              controller: _emailController,
               keyboardType: TextInputType.emailAddress,
               maxLines: 1,
               decoration: InputDecoration(
@@ -565,6 +558,26 @@ class _LoginState extends State<Login> {
           SizedBox(
             height: ScreenUtil().setHeight(50),
             child: TextField(
+              cursorColor: Colors.transparent,
+              controller: _userController,
+              keyboardType: TextInputType.text,
+              maxLines: 1,
+              decoration: InputDecoration(
+                  contentPadding: EdgeInsets.symmetric(
+                    vertical: ScreenUtil().setHeight(5),
+                    horizontal: ScreenUtil().setWidth(10),
+                  ),
+                  hintStyle: const TextStyle(
+                    color: Color(0xffa8a7a7),
+                  ),
+                  hintText: 'Usuario'),
+              enableInteractiveSelection: true,
+            ),
+          ),
+          SizedBox(
+            height: ScreenUtil().setHeight(50),
+            child: TextField(
+              controller: _passwdController,
               obscureText: _passwordVisible,
               cursorColor: Colors.transparent,
               keyboardType: TextInputType.text,
@@ -606,6 +619,7 @@ class _LoginState extends State<Login> {
           SizedBox(
             height: ScreenUtil().setHeight(50),
             child: TextField(
+              controller: _confrimPasswdController,
               obscureText: _passwordVisible,
               cursorColor: Colors.transparent,
               keyboardType: TextInputType.text,
@@ -631,7 +645,35 @@ class _LoginState extends State<Login> {
               color: Colors.red,
               textColor: Colors.white,
               elevation: 10,
-              onPressed: () {},
+              onPressed: () async {
+                _controller.changeCargando(true);
+                _controller.changeMensaje('');
+
+                if (_nombreController.text.length > 0 &&
+                    _emailController.text.length > 0 &&
+                    _userController.text.length > 0 &&
+                    _passwdController.text.length > 0 &&
+                    _confrimPasswdController.text.length > 0) {
+                  if (_passwdController.text == _confrimPasswdController.text) {
+                    final _userApi = UserApi();
+
+                    final res = await _userApi.registarNuevoUsuario(_nombreController.text, _apellidoPaternoController.text,
+                        _apellidoMaternoController.text, _emailController.text, _userController.text, _passwdController.text);
+                    if (res == 1) {
+                      setState(() {
+                        _currentPage = PageMostrar.inicioSesion;
+                      });
+                    } else {
+                      _controller.changeMensaje('Ocurrió un error');
+                    }
+                  } else {
+                    _controller.changeMensaje('Contraseñas no coinciden');
+                  }
+                } else {
+                  _controller.changeMensaje('Complete todos los campos');
+                }
+                _controller.changeCargando(false);
+              },
               shape: const RoundedRectangleBorder(
                 borderRadius: BorderRadius.all(
                   Radius.circular(20.0),
@@ -639,10 +681,358 @@ class _LoginState extends State<Login> {
               ),
               child: const Text('Continuar'),
             ),
-          )
+          ),
+          SizedBox(
+            height: ScreenUtil().setHeight(8),
+          ),
+          AnimatedBuilder(
+              animation: _controller,
+              builder: (context, snapshot) {
+                return Center(
+                  child: Text(
+                    _controller.mensaje,
+                    style: TextStyle(
+                      color: const Color(0xffa8a7a7),
+                      fontSize: ScreenUtil().setSp(16),
+                    ),
+                  ),
+                );
+              })
         ],
       ),
     );
+  }
+
+  void _completarDatosPersona(BuildContext context) {
+    final _controller = ChangeEditPerfilController();
+    final _prefs = Preferences();
+
+    FocusNode _focus1 = FocusNode();
+    FocusNode _focus2 = FocusNode();
+    FocusNode _focus3 = FocusNode();
+
+    _nombre2Controller.text = _prefs.personName;
+    _apellidoPaternoController.text = _prefs.personApellidoPaterno;
+    _apellidoMaternoController.text = _prefs.personApellidoMaterno;
+
+    showModalBottomSheet(
+        context: context,
+        isScrollControlled: true,
+        backgroundColor: Colors.transparent,
+        builder: (context) {
+          return Stack(
+            children: [
+              Container(
+                color: Color.fromRGBO(0, 0, 0, 0.001),
+                child: DraggableScrollableSheet(
+                    initialChildSize: 0.93,
+                    minChildSize: 0.2,
+                    maxChildSize: 0.93,
+                    builder: (_, controller) {
+                      return Container(
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.only(
+                            topLeft: const Radius.circular(30),
+                            topRight: const Radius.circular(30),
+                          ),
+                        ),
+                        child: KeyboardActions(
+                          config: KeyboardActionsConfig(keyboardSeparatorColor: Colors.white, keyboardBarColor: Colors.white, actions: [
+                            KeyboardActionsItem(focusNode: _focus1),
+                            KeyboardActionsItem(focusNode: _focus2),
+                            KeyboardActionsItem(focusNode: _focus3),
+                          ]),
+                          child: Padding(
+                            padding: EdgeInsets.symmetric(vertical: ScreenUtil().setHeight(10), horizontal: ScreenUtil().setWidth(24)),
+                            child: SingleChildScrollView(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  SizedBox(
+                                    height: ScreenUtil().setWidth(4),
+                                    child: Center(
+                                      child: Container(
+                                        width: ScreenUtil().setWidth(48),
+                                        decoration: BoxDecoration(
+                                          color: Color(0XFFBABABA),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    height: ScreenUtil().setWidth(10),
+                                  ),
+                                  Center(
+                                    child: Text(
+                                      'Ingresar Datos',
+                                      style: GoogleFonts.poppins(
+                                        color: Color(0XFFFF0036),
+                                        fontWeight: FontWeight.w600,
+                                        fontSize: ScreenUtil().setSp(18),
+                                      ),
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    height: ScreenUtil().setWidth(24),
+                                  ),
+                                  Text(
+                                    'Nombre',
+                                    style: GoogleFonts.poppins(
+                                      color: Color(0XFF585858),
+                                      fontWeight: FontWeight.w500,
+                                      fontSize: ScreenUtil().setSp(16),
+                                    ),
+                                  ),
+                                  TextField(
+                                    focusNode: _focus1,
+                                    controller: _nombre2Controller,
+                                    maxLines: 1,
+                                    onChanged: (value) {
+                                      if (_nombre2Controller.text.length > 0 &&
+                                          _apellidoPaternoController.text.length > 0 &&
+                                          _apellidoMaternoController.text.length > 0) {
+                                        _controller.changeBoton(true);
+                                      } else {
+                                        _controller.changeBoton(false);
+                                      }
+                                    },
+                                    keyboardType: TextInputType.text,
+                                    decoration: InputDecoration(
+                                      hintText: 'Nombre',
+                                      hintStyle: TextStyle(
+                                        color: Color(0XFFBEBEBE),
+                                        fontWeight: FontWeight.w400,
+                                        fontSize: ScreenUtil().setSp(16),
+                                        fontStyle: FontStyle.normal,
+                                      ),
+                                      filled: true,
+                                      fillColor: Color(0XFFEDEDED),
+                                      contentPadding: EdgeInsets.only(
+                                          left: ScreenUtil().setWidth(10), top: ScreenUtil().setHeight(5), bottom: ScreenUtil().setHeight(1)),
+                                      enabledBorder: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(15),
+                                        borderSide: BorderSide(color: Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
+                                      ),
+                                      focusedBorder: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(15),
+                                        borderSide: BorderSide(color: Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
+                                      ),
+                                      border: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(15),
+                                        borderSide: BorderSide(color: Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
+                                      ),
+                                    ),
+                                    style: TextStyle(
+                                      color: Color(0XFF585858),
+                                      fontWeight: FontWeight.w400,
+                                      fontSize: ScreenUtil().setSp(16),
+                                      fontStyle: FontStyle.normal,
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    height: ScreenUtil().setWidth(24),
+                                  ),
+                                  Text(
+                                    'Apellido paterno',
+                                    style: GoogleFonts.poppins(
+                                      color: Color(0XFF585858),
+                                      fontWeight: FontWeight.w500,
+                                      fontSize: ScreenUtil().setSp(16),
+                                    ),
+                                  ),
+                                  TextField(
+                                    focusNode: _focus2,
+                                    controller: _apellidoPaternoController,
+                                    maxLines: 1,
+                                    onChanged: (value) {
+                                      if (_nombre2Controller.text.length > 0 &&
+                                          _apellidoPaternoController.text.length > 0 &&
+                                          _apellidoMaternoController.text.length > 0) {
+                                        _controller.changeBoton(true);
+                                      } else {
+                                        _controller.changeBoton(false);
+                                      }
+                                    },
+                                    keyboardType: TextInputType.text,
+                                    decoration: InputDecoration(
+                                      hintText: 'Apellido paterno',
+                                      hintStyle: TextStyle(
+                                        color: Color(0XFFBEBEBE),
+                                        fontWeight: FontWeight.w400,
+                                        fontSize: ScreenUtil().setSp(16),
+                                        fontStyle: FontStyle.normal,
+                                      ),
+                                      filled: true,
+                                      fillColor: Color(0XFFEDEDED),
+                                      contentPadding: EdgeInsets.only(
+                                          left: ScreenUtil().setWidth(10), top: ScreenUtil().setHeight(5), bottom: ScreenUtil().setHeight(1)),
+                                      enabledBorder: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(15),
+                                        borderSide: BorderSide(color: Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
+                                      ),
+                                      focusedBorder: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(15),
+                                        borderSide: BorderSide(color: Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
+                                      ),
+                                      border: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(15),
+                                        borderSide: BorderSide(color: Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
+                                      ),
+                                    ),
+                                    style: TextStyle(
+                                      color: Color(0XFF585858),
+                                      fontWeight: FontWeight.w400,
+                                      fontSize: ScreenUtil().setSp(16),
+                                      fontStyle: FontStyle.normal,
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    height: ScreenUtil().setWidth(24),
+                                  ),
+                                  Text(
+                                    'Apellido materno',
+                                    style: GoogleFonts.poppins(
+                                      color: Color(0XFF585858),
+                                      fontWeight: FontWeight.w500,
+                                      fontSize: ScreenUtil().setSp(16),
+                                    ),
+                                  ),
+                                  TextField(
+                                    focusNode: _focus3,
+                                    controller: _apellidoMaternoController,
+                                    maxLines: 1,
+                                    onChanged: (value) {
+                                      if (_nombre2Controller.text.length > 0 &&
+                                          _apellidoPaternoController.text.length > 0 &&
+                                          _apellidoMaternoController.text.length > 0) {
+                                        _controller.changeBoton(true);
+                                      } else {
+                                        _controller.changeBoton(false);
+                                      }
+                                    },
+                                    keyboardType: TextInputType.text,
+                                    decoration: InputDecoration(
+                                      hintText: 'Apellido materno',
+                                      hintStyle: TextStyle(
+                                        color: Color(0XFFBEBEBE),
+                                        fontWeight: FontWeight.w400,
+                                        fontSize: ScreenUtil().setSp(16),
+                                        fontStyle: FontStyle.normal,
+                                      ),
+                                      filled: true,
+                                      fillColor: Color(0XFFEDEDED),
+                                      contentPadding: EdgeInsets.only(
+                                          left: ScreenUtil().setWidth(10), top: ScreenUtil().setHeight(5), bottom: ScreenUtil().setHeight(1)),
+                                      enabledBorder: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(15),
+                                        borderSide: BorderSide(color: Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
+                                      ),
+                                      focusedBorder: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(15),
+                                        borderSide: BorderSide(color: Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
+                                      ),
+                                      border: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(15),
+                                        borderSide: BorderSide(color: Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
+                                      ),
+                                    ),
+                                    style: TextStyle(
+                                      color: Color(0XFF585858),
+                                      fontWeight: FontWeight.w400,
+                                      fontSize: ScreenUtil().setSp(16),
+                                      fontStyle: FontStyle.normal,
+                                    ),
+                                  ),
+                                  SizedBox(height: ScreenUtil().setHeight(48)),
+                                  InkWell(
+                                    onTap: () {
+                                      if (_controller.boton) {
+                                        _nombreController.text =
+                                            '${_nombre2Controller.text} ${_apellidoPaternoController.text} ${_apellidoMaternoController.text}';
+                                        Navigator.pop(context);
+                                      }
+                                    },
+                                    child: AnimatedBuilder(
+                                        animation: _controller,
+                                        builder: (_, s) {
+                                          return Center(
+                                            child: Container(
+                                              decoration: BoxDecoration(
+                                                borderRadius: BorderRadius.circular(50),
+                                                color: (_controller.boton) ? Color(0XFFFF0036) : Color(0XFFFF0036).withOpacity(0.6),
+                                              ),
+                                              child: Center(
+                                                child: Text(
+                                                  'Hecho',
+                                                  style: TextStyle(
+                                                    color: Colors.white,
+                                                    fontWeight: FontWeight.w600,
+                                                    fontSize: ScreenUtil().setSp(16),
+                                                    fontStyle: FontStyle.normal,
+                                                    letterSpacing: 1.5,
+                                                  ),
+                                                ),
+                                              ),
+                                              height: ScreenUtil().setHeight(44),
+                                              width: ScreenUtil().setWidth(255),
+                                            ),
+                                          );
+                                        }),
+                                  ),
+                                  SizedBox(height: ScreenUtil().setHeight(8)),
+                                  Center(
+                                    child: AnimatedBuilder(
+                                        animation: _controller,
+                                        builder: (_, s) {
+                                          return Text(
+                                            _controller.text,
+                                            style: TextStyle(
+                                              color: Color(0XFFFF0036),
+                                              fontWeight: FontWeight.w600,
+                                              fontSize: ScreenUtil().setSp(16),
+                                              fontStyle: FontStyle.normal,
+                                              letterSpacing: ScreenUtil().setSp(0.016),
+                                            ),
+                                          );
+                                        }),
+                                  ),
+                                  SizedBox(height: ScreenUtil().setHeight(10)),
+                                  Center(
+                                    child: InkWell(
+                                      onTap: () {
+                                        Navigator.pop(context);
+                                      },
+                                      child: Text(
+                                        'Cancelar',
+                                        style: GoogleFonts.poppins(
+                                          color: Color(0XFF8A8A8A),
+                                          fontWeight: FontWeight.w500,
+                                          fontSize: ScreenUtil().setSp(16),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ),
+                      );
+                    }),
+              ),
+              AnimatedBuilder(
+                  animation: _controller,
+                  builder: (_, s) {
+                    if (_controller.cargando) {
+                      return _mostrarAlert();
+                    } else {
+                      return Container();
+                    }
+                  })
+            ],
+          );
+        });
   }
 }
 

@@ -24,7 +24,7 @@ class ChangeData extends ChangeNotifier {
   }
 }
 
-void modalSeletPayMetod(BuildContext context, PlanesModel planCambio, String titulo, bool esRenovacion) {
+void modalSeletPayMetod(BuildContext context, PlanesModel planCambio, String titulo, bool esRenovacion, bool planVencido) {
   final _controller = ChangeData();
 
   showModalBottomSheet(
@@ -146,6 +146,7 @@ void modalSeletPayMetod(BuildContext context, PlanesModel planCambio, String tit
                                             tipoMetodoPago: _controller.select,
                                             plan: planCambio,
                                             esRenovacion: esRenovacion,
+                                            planVencido: planVencido,
                                           );
                                         },
                                         transitionsBuilder: (context, animation, secondaryAnimation, child) {
