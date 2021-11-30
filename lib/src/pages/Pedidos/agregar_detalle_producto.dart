@@ -9,7 +9,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:mesita_aplication_2/src/api/comanda_temporal_api.dart';
 import 'package:mesita_aplication_2/src/api/pedidos_api.dart';
 import 'package:mesita_aplication_2/src/bloc/provider.dart';
-import 'package:mesita_aplication_2/src/database/pedidos_temporales_database.dart';
 import 'package:mesita_aplication_2/src/models/agregar_producto_pedido_model.dart';
 import 'package:mesita_aplication_2/src/models/pedido_temporal_model.dart';
 import 'package:mesita_aplication_2/src/models/producto_linea_model.dart';
