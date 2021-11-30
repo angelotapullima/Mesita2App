@@ -38,15 +38,26 @@ class _BebidasPageState extends State<BebidasPage> {
   }
 
   @override
+  void initState() {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      final lineasBloc = ProviderBloc.lineas(context);
+      lineasBloc.updateLineasPorNegocio(idCategoria);
+    });
+
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final prefs = Preferences();
     final lineasBloc = ProviderBloc.lineas(context);
-    if (carga == 0) {
-      lineasBloc.updateLineasPorNegocio(idCategoria);
-      carga++;
-    } else {
-      lineasBloc.obtenerLineasPorNegocio(idCategoria);
-    }
+    // if (carga == 0) {
+    //   lineasBloc.updateLineasPorNegocio(idCategoria);
+    //   carga++;
+    // } else {
+    //   lineasBloc.obtenerLineasPorNegocio(idCategoria);
+    // }
+    lineasBloc.obtenerLineasPorNegocio(idCategoria);
     final productosLineaBloc = ProviderBloc.productosLinea(context);
     return Scaffold(
       backgroundColor: Color(0XFFE5E5E5),
@@ -225,7 +236,7 @@ class _BebidasPageState extends State<BebidasPage> {
     return Container(
       height: double.infinity,
       width: double.infinity,
-      color: Color.fromRGBO(0, 0, 0, 0.5),
+      color: Color.fromRGBO(0, 0, 0, 0.1),
       child: Center(
         child: (Platform.isAndroid)
             ? CircularProgressIndicator(

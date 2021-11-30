@@ -124,9 +124,246 @@ class MesasPage extends StatelessWidget {
                             mainAxisSpacing: 0,
                             crossAxisSpacing: ScreenUtil().setWidth(10),
                           ),
-                          itemCount: snapsdhot.data.length,
+                          itemCount: snapsdhot.data.length + 2,
                           itemBuilder: (BuildContext context, int index) {
                             return LayoutBuilder(builder: (context, constraints) {
+                              if (index == 0) {
+                                return InkWell(
+                                  onTap: () {
+                                    // Navigator.push(
+                                    //   context,
+                                    //   PageRouteBuilder(
+                                    //     pageBuilder: (context, animation, secondaryAnimation) {
+                                    //       return DetalleMesaPage(
+                                    //         mesa: snapsdhot.data[index],
+                                    //       );
+                                    //     },
+                                    //     transitionsBuilder: (context, animation, secondaryAnimation, child) {
+                                    //       var begin = Offset(0.0, 1.0);
+                                    //       var end = Offset.zero;
+                                    //       var curve = Curves.ease;
+
+                                    //       var tween = Tween(begin: begin, end: end).chain(
+                                    //         CurveTween(curve: curve),
+                                    //       );
+
+                                    //       return SlideTransition(
+                                    //         position: animation.drive(tween),
+                                    //         child: child,
+                                    //       );
+                                    //     },
+                                    //   ),
+                                    // );
+                                  },
+                                  child: Container(
+                                    padding: EdgeInsets.only(
+                                      right: ScreenUtil().setWidth(10),
+                                      left: ScreenUtil().setWidth(10),
+                                    ),
+                                    width: constraints.maxWidth,
+                                    child: Row(
+                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      children: [
+                                        Container(
+                                          width: constraints.maxWidth * 0.12,
+                                          child: Padding(
+                                            padding: EdgeInsets.symmetric(
+                                              vertical: ScreenUtil().setHeight(10),
+                                            ),
+                                            child: Container(
+                                              decoration: BoxDecoration(
+                                                color: Colors.white,
+                                                borderRadius: BorderRadius.circular(5),
+                                              ),
+                                              height: constraints.maxHeight * 0.55,
+                                              width: constraints.maxWidth * 0.2,
+                                            ),
+                                          ),
+                                        ),
+                                        SizedBox(
+                                          width: constraints.maxWidth * 0.05,
+                                        ),
+                                        Container(
+                                          height: constraints.maxHeight - constraints.maxHeight * 0.20,
+                                          width: constraints.maxWidth * 0.52,
+                                          decoration: BoxDecoration(
+                                            borderRadius: BorderRadius.circular(5),
+                                            gradient: LinearGradient(
+                                              begin: Alignment.bottomLeft,
+                                              end: Alignment.topRight,
+                                              colors: [
+                                                Colors.white,
+                                                Colors.white,
+                                              ],
+
+                                              //
+                                            ),
+                                            boxShadow: [
+                                              BoxShadow(
+                                                offset: Offset(0, 0),
+                                                blurRadius: 20.0,
+                                                color: Color(0xff585858).withOpacity(.15),
+                                              ),
+                                            ],
+                                          ),
+                                          child: Padding(
+                                            padding: EdgeInsets.symmetric(
+                                              horizontal: ScreenUtil().setWidth(10),
+                                            ),
+                                            child: Center(
+                                              child: Text(
+                                                'Llevar',
+                                                style: TextStyle(
+                                                  fontSize: ScreenUtil().setSp(20),
+                                                  color: Color(0xfff9708d),
+                                                  fontWeight: FontWeight.bold,
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                        SizedBox(
+                                          width: constraints.maxWidth * 0.05,
+                                        ),
+                                        Container(
+                                          width: constraints.maxWidth * 0.12,
+                                          child: Padding(
+                                            padding: EdgeInsets.symmetric(vertical: ScreenUtil().setHeight(10)),
+                                            child: Container(
+                                              decoration: BoxDecoration(
+                                                //color: (snapsdhot.data[index].mesaEstado != '2') ? Colors.white : Color(0xffff0036),
+                                                color: Colors.white,
+                                                borderRadius: BorderRadius.circular(5),
+                                              ),
+                                              height: constraints.maxHeight * 0.55,
+                                              width: constraints.maxWidth * 0.2,
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                );
+                              }
+                              if (index == 1) {
+                                return InkWell(
+                                  onTap: () {
+                                    // Navigator.push(
+                                    //   context,
+                                    //   PageRouteBuilder(
+                                    //     pageBuilder: (context, animation, secondaryAnimation) {
+                                    //       return DetalleMesaPage(
+                                    //         mesa: snapsdhot.data[index],
+                                    //       );
+                                    //     },
+                                    //     transitionsBuilder: (context, animation, secondaryAnimation, child) {
+                                    //       var begin = Offset(0.0, 1.0);
+                                    //       var end = Offset.zero;
+                                    //       var curve = Curves.ease;
+
+                                    //       var tween = Tween(begin: begin, end: end).chain(
+                                    //         CurveTween(curve: curve),
+                                    //       );
+
+                                    //       return SlideTransition(
+                                    //         position: animation.drive(tween),
+                                    //         child: child,
+                                    //       );
+                                    //     },
+                                    //   ),
+                                    // );
+                                  },
+                                  child: Container(
+                                    padding: EdgeInsets.only(
+                                      right: ScreenUtil().setWidth(10),
+                                      left: ScreenUtil().setWidth(10),
+                                    ),
+                                    width: constraints.maxWidth,
+                                    child: Row(
+                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      children: [
+                                        Container(
+                                          width: constraints.maxWidth * 0.12,
+                                          child: Padding(
+                                            padding: EdgeInsets.symmetric(
+                                              vertical: ScreenUtil().setHeight(10),
+                                            ),
+                                            child: Container(
+                                              decoration: BoxDecoration(
+                                                color: Colors.white,
+                                                borderRadius: BorderRadius.circular(5),
+                                              ),
+                                              height: constraints.maxHeight * 0.55,
+                                              width: constraints.maxWidth * 0.2,
+                                            ),
+                                          ),
+                                        ),
+                                        SizedBox(
+                                          width: constraints.maxWidth * 0.05,
+                                        ),
+                                        Container(
+                                          height: constraints.maxHeight - constraints.maxHeight * 0.20,
+                                          width: constraints.maxWidth * 0.52,
+                                          decoration: BoxDecoration(
+                                            borderRadius: BorderRadius.circular(5),
+                                            gradient: LinearGradient(
+                                              begin: Alignment.bottomLeft,
+                                              end: Alignment.topRight,
+                                              colors: [
+                                                Colors.white,
+                                                Colors.white,
+                                              ],
+
+                                              //
+                                            ),
+                                            boxShadow: [
+                                              BoxShadow(
+                                                offset: Offset(0, 0),
+                                                blurRadius: 20.0,
+                                                color: Color(0xff585858).withOpacity(.15),
+                                              ),
+                                            ],
+                                          ),
+                                          child: Padding(
+                                            padding: EdgeInsets.symmetric(
+                                              horizontal: ScreenUtil().setWidth(10),
+                                            ),
+                                            child: Center(
+                                              child: Text(
+                                                'Delivery',
+                                                style: TextStyle(
+                                                  fontSize: ScreenUtil().setSp(18),
+                                                  color: Color(0xfff9708d),
+                                                  fontWeight: FontWeight.bold,
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                        SizedBox(
+                                          width: constraints.maxWidth * 0.05,
+                                        ),
+                                        Container(
+                                          width: constraints.maxWidth * 0.12,
+                                          child: Padding(
+                                            padding: EdgeInsets.symmetric(vertical: ScreenUtil().setHeight(10)),
+                                            child: Container(
+                                              decoration: BoxDecoration(
+                                                //color: (snapsdhot.data[index].mesaEstado != '2') ? Colors.white : Color(0xffff0036),
+                                                color: Colors.white,
+                                                borderRadius: BorderRadius.circular(5),
+                                              ),
+                                              height: constraints.maxHeight * 0.55,
+                                              width: constraints.maxWidth * 0.2,
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                );
+                              }
+                              index = index - 2;
                               return InkWell(
                                 onTap: () {
                                   Navigator.push(
@@ -339,7 +576,7 @@ class MesasPage extends StatelessWidget {
     return Container(
       height: double.infinity,
       width: double.infinity,
-      color: Color.fromRGBO(0, 0, 0, 0.5),
+      color: Color.fromRGBO(0, 0, 0, 0.1),
       child: Center(
         child: (Platform.isAndroid)
             ? CircularProgressIndicator(

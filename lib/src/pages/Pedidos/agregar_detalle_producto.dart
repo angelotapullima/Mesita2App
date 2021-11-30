@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:mesita_aplication_2/src/api/comanda_temporal_api.dart';
 import 'package:mesita_aplication_2/src/api/pedidos_api.dart';
 import 'package:mesita_aplication_2/src/bloc/provider.dart';
 import 'package:mesita_aplication_2/src/database/pedidos_temporales_database.dart';
@@ -267,8 +268,14 @@ class _AgregarDetalleProductoState extends State<AgregarDetalleProducto> {
                             alignment: Alignment.bottomRight,
                             child: InkWell(
                               onTap: () async {
+                                String valueLlevar;
+                                if (_controller.llevar) {
+                                  valueLlevar = '1';
+                                } else {
+                                  valueLlevar = '0';
+                                }
                                 if (widget.esComanda) {
-                                  final _comandaDatabase = PedidosTemporalDatabase();
+                                  //final _comandaDatabase = PedidosTemporalDatabase();
                                   DetallePedidoTemporalModel comanda = DetallePedidoTemporalModel();
 
                                   comanda.idMesa = widget.idMesa;
@@ -276,14 +283,18 @@ class _AgregarDetalleProductoState extends State<AgregarDetalleProducto> {
                                   comanda.subtotal = _controller.precioMuestra;
                                   comanda.cantidad = _controller.cantidad.toString();
                                   comanda.estado = '1';
-                                  comanda.llevar = '0';
+                                  comanda.llevar = valueLlevar;
                                   comanda.observaciones = _observacionesController.text;
                                   comanda.foto = widget.producto.productoFoto;
                                   comanda.nombre = widget.producto.productoNombre;
 
-                                  await _comandaDatabase.insertarDetallePedidoTemporal(comanda);
-                                  final comandaBloc = ProviderBloc.comanda(context);
-                                  comandaBloc.obtenerComandaPorMesa(widget.idMesa);
+                                  //await _comandaDatabase.insertarDetallePedidoTemporal(comanda);
+                                  final _comandaTemporalApi = ComandaTemporalApi();
+                                  final res = await _comandaTemporalApi.guardarDetallePedidoTemporal(comanda);
+                                  if (res == 1) {
+                                    final comandaBloc = ProviderBloc.comanda(context);
+                                    comandaBloc.obtenerComandaPorMesa(widget.idMesa);
+                                  }
 
                                   Navigator.pop(context);
                                   Navigator.pop(context);
@@ -296,7 +307,7 @@ class _AgregarDetalleProductoState extends State<AgregarDetalleProducto> {
                                   detalle.subtotal = _controller.precioMuestra;
                                   detalle.cantidad = _controller.cantidad.toString();
                                   detalle.observaciones = _observacionesController.text;
-                                  detalle.llevar = '0';
+                                  detalle.llevar = valueLlevar;
 
                                   final res = await _pedidosApi.agregarDetallePedido(widget.idEnviar, detalle);
                                   if (res) {
@@ -364,6 +375,39 @@ class _AgregarDetalleProductoState extends State<AgregarDetalleProducto> {
                         ],
                       ),
                     ),
+                    SizedBox(
+                      height: ScreenUtil().setHeight(16),
+                    ),
+                    AnimatedBuilder(
+                        animation: _controller,
+                        builder: (context, snapshot) {
+                          return Row(
+                            children: [
+                              IconButton(
+                                onPressed: () {
+                                  _controller.changeLlevar(!_controller.llevar);
+                                },
+                                icon: (_controller.llevar)
+                                    ? Icon(
+                                        Icons.check_box_outlined,
+                                        color: Color(0XFFFF0036),
+                                      )
+                                    : Icon(
+                                        Icons.check_box_outline_blank_outlined,
+                                        color: Color(0XFF585858),
+                                      ),
+                              ),
+                              Text(
+                                'Para llevar',
+                                style: TextStyle(
+                                  color: Color(0XFF585858),
+                                  fontSize: ScreenUtil().setSp(16),
+                                  fontWeight: FontWeight.w400,
+                                ),
+                              ),
+                            ],
+                          );
+                        }),
                   ],
                 ),
               ),
@@ -467,9 +511,14 @@ class ChangeController extends ChangeNotifier {
   bool boton = false;
 
   int cantidad = 1;
+  bool llevar = false;
 
   double precio = 0;
   String precioMuestra = '';
+  void changeLlevar(bool l) {
+    llevar = l;
+    notifyListeners();
+  }
 
   void changeCantidadPrecio(int c, String p) {
     if (c > 0) {

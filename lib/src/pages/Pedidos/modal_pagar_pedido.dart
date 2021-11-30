@@ -30,6 +30,7 @@ class ChangeController extends ChangeNotifier {
 
   bool mostrarTextField = false;
   String tipoDoc = '';
+  String tipoPago = '';
 
   void changeDoc(String tipo) {
     tipoDoc = tipo;
@@ -38,6 +39,11 @@ class ChangeController extends ChangeNotifier {
     } else {
       mostrarTextField = false;
     }
+    notifyListeners();
+  }
+
+  void changeTipoPago(String tipo) {
+    tipoPago = tipo;
     notifyListeners();
   }
 
@@ -125,7 +131,7 @@ void pagarPedidoModal(BuildContext context, PedidoModel pedido) {
                                   height: ScreenUtil().setWidth(24),
                                 ),
                                 Text(
-                                  'Tipo documento',
+                                  'Tipo de pago',
                                   style: GoogleFonts.poppins(
                                     color: Color(0XFF585858),
                                     fontWeight: FontWeight.w500,
@@ -136,59 +142,15 @@ void pagarPedidoModal(BuildContext context, PedidoModel pedido) {
                                   height: ScreenUtil().setWidth(16),
                                 ),
                                 AnimatedBuilder(
-                                    animation: _controller,
-                                    builder: (_, t) {
-                                      return Row(
-                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          InkWell(
-                                            onTap: () async {
-                                              _controller.changeDoc('03');
-                                              _rucController.text = '';
-                                              _razonController.text = '';
-                                              _domicilioController.text = '';
-                                              if (_controller.tipoDoc == '03') {
-                                                _controller.changeBoton(true);
-                                              } else {
-                                                _controller.changeBoton(false);
-                                              }
-                                            },
-                                            child: Row(
-                                              children: [
-                                                Container(
-                                                  height: ScreenUtil().setHeight(20),
-                                                  width: ScreenUtil().setWidth(20),
-                                                  decoration: BoxDecoration(
-                                                    shape: BoxShape.circle,
-                                                    color: (_controller.tipoDoc == '03') ? Color(0XFFFF0036) : Color(0XFFE5E5E5),
-                                                    border: Border.all(
-                                                      color: Color(0XFFE5E5E5),
-                                                      width: ScreenUtil().setWidth(4),
-                                                    ),
-                                                  ),
-                                                ),
-                                                SizedBox(
-                                                  width: ScreenUtil().setWidth(10),
-                                                ),
-                                                Text(
-                                                  'Boleta',
-                                                  style: GoogleFonts.poppins(
-                                                    color: Color(0XFF585858),
-                                                    fontSize: ScreenUtil().setSp(14),
-                                                    fontWeight: FontWeight.w500,
-                                                    letterSpacing: ScreenUtil().setSp(0.016),
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                          // SizedBox(
-                                          //   width: ScreenUtil().setWidth(60),
-                                          // ),
-                                          InkWell(
-                                            onTap: () {
-                                              _controller.changeDoc('01');
-
+                                  animation: _controller,
+                                  builder: (_, t) {
+                                    return Row(
+                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        InkWell(
+                                          onTap: () async {
+                                            _controller.changeTipoPago('1');
+                                            if (_controller.tipoDoc != '') {
                                               if (_controller.tipoDoc == '01') {
                                                 if (_rucController.text.length > 0 &&
                                                     _razonController.text.length > 0 &&
@@ -198,82 +160,299 @@ void pagarPedidoModal(BuildContext context, PedidoModel pedido) {
                                                   _controller.changeBoton(false);
                                                 }
                                               } else {
-                                                _controller.changeBoton(false);
+                                                _controller.changeBoton(true);
                                               }
-                                            },
-                                            child: Row(
-                                              children: [
-                                                Container(
-                                                  height: ScreenUtil().setHeight(20),
-                                                  width: ScreenUtil().setWidth(20),
-                                                  decoration: BoxDecoration(
-                                                    shape: BoxShape.circle,
-                                                    color: (_controller.tipoDoc == '01') ? Color(0XFFFF0036) : Color(0XFFE5E5E5),
-                                                    border: Border.all(
-                                                      color: Color(0XFFE5E5E5),
-                                                      width: ScreenUtil().setWidth(4),
-                                                    ),
+                                            } else {
+                                              _controller.changeBoton(false);
+                                            }
+                                          },
+                                          child: Row(
+                                            children: [
+                                              Container(
+                                                height: ScreenUtil().setHeight(20),
+                                                width: ScreenUtil().setWidth(20),
+                                                decoration: BoxDecoration(
+                                                  shape: BoxShape.circle,
+                                                  color: (_controller.tipoPago == '1') ? Color(0XFFFF0036) : Color(0XFFE5E5E5),
+                                                  border: Border.all(
+                                                    color: Color(0XFFE5E5E5),
+                                                    width: ScreenUtil().setWidth(4),
                                                   ),
                                                 ),
-                                                SizedBox(
-                                                  width: ScreenUtil().setWidth(10),
+                                              ),
+                                              SizedBox(
+                                                width: ScreenUtil().setWidth(10),
+                                              ),
+                                              Text(
+                                                'Efectivo',
+                                                style: GoogleFonts.poppins(
+                                                  color: Color(0XFF585858),
+                                                  fontSize: ScreenUtil().setSp(14),
+                                                  fontWeight: FontWeight.w500,
+                                                  letterSpacing: ScreenUtil().setSp(0.016),
                                                 ),
-                                                Text(
-                                                  'Factura',
-                                                  style: GoogleFonts.poppins(
-                                                    color: Color(0XFF585858),
-                                                    fontSize: ScreenUtil().setSp(14),
-                                                    fontWeight: FontWeight.w500,
-                                                    letterSpacing: ScreenUtil().setSp(0.016),
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
+                                              ),
+                                            ],
                                           ),
-                                          InkWell(
-                                            onTap: () {
-                                              _controller.changeDoc('02');
-                                              _rucController.text = '';
-                                              _razonController.text = '';
-                                              _domicilioController.text = '';
-                                              if (_controller.tipoDoc == '02') {
+                                        ),
+                                        // SizedBox(
+                                        //   width: ScreenUtil().setWidth(60),
+                                        // ),
+                                        InkWell(
+                                          onTap: () {
+                                            _controller.changeTipoPago('2');
+
+                                            if (_controller.tipoDoc != '') {
+                                              if (_controller.tipoDoc == '01') {
+                                                if (_rucController.text.length > 0 &&
+                                                    _razonController.text.length > 0 &&
+                                                    _domicilioController.text.length > 0) {
+                                                  _controller.changeBoton(true);
+                                                } else {
+                                                  _controller.changeBoton(false);
+                                                }
+                                              } else {
+                                                _controller.changeBoton(true);
+                                              }
+                                            } else {
+                                              _controller.changeBoton(false);
+                                            }
+                                          },
+                                          child: Row(
+                                            children: [
+                                              Container(
+                                                height: ScreenUtil().setHeight(20),
+                                                width: ScreenUtil().setWidth(20),
+                                                decoration: BoxDecoration(
+                                                  shape: BoxShape.circle,
+                                                  color: (_controller.tipoPago == '2') ? Color(0XFFFF0036) : Color(0XFFE5E5E5),
+                                                  border: Border.all(
+                                                    color: Color(0XFFE5E5E5),
+                                                    width: ScreenUtil().setWidth(4),
+                                                  ),
+                                                ),
+                                              ),
+                                              SizedBox(
+                                                width: ScreenUtil().setWidth(10),
+                                              ),
+                                              Text(
+                                                'Tarjeta',
+                                                style: GoogleFonts.poppins(
+                                                  color: Color(0XFF585858),
+                                                  fontSize: ScreenUtil().setSp(14),
+                                                  fontWeight: FontWeight.w500,
+                                                  letterSpacing: ScreenUtil().setSp(0.016),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                        InkWell(
+                                          onTap: () {
+                                            _controller.changeTipoPago('3');
+                                            if (_controller.tipoDoc != '') {
+                                              if (_controller.tipoDoc == '01') {
+                                                if (_rucController.text.length > 0 &&
+                                                    _razonController.text.length > 0 &&
+                                                    _domicilioController.text.length > 0) {
+                                                  _controller.changeBoton(true);
+                                                } else {
+                                                  _controller.changeBoton(false);
+                                                }
+                                              } else {
+                                                _controller.changeBoton(true);
+                                              }
+                                            } else {
+                                              _controller.changeBoton(false);
+                                            }
+                                          },
+                                          child: Row(
+                                            children: [
+                                              Container(
+                                                height: ScreenUtil().setHeight(20),
+                                                width: ScreenUtil().setWidth(20),
+                                                decoration: BoxDecoration(
+                                                  shape: BoxShape.circle,
+                                                  color: (_controller.tipoPago == '3') ? Color(0XFFFF0036) : Color(0XFFE5E5E5),
+                                                  border: Border.all(
+                                                    color: Color(0XFFE5E5E5),
+                                                    width: ScreenUtil().setWidth(4),
+                                                  ),
+                                                ),
+                                              ),
+                                              SizedBox(
+                                                width: ScreenUtil().setWidth(10),
+                                              ),
+                                              Text(
+                                                'Transferencia',
+                                                style: GoogleFonts.poppins(
+                                                  color: Color(0XFF585858),
+                                                  fontSize: ScreenUtil().setSp(14),
+                                                  fontWeight: FontWeight.w500,
+                                                  letterSpacing: ScreenUtil().setSp(0.016),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ],
+                                    );
+                                  },
+                                ),
+                                SizedBox(
+                                  height: ScreenUtil().setWidth(24),
+                                ),
+                                Text(
+                                  'Tipo de documento',
+                                  style: GoogleFonts.poppins(
+                                    color: Color(0XFF585858),
+                                    fontWeight: FontWeight.w500,
+                                    fontSize: ScreenUtil().setSp(16),
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: ScreenUtil().setWidth(16),
+                                ),
+                                AnimatedBuilder(
+                                  animation: _controller,
+                                  builder: (_, t) {
+                                    return Row(
+                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        InkWell(
+                                          onTap: () async {
+                                            _controller.changeDoc('03');
+                                            _rucController.text = '';
+                                            _razonController.text = '';
+                                            _domicilioController.text = '';
+                                            if (_controller.tipoDoc == '03' && _controller.tipoPago != '') {
+                                              _controller.changeBoton(true);
+                                            } else {
+                                              _controller.changeBoton(false);
+                                            }
+                                          },
+                                          child: Row(
+                                            children: [
+                                              Container(
+                                                height: ScreenUtil().setHeight(20),
+                                                width: ScreenUtil().setWidth(20),
+                                                decoration: BoxDecoration(
+                                                  shape: BoxShape.circle,
+                                                  color: (_controller.tipoDoc == '03') ? Color(0XFFFF0036) : Color(0XFFE5E5E5),
+                                                  border: Border.all(
+                                                    color: Color(0XFFE5E5E5),
+                                                    width: ScreenUtil().setWidth(4),
+                                                  ),
+                                                ),
+                                              ),
+                                              SizedBox(
+                                                width: ScreenUtil().setWidth(10),
+                                              ),
+                                              Text(
+                                                'Boleta',
+                                                style: GoogleFonts.poppins(
+                                                  color: Color(0XFF585858),
+                                                  fontSize: ScreenUtil().setSp(14),
+                                                  fontWeight: FontWeight.w500,
+                                                  letterSpacing: ScreenUtil().setSp(0.016),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                        // SizedBox(
+                                        //   width: ScreenUtil().setWidth(60),
+                                        // ),
+                                        InkWell(
+                                          onTap: () {
+                                            _controller.changeDoc('01');
+
+                                            if (_controller.tipoDoc == '01' && _controller.tipoPago != '') {
+                                              if (_rucController.text.length > 0 &&
+                                                  _razonController.text.length > 0 &&
+                                                  _domicilioController.text.length > 0) {
                                                 _controller.changeBoton(true);
                                               } else {
                                                 _controller.changeBoton(false);
                                               }
-                                            },
-                                            child: Row(
-                                              children: [
-                                                Container(
-                                                  height: ScreenUtil().setHeight(20),
-                                                  width: ScreenUtil().setWidth(20),
-                                                  decoration: BoxDecoration(
-                                                    shape: BoxShape.circle,
-                                                    color: (_controller.tipoDoc == '02') ? Color(0XFFFF0036) : Color(0XFFE5E5E5),
-                                                    border: Border.all(
-                                                      color: Color(0XFFE5E5E5),
-                                                      width: ScreenUtil().setWidth(4),
-                                                    ),
+                                            } else {
+                                              _controller.changeBoton(false);
+                                            }
+                                          },
+                                          child: Row(
+                                            children: [
+                                              Container(
+                                                height: ScreenUtil().setHeight(20),
+                                                width: ScreenUtil().setWidth(20),
+                                                decoration: BoxDecoration(
+                                                  shape: BoxShape.circle,
+                                                  color: (_controller.tipoDoc == '01') ? Color(0XFFFF0036) : Color(0XFFE5E5E5),
+                                                  border: Border.all(
+                                                    color: Color(0XFFE5E5E5),
+                                                    width: ScreenUtil().setWidth(4),
                                                   ),
                                                 ),
-                                                SizedBox(
-                                                  width: ScreenUtil().setWidth(10),
+                                              ),
+                                              SizedBox(
+                                                width: ScreenUtil().setWidth(10),
+                                              ),
+                                              Text(
+                                                'Factura',
+                                                style: GoogleFonts.poppins(
+                                                  color: Color(0XFF585858),
+                                                  fontSize: ScreenUtil().setSp(14),
+                                                  fontWeight: FontWeight.w500,
+                                                  letterSpacing: ScreenUtil().setSp(0.016),
                                                 ),
-                                                Text(
-                                                  'N. venta',
-                                                  style: GoogleFonts.poppins(
-                                                    color: Color(0XFF585858),
-                                                    fontSize: ScreenUtil().setSp(14),
-                                                    fontWeight: FontWeight.w500,
-                                                    letterSpacing: ScreenUtil().setSp(0.016),
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
+                                              ),
+                                            ],
                                           ),
-                                        ],
-                                      );
-                                    }),
+                                        ),
+                                        InkWell(
+                                          onTap: () {
+                                            _controller.changeDoc('02');
+                                            _rucController.text = '';
+                                            _razonController.text = '';
+                                            _domicilioController.text = '';
+                                            if (_controller.tipoDoc == '02' && _controller.tipoPago != '') {
+                                              _controller.changeBoton(true);
+                                            } else {
+                                              _controller.changeBoton(false);
+                                            }
+                                          },
+                                          child: Row(
+                                            children: [
+                                              Container(
+                                                height: ScreenUtil().setHeight(20),
+                                                width: ScreenUtil().setWidth(20),
+                                                decoration: BoxDecoration(
+                                                  shape: BoxShape.circle,
+                                                  color: (_controller.tipoDoc == '02') ? Color(0XFFFF0036) : Color(0XFFE5E5E5),
+                                                  border: Border.all(
+                                                    color: Color(0XFFE5E5E5),
+                                                    width: ScreenUtil().setWidth(4),
+                                                  ),
+                                                ),
+                                              ),
+                                              SizedBox(
+                                                width: ScreenUtil().setWidth(10),
+                                              ),
+                                              Text(
+                                                'N. venta',
+                                                style: GoogleFonts.poppins(
+                                                  color: Color(0XFF585858),
+                                                  fontSize: ScreenUtil().setSp(14),
+                                                  fontWeight: FontWeight.w500,
+                                                  letterSpacing: ScreenUtil().setSp(0.016),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ],
+                                    );
+                                  },
+                                ),
                                 SizedBox(
                                   height: ScreenUtil().setWidth(16),
                                 ),

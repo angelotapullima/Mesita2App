@@ -11,19 +11,20 @@ class UserApi {
 
   Future<int> registarNuevoUsuario(String nombre, String apellidoPaterno, String apellidoMaterno, String email, String usuario, String passwd) async {
     try {
-      final url = Uri.parse('$apiBaseURL/api/Inicio/guardar_usuario');
+      final url = Uri.parse('$apiBaseURL/api/Login/guardar_usuario');
+
+      print('Datos a enviar : $nombre, $apellidoPaterno, $apellidoMaterno, $email, $usuario, $passwd ');
 
       final resp = await http.post(url, body: {
         'persona_nombre': '$nombre',
         'persona_apellido_paterno': '$apellidoPaterno',
         'persona_apellido_materno': '$apellidoMaterno',
-        'persona_nacimiento': '-',
-        'persona_telefono': '-',
+        'persona_nacimiento': '0000-00-00',
+        'persona_telefono': '000000000',
         'id_rol': '4',
         'usuario_nickname': '$usuario',
         'usuario_contrasenha': '$passwd',
         'usuario_email': '$email',
-        'usuario_imagen': '-',
         'usuario_estado': '1',
         'app': 'true',
       });

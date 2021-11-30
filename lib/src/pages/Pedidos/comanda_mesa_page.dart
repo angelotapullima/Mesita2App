@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:mesita_aplication_2/src/api/comanda_temporal_api.dart';
 import 'package:mesita_aplication_2/src/api/pedidos_api.dart';
 import 'package:mesita_aplication_2/src/bloc/provider.dart';
 import 'package:mesita_aplication_2/src/database/pedidos_temporales_database.dart';
@@ -142,58 +143,125 @@ class _ComandaPageState extends State<ComandaPage> {
                                     ],
                                   ),
                                 ),
-                                InkWell(
-                                  onTap: () async {
-                                    final _ptDB = PedidosTemporalDatabase();
-                                    await _ptDB.deleteDetallesPedidoTemporalPorId(comanda[index].id);
-                                    comandaBloc.obtenerComandaPorMesa(widget.mesa.idMesa);
-                                  },
-                                  child: Container(
-                                    padding: EdgeInsets.symmetric(horizontal: ScreenUtil().setWidth(16)),
-                                    height: ScreenUtil().setHeight(32),
-                                    //width: ScreenUtil().setWidth(86),
-                                    decoration: BoxDecoration(
-                                      color: Color(0XFFFF0036),
-                                      borderRadius: BorderRadius.circular(30),
-                                      boxShadow: [
-                                        BoxShadow(
-                                          color: Color.fromRGBO(88, 88, 88, 0.5),
+                                Container(
+                                  padding: EdgeInsets.symmetric(horizontal: ScreenUtil().setWidth(8)),
+                                  height: ScreenUtil().setHeight(32),
+                                  //width: ScreenUtil().setWidth(86),
+                                  decoration: BoxDecoration(
+                                    color: Color(0XFFFF0036),
+                                    borderRadius: BorderRadius.circular(30),
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color: Color.fromRGBO(88, 88, 88, 0.5),
+                                      ),
+                                    ],
+                                  ),
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      InkWell(
+                                        onTap: () async {
+                                          final _comandaTemporalApi = ComandaTemporalApi();
+                                          final res = await _comandaTemporalApi.updateDetalle(comanda[index], -1);
+                                          if (res == 1) {
+                                            comandaBloc.obtenerComandaPorMesa(widget.mesa.idMesa);
+                                          }
+                                        },
+                                        child: Container(
+                                          width: ScreenUtil().setWidth(16),
+                                          child: SvgPicture.asset('assets/food_svg/minus.svg'),
                                         ),
-                                      ],
-                                    ),
-                                    child: Row(
-                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Container(
-                                          margin: EdgeInsets.symmetric(horizontal: 8),
-                                          height: ScreenUtil().setHeight(22),
-                                          width: ScreenUtil().setWidth(22),
-                                          decoration: BoxDecoration(
-                                            color: Colors.white,
-                                            shape: BoxShape.circle,
-                                            boxShadow: [
-                                              BoxShadow(
-                                                color: Color.fromRGBO(88, 88, 88, 0.5),
-                                              ),
-                                            ],
-                                          ),
-                                          child: Center(
-                                            child: Text(
-                                              '${comanda[index].cantidad}',
-                                              style: GoogleFonts.poppins(
-                                                fontWeight: FontWeight.w700,
-                                                fontSize: ScreenUtil().setSp(16),
-                                              ),
+                                      ),
+                                      Container(
+                                        margin: EdgeInsets.symmetric(horizontal: 8),
+                                        height: ScreenUtil().setHeight(22),
+                                        width: ScreenUtil().setWidth(22),
+                                        decoration: BoxDecoration(
+                                          color: Colors.white,
+                                          shape: BoxShape.circle,
+                                          boxShadow: [
+                                            BoxShadow(
+                                              color: Color.fromRGBO(88, 88, 88, 0.5),
+                                            ),
+                                          ],
+                                        ),
+                                        child: Center(
+                                          child: Text(
+                                            '${comanda[index].cantidad}',
+                                            style: GoogleFonts.poppins(
+                                              fontWeight: FontWeight.w700,
+                                              fontSize: ScreenUtil().setSp(16),
                                             ),
                                           ),
                                         ),
-                                        Icon(
-                                          Icons.delete_outline,
-                                        ),
-                                      ],
-                                    ),
+                                      ),
+                                      InkWell(
+                                          onTap: () async {
+                                            final _comandaTemporalApi = ComandaTemporalApi();
+                                            final res = await _comandaTemporalApi.updateDetalle(comanda[index], 1);
+                                            if (res == 1) {
+                                              comandaBloc.obtenerComandaPorMesa(widget.mesa.idMesa);
+                                            }
+                                          },
+                                          child: Container(
+                                            width: ScreenUtil().setWidth(16),
+                                            child: SvgPicture.asset('assets/food_svg/plus.svg'),
+                                          )),
+                                    ],
                                   ),
                                 ),
+                                // InkWell(
+                                //   onTap: () async {
+                                //     final _ptDB = PedidosTemporalDatabase();
+                                //     await _ptDB.deleteDetallesPedidoTemporalPorId(comanda[index].id);
+                                //     comandaBloc.obtenerComandaPorMesa(widget.mesa.idMesa);
+                                //   },
+                                //   child: Container(
+                                //     padding: EdgeInsets.symmetric(horizontal: ScreenUtil().setWidth(16)),
+                                //     height: ScreenUtil().setHeight(32),
+                                //     //width: ScreenUtil().setWidth(86),
+                                //     decoration: BoxDecoration(
+                                //       color: Color(0XFFFF0036),
+                                //       borderRadius: BorderRadius.circular(30),
+                                //       boxShadow: [
+                                //         BoxShadow(
+                                //           color: Color.fromRGBO(88, 88, 88, 0.5),
+                                //         ),
+                                //       ],
+                                //     ),
+                                //     child: Row(
+                                //       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                //       children: [
+                                //         Container(
+                                //           margin: EdgeInsets.symmetric(horizontal: 8),
+                                //           height: ScreenUtil().setHeight(22),
+                                //           width: ScreenUtil().setWidth(22),
+                                //           decoration: BoxDecoration(
+                                //             color: Colors.white,
+                                //             shape: BoxShape.circle,
+                                //             boxShadow: [
+                                //               BoxShadow(
+                                //                 color: Color.fromRGBO(88, 88, 88, 0.5),
+                                //               ),
+                                //             ],
+                                //           ),
+                                //           child: Center(
+                                //             child: Text(
+                                //               '${comanda[index].cantidad}',
+                                //               style: GoogleFonts.poppins(
+                                //                 fontWeight: FontWeight.w700,
+                                //                 fontSize: ScreenUtil().setSp(16),
+                                //               ),
+                                //             ),
+                                //           ),
+                                //         ),
+                                //         Icon(
+                                //           Icons.delete_outline,
+                                //         ),
+                                //       ],
+                                //     ),
+                                //   ),
+                                // ),
                               ],
                             ),
                           );

@@ -26,12 +26,40 @@ class PedidosTemporalDatabase {
     return list;
   }
 
+  Future<List<DetallePedidoTemporalModel>> obtenerDetallePedidoTemporalePorId(String idProducto, String llevar, String idMesa) async {
+    final db = await dbprovider.database;
+    final res = await db.rawQuery("SELECT * FROM DetallePedidosTemporales WHERE idProducto='$idProducto' AND llevar='$llevar' AND idMesa='$idMesa'");
+
+    List<DetallePedidoTemporalModel> list = res.isNotEmpty ? res.map((c) => DetallePedidoTemporalModel.fromJson(c)).toList() : [];
+    return list;
+  }
+
   deleteDetallesPedidoTemporal() async {
     final db = await dbprovider.database;
 
     final res = await db.rawDelete('DELETE FROM DetallePedidosTemporales');
 
     return res;
+  }
+
+  updateDetallePorIdPedidoDetalle(DetallePedidoTemporalModel detalle) async {
+    try {
+      final db = await dbprovider.database;
+
+      final res = await db.rawUpdate("UPDATE DetallePedidosTemporales SET idMesa='${detalle.idMesa}',"
+          "idProducto='${detalle.idProducto}',"
+          "foto='${detalle.foto}',"
+          "nombre='${detalle.nombre}',"
+          "cantidad='${detalle.cantidad}',"
+          "subtotal='${detalle.subtotal}',"
+          "observaciones='${detalle.observaciones}',"
+          "llevar='${detalle.llevar}',"
+          "estado='${detalle.estado}' WHERE id='${detalle.id}' AND idMesa='${detalle.idMesa}'");
+
+      return res;
+    } catch (exception) {
+      print(exception);
+    }
   }
 
   deleteDetallesPedidoTemporalPorId(int id) async {

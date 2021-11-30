@@ -641,7 +641,7 @@ class _DetalleMesaPageState extends State<DetalleMesaPage> {
     return Container(
       height: double.infinity,
       width: double.infinity,
-      color: Color.fromRGBO(0, 0, 0, 0.2),
+      color: Color.fromRGBO(0, 0, 0, 0.1),
       child: Center(
         child: (Platform.isAndroid)
             ? CircularProgressIndicator(

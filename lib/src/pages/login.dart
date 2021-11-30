@@ -29,6 +29,8 @@ class _LoginState extends State<Login> {
   bool _passwordVisible;
   String mensaje = '';
   final _controller = ControllerNotifier();
+  final TextEditingController _userNameController = TextEditingController();
+  final TextEditingController _passwdLoginController = TextEditingController();
   final TextEditingController _nombreController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _userController = TextEditingController();
@@ -183,8 +185,6 @@ class _LoginState extends State<Login> {
   }
 
   Widget inicioSe() {
-    final TextEditingController _userNameController = TextEditingController();
-    final TextEditingController _passwdController = TextEditingController();
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: ScreenUtil().setWidth(30)),
       child: Column(
@@ -294,7 +294,7 @@ class _LoginState extends State<Login> {
                 builder: (_, f) {
                   return TextField(
                     obscureText: _controller.passwdDisable,
-                    controller: _passwdController,
+                    controller: _passwdLoginController,
                     cursorColor: Colors.transparent,
                     keyboardType: TextInputType.text,
                     maxLines: 1,
@@ -353,9 +353,9 @@ class _LoginState extends State<Login> {
               onPressed: () async {
                 _controller.changeCargando(true);
                 _controller.changeMensaje('');
-                if (_userNameController.text.length > 0 && _passwdController.text.length > 0) {
+                if (_userNameController.text.length > 0 && _passwdLoginController.text.length > 0) {
                   final _loginApi = LoginApi();
-                  final res = await _loginApi.login(_userNameController.text, _passwdController.text);
+                  final res = await _loginApi.login(_userNameController.text, _passwdLoginController.text);
 
                   if (res.code == '1') {
                     final preferences = Preferences();
@@ -367,10 +367,8 @@ class _LoginState extends State<Login> {
                     final resp = compararFechaConActual(preferences.finPlan);
 
                     if (resp) {
-                      print('Necesitar renovar');
                       Navigator.pushReplacementNamed(context, 'planes');
                     } else {
-                      print('No necesitas renovars');
                       Navigator.pushReplacementNamed(context, 'home');
 
                       Navigator.push(
@@ -398,6 +396,10 @@ class _LoginState extends State<Login> {
                     }
 
                     _controller.changeCargando(false);
+                  } else if (res.code == '4') {
+                    _userNameController.text = '';
+                    _passwdLoginController.text = '';
+                    _controller.changeMensaje(res.message);
                   } else {
                     _controller.changeMensaje(res.message);
                   }
@@ -423,6 +425,7 @@ class _LoginState extends State<Login> {
                 return Center(
                   child: Text(
                     _controller.mensaje,
+                    textAlign: TextAlign.center,
                     style: TextStyle(
                       color: const Color(0xffa8a7a7),
                       fontSize: ScreenUtil().setSp(16),
@@ -647,9 +650,9 @@ class _LoginState extends State<Login> {
               elevation: 10,
               onPressed: () async {
                 _controller.changeCargando(true);
-                _controller.changeMensaje('');
+                _controller.changeMensaje2('');
 
-                if (_nombreController.text.length > 0 &&
+                if (_nombre2Controller.text.length > 0 &&
                     _emailController.text.length > 0 &&
                     _userController.text.length > 0 &&
                     _passwdController.text.length > 0 &&
@@ -657,20 +660,29 @@ class _LoginState extends State<Login> {
                   if (_passwdController.text == _confrimPasswdController.text) {
                     final _userApi = UserApi();
 
-                    final res = await _userApi.registarNuevoUsuario(_nombreController.text, _apellidoPaternoController.text,
+                    final res = await _userApi.registarNuevoUsuario(_nombre2Controller.text, _apellidoPaternoController.text,
                         _apellidoMaternoController.text, _emailController.text, _userController.text, _passwdController.text);
                     if (res == 1) {
+                      showToast('¡Registro exitoso!, Ahora puede iniciar sesión.', Colors.black);
+                      _nombreController.text = '';
+                      _nombre2Controller.text = '';
+                      _apellidoPaternoController.text = '';
+                      _apellidoMaternoController.text = '';
+                      _emailController.text = '';
+                      _userController.text = '';
+                      _passwdController.text = '';
+                      _confrimPasswdController.text = '';
                       setState(() {
                         _currentPage = PageMostrar.inicioSesion;
                       });
                     } else {
-                      _controller.changeMensaje('Ocurrió un error');
+                      _controller.changeMensaje2('Ocurrió un error');
                     }
                   } else {
-                    _controller.changeMensaje('Contraseñas no coinciden');
+                    _controller.changeMensaje2('Contraseñas no coinciden');
                   }
                 } else {
-                  _controller.changeMensaje('Complete todos los campos');
+                  _controller.changeMensaje2('Complete todos los campos');
                 }
                 _controller.changeCargando(false);
               },
@@ -690,7 +702,7 @@ class _LoginState extends State<Login> {
               builder: (context, snapshot) {
                 return Center(
                   child: Text(
-                    _controller.mensaje,
+                    _controller.mensaje2,
                     style: TextStyle(
                       color: const Color(0xffa8a7a7),
                       fontSize: ScreenUtil().setSp(16),
@@ -1039,6 +1051,7 @@ class _LoginState extends State<Login> {
 class ControllerNotifier extends ChangeNotifier {
   bool cargando = false;
   String mensaje = '';
+  String mensaje2 = '';
 
   bool passwdDisable = true;
 
@@ -1054,6 +1067,11 @@ class ControllerNotifier extends ChangeNotifier {
 
   void changeMensaje(String m) {
     mensaje = m;
+    notifyListeners();
+  }
+
+  void changeMensaje2(String m) {
+    mensaje2 = m;
     notifyListeners();
   }
 }

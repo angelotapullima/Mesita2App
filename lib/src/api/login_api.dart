@@ -24,37 +24,38 @@ class LoginApi {
       loginModel.message = decodedData['result']['message'];
 
       if (code == 1) {
-        if (decodedData['data']['agente'] != 0) {
+        if (decodedData['data']['data_negocio']['tiene_negocio'] != 0) {
           //Guardar datos Usuario
-          _prefs.idUser = decodedData['data']['c_u'];
-          _prefs.idPerson = decodedData['data']['c_p'];
-          _prefs.userNickname = decodedData['data']['_n'];
+          _prefs.idUser = '${decodedData['data']['c_u']}';
+          _prefs.idPerson = '${decodedData['data']['c_p']}';
+          _prefs.userNickname = '${decodedData['data']['_n']}';
           _prefs.userImage = '${decodedData['data']['u_i']}';
-          _prefs.personName = decodedData['data']['p_n'];
+          _prefs.personName = '${decodedData['data']['p_n']}';
           _prefs.personSurname = '${decodedData['data']['p_p']} ${decodedData['data']['p_m']}';
           _prefs.personApellidoPaterno = '${decodedData['data']['p_p']}';
           _prefs.personApellidoMaterno = '${decodedData['data']['p_m']}';
           _prefs.token = decodedData['data']['tn'];
           //Guardar rol Usuario
-          _prefs.idRol = decodedData['data']['ru'];
-          _prefs.rolName = decodedData['data']['rn'];
+          _prefs.idRol = '${decodedData['data']['ru']}';
+          _prefs.rolName = '${decodedData['data']['rn']}';
+
           //Guardar plan
-          _prefs.tipoPlan = decodedData['data']['plan']['tipo'];
-          _prefs.inicioPlan = decodedData['data']['plan']['inicio'];
-          _prefs.finPlan = decodedData['data']['plan']['inicio'];
-          _prefs.estadoPlan = decodedData['data']['plan']['fin'];
+          _prefs.tipoPlan = '${decodedData['data']['data_negocio']['plan']['tipo']}';
+          _prefs.inicioPlan = '${decodedData['data']['data_negocio']['plan']['inicio']}';
+          _prefs.finPlan = '${decodedData['data']['data_negocio']['plan']['fin']}';
+          _prefs.estadoPlan = '${decodedData['data']['data_negocio']['plan']['estado']}';
           //Guardar Negocio
-          _prefs.idNegocio = decodedData['data']['negocio']['id'];
-          _prefs.negocioNombre = decodedData['data']['negocio']['nombre'];
-          _prefs.negocioDireccion = '${decodedData['data']['negocio']['direccion']}';
-          _prefs.negocioTelefono = '${decodedData['data']['negocio']['telefono']}';
-          _prefs.negocioRUC = '${decodedData['data']['negocio']['ruc']}';
-          _prefs.negocioRazonSocial = '${decodedData['data']['negocio']['razonsocial']}';
+          _prefs.idNegocio = '${decodedData['data']['data_negocio']['negocio']['id']}';
+          _prefs.negocioNombre = '${decodedData['data']['data_negocio']['negocio']['nombre']}';
+          _prefs.negocioDireccion = '${decodedData['data']['data_negocio']['negocio']['direccion']}';
+          _prefs.negocioTelefono = '${decodedData['data']['data_negocio']['negocio']['telefono']}';
+          _prefs.negocioRUC = '${decodedData['data']['data_negocio']['negocio']['ruc']}';
+          _prefs.negocioRazonSocial = '${decodedData['data']['data_negocio']['negocio']['razonsocial']}';
           // _prefs.negocioImage = '$apiBaseURL/${decodedData['data']['n_f']}';
 
         } else {
-          loginModel.code = '2';
-          loginModel.message = decodedData['result']['message'];
+          loginModel.code = '4';
+          loginModel.message = 'Usuario no se encuentra asignado a algún negocio';
         }
 
         return loginModel;
