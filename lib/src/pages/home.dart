@@ -137,6 +137,7 @@ class _HomeState extends State<Home> {
                                       InkWell(
                                         onTap: () {
                                           bloc.changeToTable();
+                                          bloc.changeToClosed();
                                         },
                                         child: Container(
                                           height: ScreenUtil().setHeight(40),
@@ -185,6 +186,7 @@ class _HomeState extends State<Home> {
                                       InkWell(
                                         onTap: () {
                                           bloc.changeToPedidos();
+                                          bloc.changeToClosed();
                                         },
                                         child: Container(
                                           height: ScreenUtil().setHeight(40),
@@ -233,6 +235,7 @@ class _HomeState extends State<Home> {
                                       InkWell(
                                         onTap: () {
                                           bloc.changeToComidas();
+                                          bloc.changeToClosed();
                                         },
                                         child: Container(
                                           height: ScreenUtil().setHeight(40),
@@ -281,6 +284,7 @@ class _HomeState extends State<Home> {
                                       InkWell(
                                         onTap: () {
                                           bloc.changeToBebidas();
+                                          bloc.changeToClosed();
                                         },
                                         child: Container(
                                           height: ScreenUtil().setHeight(40),
@@ -329,6 +333,7 @@ class _HomeState extends State<Home> {
                                       InkWell(
                                         onTap: () {
                                           bloc.changeToVentas();
+                                          bloc.changeToClosed();
                                         },
                                         child: Container(
                                           height: ScreenUtil().setHeight(40),
@@ -377,6 +382,7 @@ class _HomeState extends State<Home> {
                                       InkWell(
                                         onTap: () {
                                           bloc.changeToReportes();
+                                          bloc.changeToClosed();
                                         },
                                         child: Container(
                                           height: ScreenUtil().setHeight(40),
