@@ -25,6 +25,17 @@ class _VentasPageState extends State<VentasPage> {
   int carga = 0;
 
   @override
+  void initState() {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      fechaI.text = obtenerFechaActualApi();
+      fechaF.text = obtenerFechaActualApi();
+
+      _controller.changeRangoFecha('${obtenerRangoFecha(fechaI.text, fechaF.text)}');
+    });
+    super.initState();
+  }
+
+  @override
   @override
   Widget build(BuildContext context) {
     final prefs = Preferences();

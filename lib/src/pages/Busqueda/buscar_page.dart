@@ -24,12 +24,14 @@ class BuscarPage extends StatefulWidget {
 
 class _BuscarPageState extends State<BuscarPage> {
   final TextEditingController _queryController = TextEditingController();
+  FocusNode focus = FocusNode();
   @override
   void initState() {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       print('${widget.esComanda}');
       final busquedaBloc = ProviderBloc.productosLinea(context);
       busquedaBloc.obtenerProductosPorQuery('');
+      FocusScope.of(context).requestFocus(focus);
     });
     super.initState();
   }
@@ -87,61 +89,18 @@ class _BuscarPageState extends State<BuscarPage> {
                                 fontSize: ScreenUtil().setSp(16),
                               ),
                               placeholder: 'Buscar comidas y bebidas',
+                              focusNode: focus,
+                              //onSubmitted: ,
                               onChanged: (value) {
-                                if (value != '') {
+                                if (value.length > 2) {
                                   busquedaBloc.obtenerProductosPorQuery(value);
                                 } else {
-                                  _queryController.text = '';
                                   busquedaBloc.obtenerProductosPorQuery('');
                                 }
                               },
                               borderRadius: BorderRadius.circular(20),
                             ),
                           ),
-                          // Container(
-                          //     // height: ScreenUtil().setHeight(44),
-                          //     // margin: EdgeInsets.symmetric(
-                          //     //   horizontal: ScreenUtil().setHeight(24),
-                          //     // ),
-                          //     // padding: EdgeInsets.symmetric(
-                          //     //   horizontal: ScreenUtil().setHeight(19),
-                          //     // ),
-                          //     // decoration: BoxDecoration(
-                          //     //   color: Colors.white,
-                          //     //   borderRadius: BorderRadius.circular(22),
-                          //     // ),
-                          //     child: CupertinoSearchTextField(
-                          //   controller: _queryController,
-                          //   backgroundColor: Colors.white,
-                          //   placeholder: 'Buscar comidas y bebidas',
-                          //   onChanged: (value) {
-                          //     if (value != '') {
-                          //       busquedaBloc.obtenerProductosPorQuery(value);
-                          //     } else {
-                          //       print('No debe mostrar nada');
-                          //       _queryController.text = '';
-                          //       busquedaBloc.obtenerProductosPorQuery('');
-                          //     }
-                          //   },
-                          //   borderRadius: BorderRadius.circular(20),
-                          // )
-                          //     // child: Row(
-                          //     //   children: [
-                          //     //     Icon(Icons.search),
-                          //     //     SizedBox(
-                          //     //       width: ScreenUtil().setHeight(13),
-                          //     //     ),
-                          //     //     Text(
-                          //     //       'Buscar comidas y bebidas',
-                          //     //       style: GoogleFonts.poppins(
-                          //     //         color: Color(0XFFA8A7A7),
-                          //     //         fontWeight: FontWeight.w400,
-                          //     //         fontSize: ScreenUtil().setSp(16),
-                          //     //       ),
-                          //     //     ),
-                          //     //   ],
-                          //     // ),
-                          //     ),
                           InkWell(
                             onTap: () {
                               Navigator.pop(context);

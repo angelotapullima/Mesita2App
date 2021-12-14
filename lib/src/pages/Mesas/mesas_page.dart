@@ -7,6 +7,8 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mesita_aplication_2/src/bloc/provider.dart';
 import 'package:mesita_aplication_2/src/models/mesa_model.dart';
+import 'package:mesita_aplication_2/src/pages/LlevarDelivery/delivery_page.dart';
+import 'package:mesita_aplication_2/src/pages/LlevarDelivery/llevar_page.dart';
 import 'package:mesita_aplication_2/src/pages/Mesas/detalle_mesa_page.dart';
 import 'package:mesita_aplication_2/src/pages/Mesas/modal_agregar_mesa.dart';
 import 'package:mesita_aplication_2/src/preferences/preferences.dart';
@@ -130,30 +132,28 @@ class MesasPage extends StatelessWidget {
                               if (index == 0) {
                                 return InkWell(
                                   onTap: () {
-                                    // Navigator.push(
-                                    //   context,
-                                    //   PageRouteBuilder(
-                                    //     pageBuilder: (context, animation, secondaryAnimation) {
-                                    //       return DetalleMesaPage(
-                                    //         mesa: snapsdhot.data[index],
-                                    //       );
-                                    //     },
-                                    //     transitionsBuilder: (context, animation, secondaryAnimation, child) {
-                                    //       var begin = Offset(0.0, 1.0);
-                                    //       var end = Offset.zero;
-                                    //       var curve = Curves.ease;
+                                    Navigator.push(
+                                      context,
+                                      PageRouteBuilder(
+                                        pageBuilder: (context, animation, secondaryAnimation) {
+                                          return LlevarPage();
+                                        },
+                                        transitionsBuilder: (context, animation, secondaryAnimation, child) {
+                                          var begin = Offset(0.0, 1.0);
+                                          var end = Offset.zero;
+                                          var curve = Curves.ease;
 
-                                    //       var tween = Tween(begin: begin, end: end).chain(
-                                    //         CurveTween(curve: curve),
-                                    //       );
+                                          var tween = Tween(begin: begin, end: end).chain(
+                                            CurveTween(curve: curve),
+                                          );
 
-                                    //       return SlideTransition(
-                                    //         position: animation.drive(tween),
-                                    //         child: child,
-                                    //       );
-                                    //     },
-                                    //   ),
-                                    // );
+                                          return SlideTransition(
+                                            position: animation.drive(tween),
+                                            child: child,
+                                          );
+                                        },
+                                      ),
+                                    );
                                   },
                                   child: Container(
                                     padding: EdgeInsets.only(
@@ -248,30 +248,28 @@ class MesasPage extends StatelessWidget {
                               if (index == 1) {
                                 return InkWell(
                                   onTap: () {
-                                    // Navigator.push(
-                                    //   context,
-                                    //   PageRouteBuilder(
-                                    //     pageBuilder: (context, animation, secondaryAnimation) {
-                                    //       return DetalleMesaPage(
-                                    //         mesa: snapsdhot.data[index],
-                                    //       );
-                                    //     },
-                                    //     transitionsBuilder: (context, animation, secondaryAnimation, child) {
-                                    //       var begin = Offset(0.0, 1.0);
-                                    //       var end = Offset.zero;
-                                    //       var curve = Curves.ease;
+                                    Navigator.push(
+                                      context,
+                                      PageRouteBuilder(
+                                        pageBuilder: (context, animation, secondaryAnimation) {
+                                          return DeliveryPage();
+                                        },
+                                        transitionsBuilder: (context, animation, secondaryAnimation, child) {
+                                          var begin = Offset(0.0, 1.0);
+                                          var end = Offset.zero;
+                                          var curve = Curves.ease;
 
-                                    //       var tween = Tween(begin: begin, end: end).chain(
-                                    //         CurveTween(curve: curve),
-                                    //       );
+                                          var tween = Tween(begin: begin, end: end).chain(
+                                            CurveTween(curve: curve),
+                                          );
 
-                                    //       return SlideTransition(
-                                    //         position: animation.drive(tween),
-                                    //         child: child,
-                                    //       );
-                                    //     },
-                                    //   ),
-                                    // );
+                                          return SlideTransition(
+                                            position: animation.drive(tween),
+                                            child: child,
+                                          );
+                                        },
+                                      ),
+                                    );
                                   },
                                   child: Container(
                                     padding: EdgeInsets.only(

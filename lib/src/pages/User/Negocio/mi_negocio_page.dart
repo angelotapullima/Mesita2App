@@ -30,11 +30,11 @@ class _MiNegocioPageState extends State<MiNegocioPage> {
   void initState() {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       final preferences = Preferences();
-      _nombreNegocioController.text = preferences.negocioNombre;
-      _direccionController.text = preferences.negocioDireccion;
-      _rucController.text = preferences.negocioRUC;
-      _telefonoController.text = preferences.negocioTelefono;
-      _razonController.text = preferences.negocioRazonSocial;
+      _nombreNegocioController.text = verificarNull(preferences.negocioNombre);
+      _direccionController.text = verificarNull(preferences.negocioDireccion);
+      _rucController.text = verificarNull(preferences.negocioRUC);
+      _telefonoController.text = verificarNull(preferences.negocioTelefono);
+      _razonController.text = verificarNull(preferences.negocioRazonSocial);
     });
     super.initState();
   }
@@ -61,53 +61,53 @@ class _MiNegocioPageState extends State<MiNegocioPage> {
                   letterSpacing: 0.16,
                 ),
               ),
-              actions: [
-                (_controller.editarActive)
-                    ? InkWell(
-                        onTap: () async {
-                          _controller.changeCargando(true);
-                          if (_controller.botton) {
-                            final _negocioApi = NegocioApi();
-                            final res = await _negocioApi.actualizarNegocio(
-                                _nombreNegocioController.text, _direccionController.text, _telefonoController.text);
+              // actions: [
+              //   (_controller.editarActive)
+              //       ? InkWell(
+              //           onTap: () async {
+              //             _controller.changeCargando(true);
+              //             if (_controller.botton) {
+              //               final _negocioApi = NegocioApi();
+              //               final res = await _negocioApi.actualizarNegocio(
+              //                   _nombreNegocioController.text, _direccionController.text, _telefonoController.text);
 
-                            if (res == 1) {
-                              _controller.changeActive(false);
-                              showToast('Negocio actualizado correctamente', Colors.black);
+              //               if (res == 1) {
+              //                 _controller.changeActive(false);
+              //                 showToast('Negocio actualizado correctamente', Colors.black);
 
-                              setState(() {});
-                            } else {
-                              showToast('Ocurrió un error', Colors.red);
-                            }
-                          }
-                          _controller.changeCargando(false);
-                        },
-                        child: Center(
-                          child: Text(
-                            'Guardar',
-                            style: GoogleFonts.poppins(
-                              color: Colors.red,
-                            ),
-                          ),
-                        ),
-                      )
-                    : InkWell(
-                        onTap: () {
-                          _controller.changeActive(true);
-                        },
-                        child: Center(
-                          child: Text(
-                            'Editar',
-                            style: GoogleFonts.poppins(
-                              color: Colors.red,
-                            ),
-                          ),
-                        ),
-                      ),
-                SizedBox(
-                  width: ScreenUtil().setWidth(24),
-                ),
-              ],
+              //                 setState(() {});
+              //               } else {
+              //                 showToast('Ocurrió un error', Colors.red);
+              //               }
+              //             }
+              //             _controller.changeCargando(false);
+              //           },
+              //           child: Center(
+              //             child: Text(
+              //               'Guardar',
+              //               style: GoogleFonts.poppins(
+              //                 color: Colors.red,
+              //               ),
+              //             ),
+              //           ),
+              //         )
+              //       : InkWell(
+              //           onTap: () {
+              //             _controller.changeActive(true);
+              //           },
+              //           child: Center(
+              //             child: Text(
+              //               'Editar',
+              //               style: GoogleFonts.poppins(
+              //                 color: Colors.red,
+              //               ),
+              //             ),
+              //           ),
+              //         ),
+              //   SizedBox(
+              //     width: ScreenUtil().setWidth(24),
+              //   ),
+              // ],
             ),
             body: Stack(
               children: [

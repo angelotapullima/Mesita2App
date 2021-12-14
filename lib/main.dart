@@ -3,6 +3,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mesita_aplication_2/src/bloc/provider.dart';
+import 'package:mesita_aplication_2/src/pages/Comidas/comidas_page.dart';
 import 'package:mesita_aplication_2/src/pages/Renovacion_Plan/mostrar_planes.dart';
 import 'package:mesita_aplication_2/src/pages/User/Planes/Pagos/bloc_pago.dart';
 import 'package:mesita_aplication_2/src/pages/home.dart';
@@ -28,6 +29,9 @@ class MyApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider<PagoBLoc>(
           create: (_) => PagoBLoc(),
+        ),
+        ChangeNotifierProvider<CategoryController>(
+          create: (_) => CategoryController(),
         ),
       ],
       child: ProviderBloc(

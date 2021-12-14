@@ -30,9 +30,12 @@ class _ReportesPageState extends State<ReportesPage> {
   final _controller = ReportesController();
   void initState() {
     WidgetsBinding.instance.addPostFrameCallback((_) {
+      fechaI.text = obtenerFechaActualApi();
+      fechaF.text = obtenerFechaActualApi();
       final reporteBloc = ProviderBloc.reporte(context);
       reporteBloc.obtenerReporteGeneralPorIdItem(fechaI.text, fechaF.text, 0);
       reporteBloc.obtenerReporteLineaFirts();
+      _controller.changeRangoFecha('${obtenerRangoFecha(fechaI.text, fechaF.text)}');
     });
     super.initState();
   }

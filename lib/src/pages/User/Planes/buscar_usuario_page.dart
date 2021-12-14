@@ -16,12 +16,14 @@ class BuscarUsuario extends StatefulWidget {
 
 class _BuscarUsuarioState extends State<BuscarUsuario> {
   final TextEditingController _queryController = TextEditingController();
+  FocusNode focus = FocusNode();
 
   @override
   void initState() {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       final busquedaBloc = ProviderBloc.busqueda(context);
       busquedaBloc.buscarUsers('');
+      FocusScope.of(context).requestFocus(focus);
     });
     super.initState();
   }
@@ -41,11 +43,11 @@ class _BuscarUsuarioState extends State<BuscarUsuario> {
                 height: ScreenUtil().setHeight(16),
               ),
               Row(
-                mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   BackButton(),
                   Container(
-                    width: ScreenUtil().setWidth(260),
+                    width: ScreenUtil().setWidth(200),
                     child: CupertinoSearchTextField(
                       controller: _queryController,
                       backgroundColor: Colors.white,
@@ -54,10 +56,16 @@ class _BuscarUsuarioState extends State<BuscarUsuario> {
                         fontWeight: FontWeight.w400,
                         fontSize: ScreenUtil().setSp(16),
                       ),
-                      placeholder: 'Ingrese nombre de usuario',
-                      onChanged: (value) {
-                        if (value != '') {
-                          busquedaBloc.buscarUsers(value);
+                      placeholder: 'Nombre de usuario',
+                      focusNode: focus,
+                      onSuffixTap: () {
+                        _queryController.text = '';
+                        busquedaBloc.buscarUsers('');
+                      },
+                      onSubmitted: (value) {
+                        if (_queryController.text.length > 0) {
+                          FocusManager.instance.primaryFocus?.unfocus();
+                          busquedaBloc.buscarUsers(_queryController.text);
                         } else {
                           _queryController.text = '';
                           busquedaBloc.buscarUsers('');
@@ -66,6 +74,33 @@ class _BuscarUsuarioState extends State<BuscarUsuario> {
                       borderRadius: BorderRadius.circular(20),
                     ),
                   ),
+                  InkWell(
+                    onTap: () {
+                      if (_queryController.text.length > 0) {
+                        FocusManager.instance.primaryFocus?.unfocus();
+                        busquedaBloc.buscarUsers(_queryController.text);
+                      } else {
+                        _queryController.text = '';
+                        busquedaBloc.buscarUsers('');
+                      }
+                    },
+                    child: Container(
+                      padding: EdgeInsets.all(8),
+                      decoration: BoxDecoration(
+                        color: Color(0XFFFF0036),
+                        borderRadius: BorderRadius.circular(15),
+                      ),
+                      child: Text(
+                        'Buscar',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.w400,
+                          fontSize: ScreenUtil().setSp(12),
+                          fontStyle: FontStyle.normal,
+                        ),
+                      ),
+                    ),
+                  )
                 ],
               ),
               SizedBox(
@@ -107,7 +142,7 @@ class _BuscarUsuarioState extends State<BuscarUsuario> {
                             });
                       } else {
                         return Center(
-                          child: Text('No hay resultados'),
+                          child: Text('No se encontraron resultados'),
                         );
                       }
                     } else {

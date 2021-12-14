@@ -127,3 +127,11 @@ compararFechaConActual(String fecha) {
     return false;
   }
 }
+
+verificarNull(String value) {
+  if (value.length > 0 && value != 'null') {
+    return value;
+  } else {
+    return '-';
+  }
+}

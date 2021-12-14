@@ -28,16 +28,22 @@ class ChangeController extends ChangeNotifier {
     notifyListeners();
   }
 
-  bool mostrarTextField = false;
+  bool mostrarTextField1 = false;
+  bool mostrarTextField2 = false;
   String tipoDoc = '';
   String tipoPago = '';
 
   void changeDoc(String tipo) {
     tipoDoc = tipo;
     if (tipo == '01') {
-      mostrarTextField = true;
+      mostrarTextField1 = true;
+      mostrarTextField2 = false;
+    } else if (tipo == '03') {
+      mostrarTextField1 = false;
+      mostrarTextField2 = true;
     } else {
-      mostrarTextField = false;
+      mostrarTextField1 = false;
+      mostrarTextField2 = false;
     }
     notifyListeners();
   }
@@ -325,8 +331,18 @@ void pagarPedidoModal(BuildContext context, PedidoModel pedido) {
                                             _rucController.text = '';
                                             _razonController.text = '';
                                             _domicilioController.text = '';
+                                            // if (_controller.tipoDoc == '03' && _controller.tipoPago != '') {
+                                            //   _controller.changeBoton(true);
+                                            // } else {
+                                            //   _controller.changeBoton(false);
+                                            // }
+
                                             if (_controller.tipoDoc == '03' && _controller.tipoPago != '') {
-                                              _controller.changeBoton(true);
+                                              if (_razonController.text.length > 0) {
+                                                _controller.changeBoton(true);
+                                              } else {
+                                                _controller.changeBoton(false);
+                                              }
                                             } else {
                                               _controller.changeBoton(false);
                                             }
@@ -460,7 +476,7 @@ void pagarPedidoModal(BuildContext context, PedidoModel pedido) {
                                 AnimatedBuilder(
                                   animation: _controller,
                                   builder: (_, g) {
-                                    if (_controller.mostrarTextField) {
+                                    if (_controller.mostrarTextField1) {
                                       return Column(
                                         children: [
                                           TextField(
@@ -579,6 +595,97 @@ void pagarPedidoModal(BuildContext context, PedidoModel pedido) {
                                             keyboardType: TextInputType.text,
                                             decoration: InputDecoration(
                                               hintText: 'Ingrese domicilio',
+                                              hintStyle: TextStyle(
+                                                color: Color(0XFFBEBEBE),
+                                                fontWeight: FontWeight.w400,
+                                                fontSize: ScreenUtil().setSp(16),
+                                                fontStyle: FontStyle.normal,
+                                              ),
+                                              filled: true,
+                                              fillColor: Color(0XFFEDEDED),
+                                              contentPadding: EdgeInsets.only(
+                                                  left: ScreenUtil().setWidth(10), top: ScreenUtil().setHeight(5), bottom: ScreenUtil().setHeight(1)),
+                                              enabledBorder: OutlineInputBorder(
+                                                borderRadius: BorderRadius.circular(15),
+                                                borderSide: BorderSide(color: Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
+                                              ),
+                                              focusedBorder: OutlineInputBorder(
+                                                borderRadius: BorderRadius.circular(15),
+                                                borderSide: BorderSide(color: Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
+                                              ),
+                                              border: OutlineInputBorder(
+                                                borderRadius: BorderRadius.circular(15),
+                                                borderSide: BorderSide(color: Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
+                                              ),
+                                            ),
+                                            style: TextStyle(
+                                              color: Color(0XFF585858),
+                                              fontWeight: FontWeight.w400,
+                                              fontSize: ScreenUtil().setSp(16),
+                                              fontStyle: FontStyle.normal,
+                                            ),
+                                          ),
+                                        ],
+                                      );
+                                    } else if (_controller.mostrarTextField2) {
+                                      return Column(
+                                        children: [
+                                          TextField(
+                                            focusNode: _focus2,
+                                            controller: _razonController,
+                                            maxLines: 1,
+                                            onChanged: (value) {
+                                              if (_razonController.text.length > 0) {
+                                                _controller.changeBoton(true);
+                                              } else {
+                                                _controller.changeBoton(false);
+                                              }
+                                            },
+                                            keyboardType: TextInputType.text,
+                                            decoration: InputDecoration(
+                                              hintText: 'Ingrese Nombre',
+                                              hintStyle: TextStyle(
+                                                color: Color(0XFFBEBEBE),
+                                                fontWeight: FontWeight.w400,
+                                                fontSize: ScreenUtil().setSp(16),
+                                                fontStyle: FontStyle.normal,
+                                              ),
+                                              filled: true,
+                                              fillColor: Color(0XFFEDEDED),
+                                              contentPadding: EdgeInsets.only(
+                                                  left: ScreenUtil().setWidth(10), top: ScreenUtil().setHeight(5), bottom: ScreenUtil().setHeight(1)),
+                                              enabledBorder: OutlineInputBorder(
+                                                borderRadius: BorderRadius.circular(15),
+                                                borderSide: BorderSide(color: Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
+                                              ),
+                                              focusedBorder: OutlineInputBorder(
+                                                borderRadius: BorderRadius.circular(15),
+                                                borderSide: BorderSide(color: Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
+                                              ),
+                                              border: OutlineInputBorder(
+                                                borderRadius: BorderRadius.circular(15),
+                                                borderSide: BorderSide(color: Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
+                                              ),
+                                            ),
+                                            style: TextStyle(
+                                              color: Color(0XFF585858),
+                                              fontWeight: FontWeight.w400,
+                                              fontSize: ScreenUtil().setSp(16),
+                                              fontStyle: FontStyle.normal,
+                                            ),
+                                          ),
+                                          SizedBox(
+                                            height: ScreenUtil().setHeight(8),
+                                          ),
+                                          TextField(
+                                            focusNode: _focus1,
+                                            controller: _rucController,
+                                            maxLines: 1,
+                                            keyboardType: TextInputType.number,
+                                            maxLength: 11,
+                                            decoration: InputDecoration(
+                                              counterText: '',
+                                              hintText: 'Ingrese N° doc',
                                               hintStyle: TextStyle(
                                                 color: Color(0XFFBEBEBE),
                                                 fontWeight: FontWeight.w400,

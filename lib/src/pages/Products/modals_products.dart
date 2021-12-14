@@ -15,7 +15,9 @@ import 'package:mesita_aplication_2/src/bloc/provider.dart';
 import 'package:mesita_aplication_2/src/database/linea_database.dart';
 import 'package:mesita_aplication_2/src/models/linea_model.dart';
 import 'package:mesita_aplication_2/src/models/producto_linea_model.dart';
+import 'package:mesita_aplication_2/src/pages/Comidas/comidas_page.dart';
 import 'package:mesita_aplication_2/src/utils/constants.dart';
+import 'package:provider/provider.dart';
 
 class ChangeController extends ChangeNotifier {
   bool cargando = false;
@@ -228,10 +230,14 @@ void _newProductModal(BuildContext context, String idCategoria, String nameCateg
   TextEditingController _nombreController = new TextEditingController();
   TextEditingController _descripcionController = new TextEditingController();
 
+  _costoController.text = '0.00';
+
   FocusNode _focus1 = FocusNode();
   FocusNode _focus2 = FocusNode();
   FocusNode _focus3 = FocusNode();
   FocusNode _focus4 = FocusNode();
+
+  final provider = Provider.of<CategoryController>(context, listen: false);
 
   showModalBottomSheet(
       context: context,
@@ -353,7 +359,7 @@ void _newProductModal(BuildContext context, String idCategoria, String nameCateg
                                             onChanged: (value) {
                                               if (value.length > 0 &&
                                                   _nombreController.text.length > 0 &&
-                                                  _descripcionController.text.length > 0 &&
+                                                  //_descripcionController.text.length > 0 &&
                                                   _controller.idLinea != '') {
                                                 _controller.changeBoton(true);
                                               } else {
@@ -408,7 +414,7 @@ void _newProductModal(BuildContext context, String idCategoria, String nameCateg
                                             onChanged: (value) {
                                               if (value.length > 0 &&
                                                   _nombreController.text.length > 0 &&
-                                                  _descripcionController.text.length > 0 &&
+                                                  // _descripcionController.text.length > 0 &&
                                                   _controller.idLinea != '') {
                                                 _controller.changeBoton(true);
                                               } else {
@@ -470,7 +476,7 @@ void _newProductModal(BuildContext context, String idCategoria, String nameCateg
                                   onChanged: (value) {
                                     if (value.length > 0 &&
                                         _precioController.text.length > 0 &&
-                                        _descripcionController.text.length > 0 &&
+                                        // _descripcionController.text.length > 0 &&
                                         _controller.idLinea != '') {
                                       _controller.changeBoton(true);
                                     } else {
@@ -587,9 +593,12 @@ void _newProductModal(BuildContext context, String idCategoria, String nameCateg
                                                                               onTap: () {
                                                                                 _controller.changeLinea(
                                                                                     snapshot.data[index2].idLinea, snapshot.data[index2].lineaNombre);
+                                                                                provider.changeIndex(index2);
+                                                                                final productosLineaBloc = ProviderBloc.productosLinea(context);
+                                                                                productosLineaBloc.updateProductosPorLinea(_controller.idLinea);
                                                                                 if (_precioController.text.length > 0 &&
                                                                                     _nombreController.text.length > 0 &&
-                                                                                    _descripcionController.text.length > 0 &&
+                                                                                    //_descripcionController.text.length > 0 &&
                                                                                     _controller.idLinea != '') {
                                                                                   _controller.changeBoton(true);
                                                                                 } else {
@@ -680,16 +689,16 @@ void _newProductModal(BuildContext context, String idCategoria, String nameCateg
                                   controller: _descripcionController,
                                   maxLines: null,
                                   keyboardType: TextInputType.multiline,
-                                  onChanged: (value) {
-                                    if (value.length > 0 &&
-                                        _precioController.text.length > 0 &&
-                                        _nombreController.text.length > 0 &&
-                                        _controller.idLinea != '') {
-                                      _controller.changeBoton(true);
-                                    } else {
-                                      _controller.changeBoton(false);
-                                    }
-                                  },
+                                  // onChanged: (value) {
+                                  //   if (value.length > 0 &&
+                                  //       _precioController.text.length > 0 &&
+                                  //       _nombreController.text.length > 0 &&
+                                  //       _controller.idLinea != '') {
+                                  //     _controller.changeBoton(true);
+                                  //   } else {
+                                  //     _controller.changeBoton(false);
+                                  //   }
+                                  // },
                                   decoration: InputDecoration(
                                     hintText: 'Ingredientes, tiempo de preparación, etc.',
                                     hintStyle: TextStyle(
@@ -736,7 +745,8 @@ void _newProductModal(BuildContext context, String idCategoria, String nameCateg
                                       producto.idLinea = _controller.idLinea;
                                       producto.productoNombre = _nombreController.text;
                                       producto.productoPrecio = _precioController.text;
-                                      producto.productoDescripcion = _descripcionController.text;
+
+                                      producto.productoDescripcion = (_descripcionController.text.length > 0) ? _descripcionController.text : '-';
                                       producto.productoEstado = '1';
                                       producto.productoCocina = '1';
                                       producto.productoCosto = _costoController.text;
@@ -1181,42 +1191,6 @@ void editProductModal(BuildContext context, ProductoLineaModel productData, Stri
                                         ),
                                       ),
                                     ),
-                                    // Container(
-                                    //   height: ScreenUtil().setHeight(150),
-                                    //   width: ScreenUtil().setWidth(150),
-                                    //   decoration: BoxDecoration(
-                                    //     color: Color(0XFFEEEEEE),
-                                    //     shape: BoxShape.circle,
-                                    //     boxShadow: [
-                                    //       BoxShadow(
-                                    //         color: Color.fromRGBO(88, 88, 88, 0.3),
-                                    //         blurRadius: 20,
-                                    //       ),
-                                    //     ],
-                                    //   ),
-                                    //   child: Stack(
-                                    //     children: [
-                                    //       Align(
-                                    //         alignment: Alignment.center,
-                                    //         child: Container(
-                                    //             height: ScreenUtil().setHeight(120),
-                                    //             width: ScreenUtil().setWidth(120),
-                                    //             decoration: BoxDecoration(
-                                    //               color: Color(0XFFEEEEEE),
-                                    //               shape: BoxShape.circle,
-                                    //               boxShadow: [
-                                    //                 BoxShadow(
-                                    //                   offset: Offset(-1, -1),
-                                    //                   color: Color.fromRGBO(0, 0, 0, 0.2),
-                                    //                   blurRadius: 5,
-                                    //                 ),
-                                    //               ],
-                                    //             ),
-                                    //             child: SvgPicture.asset('assets/food_svg/food.svg')),
-                                    //       ),
-                                    //     ],
-                                    //   ),
-                                    // ),
                                     Container(
                                       width: ScreenUtil().setWidth(156),
                                       child: Column(

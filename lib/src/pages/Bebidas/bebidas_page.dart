@@ -9,12 +9,14 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:mesita_aplication_2/src/bloc/provider.dart';
 import 'package:mesita_aplication_2/src/models/linea_model.dart';
 import 'package:mesita_aplication_2/src/models/producto_linea_model.dart';
+import 'package:mesita_aplication_2/src/pages/Comidas/comidas_page.dart';
 import 'package:mesita_aplication_2/src/pages/Products/modals_products.dart';
 import 'package:mesita_aplication_2/src/pages/Lineas_Categories/settings_lines_category.dart';
 import 'package:mesita_aplication_2/src/pages/Products/detail_product.dart';
 import 'package:mesita_aplication_2/src/preferences/preferences.dart';
 import 'package:mesita_aplication_2/src/utils/circle_user_porfile.dart';
 import 'package:mesita_aplication_2/src/utils/constants.dart';
+import 'package:provider/provider.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 class BebidasPage extends StatefulWidget {
@@ -25,7 +27,6 @@ class BebidasPage extends StatefulWidget {
 }
 
 class _BebidasPageState extends State<BebidasPage> {
-  final _controller = CategoryController();
   final String idCategoria = '2';
   final _refreshController = RefreshController(initialRefresh: false);
   int carga = 0;
@@ -42,6 +43,8 @@ class _BebidasPageState extends State<BebidasPage> {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       final lineasBloc = ProviderBloc.lineas(context);
       lineasBloc.updateLineasPorNegocio(idCategoria);
+      final provider = Provider.of<CategoryController>(context, listen: false);
+      provider.changeIndex(0);
     });
 
     super.initState();
@@ -58,6 +61,7 @@ class _BebidasPageState extends State<BebidasPage> {
     //   lineasBloc.obtenerLineasPorNegocio(idCategoria);
     // }
     lineasBloc.obtenerLineasPorNegocio(idCategoria);
+    final provider = Provider.of<CategoryController>(context, listen: false);
     final productosLineaBloc = ProviderBloc.productosLinea(context);
     return Scaffold(
       backgroundColor: Color(0XFFE5E5E5),
@@ -95,140 +99,142 @@ class _BebidasPageState extends State<BebidasPage> {
           ),
         ),
       ),
-      body: StreamBuilder(
-          stream: lineasBloc.lineasStream,
-          builder: (context, AsyncSnapshot<List<LineaModel>> snapshot) {
-            if (snapshot.hasData) {
-              if (snapshot.data.length > 0) {
-                var lineas = snapshot.data;
-                productosLineaBloc.obtenerProductosPorLinea(lineas[0].idLinea);
-                return SmartRefresher(
-                  controller: _refreshController,
-                  onRefresh: () {
-                    _refresher(lineas[_controller.index].idLinea);
-                  },
-                  child: Column(
-                    children: [
-                      Container(
-                        height: ScreenUtil().setHeight(40),
-                        child: ListView.builder(
-                          itemCount: lineas.length + 1,
-                          shrinkWrap: true,
-                          scrollDirection: Axis.horizontal,
-                          itemBuilder: (BuildContext context, int index) {
-                            if (index == lineas.length) {
-                              return InkWell(
-                                onTap: () {
-                                  Navigator.push(
-                                    context,
-                                    PageRouteBuilder(
-                                      pageBuilder: (context, animation, secondaryAnimation) {
-                                        return SettingsLinesCategory(
-                                          idCategoria: idCategoria,
-                                        );
-                                      },
-                                      transitionsBuilder: (context, animation, secondaryAnimation, child) {
-                                        var begin = Offset(0.0, 1.0);
-                                        var end = Offset.zero;
-                                        var curve = Curves.ease;
-
-                                        var tween = Tween(begin: begin, end: end).chain(
-                                          CurveTween(curve: curve),
-                                        );
-
-                                        return SlideTransition(
-                                          position: animation.drive(tween),
-                                          child: child,
-                                        );
-                                      },
-                                    ),
-                                  );
-                                },
-                                child: Container(
-                                  margin: EdgeInsets.symmetric(horizontal: ScreenUtil().setWidth(16)),
-                                  height: ScreenUtil().setHeight(30),
-                                  width: ScreenUtil().setWidth(30),
-                                  child: SvgPicture.asset('assets/food_svg/settings_category.svg'),
-                                ),
-                              );
-                            }
-                            return AnimatedBuilder(
-                                animation: _controller,
-                                builder: (_, s) {
+      body: ValueListenableBuilder<int>(
+        valueListenable: provider.indexG,
+        builder: (_, value, __) {
+          return StreamBuilder(
+              stream: lineasBloc.lineasStream,
+              builder: (context, AsyncSnapshot<List<LineaModel>> snapshot) {
+                if (snapshot.hasData) {
+                  if (snapshot.data.length > 0) {
+                    var lineas = snapshot.data;
+                    productosLineaBloc.obtenerProductosPorLinea(lineas[value].idLinea);
+                    return SmartRefresher(
+                      controller: _refreshController,
+                      onRefresh: () {
+                        _refresher(lineas[value].idLinea);
+                      },
+                      child: Column(
+                        children: [
+                          Container(
+                            height: ScreenUtil().setHeight(40),
+                            child: ListView.builder(
+                              itemCount: lineas.length + 1,
+                              shrinkWrap: true,
+                              scrollDirection: Axis.horizontal,
+                              itemBuilder: (BuildContext context, int index) {
+                                if (index == lineas.length) {
                                   return InkWell(
                                     onTap: () {
-                                      //_controller.changeIdSelect(lineas[index].idLinea);
-                                      productosLineaBloc.obtenerProductosPorLinea(lineas[index].idLinea);
-                                      _controller.changeIndex(index);
+                                      Navigator.push(
+                                        context,
+                                        PageRouteBuilder(
+                                          pageBuilder: (context, animation, secondaryAnimation) {
+                                            return SettingsLinesCategory(
+                                              idCategoria: idCategoria,
+                                            );
+                                          },
+                                          transitionsBuilder: (context, animation, secondaryAnimation, child) {
+                                            var begin = Offset(0.0, 1.0);
+                                            var end = Offset.zero;
+                                            var curve = Curves.ease;
+
+                                            var tween = Tween(begin: begin, end: end).chain(
+                                              CurveTween(curve: curve),
+                                            );
+
+                                            return SlideTransition(
+                                              position: animation.drive(tween),
+                                              child: child,
+                                            );
+                                          },
+                                        ),
+                                      );
                                     },
                                     child: Container(
-                                      margin: EdgeInsets.symmetric(horizontal: ScreenUtil().setWidth(8)),
-                                      padding: EdgeInsets.symmetric(
-                                        horizontal: ScreenUtil().setWidth(28),
-                                      ),
-                                      decoration: BoxDecoration(
-                                          borderRadius: BorderRadius.circular(22),
-                                          color: (index == _controller.index) ? Color(0XFFFF0036) : Color(0XFFE5E5E5),
-                                          boxShadow: [
-                                            BoxShadow(
-                                              color: (index == _controller.index) ? Color.fromRGBO(255, 0, 54, 0.5) : Colors.transparent,
-                                            )
-                                          ]),
-                                      child: Center(
-                                          child: Text(
-                                        lineas[index].lineaNombre,
-                                        style: TextStyle(
-                                          color: (index == _controller.index) ? Colors.white : Color(0xFF585858),
-                                          fontSize: ScreenUtil().setSp(14),
-                                          fontWeight: FontWeight.w500,
-                                          letterSpacing: 0.16,
-                                        ),
-                                      )),
+                                      margin: EdgeInsets.symmetric(horizontal: ScreenUtil().setWidth(16)),
+                                      height: ScreenUtil().setHeight(30),
+                                      width: ScreenUtil().setWidth(30),
+                                      child: SvgPicture.asset('assets/food_svg/settings_category.svg'),
                                     ),
                                   );
-                                });
-                          },
-                        ),
-                      ),
-                      Expanded(
-                        child: StreamBuilder(
-                          stream: productosLineaBloc.productosLineaStream,
-                          builder: (context, AsyncSnapshot<List<ProductoLineaModel>> snapshot) {
-                            if (snapshot.hasData) {
-                              if (snapshot.data.length > 0) {
-                                var food = snapshot.data;
-                                return ListView.builder(
-                                  itemCount: food.length,
-                                  shrinkWrap: true,
-                                  itemBuilder: (context, index2) {
-                                    return itemFood(
-                                      food[index2],
-                                    );
+                                }
+                                return InkWell(
+                                  onTap: () {
+                                    //_controller.changeIdSelect(lineas[index].idLinea);
+                                    productosLineaBloc.obtenerProductosPorLinea(lineas[index].idLinea);
+                                    provider.changeIndex(index);
+                                    // _controller.changeIndex(index);
                                   },
+                                  child: Container(
+                                    margin: EdgeInsets.symmetric(horizontal: ScreenUtil().setWidth(8)),
+                                    padding: EdgeInsets.symmetric(
+                                      horizontal: ScreenUtil().setWidth(28),
+                                    ),
+                                    decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(22),
+                                        color: (index == value) ? Color(0XFFFF0036) : Color(0XFFE5E5E5),
+                                        boxShadow: [
+                                          BoxShadow(
+                                            color: (index == value) ? Color.fromRGBO(255, 0, 54, 0.5) : Colors.transparent,
+                                          )
+                                        ]),
+                                    child: Center(
+                                        child: Text(
+                                      lineas[index].lineaNombre,
+                                      style: TextStyle(
+                                        color: (index == value) ? Colors.white : Color(0xFF585858),
+                                        fontSize: ScreenUtil().setSp(14),
+                                        fontWeight: FontWeight.w500,
+                                        letterSpacing: 0.16,
+                                      ),
+                                    )),
+                                  ),
                                 );
-                              } else {
-                                return Center(
-                                  child: Text('Aún no existen bebidas para esta línea'),
-                                );
-                              }
-                            } else {
-                              return _showLoading();
-                            }
-                          },
-                        ),
+                              },
+                            ),
+                          ),
+                          Expanded(
+                            child: StreamBuilder(
+                              stream: productosLineaBloc.productosLineaStream,
+                              builder: (context, AsyncSnapshot<List<ProductoLineaModel>> snapshot) {
+                                if (snapshot.hasData) {
+                                  if (snapshot.data.length > 0) {
+                                    var food = snapshot.data;
+                                    return ListView.builder(
+                                      itemCount: food.length,
+                                      shrinkWrap: true,
+                                      itemBuilder: (context, index2) {
+                                        return itemFood(
+                                          food[index2],
+                                        );
+                                      },
+                                    );
+                                  } else {
+                                    return Center(
+                                      child: Text('Aún no existen bebidas para esta línea'),
+                                    );
+                                  }
+                                } else {
+                                  return _showLoading();
+                                }
+                              },
+                            ),
+                          ),
+                        ],
                       ),
-                    ],
-                  ),
-                );
-              } else {
-                return Center(
-                  child: Text('Aún no se agregaron líneas'),
-                );
-              }
-            } else {
-              return _showLoading();
-            }
-          }),
+                    );
+                  } else {
+                    return Center(
+                      child: Text('Aún no se agregaron líneas'),
+                    );
+                  }
+                } else {
+                  return _showLoading();
+                }
+              });
+        },
+      ),
     );
   }
 
@@ -413,17 +419,17 @@ class _BebidasPageState extends State<BebidasPage> {
   }
 }
 
-class CategoryController extends ChangeNotifier {
-  String idSelec = '1';
-  int index = 0;
+// class CategoryController extends ChangeNotifier {
+//   String idSelec = '1';
+//   int index = 0;
 
-  void changeIndex(int i) {
-    index = i;
-    notifyListeners();
-  }
+//   void changeIndex(int i) {
+//     index = i;
+//     notifyListeners();
+//   }
 
-  // void changeIdSelect(String id) {
-  //   idSelec = id;
-  //   notifyListeners();
-  // }
-}
+//   // void changeIdSelect(String id) {
+//   //   idSelec = id;
+//   //   notifyListeners();
+//   // }
+// }
