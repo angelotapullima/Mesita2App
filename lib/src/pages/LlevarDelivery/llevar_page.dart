@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:mesita_aplication_2/src/pages/Busqueda/buscar_page.dart';
+import 'package:mesita_aplication_2/src/models/pedidos_model.dart';
 import 'package:mesita_aplication_2/src/pages/Mesas/agregar_pedidos_mesa.dart';
 
 class LlevarPage extends StatelessWidget {
@@ -104,18 +104,103 @@ class LlevarPage extends StatelessWidget {
                         children: [
                           Container(
                             height: ScreenUtil().setHeight(200),
-                            child: Expanded(
-                              child: ListView.builder(
-                                shrinkWrap: true,
-                                itemCount: 20,
-                                itemBuilder: (_, index2) {
-                                  return Container(
-                                      margin: EdgeInsets.symmetric(
-                                        horizontal: ScreenUtil().setWidth(24),
+                            child: Column(
+                              children: [
+                                Expanded(
+                                  child: ListView.builder(
+                                    shrinkWrap: true,
+                                    itemCount: 3,
+                                    itemBuilder: (_, index2) {
+                                      DetallePedidoModel pedido = DetallePedidoModel();
+                                      pedido.nombreProducto = 'Arroz con pollo';
+                                      pedido.cantidad = '2';
+                                      pedido.observaciones = 'null';
+                                      pedido.totalDetalle = '22.00';
+
+                                      return _pedidoItem(pedido);
+                                    },
+                                  ),
+                                ),
+                                Row(
+                                  children: [
+                                    Container(
+                                      width: ScreenUtil().setWidth(200),
+                                      child: MaterialButton(
+                                        color: Color(0XFFFF0036),
+                                        textColor: Colors.white,
+                                        elevation: 0,
+                                        onPressed: () {
+                                          //pagarPedidoModal(context, pedidos[0]);
+                                        },
+                                        shape: const RoundedRectangleBorder(
+                                          borderRadius: BorderRadius.all(
+                                            Radius.circular(20.0),
+                                          ),
+                                        ),
+                                        child: Text(
+                                          'Pagar S/. 66.60',
+                                          style: GoogleFonts.poppins(
+                                            color: Colors.white,
+                                            fontWeight: FontWeight.w500,
+                                            fontSize: ScreenUtil().setSp(16),
+                                          ),
+                                        ),
                                       ),
-                                      child: Text('Pollo con papas'));
-                                },
-                              ),
+                                    ),
+                                    Container(
+                                      width: ScreenUtil().setWidth(100),
+                                      child: MaterialButton(
+                                        color: Colors.white,
+                                        textColor: Color(0XFF585858),
+                                        elevation: 0,
+                                        onPressed: () {
+                                          // Navigator.push(
+                                          //   context,
+                                          //   PageRouteBuilder(
+                                          //     opaque: false,
+                                          //     pageBuilder: (context, animation, secondaryAnimation) {
+                                          //       return AgregarProductoPage(
+                                          //         mesa: widget.mesa,
+                                          //         esComanda: false,
+                                          //         idEnviar: idEnviar,
+                                          //       );
+                                          //     },
+                                          //     transitionsBuilder: (context, animation, secondaryAnimation, child) {
+                                          //       var begin = Offset(0.0, 1.0);
+                                          //       var end = Offset.zero;
+                                          //       var curve = Curves.ease;
+
+                                          //       var tween = Tween(begin: begin, end: end).chain(
+                                          //         CurveTween(curve: curve),
+                                          //       );
+
+                                          //       return SlideTransition(
+                                          //         position: animation.drive(tween),
+                                          //         child: child,
+                                          //       );
+                                          //     },
+                                          //   ),
+                                          // );
+                                        },
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius: BorderRadius.circular(22),
+                                          side: BorderSide(
+                                            color: Color(0XFFFF0036),
+                                          ),
+                                        ),
+                                        child: Text(
+                                          'Agregar pedidos',
+                                          style: GoogleFonts.poppins(
+                                            color: Color(0XFFFF0036),
+                                            fontWeight: FontWeight.w500,
+                                            fontSize: ScreenUtil().setSp(16),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ],
                             ),
                           )
                         ],
@@ -127,6 +212,105 @@ class LlevarPage extends StatelessWidget {
             ),
           )
         ],
+      ),
+    );
+  }
+
+  Widget _pedidoItem(DetallePedidoModel pedido) {
+    return InkWell(
+      onTap: () {
+        // Navigator.push(
+        //   context,
+        //   PageRouteBuilder(
+        //     pageBuilder: (context, animation, secondaryAnimation) {
+        //       return EditarDetalleProductoPedido(
+        //         producto: pedidos[0].detallesPedido[index],
+        //         idMesa: pedidos[0].idMesa,
+        //       );
+        //     },
+        //     transitionsBuilder: (context, animation, secondaryAnimation, child) {
+        //       var begin = Offset(0.0, 1.0);
+        //       var end = Offset.zero;
+        //       var curve = Curves.ease;
+
+        //       var tween = Tween(begin: begin, end: end).chain(
+        //         CurveTween(curve: curve),
+        //       );
+
+        //       return SlideTransition(
+        //         position: animation.drive(tween),
+        //         child: child,
+        //       );
+        //     },
+        //   ),
+        // );
+      },
+      child: Container(
+        padding: EdgeInsets.symmetric(
+          horizontal: ScreenUtil().setWidth(24),
+          vertical: ScreenUtil().setHeight(4),
+        ),
+        margin: EdgeInsets.symmetric(
+          vertical: ScreenUtil().setHeight(4),
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    '${pedido.nombreProducto}',
+                    style: GoogleFonts.poppins(
+                      color: Color(0XFF585858),
+                      fontWeight: FontWeight.w500,
+                      fontSize: ScreenUtil().setSp(16),
+                    ),
+                  ),
+                  SizedBox(
+                    height: ScreenUtil().setHeight(5),
+                  ),
+                  Text(
+                    'S/${pedido.totalDetalle}',
+                    style: GoogleFonts.poppins(
+                      fontWeight: FontWeight.w700,
+                      fontSize: ScreenUtil().setSp(16),
+                    ),
+                  ),
+                  SizedBox(
+                    height: ScreenUtil().setHeight(5),
+                  ),
+                  ('${pedido.observaciones}' == 'null')
+                      ? Container()
+                      : Text('${pedido.observaciones}',
+                          style: GoogleFonts.poppins(
+                            fontWeight: FontWeight.w500,
+                            fontSize: ScreenUtil().setSp(14),
+                          ),
+                          maxLines: 2),
+                ],
+              ),
+            ),
+            SizedBox(
+              width: ScreenUtil().setWidth(8),
+            ),
+            Text(
+              'X',
+              style: GoogleFonts.poppins(
+                fontWeight: FontWeight.w500,
+                fontSize: ScreenUtil().setSp(15),
+              ),
+            ),
+            Text(
+              '${pedido.cantidad}',
+              style: GoogleFonts.poppins(
+                fontWeight: FontWeight.w500,
+                fontSize: ScreenUtil().setSp(15),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
