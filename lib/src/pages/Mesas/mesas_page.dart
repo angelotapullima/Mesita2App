@@ -7,7 +7,6 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mesita_aplication_2/src/bloc/provider.dart';
 import 'package:mesita_aplication_2/src/models/mesa_model.dart';
-import 'package:mesita_aplication_2/src/pages/LlevarDelivery/delivery_page.dart';
 import 'package:mesita_aplication_2/src/pages/LlevarDelivery/llevar_page.dart';
 import 'package:mesita_aplication_2/src/pages/Mesas/detalle_mesa_page.dart';
 import 'package:mesita_aplication_2/src/pages/Mesas/modal_agregar_mesa.dart';
@@ -126,17 +125,22 @@ class MesasPage extends StatelessWidget {
                             mainAxisSpacing: 0,
                             crossAxisSpacing: ScreenUtil().setWidth(10),
                           ),
-                          itemCount: snapsdhot.data.length + 2,
+                          itemCount: snapsdhot.data.length,
                           itemBuilder: (BuildContext context, int index) {
                             return LayoutBuilder(builder: (context, constraints) {
-                              if (index == 0) {
+                              if (snapsdhot.data[index].mesaTipo == '1' || snapsdhot.data[index].mesaTipo == '2') {
                                 return InkWell(
                                   onTap: () {
                                     Navigator.push(
                                       context,
                                       PageRouteBuilder(
                                         pageBuilder: (context, animation, secondaryAnimation) {
-                                          return LlevarPage();
+                                          return DeliveryLlevarPage(
+                                            mesa: snapsdhot.data[index],
+                                            text: (snapsdhot.data[index].mesaTipo == '1')
+                                                ? 'Realice pedidos para llevar desde el local'
+                                                : 'Realice pedidos para delivery',
+                                          );
                                         },
                                         transitionsBuilder: (context, animation, secondaryAnimation, child) {
                                           var begin = Offset(0.0, 1.0);
@@ -212,123 +216,7 @@ class MesasPage extends StatelessWidget {
                                             ),
                                             child: Center(
                                               child: Text(
-                                                'Llevar',
-                                                style: TextStyle(
-                                                  fontSize: ScreenUtil().setSp(20),
-                                                  color: Color(0xfff9708d),
-                                                  fontWeight: FontWeight.bold,
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                        SizedBox(
-                                          width: constraints.maxWidth * 0.05,
-                                        ),
-                                        Container(
-                                          width: constraints.maxWidth * 0.12,
-                                          child: Padding(
-                                            padding: EdgeInsets.symmetric(vertical: ScreenUtil().setHeight(10)),
-                                            child: Container(
-                                              decoration: BoxDecoration(
-                                                //color: (snapsdhot.data[index].mesaEstado != '2') ? Colors.white : Color(0xffff0036),
-                                                color: Colors.white,
-                                                borderRadius: BorderRadius.circular(5),
-                                              ),
-                                              height: constraints.maxHeight * 0.55,
-                                              width: constraints.maxWidth * 0.2,
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                );
-                              }
-                              if (index == 1) {
-                                return InkWell(
-                                  onTap: () {
-                                    Navigator.push(
-                                      context,
-                                      PageRouteBuilder(
-                                        pageBuilder: (context, animation, secondaryAnimation) {
-                                          return DeliveryPage();
-                                        },
-                                        transitionsBuilder: (context, animation, secondaryAnimation, child) {
-                                          var begin = Offset(0.0, 1.0);
-                                          var end = Offset.zero;
-                                          var curve = Curves.ease;
-
-                                          var tween = Tween(begin: begin, end: end).chain(
-                                            CurveTween(curve: curve),
-                                          );
-
-                                          return SlideTransition(
-                                            position: animation.drive(tween),
-                                            child: child,
-                                          );
-                                        },
-                                      ),
-                                    );
-                                  },
-                                  child: Container(
-                                    padding: EdgeInsets.only(
-                                      right: ScreenUtil().setWidth(10),
-                                      left: ScreenUtil().setWidth(10),
-                                    ),
-                                    width: constraints.maxWidth,
-                                    child: Row(
-                                      mainAxisAlignment: MainAxisAlignment.center,
-                                      children: [
-                                        Container(
-                                          width: constraints.maxWidth * 0.12,
-                                          child: Padding(
-                                            padding: EdgeInsets.symmetric(
-                                              vertical: ScreenUtil().setHeight(10),
-                                            ),
-                                            child: Container(
-                                              decoration: BoxDecoration(
-                                                color: Colors.white,
-                                                borderRadius: BorderRadius.circular(5),
-                                              ),
-                                              height: constraints.maxHeight * 0.55,
-                                              width: constraints.maxWidth * 0.2,
-                                            ),
-                                          ),
-                                        ),
-                                        SizedBox(
-                                          width: constraints.maxWidth * 0.05,
-                                        ),
-                                        Container(
-                                          height: constraints.maxHeight - constraints.maxHeight * 0.20,
-                                          width: constraints.maxWidth * 0.52,
-                                          decoration: BoxDecoration(
-                                            borderRadius: BorderRadius.circular(5),
-                                            gradient: LinearGradient(
-                                              begin: Alignment.bottomLeft,
-                                              end: Alignment.topRight,
-                                              colors: [
-                                                Colors.white,
-                                                Colors.white,
-                                              ],
-
-                                              //
-                                            ),
-                                            boxShadow: [
-                                              BoxShadow(
-                                                offset: Offset(0, 0),
-                                                blurRadius: 20.0,
-                                                color: Color(0xff585858).withOpacity(.15),
-                                              ),
-                                            ],
-                                          ),
-                                          child: Padding(
-                                            padding: EdgeInsets.symmetric(
-                                              horizontal: ScreenUtil().setWidth(10),
-                                            ),
-                                            child: Center(
-                                              child: Text(
-                                                'Delivery',
+                                                snapsdhot.data[index].mesaNombre,
                                                 style: TextStyle(
                                                   fontSize: ScreenUtil().setSp(18),
                                                   color: Color(0xfff9708d),
@@ -361,7 +249,7 @@ class MesasPage extends StatelessWidget {
                                   ),
                                 );
                               }
-                              index = index - 2;
+
                               return InkWell(
                                 onTap: () {
                                   Navigator.push(

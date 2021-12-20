@@ -35,7 +35,8 @@ class DatabaseProvider {
           ' idNegocio TEXT,'
           ' mesaNombre TEXT,'
           ' mesaCapacidad TEXT,'
-          ' mesaEstado TEXT'
+          ' mesaEstado TEXT,'
+          ' mesaTipo TEXT'
           ')');
 
       await db.execute(' CREATE TABLE Categorias('
@@ -68,7 +69,10 @@ class DatabaseProvider {
           ' idMesa TEXT,'
           ' total TEXT,'
           ' fecha TEXT,'
-          ' estado TEXT'
+          ' estado TEXT,'
+          ' nombre TEXT,'
+          ' direccion TEXT,'
+          ' telefono TEXT'
           ')');
 
       await db.execute(' CREATE TABLE DetallePedidos('

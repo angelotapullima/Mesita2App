@@ -66,27 +66,51 @@ class PlanesApi {
       final decodedData = json.decode(resp.body);
 
       if (decodedData["result"].length > 0) {
-        for (var i = 0; i < decodedData["result"].length; i++) {
-          var plancU = decodedData["result"][i];
-          PlanUserModel plan = PlanUserModel();
-          plan.idUserPlan = plancU["id_plan"];
-          plan.idUser = plancU["id_usuario"];
-          plan.idNegocio = plancU["id_negocio"];
-          plan.idPlan = plancU["plan_tipo"];
-          plan.inicioFecha = plancU["plan_inicio"];
-          plan.finFecha = plancU["plan_fin"];
-          plan.voucher = plancU["plan_voucher"];
-          plan.estado = plancU["plan_estado"];
+        // for (var i = 0; i < decodedData["result"].length; i++) {
+        //   var plancU = decodedData["result"][i];
+        //   PlanUserModel plan = PlanUserModel();
+        //   plan.idUserPlan = plancU["id_plan"];
+        //   plan.idUser = plancU["id_usuario"];
+        //   plan.idNegocio = plancU["id_negocio"];
+        //   plan.idPlan = plancU["plan_tipo"];
+        //   plan.inicioFecha = plancU["plan_inicio"];
+        //   plan.finFecha = plancU["plan_fin"];
+        //   plan.voucher = plancU["plan_voucher"];
+        //   plan.estado = plancU["plan_estado"];
 
-          if (plan.estado != '2') {
-            _prefs.idPlan = plancU["id_plan"];
-            _prefs.tipoPlan = plancU["plan_tipo"];
-            _prefs.inicioPlan = plancU["plan_inicio"];
-            _prefs.finPlan = plancU["plan_fin"];
-          }
+        //   if (plan.estado == '1') {
+        //     _prefs.idPlan = plancU["id_plan"];
+        //     _prefs.tipoPlan = plancU["plan_tipo"];
+        //     _prefs.inicioPlan = plancU["plan_inicio"];
+        //     _prefs.finPlan = plancU["plan_fin"];
+        //   } else {
+        //     _prefs.idPlan = decodedData["result"][0]["id_plan"];
+        //     _prefs.tipoPlan = decodedData["result"][0]["plan_tipo"];
+        //     _prefs.inicioPlan = decodedData["result"][0]["plan_inicio"];
+        //     _prefs.finPlan = decodedData["result"][0]["plan_fin"];
+        //   }
 
-          await _planUserDatabase.insertarPlanUser(plan);
-        }
+        //   await _planUserDatabase.insertarPlanUser(plan);
+        // }
+
+        var plancU = decodedData["result"][decodedData["result"].length - 1];
+        PlanUserModel plan = PlanUserModel();
+        plan.idUserPlan = plancU["id_plan"];
+        plan.idUser = plancU["id_usuario"];
+        plan.idNegocio = plancU["id_negocio"];
+        plan.idPlan = plancU["plan_tipo"];
+        plan.inicioFecha = plancU["plan_inicio"];
+        plan.finFecha = plancU["plan_fin"];
+        plan.voucher = plancU["plan_voucher"];
+        plan.estado = plancU["plan_estado"];
+        await _planUserDatabase.insertarPlanUser(plan);
+
+        ///
+        _prefs.idPlan = plancU["id_plan"];
+        _prefs.tipoPlan = plancU["plan_tipo"];
+        _prefs.inicioPlan = plancU["plan_inicio"];
+        _prefs.finPlan = plancU["plan_fin"];
+        _prefs.estadoPlan = plancU["plan_estado"];
 
         return true;
       } else {

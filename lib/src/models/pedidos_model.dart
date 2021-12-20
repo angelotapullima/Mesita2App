@@ -4,6 +4,9 @@ class PedidoModel {
   String total;
   String fecha;
   String estado;
+  String nombre;
+  String direccion;
+  String telefono;
   List<DetallePedidoModel> detallesPedido;
 
   PedidoModel({
@@ -13,6 +16,9 @@ class PedidoModel {
     this.fecha,
     this.estado,
     this.detallesPedido,
+    this.nombre,
+    this.direccion,
+    this.telefono,
   });
 
   factory PedidoModel.fromJson(Map<String, dynamic> json) => PedidoModel(
@@ -21,6 +27,9 @@ class PedidoModel {
         idMesa: json["idMesa"],
         fecha: json["fecha"],
         estado: json["estado"],
+        nombre: json["nombre"],
+        direccion: json["direccion"],
+        telefono: json["telefono"],
       );
 }
 

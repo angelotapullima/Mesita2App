@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:mesita_aplication_2/src/models/mesa_model.dart';
 import 'package:mesita_aplication_2/src/models/pedidos_model.dart';
 import 'package:mesita_aplication_2/src/pages/Mesas/agregar_pedidos_mesa.dart';
 
-class LlevarPage extends StatelessWidget {
-  const LlevarPage({Key key}) : super(key: key);
+class DeliveryLlevarPage extends StatelessWidget {
+  final MesaModel mesa;
+  final String text;
+  const DeliveryLlevarPage({Key key, @required this.mesa, @required this.text}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +19,7 @@ class LlevarPage extends StatelessWidget {
         elevation: 0,
         iconTheme: IconThemeData(color: Colors.white),
         title: Text(
-          'Llevar',
+          mesa.mesaNombre,
           style: GoogleFonts.poppins(
             color: Colors.white,
             fontWeight: FontWeight.w600,
@@ -51,7 +54,7 @@ class LlevarPage extends StatelessWidget {
                       children: [
                         Center(
                           child: Text(
-                            'Realice pedidos para llevar desde el local',
+                            text,
                             style: GoogleFonts.poppins(
                               color: Colors.white,
                               fontWeight: FontWeight.w500,

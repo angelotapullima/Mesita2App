@@ -5,6 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:mesita_aplication_2/src/bloc/provider.dart';
 import 'package:mesita_aplication_2/src/pages/Comidas/comidas_page.dart';
 import 'package:mesita_aplication_2/src/pages/Renovacion_Plan/mostrar_planes.dart';
+import 'package:mesita_aplication_2/src/pages/Renovacion_Plan/solicitud_pendiente.dart';
 import 'package:mesita_aplication_2/src/pages/User/Planes/Pagos/bloc_pago.dart';
 import 'package:mesita_aplication_2/src/pages/home.dart';
 import 'package:mesita_aplication_2/src/pages/login.dart';
@@ -73,6 +74,7 @@ class MyApp extends StatelessWidget {
               'home': (BuildContext context) => const Home(),
               'login': (BuildContext context) => const Login(),
               'planes': (BuildContext context) => const MostrarPlanesPage(),
+              'solicituPlan': (BuildContext context) => const SolicitudPendiente(),
             },
           ),
         ),

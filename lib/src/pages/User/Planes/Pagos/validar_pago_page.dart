@@ -9,9 +9,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:mesita_aplication_2/src/api/planes_api.dart';
-import 'package:mesita_aplication_2/src/bloc/provider.dart';
 import 'package:mesita_aplication_2/src/models/planes_model.dart';
-import 'package:mesita_aplication_2/src/pages/home.dart';
 import 'package:mesita_aplication_2/src/preferences/preferences.dart';
 import 'package:mesita_aplication_2/src/utils/utils.dart';
 
@@ -707,40 +705,7 @@ class _ValidarPagoPageState extends State<ValidarPagoPage> {
 
                       if (_controller.boton) {
                         final api = PlanesApi();
-                        // String nrDoc = '';
-                        // String razon = '';
-                        // String direccionDoc = '';
-                        // if (_controller.tipoDoc == '01') {
-                        //   nrDoc = _rucController.text;
-                        //   razon = _razonSocialController.text;
-                        //   direccionDoc = _direccionSocialController.text;
-                        // }
 
-                        // if (widget.tipoMetodoPago == 3) {
-                        //   final resp = await api.reservaOnline(widget.canchita, _controller.tipoDoc, nrDoc, razon, direccionDoc);
-
-                        //   if (resp.code == '1') {
-                        //     Navigator.pop(context);
-
-                        //     Navigator.push(
-                        //       context,
-                        //       PageRouteBuilder(
-                        //         transitionDuration: const Duration(milliseconds: 700),
-                        //         pageBuilder: (context, animation, secondaryAnimation) {
-                        //           return WebViewPagos(link: resp.url, cancha: widget.canchita);
-                        //         },
-                        //         transitionsBuilder: (context, animation, secondaryAnimation, child) {
-                        //           return FadeTransition(
-                        //             opacity: animation,
-                        //             child: child,
-                        //           );
-                        //         },
-                        //       ),
-                        //     );
-                        //   } else {
-                        //     _controller.changeText('Ocurrió un problema');
-                        //   }
-                        // } else {
                         var resp;
 
                         if (widget.esRenovacion) {
@@ -750,38 +715,39 @@ class _ValidarPagoPageState extends State<ValidarPagoPage> {
                         }
 
                         if (resp) {
-                          await api.obtenerPlanUser();
-                          Navigator.pop(context);
+                          Navigator.pushReplacementNamed(context, 'splash');
+                          // await api.obtenerPlanUser();
+                          // Navigator.pop(context);
 
-                          if (widget.planVencido) {
-                            Navigator.pushReplacementNamed(context, 'home');
+                          // if (widget.planVencido) {
+                          //   Navigator.pushReplacementNamed(context, 'home');
 
-                            Navigator.push(
-                              context,
-                              PageRouteBuilder(
-                                pageBuilder: (context, animation, secondaryAnimation) {
-                                  return Home();
-                                },
-                                transitionsBuilder: (context, animation, secondaryAnimation, child) {
-                                  var begin = Offset(0.0, 1.0);
-                                  var end = Offset.zero;
-                                  var curve = Curves.ease;
+                          //   Navigator.push(
+                          //     context,
+                          //     PageRouteBuilder(
+                          //       pageBuilder: (context, animation, secondaryAnimation) {
+                          //         return Home();
+                          //       },
+                          //       transitionsBuilder: (context, animation, secondaryAnimation, child) {
+                          //         var begin = Offset(0.0, 1.0);
+                          //         var end = Offset.zero;
+                          //         var curve = Curves.ease;
 
-                                  var tween = Tween(begin: begin, end: end).chain(
-                                    CurveTween(curve: curve),
-                                  );
+                          //         var tween = Tween(begin: begin, end: end).chain(
+                          //           CurveTween(curve: curve),
+                          //         );
 
-                                  return SlideTransition(
-                                    position: animation.drive(tween),
-                                    child: child,
-                                  );
-                                },
-                              ),
-                            );
-                          } else {
-                            final planesBloc = ProviderBloc.planes(context);
-                            planesBloc.obtenerPlanes();
-                          }
+                          //         return SlideTransition(
+                          //           position: animation.drive(tween),
+                          //           child: child,
+                          //         );
+                          //       },
+                          //     ),
+                          //   );
+                          // } else {
+                          //   final planesBloc = ProviderBloc.planes(context);
+                          //   planesBloc.obtenerPlanes();
+                          // }
 
                           // Navigator.push(
                           //   context,

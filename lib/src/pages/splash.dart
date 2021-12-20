@@ -31,15 +31,18 @@ class _SplashState extends State<Splash> with AfterLayoutMixin<Splash> {
         } else {
           await _lineaApi.obtenerLineasPorNegocio();
           await _planApi.obtenerPlanUser();
-
-          final resp = compararFechaConActual(preferences.finPlan);
-
-          if (resp) {
-            print('Necesitar renovar');
-            Navigator.pushReplacementNamed(context, 'planes');
+          if (preferences.estadoPlan == '0') {
+            Navigator.pushReplacementNamed(context, 'solicituPlan');
           } else {
-            print('No necesitas renovars');
-            Navigator.pushReplacementNamed(context, 'home');
+            final resp = compararFechaConActual(preferences.finPlan);
+
+            if (resp) {
+              print('Necesitar renovar');
+              Navigator.pushReplacementNamed(context, 'planes');
+            } else {
+              print('No necesitas renovars');
+              Navigator.pushReplacementNamed(context, 'home');
+            }
           }
         }
       },

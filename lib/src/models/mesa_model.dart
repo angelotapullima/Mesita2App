@@ -4,6 +4,7 @@ class MesaModel {
   String mesaNombre;
   String mesaEstado;
   String mesaCapacidad;
+  String mesaTipo;
 
   MesaModel({
     this.idMesa,
@@ -11,6 +12,7 @@ class MesaModel {
     this.mesaNombre,
     this.mesaEstado,
     this.mesaCapacidad,
+    this.mesaTipo,
   });
 
   factory MesaModel.fromJson(Map<String, dynamic> json) => MesaModel(
@@ -19,5 +21,6 @@ class MesaModel {
         mesaNombre: json["mesaNombre"],
         mesaEstado: json["mesaEstado"],
         mesaCapacidad: json["mesaCapacidad"],
+        mesaTipo: json["mesaTipo"],
       );
 }
