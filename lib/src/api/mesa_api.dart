@@ -91,40 +91,36 @@ class MesaApi {
       mesa.mesaEstado = decodedData['llevar']['mesa_estado'];
       mesa.mesaTipo = decodedData['llevar']['mesa_tipo'];
       await _mesaDatabase.insertarMesa(mesa);
-      //decodedData['local'][i]["pedido"]["id_pedido"] != 0 &&
 
       if (decodedData['llevar']['mesa_estado'] == '2') {
-        PedidoModel pedido = PedidoModel();
+        for (var a = 0; a < decodedData['llevar']["pedido"].length; a++) {
+          var pedixd = decodedData['llevar']["pedido"][a];
+          PedidoModel pedido = PedidoModel();
 
-        pedido.idPedido = decodedData['llevar']["pedido"]["id_pedido"];
-        pedido.idMesa = decodedData['llevar']['id_mesa'];
-        pedido.total = decodedData['llevar']["pedido"]["pedido_total"];
-        pedido.nombre = decodedData['llevar']["pedido"]["pedido_nombre"];
-        pedido.direccion = decodedData['llevar']["pedido"]["pedido_direccion"];
-        pedido.telefono = decodedData['llevar']["pedido"]["pedido_telefono"];
-
-        if (decodedData['llevar']["pedido"]["detalle"].length > 0) {
-          pedido.estado = decodedData['llevar']["pedido"]["detalle"][0]["pedido_estado"];
-          pedido.fecha = decodedData['llevar']["pedido"]["detalle"][0]["pedido_datetime"];
-          for (var x = 0; x < decodedData['llevar']["pedido"]["detalle"].length; x++) {
-            var detalle = decodedData['llevar']["pedido"]["detalle"][x];
-            DetallePedidoModel detallePedido = DetallePedidoModel();
-            detallePedido.idDetalle = detalle["id_pedido_detalle"];
-            detallePedido.idPedido = detalle["id_pedido"];
-            detallePedido.idProducto = detalle["id_producto"];
-            detallePedido.cantidad = detalle["pedido_detalle_cantidad"];
-            detallePedido.subtotal = detalle["pedido_detalle_subtotal"];
-            detallePedido.totalDetalle = detalle["pedido_detalle_subtotal"];
-            detallePedido.observaciones = detalle["pedido_detalle_observaciones"].toString();
-            detallePedido.estado = detalle["pedido_detalle_estado"];
-            detallePedido.llevar = detalle["pedido_detalle_llevar"];
-            detallePedido.nombreProducto = detalle["producto_nombre"];
-            detallePedido.fotoProducto = detalle["producto_foto"];
-
-            await _pedidosDatabase.insertarDetallePedido(detallePedido);
-          }
-
+          pedido.idPedido = pedixd["id_pedido"];
+          pedido.idMesa = decodedData['llevar']['id_mesa'];
+          pedido.total = pedixd["pedido_total"];
+          pedido.nombre = pedixd["pedido_nombre"];
+          pedido.direccion = pedixd["pedido_direccion"];
+          pedido.telefono = pedixd["pedido_telefono"];
+          pedido.estado = pedixd["pedido_estado"];
+          pedido.fecha = pedixd["pedido_datetime"];
           await _pedidosDatabase.insertarPedido(pedido);
+
+          DetallePedidoModel detallePedido = DetallePedidoModel();
+          detallePedido.idDetalle = pedixd["id_pedido_detalle"];
+          detallePedido.idPedido = pedixd["id_pedido"];
+          detallePedido.idProducto = pedixd["id_producto"];
+          detallePedido.cantidad = pedixd["pedido_detalle_cantidad"];
+          detallePedido.subtotal = pedixd["pedido_detalle_subtotal"];
+          detallePedido.totalDetalle = pedixd["pedido_detalle_subtotal"];
+          detallePedido.observaciones = pedixd["pedido_detalle_observaciones"].toString();
+          detallePedido.estado = pedixd["pedido_detalle_estado"];
+          detallePedido.llevar = pedixd["pedido_detalle_llevar"];
+          detallePedido.nombreProducto = pedixd["producto_nombre"];
+          detallePedido.fotoProducto = pedixd["producto_foto"];
+
+          await _pedidosDatabase.insertarDetallePedido(detallePedido);
         }
       } else {
         await _pedidosDatabase.deletePedidoPorIdMesa(decodedData['llevar']['id_mesa']);
@@ -140,40 +136,37 @@ class MesaApi {
       mesa2.mesaEstado = decodedData['delivery']['mesa_estado'];
       mesa2.mesaTipo = decodedData['delivery']['mesa_tipo'];
       await _mesaDatabase.insertarMesa(mesa2);
-      //decodedData['local'][i]["pedido"]["id_pedido"] != 0 &&
 
-      if (decodedData['delivery']['mesa_estado'] == '2') {
-        PedidoModel pedido = PedidoModel();
+      if (decodedData['delivery']["mesa_estado"] == '2') {
+        for (var g = 0; g < decodedData['delivery']["pedido"].length; g++) {
+          var delivery = decodedData['delivery']["pedido"][g];
 
-        pedido.idPedido = decodedData['delivery']["pedido"]["id_pedido"];
-        pedido.idMesa = decodedData['delivery']['id_mesa'];
-        pedido.total = decodedData['delivery']["pedido"]["pedido_total"];
-        pedido.nombre = decodedData['delivery']["pedido"]["pedido_nombre"];
-        pedido.direccion = decodedData['delivery']["pedido"]["pedido_direccion"];
-        pedido.telefono = decodedData['delivery']["pedido"]["pedido_telefono"];
+          PedidoModel pedido = PedidoModel();
 
-        if (decodedData['delivery']["pedido"]["detalle"].length > 0) {
-          pedido.estado = decodedData['delivery']["pedido"]["detalle"][0]["pedido_estado"];
-          pedido.fecha = decodedData['delivery']["pedido"]["detalle"][0]["pedido_datetime"];
-          for (var x = 0; x < decodedData['delivery']["pedido"]["detalle"].length; x++) {
-            var detalle = decodedData['delivery']["pedido"]["detalle"][x];
-            DetallePedidoModel detallePedido = DetallePedidoModel();
-            detallePedido.idDetalle = detalle["id_pedido_detalle"];
-            detallePedido.idPedido = detalle["id_pedido"];
-            detallePedido.idProducto = detalle["id_producto"];
-            detallePedido.cantidad = detalle["pedido_detalle_cantidad"];
-            detallePedido.subtotal = detalle["pedido_detalle_subtotal"];
-            detallePedido.totalDetalle = detalle["pedido_detalle_subtotal"];
-            detallePedido.observaciones = detalle["pedido_detalle_observaciones"].toString();
-            detallePedido.estado = detalle["pedido_detalle_estado"];
-            detallePedido.llevar = detalle["pedido_detalle_llevar"];
-            detallePedido.nombreProducto = detalle["producto_nombre"];
-            detallePedido.fotoProducto = detalle["producto_foto"];
-
-            await _pedidosDatabase.insertarDetallePedido(detallePedido);
-          }
-
+          pedido.idPedido = delivery["id_pedido"];
+          pedido.idMesa = decodedData['delivery']['id_mesa'];
+          pedido.total = delivery["pedido_total"];
+          pedido.nombre = delivery["pedido_nombre"];
+          pedido.direccion = delivery["pedido_direccion"];
+          pedido.telefono = delivery["pedido_telefono"];
+          pedido.estado = delivery["pedido_estado"];
+          pedido.fecha = delivery["pedido_datetime"];
           await _pedidosDatabase.insertarPedido(pedido);
+
+          DetallePedidoModel detallePedido = DetallePedidoModel();
+          detallePedido.idDetalle = delivery["id_pedido_detalle"];
+          detallePedido.idPedido = delivery["id_pedido"];
+          detallePedido.idProducto = delivery["id_producto"];
+          detallePedido.cantidad = delivery["pedido_detalle_cantidad"];
+          detallePedido.subtotal = delivery["pedido_detalle_subtotal"];
+          detallePedido.totalDetalle = delivery["pedido_detalle_subtotal"];
+          detallePedido.observaciones = delivery["pedido_detalle_observaciones"].toString();
+          detallePedido.estado = delivery["pedido_detalle_estado"];
+          detallePedido.llevar = delivery["pedido_detalle_llevar"];
+          detallePedido.nombreProducto = delivery["producto_nombre"];
+          detallePedido.fotoProducto = delivery["producto_foto"];
+
+          await _pedidosDatabase.insertarDetallePedido(detallePedido);
         }
       } else {
         await _pedidosDatabase.deletePedidoPorIdMesa(decodedData['delivery']['id_mesa']);

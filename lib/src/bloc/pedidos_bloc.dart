@@ -62,12 +62,15 @@ class PedidosBloc {
 
   void obtenerPedidosPorIdMesaParaLlevarYDelivery(String idMesa, String tipo) async {
     _pedidosPorMesaController.sink.add(null);
+
     await _mesaApi.obtenerMesasPorNegocio();
+
     final List<PedidoModel> pedixt = [];
 
     final pedido = await await pedidosDatabase.obtenerPedidosPorIdMesa(idMesa);
 
     if (pedido.length > 0) {
+      print('Hay pedidos');
       for (var x = 0; x < pedido.length; x++) {
         final List<DetallePedidoModel> details = [];
         PedidoModel pedidoModel = PedidoModel();
@@ -92,19 +95,18 @@ class PedidosBloc {
 
             details.add(detallePedidoModel);
           }
+          pedidoModel.idPedido = pedido[x].idPedido;
+          pedidoModel.idMesa = pedido[x].idMesa;
+          pedidoModel.fecha = pedido[x].fecha;
+          pedidoModel.estado = pedido[x].estado;
+          pedidoModel.detallesPedido = details;
+          pedidoModel.total = pedido[x].total;
+          pedidoModel.nombre = pedido[x].nombre;
+          pedidoModel.direccion = pedido[x].direccion;
+          pedidoModel.telefono = pedido[x].telefono;
+
+          pedixt.add(pedidoModel);
         }
-
-        pedidoModel.idPedido = pedido[x].idPedido;
-        pedidoModel.idMesa = pedido[x].idMesa;
-        pedidoModel.fecha = pedido[x].fecha;
-        pedidoModel.estado = pedido[x].estado;
-        pedidoModel.detallesPedido = details;
-        pedidoModel.total = pedido[x].total;
-        pedidoModel.nombre = pedido[x].nombre;
-        pedidoModel.direccion = pedido[x].direccion;
-        pedidoModel.telefono = pedido[x].telefono;
-
-        pedixt.add(pedidoModel);
       }
     }
     if (tipo == '1') {
