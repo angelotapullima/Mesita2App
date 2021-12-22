@@ -216,7 +216,7 @@ class PedidosPage extends StatelessWidget {
                   Text(
                     pedido.mesaNombre,
                     style: GoogleFonts.poppins(
-                      fontSize: ScreenUtil().setSp(35),
+                      fontSize: (pedido.mesaNombre.length > 2) ? ScreenUtil().setSp(8) : ScreenUtil().setSp(35),
                       color: Color(0xfff9708d),
                       fontWeight: FontWeight.bold,
                       letterSpacing: 0.16,

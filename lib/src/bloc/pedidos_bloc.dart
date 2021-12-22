@@ -61,16 +61,19 @@ class PedidosBloc {
   }
 
   void obtenerPedidosPorIdMesaParaLlevarYDelivery(String idMesa, String tipo) async {
-    _pedidosPorMesaController.sink.add(null);
+    if (tipo == '1') {
+      _pedidosParaLlevarController.sink.add(null);
+    } else {
+      _pedidosDeliveryController.sink.add(null);
+    }
 
     await _mesaApi.obtenerMesasPorNegocio();
 
     final List<PedidoModel> pedixt = [];
 
-    final pedido = await await pedidosDatabase.obtenerPedidosPorIdMesa(idMesa);
+    final pedido = await pedidosDatabase.obtenerPedidosPorIdMesa(idMesa);
 
     if (pedido.length > 0) {
-      print('Hay pedidos');
       for (var x = 0; x < pedido.length; x++) {
         final List<DetallePedidoModel> details = [];
         PedidoModel pedidoModel = PedidoModel();

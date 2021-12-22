@@ -184,6 +184,7 @@ class _BuscarPageState extends State<BuscarPage> {
                   idEnviar: widget.idEnviar,
                   esComanda: widget.esComanda,
                   idMesa: widget.mesa.idMesa,
+                  tipoMesa: widget.mesa.mesaTipo,
                 );
               },
               transitionsBuilder: (context, animation, secondaryAnimation, child) {

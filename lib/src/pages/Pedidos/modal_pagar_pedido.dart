@@ -64,7 +64,7 @@ class ChangeController extends ChangeNotifier {
   }
 }
 
-void pagarPedidoModal(BuildContext context, PedidoModel pedido) {
+void pagarPedidoModal(BuildContext context, PedidoModel pedido, bool esDeliveryLlevar, String mesaTipo) {
   final _controller = ChangeController();
 
   TextEditingController _rucController = new TextEditingController();
@@ -734,8 +734,14 @@ void pagarPedidoModal(BuildContext context, PedidoModel pedido) {
                                           _razonController.text, _domicilioController.text);
                                       if (res) {
                                         final mesasBloc = ProviderBloc.mesas(context);
-                                        mesasBloc.obtenerMesasPorNegocio();
-                                        Navigator.pop(context);
+                                        if (esDeliveryLlevar) {
+                                          final pedidosBloc = ProviderBloc.pedidos(context);
+                                          pedidosBloc.obtenerPedidosPorIdMesaParaLlevarYDelivery(pedido.idMesa, mesaTipo);
+                                        } else {
+                                          mesasBloc.obtenerMesasPorNegocio();
+                                          Navigator.pop(context);
+                                        }
+
                                         Navigator.pop(context);
                                       } else {
                                         _controller.changeText('Ocurrió un error, inténtelo nuevamente');

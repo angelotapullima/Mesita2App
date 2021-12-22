@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:keyboard_actions/keyboard_actions.dart';
 import 'package:mesita_aplication_2/src/api/comanda_temporal_api.dart';
 import 'package:mesita_aplication_2/src/api/pedidos_api.dart';
 import 'package:mesita_aplication_2/src/bloc/provider.dart';
@@ -13,10 +14,12 @@ import 'package:mesita_aplication_2/src/models/mesa_model.dart';
 import 'package:mesita_aplication_2/src/models/pedido_temporal_model.dart';
 import 'package:mesita_aplication_2/src/pages/Pedidos/agregar_producto_page.dart';
 import 'package:mesita_aplication_2/src/utils/constants.dart';
+import 'package:mesita_aplication_2/src/utils/utils.dart';
 
 class ComandaPage extends StatefulWidget {
   final MesaModel mesa;
-  ComandaPage({Key key, @required this.mesa}) : super(key: key);
+  final bool esComandaCero;
+  ComandaPage({Key key, @required this.mesa, @required this.esComandaCero}) : super(key: key);
 
   @override
   _ComandaPageState createState() => _ComandaPageState();
@@ -24,6 +27,9 @@ class ComandaPage extends StatefulWidget {
 
 class _ComandaPageState extends State<ComandaPage> {
   final _controller = ComandaController();
+  final TextEditingController _nombre = TextEditingController();
+  final TextEditingController _direccion = TextEditingController();
+  final TextEditingController _telefono = TextEditingController();
   @override
   Widget build(BuildContext context) {
     final comandaBloc = ProviderBloc.comanda(context);
@@ -359,12 +365,20 @@ class _ComandaPageState extends State<ComandaPage> {
                           _controller.changeCargando(true);
                           final _pedidoApi = PedidosApi();
 
-                          final res = await _pedidoApi.enviarComanda(widget.mesa.idMesa, total.toString());
-
-                          if (res) {
-                            final pedidosBloc = ProviderBloc.pedidos(context);
-                            pedidosBloc.obtenerPedidosPorIdMesa(widget.mesa.idMesa);
+                          if (widget.mesa.mesaTipo == '0') {
+                            final res =
+                                await _pedidoApi.enviarComanda(widget.mesa.idMesa, total.toString(), _nombre.text, _direccion.text, _telefono.text);
+                            if (res) {
+                              final pedidosBloc = ProviderBloc.pedidos(context);
+                              pedidosBloc.obtenerPedidosPorIdMesa(widget.mesa.idMesa);
+                            }
+                          } else {
+                            generarComandaDeliveryLlevarModal(
+                              context,
+                              total.toString(),
+                            );
                           }
+
                           _controller.changeCargando(false);
                         },
                         shape: const RoundedRectangleBorder(
@@ -496,6 +510,281 @@ class _ComandaPageState extends State<ComandaPage> {
         },
       ),
     );
+  }
+
+  void generarComandaDeliveryLlevarModal(BuildContext context, String total) {
+    FocusNode _focus1 = FocusNode();
+    FocusNode _focus2 = FocusNode();
+    FocusNode _focus3 = FocusNode();
+
+    showModalBottomSheet(
+        context: context,
+        isScrollControlled: true,
+        backgroundColor: Colors.transparent,
+        builder: (context) {
+          return Stack(
+            children: [
+              Container(
+                color: Color.fromRGBO(0, 0, 0, 0.001),
+                child: DraggableScrollableSheet(
+                    initialChildSize: 0.93,
+                    minChildSize: 0.2,
+                    maxChildSize: 0.93,
+                    builder: (_, controller) {
+                      return Container(
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.only(
+                            topLeft: const Radius.circular(30),
+                            topRight: const Radius.circular(30),
+                          ),
+                        ),
+                        child: KeyboardActions(
+                          config: KeyboardActionsConfig(keyboardSeparatorColor: Colors.white, keyboardBarColor: Colors.white, actions: [
+                            KeyboardActionsItem(focusNode: _focus1),
+                            KeyboardActionsItem(focusNode: _focus2),
+                            KeyboardActionsItem(focusNode: _focus3),
+                          ]),
+                          child: Padding(
+                            padding: EdgeInsets.symmetric(vertical: ScreenUtil().setHeight(10), horizontal: ScreenUtil().setWidth(24)),
+                            child: SingleChildScrollView(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  SizedBox(
+                                    height: ScreenUtil().setWidth(4),
+                                    child: Center(
+                                      child: Container(
+                                        width: ScreenUtil().setWidth(48),
+                                        decoration: BoxDecoration(
+                                          color: Color(0XFFBABABA),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    height: ScreenUtil().setWidth(10),
+                                  ),
+                                  Center(
+                                    child: Text(
+                                      'Detalles de entrega',
+                                      style: GoogleFonts.poppins(
+                                        color: Color(0XFFFF0036),
+                                        fontWeight: FontWeight.w600,
+                                        fontSize: ScreenUtil().setSp(18),
+                                      ),
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    height: ScreenUtil().setWidth(24),
+                                  ),
+                                  TextField(
+                                    focusNode: _focus1,
+                                    controller: _nombre,
+                                    maxLines: 1,
+                                    keyboardType: TextInputType.text,
+                                    decoration: InputDecoration(
+                                      counterText: '',
+                                      hintText: 'Ingrese nombre del cliente',
+                                      hintStyle: TextStyle(
+                                        color: Color(0XFFBEBEBE),
+                                        fontWeight: FontWeight.w400,
+                                        fontSize: ScreenUtil().setSp(16),
+                                        fontStyle: FontStyle.normal,
+                                      ),
+                                      filled: true,
+                                      fillColor: Color(0XFFEDEDED),
+                                      contentPadding: EdgeInsets.only(
+                                          left: ScreenUtil().setWidth(10), top: ScreenUtil().setHeight(5), bottom: ScreenUtil().setHeight(1)),
+                                      enabledBorder: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(15),
+                                        borderSide: BorderSide(color: Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
+                                      ),
+                                      focusedBorder: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(15),
+                                        borderSide: BorderSide(color: Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
+                                      ),
+                                      border: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(15),
+                                        borderSide: BorderSide(color: Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
+                                      ),
+                                    ),
+                                    style: TextStyle(
+                                      color: Color(0XFF585858),
+                                      fontWeight: FontWeight.w400,
+                                      fontSize: ScreenUtil().setSp(16),
+                                      fontStyle: FontStyle.normal,
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    height: ScreenUtil().setHeight(10),
+                                  ),
+                                  TextField(
+                                    focusNode: _focus2,
+                                    controller: _direccion,
+                                    maxLines: 1,
+                                    keyboardType: TextInputType.text,
+                                    decoration: InputDecoration(
+                                      counterText: '',
+                                      hintText: 'Ingrese direccion',
+                                      hintStyle: TextStyle(
+                                        color: Color(0XFFBEBEBE),
+                                        fontWeight: FontWeight.w400,
+                                        fontSize: ScreenUtil().setSp(16),
+                                        fontStyle: FontStyle.normal,
+                                      ),
+                                      filled: true,
+                                      fillColor: Color(0XFFEDEDED),
+                                      contentPadding: EdgeInsets.only(
+                                          left: ScreenUtil().setWidth(10), top: ScreenUtil().setHeight(5), bottom: ScreenUtil().setHeight(1)),
+                                      enabledBorder: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(15),
+                                        borderSide: BorderSide(color: Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
+                                      ),
+                                      focusedBorder: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(15),
+                                        borderSide: BorderSide(color: Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
+                                      ),
+                                      border: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(15),
+                                        borderSide: BorderSide(color: Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
+                                      ),
+                                    ),
+                                    style: TextStyle(
+                                      color: Color(0XFF585858),
+                                      fontWeight: FontWeight.w400,
+                                      fontSize: ScreenUtil().setSp(16),
+                                      fontStyle: FontStyle.normal,
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    height: ScreenUtil().setHeight(10),
+                                  ),
+                                  TextField(
+                                    focusNode: _focus3,
+                                    controller: _telefono,
+                                    maxLines: 1,
+                                    keyboardType: TextInputType.number,
+                                    maxLength: 9,
+                                    decoration: InputDecoration(
+                                      counterText: '',
+                                      hintText: 'Ingrese teléfono',
+                                      hintStyle: TextStyle(
+                                        color: Color(0XFFBEBEBE),
+                                        fontWeight: FontWeight.w400,
+                                        fontSize: ScreenUtil().setSp(16),
+                                        fontStyle: FontStyle.normal,
+                                      ),
+                                      filled: true,
+                                      fillColor: Color(0XFFEDEDED),
+                                      contentPadding: EdgeInsets.only(
+                                          left: ScreenUtil().setWidth(10), top: ScreenUtil().setHeight(5), bottom: ScreenUtil().setHeight(1)),
+                                      enabledBorder: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(15),
+                                        borderSide: BorderSide(color: Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
+                                      ),
+                                      focusedBorder: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(15),
+                                        borderSide: BorderSide(color: Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
+                                      ),
+                                      border: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(15),
+                                        borderSide: BorderSide(color: Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
+                                      ),
+                                    ),
+                                    style: TextStyle(
+                                      color: Color(0XFF585858),
+                                      fontWeight: FontWeight.w400,
+                                      fontSize: ScreenUtil().setSp(16),
+                                      fontStyle: FontStyle.normal,
+                                    ),
+                                  ),
+                                  SizedBox(height: ScreenUtil().setHeight(48)),
+                                  InkWell(
+                                    onTap: () async {
+                                      _controller.changeCargando(true);
+
+                                      if (_nombre.text.length > 0) {
+                                        final _pedidoApi = PedidosApi();
+                                        final res = await _pedidoApi.enviarComanda(
+                                            widget.mesa.idMesa, total.toString(), _nombre.text, _direccion.text, _telefono.text);
+                                        if (res) {
+                                          final pedidosBloc = ProviderBloc.pedidos(context);
+                                          pedidosBloc.obtenerPedidosPorIdMesaParaLlevarYDelivery(widget.mesa.idMesa, widget.mesa.mesaTipo);
+                                          Navigator.pop(context);
+                                          if (!widget.esComandaCero) {
+                                            Navigator.pop(context);
+                                          }
+                                        }
+                                      } else {
+                                        showToast('Ingrese los datos solicitados', Colors.black);
+                                      }
+
+                                      _controller.changeCargando(false);
+                                    },
+                                    child: AnimatedBuilder(
+                                        animation: _controller,
+                                        builder: (_, s) {
+                                          return Center(
+                                            child: Container(
+                                              decoration: BoxDecoration(
+                                                borderRadius: BorderRadius.circular(50),
+                                                color: Color(0XFFFF0036),
+                                              ),
+                                              child: Center(
+                                                child: Text(
+                                                  'Enviar',
+                                                  style: TextStyle(
+                                                    color: Colors.white,
+                                                    fontWeight: FontWeight.w600,
+                                                    fontSize: ScreenUtil().setSp(16),
+                                                    fontStyle: FontStyle.normal,
+                                                    letterSpacing: 1.5,
+                                                  ),
+                                                ),
+                                              ),
+                                              height: ScreenUtil().setHeight(44),
+                                              width: ScreenUtil().setWidth(255),
+                                            ),
+                                          );
+                                        }),
+                                  ),
+                                  SizedBox(height: ScreenUtil().setHeight(10)),
+                                  Center(
+                                    child: InkWell(
+                                      onTap: () {
+                                        Navigator.pop(context);
+                                      },
+                                      child: Text(
+                                        'Cancelar',
+                                        style: GoogleFonts.poppins(
+                                          color: Color(0XFF8A8A8A),
+                                          fontWeight: FontWeight.w500,
+                                          fontSize: ScreenUtil().setSp(16),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ),
+                      );
+                    }),
+              ),
+              AnimatedBuilder(
+                  animation: _controller,
+                  builder: (_, s) {
+                    if (_controller.cargando) {
+                      return _showLoading();
+                    } else {
+                      return Container();
+                    }
+                  })
+            ],
+          );
+        });
   }
 }
 

@@ -255,6 +255,7 @@ class _DetalleMesaPageState extends State<DetalleMesaPage> {
                                                     return EditarDetalleProductoPedido(
                                                       producto: pedidos[0].detallesPedido[index],
                                                       idMesa: pedidos[0].idMesa,
+                                                      tipoMesa: mesaData[0].mesaTipo,
                                                     );
                                                   },
                                                   transitionsBuilder: (context, animation, secondaryAnimation, child) {
@@ -556,7 +557,7 @@ class _DetalleMesaPageState extends State<DetalleMesaPage> {
                                       textColor: Colors.white,
                                       elevation: 1,
                                       onPressed: () {
-                                        pagarPedidoModal(context, pedidos[0]);
+                                        pagarPedidoModal(context, pedidos[0], false, '0');
                                       },
                                       shape: const RoundedRectangleBorder(
                                         borderRadius: BorderRadius.all(
@@ -581,6 +582,7 @@ class _DetalleMesaPageState extends State<DetalleMesaPage> {
                               idEnviar = mesaData[0].idMesa;
                               return ComandaPage(
                                 mesa: mesaData[0],
+                                esComandaCero: true,
                               );
                             }
                           } else {

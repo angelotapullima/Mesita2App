@@ -19,9 +19,16 @@ class AgregarDetalleProducto extends StatefulWidget {
   final String idEnviar;
   final bool esComanda;
   final String idMesa;
+  final String tipoMesa;
 
-  const AgregarDetalleProducto({Key key, @required this.producto, @required this.idEnviar, @required this.esComanda, @required this.idMesa})
-      : super(key: key);
+  const AgregarDetalleProducto({
+    Key key,
+    @required this.producto,
+    @required this.idEnviar,
+    @required this.esComanda,
+    @required this.idMesa,
+    @required this.tipoMesa,
+  }) : super(key: key);
 
   @override
   _AgregarDetalleProductoState createState() => _AgregarDetalleProductoState();
@@ -34,6 +41,9 @@ class _AgregarDetalleProductoState extends State<AgregarDetalleProducto> {
   void initState() {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       _controller.changeCantidadPrecio(0, widget.producto.productoPrecio);
+      if (widget.tipoMesa != '0') {
+        _controller.changeLlevar(true);
+      }
     });
 
     super.initState();
@@ -311,7 +321,12 @@ class _AgregarDetalleProductoState extends State<AgregarDetalleProducto> {
                                   final res = await _pedidosApi.agregarDetallePedido(widget.idEnviar, detalle);
                                   if (res) {
                                     final pedidosBloc = ProviderBloc.pedidos(context);
-                                    pedidosBloc.obtenerPedidosPorIdMesa(widget.idMesa);
+                                    if (widget.tipoMesa == '0') {
+                                      pedidosBloc.obtenerPedidosPorIdMesa(widget.idMesa);
+                                    } else {
+                                      pedidosBloc.obtenerPedidosPorIdMesaParaLlevarYDelivery(widget.idMesa, widget.tipoMesa);
+                                    }
+
                                     Navigator.pop(context);
                                     Navigator.pop(context);
                                   }

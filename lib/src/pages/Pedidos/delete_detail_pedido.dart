@@ -11,7 +11,13 @@ import 'package:mesita_aplication_2/src/pages/Lineas_Categories/modal_edit_line.
 class DeleteDetallePedido extends StatefulWidget {
   final DetallePedidoModel pedidoDetalle;
   final String idMesa;
-  const DeleteDetallePedido({Key key, @required this.pedidoDetalle, @required this.idMesa}) : super(key: key);
+  final String tipoMesa;
+  const DeleteDetallePedido({
+    Key key,
+    @required this.pedidoDetalle,
+    @required this.idMesa,
+    @required this.tipoMesa,
+  }) : super(key: key);
 
   @override
   _DeleteDetallePedidoState createState() => _DeleteDetallePedidoState();
@@ -47,7 +53,12 @@ class _DeleteDetallePedidoState extends State<DeleteDetallePedido> {
                     final res = await _pedidoApi.eliminarDetallePedido(widget.pedidoDetalle);
                     if (res) {
                       final pedidosBloc = ProviderBloc.pedidos(context);
-                      pedidosBloc.obtenerPedidosPorIdMesa(widget.idMesa);
+
+                      if (widget.tipoMesa == '0') {
+                        pedidosBloc.obtenerPedidosPorIdMesa(widget.idMesa);
+                      } else {
+                        pedidosBloc.obtenerPedidosPorIdMesaParaLlevarYDelivery(widget.idMesa, widget.tipoMesa);
+                      }
                       Navigator.pop(context);
                       Navigator.pop(context);
                     } else {

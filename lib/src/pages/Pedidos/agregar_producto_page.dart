@@ -287,6 +287,7 @@ class _AgregarProductoPageState extends State<AgregarProductoPage> {
                   idEnviar: widget.idEnviar,
                   esComanda: widget.esComanda,
                   idMesa: widget.mesa.idMesa,
+                  tipoMesa: widget.mesa.mesaTipo,
                 );
               },
               transitionsBuilder: (context, animation, secondaryAnimation, child) {

@@ -7,6 +7,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:mesita_aplication_2/src/bloc/provider.dart';
 import 'package:mesita_aplication_2/src/models/mesa_model.dart';
 import 'package:mesita_aplication_2/src/models/pedidos_model.dart';
+import 'package:mesita_aplication_2/src/pages/LlevarDelivery/comanda_delivery_llevar.dart';
 import 'package:mesita_aplication_2/src/pages/Mesas/agregar_pedidos_mesa.dart';
 import 'package:mesita_aplication_2/src/pages/Pedidos/agregar_producto_page.dart';
 import 'package:mesita_aplication_2/src/pages/Pedidos/comanda_mesa_page.dart';
@@ -40,6 +41,10 @@ class DeliveryLlevarPage extends StatelessWidget {
       ),
       body: Stack(
         children: [
+          Container(
+            height: double.infinity,
+            width: double.infinity,
+          ),
           Container(
             height: ScreenUtil().setHeight(200),
             child: Stack(
@@ -99,25 +104,69 @@ class DeliveryLlevarPage extends StatelessWidget {
                               Expanded(
                                 child: _listPedidos(context, datos),
                               ),
-                              // ComandaPage(
-                              //   mesa: mesa,
-                              // )
+                              Container(
+                                margin: EdgeInsets.symmetric(
+                                  horizontal: ScreenUtil().setWidth(50),
+                                  vertical: ScreenUtil().setHeight(16),
+                                ),
+                                width: double.infinity,
+                                child: MaterialButton(
+                                  color: Color(0XFFFF0036),
+                                  textColor: Colors.white,
+                                  elevation: 10,
+                                  onPressed: () {
+                                    Navigator.push(
+                                      context,
+                                      PageRouteBuilder(
+                                        opaque: false,
+                                        pageBuilder: (context, animation, secondaryAnimation) {
+                                          return ComandaDeliveryLlevar(
+                                            mesa: mesa,
+                                            text: 'Nueva comanda para llevar',
+                                          );
+                                        },
+                                        transitionsBuilder: (context, animation, secondaryAnimation, child) {
+                                          var begin = Offset(0.0, 1.0);
+                                          var end = Offset.zero;
+                                          var curve = Curves.ease;
+
+                                          var tween = Tween(begin: begin, end: end).chain(
+                                            CurveTween(curve: curve),
+                                          );
+
+                                          return SlideTransition(
+                                            position: animation.drive(tween),
+                                            child: child,
+                                          );
+                                        },
+                                      ),
+                                    );
+                                  },
+                                  shape: const RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.all(
+                                      Radius.circular(20.0),
+                                    ),
+                                  ),
+                                  child: Text(
+                                    'Generar nueva comanda',
+                                    style: GoogleFonts.poppins(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.w500,
+                                      fontSize: ScreenUtil().setSp(16),
+                                    ),
+                                  ),
+                                ),
+                              ),
                             ],
                           );
                         } else {
-                          //Se creará la nueva comanda en db interna
-                          // esComanda = true;
-                          // idEnviar = mesaData[0].idMesa;
-                          return Expanded(
-                            child: ComandaPage(
-                              mesa: mesa,
-                            ),
+                          return ComandaPage(
+                            mesa: mesa,
+                            esComandaCero: true,
                           );
                         }
                       } else {
-                        return Expanded(
-                          child: _showLoading(),
-                        );
+                        return _showLoading();
                       }
                     },
                   )
@@ -132,22 +181,69 @@ class DeliveryLlevarPage extends StatelessWidget {
                               Expanded(
                                 child: _listPedidos(context, datos),
                               ),
-                              // ComandaPage(
-                              //   mesa: mesa,
-                              // )
+                              Container(
+                                margin: EdgeInsets.symmetric(
+                                  horizontal: ScreenUtil().setWidth(50),
+                                  vertical: ScreenUtil().setHeight(16),
+                                ),
+                                width: double.infinity,
+                                child: MaterialButton(
+                                  color: Color(0XFFFF0036),
+                                  textColor: Colors.white,
+                                  elevation: 10,
+                                  onPressed: () {
+                                    Navigator.push(
+                                      context,
+                                      PageRouteBuilder(
+                                        opaque: false,
+                                        pageBuilder: (context, animation, secondaryAnimation) {
+                                          return ComandaDeliveryLlevar(
+                                            mesa: mesa,
+                                            text: 'Nueva comanda para delivery',
+                                          );
+                                        },
+                                        transitionsBuilder: (context, animation, secondaryAnimation, child) {
+                                          var begin = Offset(0.0, 1.0);
+                                          var end = Offset.zero;
+                                          var curve = Curves.ease;
+
+                                          var tween = Tween(begin: begin, end: end).chain(
+                                            CurveTween(curve: curve),
+                                          );
+
+                                          return SlideTransition(
+                                            position: animation.drive(tween),
+                                            child: child,
+                                          );
+                                        },
+                                      ),
+                                    );
+                                  },
+                                  shape: const RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.all(
+                                      Radius.circular(20.0),
+                                    ),
+                                  ),
+                                  child: Text(
+                                    'Generar nueva comanda',
+                                    style: GoogleFonts.poppins(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.w500,
+                                      fontSize: ScreenUtil().setSp(16),
+                                    ),
+                                  ),
+                                ),
+                              ),
                             ],
                           );
                         } else {
-                          return Expanded(
-                            child: ComandaPage(
-                              mesa: mesa,
-                            ),
+                          return ComandaPage(
+                            mesa: mesa,
+                            esComandaCero: true,
                           );
                         }
                       } else {
-                        return Expanded(
-                          child: _showLoading(),
-                        );
+                        return _showLoading();
                       }
                     },
                   ),
@@ -160,28 +256,89 @@ class DeliveryLlevarPage extends StatelessWidget {
   Widget _listPedidos(BuildContext context, List<PedidoModel> datos) {
     return ListView.builder(
       shrinkWrap: true,
-      //physics: NeverScrollableScrollPhysics(),
       itemCount: datos.length,
       itemBuilder: (_, index) {
         return ExpansionTile(
-          onExpansionChanged: (valor) {
-            // _changeData.onChangeValue(false, valor, false, false, false, false, false);
-          },
-          title: Text(
-            'Pedido N° ${datos[index].idPedido} - ${datos[index].nombre}',
-            style: TextStyle(
-              fontWeight: FontWeight.w500,
-              color: Colors.black,
-              fontSize: ScreenUtil().setSp(16),
-            ),
+          onExpansionChanged: (valor) {},
+          title: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                children: [
+                  Text(
+                    'Pedido N° ${datos[index].idPedido}',
+                    style: TextStyle(
+                      fontWeight: FontWeight.w500,
+                      color: Colors.black,
+                      fontSize: ScreenUtil().setSp(16),
+                    ),
+                  ),
+                  SizedBox(
+                    width: ScreenUtil().setWidth(8),
+                  ),
+                  Icon(
+                    Icons.person,
+                    size: ScreenUtil().setHeight(16),
+                    color: Color(0XFF585858),
+                  ),
+                  SizedBox(
+                    width: ScreenUtil().setWidth(4),
+                  ),
+                  Text(
+                    '${datos[index].nombre}',
+                    style: TextStyle(
+                      fontWeight: FontWeight.w500,
+                      color: Colors.black,
+                      fontSize: ScreenUtil().setSp(16),
+                    ),
+                  ),
+                ],
+              ),
+              Row(
+                children: [
+                  Icon(
+                    Icons.place,
+                    size: ScreenUtil().setHeight(16),
+                    color: Color(0XFF585858),
+                  ),
+                  SizedBox(
+                    width: ScreenUtil().setWidth(4),
+                  ),
+                  Text(
+                    '${datos[index].direccion}',
+                    style: TextStyle(
+                      fontWeight: FontWeight.w500,
+                      color: Colors.black,
+                      fontSize: ScreenUtil().setSp(16),
+                    ),
+                  ),
+                  SizedBox(
+                    width: ScreenUtil().setWidth(8),
+                  ),
+                  Icon(
+                    Icons.phone,
+                    size: ScreenUtil().setHeight(16),
+                    color: Color(0XFF585858),
+                  ),
+                  SizedBox(
+                    width: ScreenUtil().setWidth(4),
+                  ),
+                  Text(
+                    '${datos[index].telefono}',
+                    style: TextStyle(
+                      fontWeight: FontWeight.w500,
+                      color: Colors.black,
+                      fontSize: ScreenUtil().setSp(16),
+                    ),
+                  ),
+                ],
+              ),
+            ],
           ),
           iconColor: Color(0XFFFF0036),
           trailing: Container(
             margin: EdgeInsets.symmetric(vertical: ScreenUtil().setHeight(8)),
-            child: Icon(Icons.keyboard_arrow_down
-                // _changeData.vitales ? Icons.keyboard_arrow_up : Icons.keyboard_arrow_down,
-                // color: ColorsApp.blueClinica,
-                ),
+            child: Icon(Icons.keyboard_arrow_down),
           ),
           children: [
             Container(
@@ -260,7 +417,7 @@ class DeliveryLlevarPage extends StatelessWidget {
                           textColor: Colors.white,
                           elevation: 0,
                           onPressed: () {
-                            pagarPedidoModal(context, datos[index]);
+                            pagarPedidoModal(context, datos[index], true, mesa.mesaTipo);
                           },
                           shape: const RoundedRectangleBorder(
                             borderRadius: BorderRadius.all(
@@ -298,6 +455,7 @@ class DeliveryLlevarPage extends StatelessWidget {
               return EditarDetalleProductoPedido(
                 producto: pedido,
                 idMesa: idMesa,
+                tipoMesa: mesa.mesaTipo,
               );
             },
             transitionsBuilder: (context, animation, secondaryAnimation, child) {
@@ -320,9 +478,6 @@ class DeliveryLlevarPage extends StatelessWidget {
       child: Container(
         padding: EdgeInsets.symmetric(
           horizontal: ScreenUtil().setWidth(24),
-          vertical: ScreenUtil().setHeight(4),
-        ),
-        margin: EdgeInsets.symmetric(
           vertical: ScreenUtil().setHeight(4),
         ),
         child: Row(
@@ -388,17 +543,12 @@ class DeliveryLlevarPage extends StatelessWidget {
   }
 
   _showLoading() {
-    return Container(
-      height: double.infinity,
-      width: double.infinity,
-      color: Color.fromRGBO(0, 0, 0, 0.1),
-      child: Center(
-        child: (Platform.isAndroid)
-            ? CircularProgressIndicator(
-                color: Color(0XFFFF0036),
-              )
-            : CupertinoActivityIndicator(),
-      ),
+    return Center(
+      child: (Platform.isAndroid)
+          ? CircularProgressIndicator(
+              color: Color(0XFFFF0036),
+            )
+          : CupertinoActivityIndicator(),
     );
   }
 }

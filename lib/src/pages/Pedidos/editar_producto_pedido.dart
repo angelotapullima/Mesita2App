@@ -15,8 +15,14 @@ import 'package:mesita_aplication_2/src/utils/constants.dart';
 class EditarDetalleProductoPedido extends StatefulWidget {
   final DetallePedidoModel producto;
   final String idMesa;
+  final String tipoMesa;
 
-  const EditarDetalleProductoPedido({Key key, @required this.producto, @required this.idMesa}) : super(key: key);
+  const EditarDetalleProductoPedido({
+    Key key,
+    @required this.producto,
+    @required this.idMesa,
+    @required this.tipoMesa,
+  }) : super(key: key);
 
   @override
   _EditarDetalleProductoPedidoState createState() => _EditarDetalleProductoPedidoState();
@@ -85,6 +91,7 @@ class _EditarDetalleProductoPedidoState extends State<EditarDetalleProductoPedid
                         return DeleteDetallePedido(
                           pedidoDetalle: widget.producto,
                           idMesa: widget.idMesa,
+                          tipoMesa: widget.tipoMesa,
                         );
                       },
                       transitionsBuilder: (context, animation, secondaryAnimation, child) {
@@ -239,25 +246,6 @@ class _EditarDetalleProductoPedidoState extends State<EditarDetalleProductoPedid
                     SizedBox(
                       height: ScreenUtil().setHeight(32),
                     ),
-                    // Text(
-                    //   'Descripción',
-                    //   style: TextStyle(
-                    //     color: Color(0XFF585858),
-                    //     fontSize: ScreenUtil().setSp(18),
-                    //     fontWeight: FontWeight.w600,
-                    //   ),
-                    // ),
-                    // SizedBox(
-                    //   height: ScreenUtil().setHeight(16),
-                    // ),
-                    // Text(
-                    //   '${widget.producto.observaciones} ',
-                    //   style: TextStyle(
-                    //     color: Color(0XFF585858),
-                    //     fontSize: ScreenUtil().setSp(16),
-                    //     fontWeight: FontWeight.w400,
-                    //   ),
-                    // ),
                     SizedBox(
                       height: ScreenUtil().setHeight(16),
                     ),
@@ -317,7 +305,12 @@ class _EditarDetalleProductoPedidoState extends State<EditarDetalleProductoPedid
                                 final res = await _pedidosApi.editarDetallePedido(detalle);
                                 if (res) {
                                   final pedidosBloc = ProviderBloc.pedidos(context);
-                                  pedidosBloc.obtenerPedidosPorIdMesa(widget.idMesa);
+                                  if (widget.tipoMesa == '0') {
+                                    pedidosBloc.obtenerPedidosPorIdMesa(widget.idMesa);
+                                  } else {
+                                    pedidosBloc.obtenerPedidosPorIdMesaParaLlevarYDelivery(widget.idMesa, widget.tipoMesa);
+                                  }
+
                                   Navigator.pop(context);
                                 }
                                 _controller.changeBoton(false);

@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
+import 'package:mesita_aplication_2/src/database/pedidos_database.dart';
 import 'package:mesita_aplication_2/src/database/ventas_database.dart';
 import 'package:mesita_aplication_2/src/models/venta_model.dart';
 import 'package:mesita_aplication_2/src/preferences/preferences.dart';
@@ -9,6 +10,7 @@ import 'package:mesita_aplication_2/src/utils/constants.dart';
 class VentaApi {
   final _prefs = Preferences();
   final _ventasDatabase = VentasDatabase();
+  final _pedidosDatabase = PedidosDatabase();
 
   Future<bool> guardarVenta(String idPedido, String tipoVenta, String ruc, String razon, String domicilio) async {
     try {
@@ -31,6 +33,8 @@ class VentaApi {
       final decodedData = json.decode(resp.body);
 
       if (decodedData['result'] == 1) {
+        await _pedidosDatabase.deletePedidoPorIdPedido(idPedido);
+        await _pedidosDatabase.deleteDetallesPedidoPorIdPedido(idPedido);
         return true;
       } else {
         return false;

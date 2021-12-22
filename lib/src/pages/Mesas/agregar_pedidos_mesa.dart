@@ -224,6 +224,7 @@ class _DetalleMesaPageState extends State<AgregarePedidoMesa> {
                       ),
                       child: ComandaPage(
                         mesa: mesaData[0],
+                        esComandaCero: false,
                       ),
                     ),
                     Positioned(

@@ -92,7 +92,7 @@ class MesaApi {
       mesa.mesaTipo = decodedData['llevar']['mesa_tipo'];
       await _mesaDatabase.insertarMesa(mesa);
 
-      if (decodedData['llevar']['mesa_estado'] == '2') {
+      if (decodedData['llevar']["pedido"].length > 0) {
         for (var a = 0; a < decodedData['llevar']["pedido"].length; a++) {
           var pedixd = decodedData['llevar']["pedido"][a];
           PedidoModel pedido = PedidoModel();
@@ -137,7 +137,7 @@ class MesaApi {
       mesa2.mesaTipo = decodedData['delivery']['mesa_tipo'];
       await _mesaDatabase.insertarMesa(mesa2);
 
-      if (decodedData['delivery']["mesa_estado"] == '2') {
+      if (decodedData['delivery']["pedido"].length > 0) {
         for (var g = 0; g < decodedData['delivery']["pedido"].length; g++) {
           var delivery = decodedData['delivery']["pedido"][g];
 

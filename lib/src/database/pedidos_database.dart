@@ -8,8 +8,8 @@ class PedidosDatabase {
     try {
       final db = await dbprovider.database;
 
-      final res = await db.rawInsert("INSERT OR REPLACE INTO Pedidos (idPedido,idMesa,total,fecha, estado) "
-          "VALUES ('${pedido.idPedido}','${pedido.idMesa}','${pedido.total}','${pedido.fecha}','${pedido.estado}')");
+      final res = await db.rawInsert("INSERT OR REPLACE INTO Pedidos (idPedido,idMesa,total,fecha,estado,nombre,direccion,telefono) "
+          "VALUES ('${pedido.idPedido}','${pedido.idMesa}','${pedido.total}','${pedido.fecha}','${pedido.estado}','${pedido.nombre}','${pedido.direccion}','${pedido.telefono}')");
 
       return res;
     } catch (exception) {
@@ -74,12 +74,26 @@ class PedidosDatabase {
     return res;
   }
 
+  deletePedidoPorIdPedido(String idPedido) async {
+    final db = await dbprovider.database;
+
+    final res = await db.rawDelete("DELETE FROM Pedidos WHERE idPedido='$idPedido'");
+
+    return res;
+  }
+
   deleteDetallesPedidoPorId(String id) async {
     final db = await dbprovider.database;
 
     final res = await db.rawDelete("DELETE FROM DetallePedidos WHERE idDetalle='$id'");
 
-    print(res);
+    return res;
+  }
+
+  deleteDetallesPedidoPorIdPedido(String id) async {
+    final db = await dbprovider.database;
+
+    final res = await db.rawDelete("DELETE FROM DetallePedidos WHERE idPedido='$id'");
 
     return res;
   }
