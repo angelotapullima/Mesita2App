@@ -21,13 +21,13 @@ class UserPage extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 0,
-        iconTheme: IconThemeData(
+        iconTheme: const IconThemeData(
           color: Color(0XFF3A3A3A),
         ),
         title: Text(
           'Configuración',
           style: GoogleFonts.poppins(
-            color: Color(0XFF3A3A3A),
+            color: const Color(0XFF3A3A3A),
             fontSize: ScreenUtil().setSp(18),
             fontWeight: FontWeight.w600,
             letterSpacing: 0.16,
@@ -41,18 +41,16 @@ class UserPage extends StatelessWidget {
               height: ScreenUtil().setHeight(16),
             ),
             Center(
-              child: Container(
+              child: SizedBox(
                 width: ScreenUtil().setWidth(100),
                 height: ScreenUtil().setHeight(100),
                 child: CachedNetworkImage(
-                  placeholder: (context, url) => Container(
+                  placeholder: (context, url) => SizedBox(
                     child: SvgPicture.asset('assets/settings_svg/porfile.svg'),
                   ),
-                  errorWidget: (context, url, error) => Container(
-                    child: Container(
-                      child: SvgPicture.asset(
-                        'assets/settings_svg/porfile.svg',
-                      ),
+                  errorWidget: (context, url, error) => SizedBox(
+                    child: SvgPicture.asset(
+                      'assets/settings_svg/porfile.svg',
                     ),
                   ),
                   imageUrl: '${prefs.userImage}',
@@ -75,7 +73,7 @@ class UserPage extends StatelessWidget {
               child: Text(
                 '${obtenerPrimerNombre(prefs.personName)} ${prefs.personApellidoPaterno}',
                 style: GoogleFonts.poppins(
-                  color: Color(0XFF3A3A3A),
+                  color: const Color(0XFF3A3A3A),
                   fontSize: ScreenUtil().setSp(18),
                   fontWeight: FontWeight.w600,
                   letterSpacing: 0.16,
@@ -91,10 +89,10 @@ class UserPage extends StatelessWidget {
                     context,
                     PageRouteBuilder(
                       pageBuilder: (context, animation, secondaryAnimation) {
-                        return CuentaPage();
+                        return const CuentaPage();
                       },
                       transitionsBuilder: (context, animation, secondaryAnimation, child) {
-                        var begin = Offset(0.0, 1.0);
+                        var begin = const Offset(0.0, 1.0);
                         var end = Offset.zero;
                         var curve = Curves.ease;
 
@@ -120,10 +118,10 @@ class UserPage extends StatelessWidget {
                     context,
                     PageRouteBuilder(
                       pageBuilder: (context, animation, secondaryAnimation) {
-                        return MiNegocioPage();
+                        return const MiNegocioPage();
                       },
                       transitionsBuilder: (context, animation, secondaryAnimation, child) {
-                        var begin = Offset(0.0, 1.0);
+                        var begin = const Offset(0.0, 1.0);
                         var end = Offset.zero;
                         var curve = Curves.ease;
 
@@ -149,10 +147,10 @@ class UserPage extends StatelessWidget {
                     context,
                     PageRouteBuilder(
                       pageBuilder: (context, animation, secondaryAnimation) {
-                        return PlanesPage();
+                        return const PlanesPage();
                       },
                       transitionsBuilder: (context, animation, secondaryAnimation, child) {
-                        var begin = Offset(0.0, 1.0);
+                        var begin = const Offset(0.0, 1.0);
                         var end = Offset.zero;
                         var curve = Curves.ease;
 
@@ -178,10 +176,10 @@ class UserPage extends StatelessWidget {
                     context,
                     PageRouteBuilder(
                       pageBuilder: (context, animation, secondaryAnimation) {
-                        return RecibosPage();
+                        return const RecibosPage();
                       },
                       transitionsBuilder: (context, animation, secondaryAnimation, child) {
-                        var begin = Offset(0.0, 1.0);
+                        var begin = const Offset(0.0, 1.0);
                         var end = Offset.zero;
                         var curve = Curves.ease;
 
@@ -230,7 +228,7 @@ class UserPage extends StatelessWidget {
                 padding: EdgeInsets.symmetric(horizontal: ScreenUtil().setWidth(50), vertical: ScreenUtil().setHeight(10)),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(22),
-                  color: Color(0XFFFF0036),
+                  color: const Color(0XFFFF0036),
                 ),
                 child: Text(
                   'Cerrar sesión',
@@ -253,7 +251,7 @@ class UserPage extends StatelessWidget {
       padding: EdgeInsets.symmetric(horizontal: ScreenUtil().setWidth(32)),
       child: Row(
         children: [
-          Container(
+          SizedBox(
             height: ScreenUtil().setHeight(24),
             width: ScreenUtil().setWidth(24),
             child: SvgPicture.asset('assets/settings_svg/$icon.svg'),
@@ -264,16 +262,16 @@ class UserPage extends StatelessWidget {
           Text(
             name,
             style: GoogleFonts.poppins(
-              color: Color(0XFF585858),
+              color: const Color(0XFF585858),
               fontSize: ScreenUtil().setSp(16),
               fontWeight: FontWeight.w400,
               letterSpacing: 0.16,
             ),
           ),
-          Spacer(),
+          const Spacer(),
           Icon(
             Icons.arrow_forward_ios,
-            color: Color(0XFF585858),
+            color: const Color(0XFF585858),
             size: ScreenUtil().setHeight(16),
           )
         ],

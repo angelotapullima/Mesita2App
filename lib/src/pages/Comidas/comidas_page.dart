@@ -66,9 +66,9 @@ class _ComidasPageState extends State<ComidasPage> {
 
     final productosLineaBloc = ProviderBloc.productosLinea(context);
     return Scaffold(
-      backgroundColor: Color(0XFFE5E5E5),
+      backgroundColor: const Color(0XFFE5E5E5),
       appBar: AppBar(
-        backgroundColor: Color(0XFFE5E5E5),
+        backgroundColor: const Color(0XFFE5E5E5),
         leading: InkWell(
           child: Container(),
         ),
@@ -77,7 +77,7 @@ class _ComidasPageState extends State<ComidasPage> {
             onTap: () {
               addModal(context, idCategoria, 'comida', 'new_food');
             },
-            child: Container(
+            child: SizedBox(
               width: ScreenUtil().setWidth(20),
               height: ScreenUtil().setHeight(20),
               child: SvgPicture.asset('assets/food_svg/add_food.svg'),
@@ -108,7 +108,7 @@ class _ComidasPageState extends State<ComidasPage> {
               stream: lineasBloc.lineasStream,
               builder: (context, AsyncSnapshot<List<LineaModel>> snapshot) {
                 if (snapshot.hasData) {
-                  if (snapshot.data.length > 0) {
+                  if (snapshot.data.isNotEmpty) {
                     var lineas = snapshot.data;
                     productosLineaBloc.obtenerProductosPorLinea(lineas[value].idLinea);
                     return SmartRefresher(
@@ -118,7 +118,7 @@ class _ComidasPageState extends State<ComidasPage> {
                       },
                       child: Column(
                         children: [
-                          Container(
+                          SizedBox(
                             height: ScreenUtil().setHeight(40),
                             child: ListView.builder(
                               itemCount: lineas.length + 1,
@@ -137,7 +137,7 @@ class _ComidasPageState extends State<ComidasPage> {
                                             );
                                           },
                                           transitionsBuilder: (context, animation, secondaryAnimation, child) {
-                                            var begin = Offset(0.0, 1.0);
+                                            var begin = const Offset(0.0, 1.0);
                                             var end = Offset.zero;
                                             var curve = Curves.ease;
 
@@ -175,17 +175,17 @@ class _ComidasPageState extends State<ComidasPage> {
                                     ),
                                     decoration: BoxDecoration(
                                         borderRadius: BorderRadius.circular(22),
-                                        color: (indexito == value) ? Color(0XFFFF0036) : Color(0XFFE5E5E5),
+                                        color: (indexito == value) ? const Color(0XFFFF0036) : const Color(0XFFE5E5E5),
                                         boxShadow: [
                                           BoxShadow(
-                                            color: (indexito == value) ? Color.fromRGBO(255, 0, 54, 0.5) : Colors.transparent,
+                                            color: (indexito == value) ? const Color.fromRGBO(255, 0, 54, 0.5) : Colors.transparent,
                                           )
                                         ]),
                                     child: Center(
                                         child: Text(
                                       lineas[indexito].lineaNombre,
                                       style: TextStyle(
-                                        color: (indexito == value) ? Colors.white : Color(0xFF585858),
+                                        color: (indexito == value) ? Colors.white : const Color(0xFF585858),
                                         fontSize: ScreenUtil().setSp(14),
                                         fontWeight: FontWeight.w500,
                                         letterSpacing: 0.16,
@@ -201,7 +201,7 @@ class _ComidasPageState extends State<ComidasPage> {
                               stream: productosLineaBloc.productosLineaStream,
                               builder: (context, AsyncSnapshot<List<ProductoLineaModel>> snapshot) {
                                 if (snapshot.hasData) {
-                                  if (snapshot.data.length > 0) {
+                                  if (snapshot.data.isNotEmpty) {
                                     var food = snapshot.data;
                                     return ListView.builder(
                                       itemCount: food.length,
@@ -213,7 +213,7 @@ class _ComidasPageState extends State<ComidasPage> {
                                       },
                                     );
                                   } else {
-                                    return Center(
+                                    return const Center(
                                       child: Text('Aún no existen comidas para esta línea'),
                                     );
                                   }
@@ -227,7 +227,7 @@ class _ComidasPageState extends State<ComidasPage> {
                       ),
                     );
                   } else {
-                    return Center(
+                    return const Center(
                       child: Text('Aún no se agregaron líneas'),
                     );
                   }
@@ -244,13 +244,13 @@ class _ComidasPageState extends State<ComidasPage> {
     return Container(
       height: double.infinity,
       width: double.infinity,
-      color: Color.fromRGBO(0, 0, 0, 0.1),
+      color: const Color.fromRGBO(0, 0, 0, 0.1),
       child: Center(
         child: (Platform.isAndroid)
-            ? CircularProgressIndicator(
+            ? const CircularProgressIndicator(
                 color: Color(0XFFFF0036),
               )
-            : CupertinoActivityIndicator(),
+            : const CupertinoActivityIndicator(),
       ),
     );
   }
@@ -275,7 +275,7 @@ class _ComidasPageState extends State<ComidasPage> {
               );
             },
             transitionsBuilder: (context, animation, secondaryAnimation, child) {
-              var begin = Offset(0.0, 1.0);
+              var begin = const Offset(0.0, 1.0);
               var end = Offset.zero;
               var curve = Curves.ease;
 
@@ -305,7 +305,7 @@ class _ComidasPageState extends State<ComidasPage> {
             Container(
               height: ScreenUtil().setHeight(100),
               width: ScreenUtil().setWidth(100),
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 color: Color(0XFFEEEEEE),
                 shape: BoxShape.circle,
                 boxShadow: [
@@ -324,7 +324,7 @@ class _ComidasPageState extends State<ComidasPage> {
                       child: Container(
                         height: ScreenUtil().setHeight(80),
                         width: ScreenUtil().setWidth(80),
-                        decoration: BoxDecoration(
+                        decoration: const BoxDecoration(
                           color: Color(0XFFEEEEEE),
                           shape: BoxShape.circle,
                           boxShadow: [
@@ -336,14 +336,12 @@ class _ComidasPageState extends State<ComidasPage> {
                           ],
                         ),
                         child: CachedNetworkImage(
-                          placeholder: (context, url) => Container(
+                          placeholder: (context, url) => SizedBox(
                             child: SvgPicture.asset('assets/food_svg/food.svg'),
                           ),
-                          errorWidget: (context, url, error) => Container(
-                            child: Container(
-                              child: SvgPicture.asset(
-                                'assets/food_svg/food.svg',
-                              ),
+                          errorWidget: (context, url, error) => SizedBox(
+                            child: SvgPicture.asset(
+                              'assets/food_svg/food.svg',
                             ),
                           ),
                           imageUrl: '$apiBaseURL/${food.productoFoto}',
@@ -373,9 +371,9 @@ class _ComidasPageState extends State<ComidasPage> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    '${food.productoNombre}',
+                    food.productoNombre,
                     style: TextStyle(
-                      color: Color(0XFF585858),
+                      color: const Color(0XFF585858),
                       fontSize: ScreenUtil().setSp(16),
                       fontWeight: FontWeight.w500,
                       letterSpacing: 0.16,
@@ -385,7 +383,7 @@ class _ComidasPageState extends State<ComidasPage> {
                     height: ScreenUtil().setHeight(8),
                   ),
                   Text(
-                    '$disponible',
+                    disponible,
                     style: TextStyle(
                       color: color,
                       fontSize: ScreenUtil().setSp(14),
@@ -399,7 +397,7 @@ class _ComidasPageState extends State<ComidasPage> {
                   Text(
                     'S/${food.productoPrecio}',
                     style: TextStyle(
-                      color: Color(0XFF3A3A3A),
+                      color: const Color(0XFF3A3A3A),
                       fontSize: ScreenUtil().setSp(16),
                       fontWeight: FontWeight.w700,
                       letterSpacing: 0.16,
@@ -422,24 +420,10 @@ class _ComidasPageState extends State<ComidasPage> {
 }
 
 class CategoryController extends ChangeNotifier {
-  // String idSelec = '1';
-  // // int index = 0;
-
-  // // void changeIndex(int i) {
-  // //   index = i;
-  // //   notifyListeners();
-  // // }
-
-  // void changeIdSelect(String id) {
-  //   idSelec = id;
-  //   notifyListeners();
-  // }
-
   ValueNotifier<int> index = ValueNotifier(0);
-  ValueNotifier<int> get indexG => this.index;
+  ValueNotifier<int> get indexG => index;
 
   void changeIndex(int i) {
-    print('index $index');
     index.value = i;
     notifyListeners();
   }

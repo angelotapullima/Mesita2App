@@ -8,7 +8,7 @@ import 'package:mesita_aplication_2/src/bloc/provider.dart';
 import 'package:mesita_aplication_2/src/models/buscar_user_model.dart';
 
 class BuscarUsuario extends StatefulWidget {
-  BuscarUsuario({Key key}) : super(key: key);
+  const BuscarUsuario({Key key}) : super(key: key);
 
   @override
   _BuscarUsuarioState createState() => _BuscarUsuarioState();
@@ -45,14 +45,14 @@ class _BuscarUsuarioState extends State<BuscarUsuario> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  BackButton(),
-                  Container(
+                  const BackButton(),
+                  SizedBox(
                     width: ScreenUtil().setWidth(200),
                     child: CupertinoSearchTextField(
                       controller: _queryController,
                       backgroundColor: Colors.white,
                       placeholderStyle: GoogleFonts.poppins(
-                        color: Color(0XFFA8A7A7),
+                        color: const Color(0XFFA8A7A7),
                         fontWeight: FontWeight.w400,
                         fontSize: ScreenUtil().setSp(16),
                       ),
@@ -63,7 +63,7 @@ class _BuscarUsuarioState extends State<BuscarUsuario> {
                         busquedaBloc.buscarUsers('');
                       },
                       onSubmitted: (value) {
-                        if (_queryController.text.length > 0) {
+                        if (_queryController.text.isNotEmpty) {
                           FocusManager.instance.primaryFocus?.unfocus();
                           busquedaBloc.buscarUsers(_queryController.text);
                         } else {
@@ -76,7 +76,7 @@ class _BuscarUsuarioState extends State<BuscarUsuario> {
                   ),
                   InkWell(
                     onTap: () {
-                      if (_queryController.text.length > 0) {
+                      if (_queryController.text.isNotEmpty) {
                         FocusManager.instance.primaryFocus?.unfocus();
                         busquedaBloc.buscarUsers(_queryController.text);
                       } else {
@@ -85,9 +85,9 @@ class _BuscarUsuarioState extends State<BuscarUsuario> {
                       }
                     },
                     child: Container(
-                      padding: EdgeInsets.all(8),
+                      padding: const EdgeInsets.all(8),
                       decoration: BoxDecoration(
-                        color: Color(0XFFFF0036),
+                        color: const Color(0XFFFF0036),
                         borderRadius: BorderRadius.circular(15),
                       ),
                       child: Text(
@@ -111,7 +111,7 @@ class _BuscarUsuarioState extends State<BuscarUsuario> {
                   stream: busquedaBloc.busquedaStream,
                   builder: (context, AsyncSnapshot<List<BuscarUserModel>> snapshot) {
                     if (snapshot.hasData) {
-                      if (snapshot.data.length > 0) {
+                      if (snapshot.data.isNotEmpty) {
                         var users = snapshot.data;
 
                         return ListView.builder(
@@ -125,13 +125,13 @@ class _BuscarUsuarioState extends State<BuscarUsuario> {
                                   Navigator.pop(context);
                                 },
                                 child: Card(
-                                  margin: EdgeInsets.all(8),
+                                  margin: const EdgeInsets.all(8),
                                   child: Padding(
-                                    padding: EdgeInsets.all(8.0),
+                                    padding: const EdgeInsets.all(8.0),
                                     child: Text(
                                       users[index].nombre,
                                       style: GoogleFonts.poppins(
-                                        color: Color(0XFF585858),
+                                        color: const Color(0XFF585858),
                                         fontWeight: FontWeight.w400,
                                         fontSize: ScreenUtil().setSp(16),
                                       ),
@@ -141,7 +141,7 @@ class _BuscarUsuarioState extends State<BuscarUsuario> {
                               );
                             });
                       } else {
-                        return Center(
+                        return const Center(
                           child: Text('No se encontraron resultados'),
                         );
                       }
@@ -161,10 +161,10 @@ class _BuscarUsuarioState extends State<BuscarUsuario> {
   _showLoading() {
     return Center(
       child: (Platform.isAndroid)
-          ? CircularProgressIndicator(
+          ? const CircularProgressIndicator(
               color: Color(0XFFFF0036),
             )
-          : CupertinoActivityIndicator(),
+          : const CupertinoActivityIndicator(),
     );
   }
 }

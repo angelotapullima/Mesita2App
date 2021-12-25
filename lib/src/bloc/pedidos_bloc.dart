@@ -20,15 +20,15 @@ class PedidosBloc {
     await _mesaApi.obtenerMesasPorNegocio();
     final List<PedidoModel> pedixt = [];
 
-    final pedido = await await pedidosDatabase.obtenerPedidosPorIdMesa(idMesa);
+    final pedido = await pedidosDatabase.obtenerPedidosPorIdMesa(idMesa);
 
-    if (pedido.length > 0) {
+    if (pedido.isNotEmpty) {
       final List<DetallePedidoModel> details = [];
       PedidoModel pedidoModel = PedidoModel();
 
       final detallePedido = await pedidosDatabase.obtenerDetallesPedidoPorIdPedido(pedido[0].idPedido);
 
-      if (detallePedido.length > 0) {
+      if (detallePedido.isNotEmpty) {
         for (int i = 0; i < detallePedido.length; i++) {
           DetallePedidoModel detallePedidoModel = DetallePedidoModel();
 
@@ -73,14 +73,14 @@ class PedidosBloc {
 
     final pedido = await pedidosDatabase.obtenerPedidosPorIdMesa(idMesa);
 
-    if (pedido.length > 0) {
+    if (pedido.isNotEmpty) {
       for (var x = 0; x < pedido.length; x++) {
         final List<DetallePedidoModel> details = [];
         PedidoModel pedidoModel = PedidoModel();
 
         final detallePedido = await pedidosDatabase.obtenerDetallesPedidoPorIdPedido(pedido[x].idPedido);
 
-        if (detallePedido.length > 0) {
+        if (detallePedido.isNotEmpty) {
           for (int i = 0; i < detallePedido.length; i++) {
             DetallePedidoModel detallePedidoModel = DetallePedidoModel();
 

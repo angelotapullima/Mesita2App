@@ -31,7 +31,7 @@ class ReporteBloc {
 
   void obtenerReporteGeneralPorIdItem(String fechaI, String fechaF, int idItem) async {
     _reporteGeneralController.sink.add(null);
-    if (fechaI.length > 0) {
+    if (fechaI.isNotEmpty) {
       await _reportesApi.obtenerReportesLinea(fechaI, fechaF, idItem);
       _reporteGeneralController.sink.add(await _reportGDB.obtenerReporteGeneralPorId(idItem.toString()));
     } else {
@@ -40,7 +40,7 @@ class ReporteBloc {
   }
 
   void obtenerReporteLinea(String fechaI) async {
-    if (fechaI.length > 0) {
+    if (fechaI.isNotEmpty) {
       _reportesLineaController.sink.add(await _reporteLineaDB.obtenerReportLinea(_prefs.idNegocio));
     } else {
       _reportesLineaController.sink.add([]);
@@ -54,7 +54,7 @@ class ReporteBloc {
 
   void obtenerReporteProductos(String fechaI, String fechaF) async {
     _reporteProductosController.sink.add(null);
-    if (fechaI.length > 0) {
+    if (fechaI.isNotEmpty) {
       await _reportesApi.obtenerReportesProductos(fechaI, fechaF);
       _reporteProductosController.sink.add(await obtenerReporteProducto());
     } else {
@@ -64,7 +64,7 @@ class ReporteBloc {
 
   void obtenerReporteUtilidadesLineas(String fechaI, String fechaF) async {
     _reportesUtilidadesLineaController.sink.add(null);
-    if (fechaI.length > 0) {
+    if (fechaI.isNotEmpty) {
       await _reportesApi.obtenerReportesUtilidadesLinea(fechaI, fechaF);
       _reportesUtilidadesLineaController.sink.add(await _reporteUtilidadesLineaDB.obtenerReportUtilidadLinea(_prefs.idNegocio));
     } else {
@@ -81,7 +81,7 @@ class ReporteBloc {
       for (var i = 0; i < reportDB.length; i++) {
         final producto = await _productosDatabase.obtenerProductosPorIdProducto(reportDB[i].idProducto);
 
-        if (producto.length > 0) {
+        if (producto.isNotEmpty) {
           ReporteProductoModel report = ReporteProductoModel();
 
           report.idProducto = reportDB[i].idProducto;

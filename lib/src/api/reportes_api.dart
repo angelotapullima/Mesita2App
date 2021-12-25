@@ -22,7 +22,7 @@ class ReportesApi {
 
   Future<bool> obtenerReportesLinea(String fechaI, String fechaF, int idItem) async {
     try {
-      final url = Uri.parse('${apiBaseURL}/api/Negocio/reporte_por_fechas');
+      final url = Uri.parse('$apiBaseURL/api/Negocio/reporte_por_fechas');
 
       final resp = await http.post(
         url,
@@ -30,13 +30,12 @@ class ReportesApi {
           'tn': '${_prefs.token}',
           'app': 'true',
           'id_negocio': '${_prefs.idNegocio}',
-          'fecha_i': '$fechaI',
-          'fecha_f': '$fechaF',
+          'fecha_i': fechaI,
+          'fecha_f': fechaF,
         },
       );
 
       final decodedData = json.decode(resp.body);
-      print(decodedData);
 
       ReporteGeneralModel general = ReporteGeneralModel();
 
@@ -71,7 +70,7 @@ class ReportesApi {
 
   Future<bool> obtenerReportesUtilidadesLinea(String fechaI, String fechaF) async {
     try {
-      final url = Uri.parse('${apiBaseURL}/api/Negocio/utilidad_por_fechas');
+      final url = Uri.parse('$apiBaseURL/api/Negocio/utilidad_por_fechas');
 
       final resp = await http.post(
         url,
@@ -79,13 +78,12 @@ class ReportesApi {
           'tn': '${_prefs.token}',
           'app': 'true',
           'id_negocio': '${_prefs.idNegocio}',
-          'fecha_i': '$fechaI',
-          'fecha_f': '$fechaF',
+          'fecha_i': fechaI,
+          'fecha_f': fechaF,
         },
       );
 
       final decodedData = json.decode(resp.body);
-      print(decodedData);
 
       if (decodedData["result"]["lineas"].length > 0) {
         await _reporteLineaDB.deleteReportLinea();
@@ -113,7 +111,7 @@ class ReportesApi {
 
   Future<bool> obtenerReportesProductos(String fechaI, String fechaF) async {
     try {
-      final url = Uri.parse('${apiBaseURL}/api/Negocio/productos_mas_vendidos');
+      final url = Uri.parse('$apiBaseURL/api/Negocio/productos_mas_vendidos');
 
       final resp = await http.post(
         url,
@@ -121,13 +119,12 @@ class ReportesApi {
           'tn': '${_prefs.token}',
           'app': 'true',
           'id_negocio': '${_prefs.idNegocio}',
-          'fecha_i': '$fechaI',
-          'fecha_f': '$fechaF',
+          'fecha_i': fechaI,
+          'fecha_f': fechaF,
         },
       );
 
       final decodedData = json.decode(resp.body);
-      print(decodedData);
 
       if (decodedData["result"].length > 0) {
         await _reporteProductoDB.deleteReportProduct();

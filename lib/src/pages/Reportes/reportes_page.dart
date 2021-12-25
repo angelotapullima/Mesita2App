@@ -28,6 +28,7 @@ class _ReportesPageState extends State<ReportesPage> {
   TextEditingController fechaI = TextEditingController();
   TextEditingController fechaF = TextEditingController();
   final _controller = ReportesController();
+  @override
   void initState() {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       fechaI.text = obtenerFechaActualApi();
@@ -45,9 +46,9 @@ class _ReportesPageState extends State<ReportesPage> {
     final reporteBloc = ProviderBloc.reporte(context);
     final prefs = Preferences();
     return Scaffold(
-      backgroundColor: Color(0XFFE5E5E5),
+      backgroundColor: const Color(0XFFE5E5E5),
       appBar: AppBar(
-        backgroundColor: Color(0XFFE5E5E5),
+        backgroundColor: const Color(0XFFE5E5E5),
         leading: InkWell(
           child: Container(),
         ),
@@ -81,7 +82,7 @@ class _ReportesPageState extends State<ReportesPage> {
                     return Container(
                       height: ScreenUtil().setHeight(48),
                       width: double.infinity,
-                      decoration: BoxDecoration(color: Color(0XFFEDEDED), borderRadius: BorderRadius.circular(15)),
+                      decoration: BoxDecoration(color: const Color(0XFFEDEDED), borderRadius: BorderRadius.circular(15)),
                       padding: EdgeInsets.symmetric(horizontal: ScreenUtil().setWidth(10)),
                       child: Row(
                         children: [
@@ -90,7 +91,7 @@ class _ReportesPageState extends State<ReportesPage> {
                               _controller.rangoFecha,
                               textAlign: TextAlign.center,
                               style: TextStyle(
-                                color: (_controller.rangoFecha != 'Seleccionar fecha') ? Color(0XFF585858) : Color(0XFFBEBEBE),
+                                color: (_controller.rangoFecha != 'Seleccionar fecha') ? const Color(0XFF585858) : const Color(0XFFBEBEBE),
                                 fontWeight: FontWeight.w400,
                                 fontSize: ScreenUtil().setSp(16),
                                 fontStyle: FontStyle.normal,
@@ -100,7 +101,7 @@ class _ReportesPageState extends State<ReportesPage> {
                           Icon(
                             Icons.arrow_drop_down,
                             size: ScreenUtil().setHeight(20),
-                            color: Color(0XFF585858),
+                            color: const Color(0XFF585858),
                           ),
                         ],
                       ),
@@ -110,7 +111,7 @@ class _ReportesPageState extends State<ReportesPage> {
             SizedBox(
               height: ScreenUtil().setHeight(16),
             ),
-            Container(
+            SizedBox(
               height: ScreenUtil().setHeight(40),
               child: ListView.builder(
                 itemCount: itemsList.length,
@@ -144,17 +145,17 @@ class _ReportesPageState extends State<ReportesPage> {
                             ),
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(22),
-                                color: (index == _controller.index) ? Color(0XFFFF0036) : Color(0XFFE5E5E5),
+                                color: (index == _controller.index) ? const Color(0XFFFF0036) : const Color(0XFFE5E5E5),
                                 boxShadow: [
                                   BoxShadow(
-                                    color: (index == _controller.index) ? Color.fromRGBO(255, 0, 54, 0.5) : Colors.transparent,
+                                    color: (index == _controller.index) ? const Color.fromRGBO(255, 0, 54, 0.5) : Colors.transparent,
                                   )
                                 ]),
                             child: Center(
                                 child: Text(
                               itemsList[index].item,
                               style: TextStyle(
-                                color: (index == _controller.index) ? Colors.white : Color(0xFF585858),
+                                color: (index == _controller.index) ? Colors.white : const Color(0xFF585858),
                                 fontSize: ScreenUtil().setSp(14),
                                 fontWeight: FontWeight.w500,
                                 letterSpacing: 0.16,
@@ -170,13 +171,13 @@ class _ReportesPageState extends State<ReportesPage> {
                 animation: _controller,
                 builder: (s, t) {
                   return (_controller.currentPage == PageMostrar.general)
-                      ? ReporteGeneral()
+                      ? const ReporteGeneral()
                       : (_controller.currentPage == PageMostrar.categorias)
-                          ? ReporteCategoria()
+                          ? const ReporteCategoria()
                           : (_controller.currentPage == PageMostrar.productos)
-                              ? ReporteProductos()
+                              ? const ReporteProductos()
                               : (_controller.currentPage == PageMostrar.utilidades)
-                                  ? ReporteUtilidades()
+                                  ? const ReporteUtilidades()
                                   : Container();
                 }),
           ],
@@ -194,35 +195,35 @@ class _ReportesPageState extends State<ReportesPage> {
       decoration: InputDecoration(
         hintText: title,
         hintStyle: TextStyle(
-          color: Color(0XFFBEBEBE),
+          color: const Color(0XFFBEBEBE),
           fontWeight: FontWeight.w400,
           fontSize: ScreenUtil().setSp(16),
           fontStyle: FontStyle.normal,
         ),
         filled: true,
-        fillColor: Color(0XFFEDEDED),
+        fillColor: const Color(0XFFEDEDED),
         contentPadding: EdgeInsets.only(left: ScreenUtil().setWidth(10), top: ScreenUtil().setHeight(5), bottom: ScreenUtil().setHeight(1)),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(15),
-          borderSide: BorderSide(color: Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
+          borderSide: BorderSide(color: const Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(15),
-          borderSide: BorderSide(color: Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
+          borderSide: BorderSide(color: const Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
         ),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(15),
-          borderSide: BorderSide(color: Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
+          borderSide: BorderSide(color: const Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
         ),
       ),
       style: TextStyle(
-        color: Color(0XFF585858),
+        color: const Color(0XFF585858),
         fontWeight: FontWeight.w400,
         fontSize: ScreenUtil().setSp(16),
         fontStyle: FontStyle.normal,
       ),
       onTap: () async {
-        FocusScope.of(context).requestFocus(new FocusNode());
+        FocusScope.of(context).requestFocus(FocusNode());
         DateTime picked = await PlatformDatePicker.showDate(
           context: context,
           backgroundColor: Colors.white,
@@ -231,13 +232,12 @@ class _ReportesPageState extends State<ReportesPage> {
           lastDate: DateTime(DateTime.now().year + 1),
         );
 
-        print('date $picked');
         if (picked != null) {
           control.text =
               "${picked.year.toString().padLeft(2, '0')}-${picked.month.toString().padLeft(2, '0')}-${picked.day.toString().padLeft(2, '0')}";
         }
 
-        if (fechaI.text.length > 0 && fechaF.text.length > 0) {
+        if (fechaI.text.isNotEmpty && fechaF.text.isNotEmpty) {
           _controller.changeBoton(true);
         } else {
           _controller.changeBoton(false);
@@ -255,18 +255,18 @@ class _ReportesPageState extends State<ReportesPage> {
           return Stack(
             children: [
               Container(
-                color: Color.fromRGBO(0, 0, 0, 0.001),
+                color: const Color.fromRGBO(0, 0, 0, 0.001),
                 child: DraggableScrollableSheet(
                     initialChildSize: 0.93,
                     minChildSize: 0.2,
                     maxChildSize: 0.93,
                     builder: (_, controller) {
                       return Container(
-                        decoration: BoxDecoration(
+                        decoration: const BoxDecoration(
                           color: Colors.white,
                           borderRadius: BorderRadius.only(
-                            topLeft: const Radius.circular(30),
-                            topRight: const Radius.circular(30),
+                            topLeft: Radius.circular(30),
+                            topRight: Radius.circular(30),
                           ),
                         ),
                         child: Padding(
@@ -280,7 +280,7 @@ class _ReportesPageState extends State<ReportesPage> {
                                   child: Center(
                                     child: Container(
                                       width: ScreenUtil().setWidth(48),
-                                      decoration: BoxDecoration(
+                                      decoration: const BoxDecoration(
                                         color: Color(0XFFBABABA),
                                       ),
                                     ),
@@ -293,7 +293,7 @@ class _ReportesPageState extends State<ReportesPage> {
                                   child: Text(
                                     'Establecer fecha',
                                     style: GoogleFonts.poppins(
-                                      color: Color(0XFFFF0036),
+                                      color: const Color(0XFFFF0036),
                                       fontWeight: FontWeight.w600,
                                       fontSize: ScreenUtil().setSp(18),
                                     ),
@@ -305,7 +305,7 @@ class _ReportesPageState extends State<ReportesPage> {
                                 Text(
                                   'Fecha inicio',
                                   style: GoogleFonts.poppins(
-                                    color: Color(0XFF585858),
+                                    color: const Color(0XFF585858),
                                     fontWeight: FontWeight.w500,
                                     fontSize: ScreenUtil().setSp(16),
                                   ),
@@ -317,7 +317,7 @@ class _ReportesPageState extends State<ReportesPage> {
                                 Text(
                                   'Fecha fin',
                                   style: GoogleFonts.poppins(
-                                    color: Color(0XFF585858),
+                                    color: const Color(0XFF585858),
                                     fontWeight: FontWeight.w500,
                                     fontSize: ScreenUtil().setSp(16),
                                   ),
@@ -347,7 +347,7 @@ class _ReportesPageState extends State<ReportesPage> {
                                           child: Container(
                                             decoration: BoxDecoration(
                                               borderRadius: BorderRadius.circular(50),
-                                              color: (_controller.boton) ? Color(0XFFFF0036) : Color(0XFFFF0036).withOpacity(0.6),
+                                              color: (_controller.boton) ? const Color(0XFFFF0036) : const Color(0XFFFF0036).withOpacity(0.6),
                                             ),
                                             child: Center(
                                               child: Text(
@@ -375,7 +375,7 @@ class _ReportesPageState extends State<ReportesPage> {
                                         return Text(
                                           _controller.text,
                                           style: TextStyle(
-                                            color: Color(0XFFFF0036),
+                                            color: const Color(0XFFFF0036),
                                             fontWeight: FontWeight.w600,
                                             fontSize: ScreenUtil().setSp(16),
                                             fontStyle: FontStyle.normal,
@@ -393,7 +393,7 @@ class _ReportesPageState extends State<ReportesPage> {
                                     child: Text(
                                       'Cancelar',
                                       style: GoogleFonts.poppins(
-                                        color: Color(0XFF8A8A8A),
+                                        color: const Color(0XFF8A8A8A),
                                         fontWeight: FontWeight.w500,
                                         fontSize: ScreenUtil().setSp(16),
                                       ),
@@ -425,13 +425,13 @@ class _ReportesPageState extends State<ReportesPage> {
     return Container(
       height: double.infinity,
       width: double.infinity,
-      color: Color.fromRGBO(0, 0, 0, 0.5),
+      color: const Color.fromRGBO(0, 0, 0, 0.5),
       child: Center(
         child: (Platform.isAndroid)
-            ? CircularProgressIndicator(
+            ? const CircularProgressIndicator(
                 color: Color(0XFFFF0036),
               )
-            : CupertinoActivityIndicator(),
+            : const CupertinoActivityIndicator(),
       ),
     );
   }

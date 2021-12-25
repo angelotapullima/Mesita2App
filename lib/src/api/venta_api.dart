@@ -14,18 +14,18 @@ class VentaApi {
 
   Future<bool> guardarVenta(String idPedido, String tipoVenta, String ruc, String razon, String domicilio) async {
     try {
-      final url = Uri.parse('${apiBaseURL}/api/Negocio/guardar_venta');
+      final url = Uri.parse('$apiBaseURL/api/Negocio/guardar_venta');
 
       final resp = await http.post(
         url,
         body: {
           'tn': '${_prefs.token}',
           'app': 'true',
-          'id_pedido': '$idPedido',
-          'venta_tipo': '$tipoVenta',
-          'venta_ruc': '$ruc',
-          'venta_razonsocial': '$razon',
-          'venta_domicilio': '$domicilio',
+          'id_pedido': idPedido,
+          'venta_tipo': tipoVenta,
+          'venta_ruc': ruc,
+          'venta_razonsocial': razon,
+          'venta_domicilio': domicilio,
           'id_usuario': '${_prefs.idUser}',
         },
       );
@@ -46,7 +46,7 @@ class VentaApi {
 
   Future<bool> listarVentas(String fechaI, String fechaF) async {
     try {
-      final url = Uri.parse('${apiBaseURL}/api/Negocio/ventas_por_fecha');
+      final url = Uri.parse('$apiBaseURL/api/Negocio/ventas_por_fecha');
 
       final resp = await http.post(
         url,
@@ -54,8 +54,8 @@ class VentaApi {
           'tn': '${_prefs.token}',
           'app': 'true',
           'id_negocio': '${_prefs.idNegocio}',
-          'fecha_i': '$fechaI',
-          'fecha_f': '$fechaF',
+          'fecha_i': fechaI,
+          'fecha_f': fechaF,
         },
       );
 

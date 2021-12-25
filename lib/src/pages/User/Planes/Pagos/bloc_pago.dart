@@ -1,20 +1,19 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/rendering.dart';
 
 class PagoBLoc extends ChangeNotifier {
-  ValueNotifier<bool> _cargando = ValueNotifier(false);
-  ValueNotifier<bool> get cargando => this._cargando;
-  ValueNotifier<bool> _show = ValueNotifier(true);
-  ValueNotifier<bool> get show => this._show;
+  final ValueNotifier<bool> _cargando = ValueNotifier(false);
+  ValueNotifier<bool> get cargando => _cargando;
+  final ValueNotifier<bool> _show = ValueNotifier(true);
+  ValueNotifier<bool> get show => _show;
 
-  ValueNotifier<bool> _animacionCalendar = ValueNotifier(false);
-  ValueNotifier<bool> get animacionCalendar => this._animacionCalendar;
+  final ValueNotifier<bool> _animacionCalendar = ValueNotifier(false);
+  ValueNotifier<bool> get animacionCalendar => _animacionCalendar;
 
-  ScrollController _controller = ScrollController();
-  ScrollController get controller => this._controller;
+  final ScrollController _controller = ScrollController();
+  ScrollController get controller => _controller;
 
-  DetalleCanchaBLoc() {
+  PagoBLoc() {
     _init();
   }
 
@@ -48,5 +47,5 @@ class PagoBLoc extends ChangeNotifier {
   }
 
   //void setIndex(bool value) => this._cargando.value = value;
-  void setEstadoAnimacion(bool value) => this._animacionCalendar.value = value;
+  void setEstadoAnimacion(bool value) => _animacionCalendar.value = value;
 }

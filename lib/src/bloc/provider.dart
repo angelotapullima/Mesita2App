@@ -27,9 +27,7 @@ class ProviderBloc extends InheritedWidget {
   final buscarBloc = BuscarUserBloc();
 
   factory ProviderBloc({Key key, Widget child}) {
-    if (_instancia == null) {
-      _instancia = new ProviderBloc._internal(key: key, child: child);
-    }
+    _instancia ??= ProviderBloc._internal(key: key, child: child);
 
     return _instancia;
   }

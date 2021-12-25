@@ -13,13 +13,13 @@ class RecibosPage extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 0,
-        iconTheme: IconThemeData(
+        iconTheme: const IconThemeData(
           color: Color(0XFF3A3A3A),
         ),
         title: Text(
           'Recibos',
           style: GoogleFonts.poppins(
-            color: Color(0XFF3A3A3A),
+            color: const Color(0XFF3A3A3A),
             fontSize: ScreenUtil().setSp(18),
             fontWeight: FontWeight.w600,
             letterSpacing: 0.16,
@@ -38,37 +38,31 @@ class RecibosPage extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Container(
-                  child: Text(
-                    'FECHA',
-                    style: GoogleFonts.poppins(
-                      color: Color(0XFF585858),
-                      fontSize: ScreenUtil().setSp(16),
-                      fontWeight: FontWeight.w500,
-                      letterSpacing: 0.16,
-                    ),
+                Text(
+                  'FECHA',
+                  style: GoogleFonts.poppins(
+                    color: const Color(0XFF585858),
+                    fontSize: ScreenUtil().setSp(16),
+                    fontWeight: FontWeight.w500,
+                    letterSpacing: 0.16,
                   ),
                 ),
-                Container(
-                  child: Text(
-                    'N° DE REFERENCIA',
-                    style: GoogleFonts.poppins(
-                      color: Color(0XFF585858),
-                      fontSize: ScreenUtil().setSp(16),
-                      fontWeight: FontWeight.w500,
-                      letterSpacing: 0.16,
-                    ),
+                Text(
+                  'N° DE REFERENCIA',
+                  style: GoogleFonts.poppins(
+                    color: const Color(0XFF585858),
+                    fontSize: ScreenUtil().setSp(16),
+                    fontWeight: FontWeight.w500,
+                    letterSpacing: 0.16,
                   ),
                 ),
-                Container(
-                  child: Text(
-                    'IMPORTE',
-                    style: GoogleFonts.poppins(
-                      color: Color(0XFF585858),
-                      fontSize: ScreenUtil().setSp(16),
-                      fontWeight: FontWeight.w500,
-                      letterSpacing: 0.16,
-                    ),
+                Text(
+                  'IMPORTE',
+                  style: GoogleFonts.poppins(
+                    color: const Color(0XFF585858),
+                    fontSize: ScreenUtil().setSp(16),
+                    fontWeight: FontWeight.w500,
+                    letterSpacing: 0.16,
                   ),
                 )
               ],
@@ -90,10 +84,10 @@ class RecibosPage extends StatelessWidget {
           context,
           PageRouteBuilder(
             pageBuilder: (context, animation, secondaryAnimation) {
-              return DetalleRecibo();
+              return const DetalleRecibo();
             },
             transitionsBuilder: (context, animation, secondaryAnimation, child) {
-              var begin = Offset(0.0, 1.0);
+              var begin = const Offset(0.0, 1.0);
               var end = Offset.zero;
               var curve = Curves.ease;
 
@@ -112,54 +106,48 @@ class RecibosPage extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Container(
-            child: Text(
-              '25/10/21',
-              style: GoogleFonts.poppins(
-                color: Color(0XFF585858),
-                fontSize: ScreenUtil().setSp(14),
-                fontWeight: FontWeight.w400,
-                letterSpacing: 0.16,
-              ),
+          Text(
+            '25/10/21',
+            style: GoogleFonts.poppins(
+              color: const Color(0XFF585858),
+              fontSize: ScreenUtil().setSp(14),
+              fontWeight: FontWeight.w400,
+              letterSpacing: 0.16,
             ),
           ),
-          Container(
-            child: Text(
-              '12345678910111213',
-              style: GoogleFonts.poppins(
-                color: Color(0XFF585858),
-                fontSize: ScreenUtil().setSp(14),
-                fontWeight: FontWeight.w400,
-                letterSpacing: 0.16,
-              ),
+          Text(
+            '12345678910111213',
+            style: GoogleFonts.poppins(
+              color: const Color(0XFF585858),
+              fontSize: ScreenUtil().setSp(14),
+              fontWeight: FontWeight.w400,
+              letterSpacing: 0.16,
             ),
           ),
-          Container(
-            child: Row(
-              children: [
-                Text(
-                  'S/ 3.00',
-                  style: GoogleFonts.poppins(
-                    color: Color(0XFF585858),
-                    fontSize: ScreenUtil().setSp(14),
-                    fontWeight: FontWeight.w400,
-                    letterSpacing: 0.16,
-                  ),
+          Row(
+            children: [
+              Text(
+                'S/ 3.00',
+                style: GoogleFonts.poppins(
+                  color: const Color(0XFF585858),
+                  fontSize: ScreenUtil().setSp(14),
+                  fontWeight: FontWeight.w400,
+                  letterSpacing: 0.16,
                 ),
-                SizedBox(
-                  width: ScreenUtil().setWidth(8),
+              ),
+              SizedBox(
+                width: ScreenUtil().setWidth(8),
+              ),
+              Text(
+                'VER',
+                style: GoogleFonts.poppins(
+                  color: const Color(0XFFFF0036),
+                  fontSize: ScreenUtil().setSp(14),
+                  fontWeight: FontWeight.w500,
+                  letterSpacing: 0.16,
                 ),
-                Text(
-                  'VER',
-                  style: GoogleFonts.poppins(
-                    color: Color(0XFFFF0036),
-                    fontSize: ScreenUtil().setSp(14),
-                    fontWeight: FontWeight.w500,
-                    letterSpacing: 0.16,
-                  ),
-                ),
-              ],
-            ),
+              ),
+            ],
           ),
         ],
       ),

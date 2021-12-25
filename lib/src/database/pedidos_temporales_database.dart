@@ -14,7 +14,7 @@ class PedidosTemporalDatabase {
 
       return res;
     } catch (exception) {
-      print(exception);
+      return exception;
     }
   }
 
@@ -58,7 +58,7 @@ class PedidosTemporalDatabase {
 
       return res;
     } catch (exception) {
-      print(exception);
+      return exception;
     }
   }
 

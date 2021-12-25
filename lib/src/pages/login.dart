@@ -38,9 +38,9 @@ class _LoginState extends State<Login> {
   final TextEditingController _confrimPasswdController = TextEditingController();
 
   //COMPLETAR DATOS
-  TextEditingController _nombre2Controller = new TextEditingController();
-  TextEditingController _apellidoPaternoController = new TextEditingController();
-  TextEditingController _apellidoMaternoController = new TextEditingController();
+  final TextEditingController _nombre2Controller = TextEditingController();
+  final TextEditingController _apellidoPaternoController = TextEditingController();
+  final TextEditingController _apellidoMaternoController = TextEditingController();
 
   @override
   void initState() {
@@ -173,13 +173,13 @@ class _LoginState extends State<Login> {
     return Container(
       height: double.infinity,
       width: double.infinity,
-      color: Color.fromRGBO(0, 0, 0, 0.5),
+      color: const Color.fromRGBO(0, 0, 0, 0.5),
       child: Center(
         child: (Platform.isAndroid)
-            ? CircularProgressIndicator(
+            ? const CircularProgressIndicator(
                 color: Color(0xffFF0036),
               )
-            : CupertinoActivityIndicator(),
+            : const CupertinoActivityIndicator(),
       ),
     );
   }
@@ -308,16 +308,16 @@ class _LoginState extends State<Login> {
                       ),
                       hintText: 'Contraseña',
                       suffixIcon: IconButton(
-                        padding: EdgeInsets.all(0),
+                        padding: const EdgeInsets.all(0),
                         onPressed: () {
                           _controller.changePasswdDisable(!_controller.passwdDisable);
                         },
                         icon: _controller.passwdDisable
-                            ? Icon(
+                            ? const Icon(
                                 Icons.visibility,
                                 color: Color(0xffa8a7a7),
                               )
-                            : Icon(
+                            : const Icon(
                                 Icons.visibility_off,
                                 color: Color(0xffa8a7a7),
                               ),
@@ -353,7 +353,7 @@ class _LoginState extends State<Login> {
               onPressed: () async {
                 _controller.changeCargando(true);
                 _controller.changeMensaje('');
-                if (_userNameController.text.length > 0 && _passwdLoginController.text.length > 0) {
+                if (_userNameController.text.isNotEmpty && _passwdLoginController.text.isNotEmpty) {
                   final _loginApi = LoginApi();
                   final res = await _loginApi.login(_userNameController.text, _passwdLoginController.text);
 
@@ -375,10 +375,10 @@ class _LoginState extends State<Login> {
                         context,
                         PageRouteBuilder(
                           pageBuilder: (context, animation, secondaryAnimation) {
-                            return Home();
+                            return const Home();
                           },
                           transitionsBuilder: (context, animation, secondaryAnimation, child) {
-                            var begin = Offset(0.0, 1.0);
+                            var begin = const Offset(0.0, 1.0);
                             var end = Offset.zero;
                             var curve = Curves.ease;
 
@@ -534,7 +534,7 @@ class _LoginState extends State<Login> {
                   hintText: 'Nombre'),
               enableInteractiveSelection: false,
               onTap: () {
-                FocusScope.of(context).requestFocus(new FocusNode());
+                FocusScope.of(context).requestFocus(FocusNode());
                 _completarDatosPersona(context);
               },
             ),
@@ -595,7 +595,7 @@ class _LoginState extends State<Login> {
                 ),
                 hintText: 'Contraseña',
                 suffixIcon: IconButton(
-                  padding: EdgeInsets.all(0),
+                  padding: const EdgeInsets.all(0),
                   onPressed: () {
                     setState(() {
                       if (_passwordVisible) {
@@ -606,11 +606,11 @@ class _LoginState extends State<Login> {
                     });
                   },
                   icon: _passwordVisible
-                      ? Icon(
+                      ? const Icon(
                           Icons.visibility,
                           color: Color(0xffa8a7a7),
                         )
-                      : Icon(
+                      : const Icon(
                           Icons.visibility_off,
                           color: Color(0xffa8a7a7),
                         ),
@@ -652,11 +652,11 @@ class _LoginState extends State<Login> {
                 _controller.changeCargando(true);
                 _controller.changeMensaje2('');
 
-                if (_nombre2Controller.text.length > 0 &&
-                    _emailController.text.length > 0 &&
-                    _userController.text.length > 0 &&
-                    _passwdController.text.length > 0 &&
-                    _confrimPasswdController.text.length > 0) {
+                if (_nombre2Controller.text.isNotEmpty &&
+                    _emailController.text.isNotEmpty &&
+                    _userController.text.isNotEmpty &&
+                    _passwdController.text.isNotEmpty &&
+                    _confrimPasswdController.text.isNotEmpty) {
                   if (_passwdController.text == _confrimPasswdController.text) {
                     final _userApi = UserApi();
 
@@ -735,18 +735,18 @@ class _LoginState extends State<Login> {
           return Stack(
             children: [
               Container(
-                color: Color.fromRGBO(0, 0, 0, 0.001),
+                color: const Color.fromRGBO(0, 0, 0, 0.001),
                 child: DraggableScrollableSheet(
                     initialChildSize: 0.93,
                     minChildSize: 0.2,
                     maxChildSize: 0.93,
                     builder: (_, controller) {
                       return Container(
-                        decoration: BoxDecoration(
+                        decoration: const BoxDecoration(
                           color: Colors.white,
                           borderRadius: BorderRadius.only(
-                            topLeft: const Radius.circular(30),
-                            topRight: const Radius.circular(30),
+                            topLeft: Radius.circular(30),
+                            topRight: Radius.circular(30),
                           ),
                         ),
                         child: KeyboardActions(
@@ -766,7 +766,7 @@ class _LoginState extends State<Login> {
                                     child: Center(
                                       child: Container(
                                         width: ScreenUtil().setWidth(48),
-                                        decoration: BoxDecoration(
+                                        decoration: const BoxDecoration(
                                           color: Color(0XFFBABABA),
                                         ),
                                       ),
@@ -779,7 +779,7 @@ class _LoginState extends State<Login> {
                                     child: Text(
                                       'Ingresar Datos',
                                       style: GoogleFonts.poppins(
-                                        color: Color(0XFFFF0036),
+                                        color: const Color(0XFFFF0036),
                                         fontWeight: FontWeight.w600,
                                         fontSize: ScreenUtil().setSp(18),
                                       ),
@@ -791,7 +791,7 @@ class _LoginState extends State<Login> {
                                   Text(
                                     'Nombre',
                                     style: GoogleFonts.poppins(
-                                      color: Color(0XFF585858),
+                                      color: const Color(0XFF585858),
                                       fontWeight: FontWeight.w500,
                                       fontSize: ScreenUtil().setSp(16),
                                     ),
@@ -801,9 +801,9 @@ class _LoginState extends State<Login> {
                                     controller: _nombre2Controller,
                                     maxLines: 1,
                                     onChanged: (value) {
-                                      if (_nombre2Controller.text.length > 0 &&
-                                          _apellidoPaternoController.text.length > 0 &&
-                                          _apellidoMaternoController.text.length > 0) {
+                                      if (_nombre2Controller.text.isNotEmpty &&
+                                          _apellidoPaternoController.text.isNotEmpty &&
+                                          _apellidoMaternoController.text.isNotEmpty) {
                                         _controller.changeBoton(true);
                                       } else {
                                         _controller.changeBoton(false);
@@ -813,30 +813,30 @@ class _LoginState extends State<Login> {
                                     decoration: InputDecoration(
                                       hintText: 'Nombre',
                                       hintStyle: TextStyle(
-                                        color: Color(0XFFBEBEBE),
+                                        color: const Color(0XFFBEBEBE),
                                         fontWeight: FontWeight.w400,
                                         fontSize: ScreenUtil().setSp(16),
                                         fontStyle: FontStyle.normal,
                                       ),
                                       filled: true,
-                                      fillColor: Color(0XFFEDEDED),
+                                      fillColor: const Color(0XFFEDEDED),
                                       contentPadding: EdgeInsets.only(
                                           left: ScreenUtil().setWidth(10), top: ScreenUtil().setHeight(5), bottom: ScreenUtil().setHeight(1)),
                                       enabledBorder: OutlineInputBorder(
                                         borderRadius: BorderRadius.circular(15),
-                                        borderSide: BorderSide(color: Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
+                                        borderSide: BorderSide(color: const Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
                                       ),
                                       focusedBorder: OutlineInputBorder(
                                         borderRadius: BorderRadius.circular(15),
-                                        borderSide: BorderSide(color: Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
+                                        borderSide: BorderSide(color: const Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
                                       ),
                                       border: OutlineInputBorder(
                                         borderRadius: BorderRadius.circular(15),
-                                        borderSide: BorderSide(color: Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
+                                        borderSide: BorderSide(color: const Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
                                       ),
                                     ),
                                     style: TextStyle(
-                                      color: Color(0XFF585858),
+                                      color: const Color(0XFF585858),
                                       fontWeight: FontWeight.w400,
                                       fontSize: ScreenUtil().setSp(16),
                                       fontStyle: FontStyle.normal,
@@ -848,7 +848,7 @@ class _LoginState extends State<Login> {
                                   Text(
                                     'Apellido paterno',
                                     style: GoogleFonts.poppins(
-                                      color: Color(0XFF585858),
+                                      color: const Color(0XFF585858),
                                       fontWeight: FontWeight.w500,
                                       fontSize: ScreenUtil().setSp(16),
                                     ),
@@ -858,9 +858,9 @@ class _LoginState extends State<Login> {
                                     controller: _apellidoPaternoController,
                                     maxLines: 1,
                                     onChanged: (value) {
-                                      if (_nombre2Controller.text.length > 0 &&
-                                          _apellidoPaternoController.text.length > 0 &&
-                                          _apellidoMaternoController.text.length > 0) {
+                                      if (_nombre2Controller.text.isNotEmpty &&
+                                          _apellidoPaternoController.text.isNotEmpty &&
+                                          _apellidoMaternoController.text.isNotEmpty) {
                                         _controller.changeBoton(true);
                                       } else {
                                         _controller.changeBoton(false);
@@ -870,30 +870,30 @@ class _LoginState extends State<Login> {
                                     decoration: InputDecoration(
                                       hintText: 'Apellido paterno',
                                       hintStyle: TextStyle(
-                                        color: Color(0XFFBEBEBE),
+                                        color: const Color(0XFFBEBEBE),
                                         fontWeight: FontWeight.w400,
                                         fontSize: ScreenUtil().setSp(16),
                                         fontStyle: FontStyle.normal,
                                       ),
                                       filled: true,
-                                      fillColor: Color(0XFFEDEDED),
+                                      fillColor: const Color(0XFFEDEDED),
                                       contentPadding: EdgeInsets.only(
                                           left: ScreenUtil().setWidth(10), top: ScreenUtil().setHeight(5), bottom: ScreenUtil().setHeight(1)),
                                       enabledBorder: OutlineInputBorder(
                                         borderRadius: BorderRadius.circular(15),
-                                        borderSide: BorderSide(color: Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
+                                        borderSide: BorderSide(color: const Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
                                       ),
                                       focusedBorder: OutlineInputBorder(
                                         borderRadius: BorderRadius.circular(15),
-                                        borderSide: BorderSide(color: Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
+                                        borderSide: BorderSide(color: const Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
                                       ),
                                       border: OutlineInputBorder(
                                         borderRadius: BorderRadius.circular(15),
-                                        borderSide: BorderSide(color: Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
+                                        borderSide: BorderSide(color: const Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
                                       ),
                                     ),
                                     style: TextStyle(
-                                      color: Color(0XFF585858),
+                                      color: const Color(0XFF585858),
                                       fontWeight: FontWeight.w400,
                                       fontSize: ScreenUtil().setSp(16),
                                       fontStyle: FontStyle.normal,
@@ -905,7 +905,7 @@ class _LoginState extends State<Login> {
                                   Text(
                                     'Apellido materno',
                                     style: GoogleFonts.poppins(
-                                      color: Color(0XFF585858),
+                                      color: const Color(0XFF585858),
                                       fontWeight: FontWeight.w500,
                                       fontSize: ScreenUtil().setSp(16),
                                     ),
@@ -915,9 +915,9 @@ class _LoginState extends State<Login> {
                                     controller: _apellidoMaternoController,
                                     maxLines: 1,
                                     onChanged: (value) {
-                                      if (_nombre2Controller.text.length > 0 &&
-                                          _apellidoPaternoController.text.length > 0 &&
-                                          _apellidoMaternoController.text.length > 0) {
+                                      if (_nombre2Controller.text.isNotEmpty &&
+                                          _apellidoPaternoController.text.isNotEmpty &&
+                                          _apellidoMaternoController.text.isNotEmpty) {
                                         _controller.changeBoton(true);
                                       } else {
                                         _controller.changeBoton(false);
@@ -927,30 +927,30 @@ class _LoginState extends State<Login> {
                                     decoration: InputDecoration(
                                       hintText: 'Apellido materno',
                                       hintStyle: TextStyle(
-                                        color: Color(0XFFBEBEBE),
+                                        color: const Color(0XFFBEBEBE),
                                         fontWeight: FontWeight.w400,
                                         fontSize: ScreenUtil().setSp(16),
                                         fontStyle: FontStyle.normal,
                                       ),
                                       filled: true,
-                                      fillColor: Color(0XFFEDEDED),
+                                      fillColor: const Color(0XFFEDEDED),
                                       contentPadding: EdgeInsets.only(
                                           left: ScreenUtil().setWidth(10), top: ScreenUtil().setHeight(5), bottom: ScreenUtil().setHeight(1)),
                                       enabledBorder: OutlineInputBorder(
                                         borderRadius: BorderRadius.circular(15),
-                                        borderSide: BorderSide(color: Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
+                                        borderSide: BorderSide(color: const Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
                                       ),
                                       focusedBorder: OutlineInputBorder(
                                         borderRadius: BorderRadius.circular(15),
-                                        borderSide: BorderSide(color: Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
+                                        borderSide: BorderSide(color: const Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
                                       ),
                                       border: OutlineInputBorder(
                                         borderRadius: BorderRadius.circular(15),
-                                        borderSide: BorderSide(color: Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
+                                        borderSide: BorderSide(color: const Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
                                       ),
                                     ),
                                     style: TextStyle(
-                                      color: Color(0XFF585858),
+                                      color: const Color(0XFF585858),
                                       fontWeight: FontWeight.w400,
                                       fontSize: ScreenUtil().setSp(16),
                                       fontStyle: FontStyle.normal,
@@ -972,7 +972,7 @@ class _LoginState extends State<Login> {
                                             child: Container(
                                               decoration: BoxDecoration(
                                                 borderRadius: BorderRadius.circular(50),
-                                                color: (_controller.boton) ? Color(0XFFFF0036) : Color(0XFFFF0036).withOpacity(0.6),
+                                                color: (_controller.boton) ? const Color(0XFFFF0036) : const Color(0XFFFF0036).withOpacity(0.6),
                                               ),
                                               child: Center(
                                                 child: Text(
@@ -1000,7 +1000,7 @@ class _LoginState extends State<Login> {
                                           return Text(
                                             _controller.text,
                                             style: TextStyle(
-                                              color: Color(0XFFFF0036),
+                                              color: const Color(0XFFFF0036),
                                               fontWeight: FontWeight.w600,
                                               fontSize: ScreenUtil().setSp(16),
                                               fontStyle: FontStyle.normal,
@@ -1018,7 +1018,7 @@ class _LoginState extends State<Login> {
                                       child: Text(
                                         'Cancelar',
                                         style: GoogleFonts.poppins(
-                                          color: Color(0XFF8A8A8A),
+                                          color: const Color(0XFF8A8A8A),
                                           fontWeight: FontWeight.w500,
                                           fontSize: ScreenUtil().setSp(16),
                                         ),

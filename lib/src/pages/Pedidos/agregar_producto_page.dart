@@ -34,11 +34,11 @@ class _AgregarProductoPageState extends State<AgregarProductoPage> {
 
     final productosBloc = ProviderBloc.productosLinea(context);
     return Scaffold(
-      backgroundColor: Color(0XFFE5E5E5),
+      backgroundColor: const Color(0XFFE5E5E5),
       appBar: AppBar(
-        backgroundColor: Color(0XFFFF0036),
+        backgroundColor: const Color(0XFFFF0036),
         elevation: 0,
-        iconTheme: IconThemeData(color: Colors.white),
+        iconTheme: const IconThemeData(color: Colors.white),
         title: Text(
           'Agregar producto',
           style: GoogleFonts.poppins(
@@ -52,7 +52,7 @@ class _AgregarProductoPageState extends State<AgregarProductoPage> {
         children: [
           Column(
             children: [
-              Container(
+              SizedBox(
                 height: ScreenUtil().setHeight(260),
                 child: Stack(
                   children: [
@@ -60,7 +60,7 @@ class _AgregarProductoPageState extends State<AgregarProductoPage> {
                       clipper: HeaderFormaClipper(),
                       child: Container(
                         height: ScreenUtil().setHeight(270),
-                        decoration: BoxDecoration(
+                        decoration: const BoxDecoration(
                           color: Color(0xFFF9708D),
                         ),
                       ),
@@ -69,7 +69,7 @@ class _AgregarProductoPageState extends State<AgregarProductoPage> {
                       clipper: HeaderFormaClipper(),
                       child: Container(
                         height: ScreenUtil().setHeight(250),
-                        decoration: BoxDecoration(
+                        decoration: const BoxDecoration(
                           color: Color(0XFFFF0036),
                         ),
                         child: Column(
@@ -103,7 +103,7 @@ class _AgregarProductoPageState extends State<AgregarProductoPage> {
                                         );
                                       },
                                       transitionsBuilder: (context, animation, secondaryAnimation, child) {
-                                        var begin = Offset(0.0, 1.0);
+                                        var begin = const Offset(0.0, 1.0);
                                         var end = Offset.zero;
                                         var curve = Curves.ease;
 
@@ -132,14 +132,14 @@ class _AgregarProductoPageState extends State<AgregarProductoPage> {
                                   ),
                                   child: Row(
                                     children: [
-                                      Icon(Icons.search),
+                                      const Icon(Icons.search),
                                       SizedBox(
                                         width: ScreenUtil().setHeight(13),
                                       ),
                                       Text(
                                         'Buscar comidas y bebidas',
                                         style: GoogleFonts.poppins(
-                                          color: Color(0XFFA8A7A7),
+                                          color: const Color(0XFFA8A7A7),
                                           fontWeight: FontWeight.w400,
                                           fontSize: ScreenUtil().setSp(16),
                                         ),
@@ -156,10 +156,10 @@ class _AgregarProductoPageState extends State<AgregarProductoPage> {
                                 stream: lineasBloc.allLineasStream,
                                 builder: (context, AsyncSnapshot<List<LineaModel>> snapshot) {
                                   if (snapshot.hasData) {
-                                    if (snapshot.data.length > 0) {
+                                    if (snapshot.data.isNotEmpty) {
                                       var lineas = snapshot.data;
                                       productosBloc.obtenerProductosPorLineaParaPedidos(lineas[0].idLinea);
-                                      return Container(
+                                      return SizedBox(
                                         height: ScreenUtil().setHeight(40),
                                         child: ListView.builder(
                                           itemCount: lineas.length,
@@ -182,18 +182,19 @@ class _AgregarProductoPageState extends State<AgregarProductoPage> {
                                                       ),
                                                       decoration: BoxDecoration(
                                                           borderRadius: BorderRadius.circular(22),
-                                                          color: (index == _controller.index) ? Colors.white : Color(0XFFFF0036),
+                                                          color: (index == _controller.index) ? Colors.white : const Color(0XFFFF0036),
                                                           boxShadow: [
                                                             BoxShadow(
-                                                              color:
-                                                                  (index == _controller.index) ? Color.fromRGBO(255, 0, 54, 0.5) : Colors.transparent,
+                                                              color: (index == _controller.index)
+                                                                  ? const Color.fromRGBO(255, 0, 54, 0.5)
+                                                                  : Colors.transparent,
                                                             )
                                                           ]),
                                                       child: Center(
                                                           child: Text(
                                                         lineas[index].lineaNombre,
                                                         style: TextStyle(
-                                                          color: (index == _controller.index) ? Color(0xFF585858) : Colors.white,
+                                                          color: (index == _controller.index) ? const Color(0xFF585858) : Colors.white,
                                                           fontSize: ScreenUtil().setSp(14),
                                                           fontWeight: FontWeight.w500,
                                                           letterSpacing: 0.16,
@@ -224,7 +225,7 @@ class _AgregarProductoPageState extends State<AgregarProductoPage> {
                   stream: productosBloc.productoPedidosStream,
                   builder: (context, AsyncSnapshot<List<ProductoLineaModel>> snapshot) {
                     if (snapshot.hasData) {
-                      if (snapshot.data.length > 0) {
+                      if (snapshot.data.isNotEmpty) {
                         var food = snapshot.data;
                         return ListView.builder(
                           itemCount: food.length,
@@ -236,7 +237,7 @@ class _AgregarProductoPageState extends State<AgregarProductoPage> {
                           },
                         );
                       } else {
-                        return Center(
+                        return const Center(
                           child: Text('Aún no existen productos para esta línea'),
                         );
                       }
@@ -257,13 +258,13 @@ class _AgregarProductoPageState extends State<AgregarProductoPage> {
     return Container(
       height: double.infinity,
       width: double.infinity,
-      color: Color.fromRGBO(0, 0, 0, 0.5),
+      color: const Color.fromRGBO(0, 0, 0, 0.5),
       child: Center(
         child: (Platform.isAndroid)
-            ? CircularProgressIndicator(
+            ? const CircularProgressIndicator(
                 color: Color(0XFFFF0036),
               )
-            : CupertinoActivityIndicator(),
+            : const CupertinoActivityIndicator(),
       ),
     );
   }
@@ -291,7 +292,7 @@ class _AgregarProductoPageState extends State<AgregarProductoPage> {
                 );
               },
               transitionsBuilder: (context, animation, secondaryAnimation, child) {
-                var begin = Offset(0.0, 1.0);
+                var begin = const Offset(0.0, 1.0);
                 var end = Offset.zero;
                 var curve = Curves.ease;
 
@@ -322,7 +323,7 @@ class _AgregarProductoPageState extends State<AgregarProductoPage> {
             Container(
               height: ScreenUtil().setHeight(100),
               width: ScreenUtil().setWidth(100),
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 color: Color(0XFFEEEEEE),
                 shape: BoxShape.circle,
                 boxShadow: [
@@ -341,7 +342,7 @@ class _AgregarProductoPageState extends State<AgregarProductoPage> {
                       child: Container(
                         height: ScreenUtil().setHeight(80),
                         width: ScreenUtil().setWidth(80),
-                        decoration: BoxDecoration(
+                        decoration: const BoxDecoration(
                           color: Color(0XFFEEEEEE),
                           shape: BoxShape.circle,
                           boxShadow: [
@@ -353,14 +354,12 @@ class _AgregarProductoPageState extends State<AgregarProductoPage> {
                           ],
                         ),
                         child: CachedNetworkImage(
-                          placeholder: (context, url) => Container(
+                          placeholder: (context, url) => SizedBox(
                             child: SvgPicture.asset('assets/food_svg/food.svg'),
                           ),
-                          errorWidget: (context, url, error) => Container(
-                            child: Container(
-                              child: SvgPicture.asset(
-                                'assets/food_svg/food.svg',
-                              ),
+                          errorWidget: (context, url, error) => SizedBox(
+                            child: SvgPicture.asset(
+                              'assets/food_svg/food.svg',
                             ),
                           ),
                           imageUrl: '$apiBaseURL/${food.productoFoto}',
@@ -390,9 +389,9 @@ class _AgregarProductoPageState extends State<AgregarProductoPage> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    '${food.productoNombre}',
+                    food.productoNombre,
                     style: TextStyle(
-                      color: Color(0XFF585858),
+                      color: const Color(0XFF585858),
                       fontSize: ScreenUtil().setSp(16),
                       fontWeight: FontWeight.w500,
                       letterSpacing: 0.16,
@@ -402,7 +401,7 @@ class _AgregarProductoPageState extends State<AgregarProductoPage> {
                     height: ScreenUtil().setHeight(8),
                   ),
                   Text(
-                    '$disponible',
+                    disponible,
                     style: TextStyle(
                       color: color,
                       fontSize: ScreenUtil().setSp(14),
@@ -416,7 +415,7 @@ class _AgregarProductoPageState extends State<AgregarProductoPage> {
                   Text(
                     'S/${food.productoPrecio}',
                     style: TextStyle(
-                      color: Color(0XFF3A3A3A),
+                      color: const Color(0XFF3A3A3A),
                       fontSize: ScreenUtil().setSp(16),
                       fontWeight: FontWeight.w700,
                       letterSpacing: 0.16,

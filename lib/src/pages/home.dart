@@ -44,38 +44,38 @@ class _HomeState extends State<Home> {
                 bottom: 0,
                 child: Container(
                   width: ScreenUtil().setWidth(150),
-                  color: Color(0xffFF0036),
+                  color: const Color(0xffFF0036),
                 ),
               ),
               AnimatedPositioned(
-                duration: Duration(milliseconds: 300),
+                duration: const Duration(milliseconds: 300),
                 curve: Curves.decelerate,
                 right: _getPanelWhite(bloc.categoryProductState),
                 top: 0,
                 bottom: 0,
                 child: ClipRRect(
                   borderRadius: BorderRadius.only(
-                    topLeft: (bloc.categoryProductState == PanelIniciostate.open) ? Radius.circular(35) : Radius.circular(0),
-                    bottomLeft: (bloc.categoryProductState == PanelIniciostate.open) ? Radius.circular(35) : Radius.circular(0),
+                    topLeft: (bloc.categoryProductState == PanelIniciostate.open) ? const Radius.circular(35) : const Radius.circular(0),
+                    bottomLeft: (bloc.categoryProductState == PanelIniciostate.open) ? const Radius.circular(35) : const Radius.circular(0),
                   ),
                   child: Container(
-                    decoration: BoxDecoration(
+                    decoration: const BoxDecoration(
                       color: Color(0xffededed),
                     ),
                     width: ScreenUtil().setWidth(375),
                     height: double.infinity,
                     child: (bloc.optionsInicio == OptionsInicio.table)
-                        ? MesasPage()
+                        ? const MesasPage()
                         : (bloc.optionsInicio == OptionsInicio.comida)
-                            ? ComidasPage()
+                            ? const ComidasPage()
                             : (bloc.optionsInicio == OptionsInicio.bebida)
-                                ? BebidasPage()
+                                ? const BebidasPage()
                                 : (bloc.optionsInicio == OptionsInicio.pedidos)
-                                    ? PedidosPage()
+                                    ? const PedidosPage()
                                     : (bloc.optionsInicio == OptionsInicio.ventas)
-                                        ? VentasPage()
+                                        ? const VentasPage()
                                         : (bloc.optionsInicio == OptionsInicio.reportes)
-                                            ? ReportesPage()
+                                            ? const ReportesPage()
                                             : Container(),
                   ),
                 ),
@@ -99,7 +99,7 @@ class _HomeState extends State<Home> {
                                 SizedBox(
                                   height: ScreenUtil().setHeight(90),
                                 ),
-                                Container(
+                                SizedBox(
                                   //color: Colors.black,
                                   height: ScreenUtil().setHeight(70),
                                   child: Stack(
@@ -115,11 +115,11 @@ class _HomeState extends State<Home> {
                                                 child: ClipOval(
                                                   child: Container(
                                                     height: ScreenUtil().setHeight(50),
-                                                    color: Color(0xffFF0036),
+                                                    color: const Color(0xffFF0036),
                                                     //color: Colors.blue,
                                                     child: Row(
                                                       children: [
-                                                        Spacer(),
+                                                        const Spacer(),
                                                         CircleAvatar(
                                                           backgroundColor: Colors.white,
                                                           radius: ScreenUtil().setHeight(5),
@@ -139,7 +139,7 @@ class _HomeState extends State<Home> {
                                           bloc.changeToTable();
                                           bloc.changeToClosed();
                                         },
-                                        child: Container(
+                                        child: SizedBox(
                                           height: ScreenUtil().setHeight(40),
                                           width: ScreenUtil().setWidth(35),
                                           child: SvgPicture.asset(
@@ -153,7 +153,7 @@ class _HomeState extends State<Home> {
                                 SizedBox(
                                   height: ScreenUtil().setHeight(30),
                                 ),
-                                Container(
+                                SizedBox(
                                   height: ScreenUtil().setHeight(70),
                                   child: Stack(
                                     children: [
@@ -164,11 +164,11 @@ class _HomeState extends State<Home> {
                                                 child: ClipOval(
                                                   child: Container(
                                                     height: ScreenUtil().setHeight(100),
-                                                    color: Color(0xffFF0036),
+                                                    color: const Color(0xffFF0036),
                                                     //color: Colors.blue,
                                                     child: Row(
                                                       children: [
-                                                        Spacer(),
+                                                        const Spacer(),
                                                         CircleAvatar(
                                                           backgroundColor: Colors.white,
                                                           radius: ScreenUtil().setHeight(5),
@@ -188,7 +188,7 @@ class _HomeState extends State<Home> {
                                           bloc.changeToPedidos();
                                           bloc.changeToClosed();
                                         },
-                                        child: Container(
+                                        child: SizedBox(
                                           height: ScreenUtil().setHeight(40),
                                           width: ScreenUtil().setWidth(35),
                                           child: SvgPicture.asset(
@@ -202,7 +202,7 @@ class _HomeState extends State<Home> {
                                 SizedBox(
                                   height: ScreenUtil().setHeight(30),
                                 ),
-                                Container(
+                                SizedBox(
                                   height: ScreenUtil().setHeight(70),
                                   child: Stack(
                                     children: [
@@ -213,11 +213,11 @@ class _HomeState extends State<Home> {
                                                 child: ClipOval(
                                                   child: Container(
                                                     height: ScreenUtil().setHeight(100),
-                                                    color: Color(0xffFF0036),
+                                                    color: const Color(0xffFF0036),
                                                     //color: Colors.blue,
                                                     child: Row(
                                                       children: [
-                                                        Spacer(),
+                                                        const Spacer(),
                                                         CircleAvatar(
                                                           backgroundColor: Colors.white,
                                                           radius: ScreenUtil().setHeight(5),
@@ -237,7 +237,7 @@ class _HomeState extends State<Home> {
                                           bloc.changeToComidas();
                                           bloc.changeToClosed();
                                         },
-                                        child: Container(
+                                        child: SizedBox(
                                           height: ScreenUtil().setHeight(40),
                                           width: ScreenUtil().setWidth(35),
                                           child: SvgPicture.asset(
@@ -251,7 +251,7 @@ class _HomeState extends State<Home> {
                                 SizedBox(
                                   height: ScreenUtil().setHeight(30),
                                 ),
-                                Container(
+                                SizedBox(
                                   height: ScreenUtil().setHeight(70),
                                   child: Stack(
                                     children: [
@@ -262,11 +262,11 @@ class _HomeState extends State<Home> {
                                                 child: ClipOval(
                                                   child: Container(
                                                     height: ScreenUtil().setHeight(100),
-                                                    color: Color(0xffFF0036),
+                                                    color: const Color(0xffFF0036),
                                                     //color: Colors.blue,
                                                     child: Row(
                                                       children: [
-                                                        Spacer(),
+                                                        const Spacer(),
                                                         CircleAvatar(
                                                           backgroundColor: Colors.white,
                                                           radius: ScreenUtil().setHeight(5),
@@ -286,7 +286,7 @@ class _HomeState extends State<Home> {
                                           bloc.changeToBebidas();
                                           bloc.changeToClosed();
                                         },
-                                        child: Container(
+                                        child: SizedBox(
                                           height: ScreenUtil().setHeight(40),
                                           width: ScreenUtil().setWidth(35),
                                           child: SvgPicture.asset(
@@ -300,7 +300,7 @@ class _HomeState extends State<Home> {
                                 SizedBox(
                                   height: ScreenUtil().setHeight(30),
                                 ),
-                                Container(
+                                SizedBox(
                                   height: ScreenUtil().setHeight(70),
                                   child: Stack(
                                     children: [
@@ -311,11 +311,11 @@ class _HomeState extends State<Home> {
                                                 child: ClipOval(
                                                   child: Container(
                                                     height: ScreenUtil().setHeight(100),
-                                                    color: Color(0xffFF0036),
+                                                    color: const Color(0xffFF0036),
                                                     //color: Colors.blue,
                                                     child: Row(
                                                       children: [
-                                                        Spacer(),
+                                                        const Spacer(),
                                                         CircleAvatar(
                                                           backgroundColor: Colors.white,
                                                           radius: ScreenUtil().setHeight(5),
@@ -335,7 +335,7 @@ class _HomeState extends State<Home> {
                                           bloc.changeToVentas();
                                           bloc.changeToClosed();
                                         },
-                                        child: Container(
+                                        child: SizedBox(
                                           height: ScreenUtil().setHeight(40),
                                           width: ScreenUtil().setWidth(35),
                                           child: SvgPicture.asset(
@@ -349,7 +349,7 @@ class _HomeState extends State<Home> {
                                 SizedBox(
                                   height: ScreenUtil().setHeight(30),
                                 ),
-                                Container(
+                                SizedBox(
                                   height: ScreenUtil().setHeight(70),
                                   child: Stack(
                                     children: [
@@ -360,11 +360,11 @@ class _HomeState extends State<Home> {
                                                 child: ClipOval(
                                                   child: Container(
                                                     height: ScreenUtil().setHeight(100),
-                                                    color: Color(0xffFF0036),
+                                                    color: const Color(0xffFF0036),
                                                     //color: Colors.blue,
                                                     child: Row(
                                                       children: [
-                                                        Spacer(),
+                                                        const Spacer(),
                                                         CircleAvatar(
                                                           backgroundColor: Colors.white,
                                                           radius: ScreenUtil().setHeight(5),
@@ -384,7 +384,7 @@ class _HomeState extends State<Home> {
                                           bloc.changeToReportes();
                                           bloc.changeToClosed();
                                         },
-                                        child: Container(
+                                        child: SizedBox(
                                           height: ScreenUtil().setHeight(40),
                                           width: ScreenUtil().setWidth(35),
                                           child: SvgPicture.asset(
@@ -414,12 +414,12 @@ class _HomeState extends State<Home> {
                         bloc.changeToClosed();
                       }
                     },
-                    child: Container(
+                    child: SizedBox(
                       height: ScreenUtil().setHeight(30),
                       width: ScreenUtil().setWidth(25),
                       child: SvgPicture.asset(
                         'assets/svg/options_menu.svg',
-                        color: (bloc.categoryProductState == PanelIniciostate.open) ? Colors.white : Color(0xff585858),
+                        color: (bloc.categoryProductState == PanelIniciostate.open) ? Colors.white : const Color(0xff585858),
                       ),
                     ),
                   ),

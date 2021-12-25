@@ -1,3 +1,5 @@
+// ignore_for_file: sized_box_for_whitespace
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -13,11 +15,11 @@ class ComandaDeliveryLlevar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0XFFE5E5E5),
+      backgroundColor: const Color(0XFFE5E5E5),
       appBar: AppBar(
-        backgroundColor: Color(0XFFFF0036),
+        backgroundColor: const Color(0XFFFF0036),
         elevation: 0,
-        iconTheme: IconThemeData(color: Colors.white),
+        iconTheme: const IconThemeData(color: Colors.white),
         title: Text(
           mesa.mesaNombre,
           style: GoogleFonts.poppins(
@@ -41,7 +43,7 @@ class ComandaDeliveryLlevar extends StatelessWidget {
                   clipper: HeaderFormaClipper(),
                   child: Container(
                     height: ScreenUtil().setHeight(150),
-                    decoration: BoxDecoration(
+                    decoration: const BoxDecoration(
                       color: Color(0xFFF9708D),
                     ),
                   ),
@@ -50,7 +52,7 @@ class ComandaDeliveryLlevar extends StatelessWidget {
                   clipper: HeaderFormaClipper(),
                   child: Container(
                     height: ScreenUtil().setHeight(125),
-                    decoration: BoxDecoration(
+                    decoration: const BoxDecoration(
                       color: Color(0XFFFF0036),
                     ),
                     child: Column(

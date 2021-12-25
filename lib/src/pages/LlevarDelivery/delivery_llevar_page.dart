@@ -1,3 +1,5 @@
+// ignore_for_file: sized_box_for_whitespace
+
 import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
@@ -25,11 +27,11 @@ class DeliveryLlevarPage extends StatelessWidget {
     pedidosBloc.obtenerPedidosPorIdMesaParaLlevarYDelivery(mesa.idMesa, mesa.mesaTipo);
 
     return Scaffold(
-      backgroundColor: Color(0XFFE5E5E5),
+      backgroundColor: const Color(0XFFE5E5E5),
       appBar: AppBar(
-        backgroundColor: Color(0XFFFF0036),
+        backgroundColor: const Color(0XFFFF0036),
         elevation: 0,
-        iconTheme: IconThemeData(color: Colors.white),
+        iconTheme: const IconThemeData(color: Colors.white),
         title: Text(
           mesa.mesaNombre,
           style: GoogleFonts.poppins(
@@ -53,7 +55,7 @@ class DeliveryLlevarPage extends StatelessWidget {
                   clipper: HeaderFormaClipper(),
                   child: Container(
                     height: ScreenUtil().setHeight(150),
-                    decoration: BoxDecoration(
+                    decoration: const BoxDecoration(
                       color: Color(0xFFF9708D),
                     ),
                   ),
@@ -62,7 +64,7 @@ class DeliveryLlevarPage extends StatelessWidget {
                   clipper: HeaderFormaClipper(),
                   child: Container(
                     height: ScreenUtil().setHeight(125),
-                    decoration: BoxDecoration(
+                    decoration: const BoxDecoration(
                       color: Color(0XFFFF0036),
                     ),
                     child: Column(
@@ -97,7 +99,7 @@ class DeliveryLlevarPage extends StatelessWidget {
                     stream: pedidosBloc.pedidosParaLlevarStream,
                     builder: (context, AsyncSnapshot<List<PedidoModel>> snapshot) {
                       if (snapshot.hasData) {
-                        if (snapshot.data.length > 0) {
+                        if (snapshot.data.isNotEmpty) {
                           var datos = snapshot.data;
                           return Column(
                             children: [
@@ -111,7 +113,7 @@ class DeliveryLlevarPage extends StatelessWidget {
                                 ),
                                 width: double.infinity,
                                 child: MaterialButton(
-                                  color: Color(0XFFFF0036),
+                                  color: const Color(0XFFFF0036),
                                   textColor: Colors.white,
                                   elevation: 10,
                                   onPressed: () {
@@ -126,7 +128,7 @@ class DeliveryLlevarPage extends StatelessWidget {
                                           );
                                         },
                                         transitionsBuilder: (context, animation, secondaryAnimation, child) {
-                                          var begin = Offset(0.0, 1.0);
+                                          var begin = const Offset(0.0, 1.0);
                                           var end = Offset.zero;
                                           var curve = Curves.ease;
 
@@ -174,7 +176,7 @@ class DeliveryLlevarPage extends StatelessWidget {
                     stream: pedidosBloc.pedidosDeliveryStream,
                     builder: (context, AsyncSnapshot<List<PedidoModel>> snapshot) {
                       if (snapshot.hasData) {
-                        if (snapshot.data.length > 0) {
+                        if (snapshot.data.isNotEmpty) {
                           var datos = snapshot.data;
                           return Column(
                             children: [
@@ -188,7 +190,7 @@ class DeliveryLlevarPage extends StatelessWidget {
                                 ),
                                 width: double.infinity,
                                 child: MaterialButton(
-                                  color: Color(0XFFFF0036),
+                                  color: const Color(0XFFFF0036),
                                   textColor: Colors.white,
                                   elevation: 10,
                                   onPressed: () {
@@ -203,7 +205,7 @@ class DeliveryLlevarPage extends StatelessWidget {
                                           );
                                         },
                                         transitionsBuilder: (context, animation, secondaryAnimation, child) {
-                                          var begin = Offset(0.0, 1.0);
+                                          var begin = const Offset(0.0, 1.0);
                                           var end = Offset.zero;
                                           var curve = Curves.ease;
 
@@ -279,13 +281,13 @@ class DeliveryLlevarPage extends StatelessWidget {
                   Icon(
                     Icons.person,
                     size: ScreenUtil().setHeight(16),
-                    color: Color(0XFF585858),
+                    color: const Color(0XFF585858),
                   ),
                   SizedBox(
                     width: ScreenUtil().setWidth(4),
                   ),
                   Text(
-                    '${datos[index].nombre}',
+                    datos[index].nombre,
                     style: TextStyle(
                       fontWeight: FontWeight.w500,
                       color: Colors.black,
@@ -299,13 +301,13 @@ class DeliveryLlevarPage extends StatelessWidget {
                   Icon(
                     Icons.place,
                     size: ScreenUtil().setHeight(16),
-                    color: Color(0XFF585858),
+                    color: const Color(0XFF585858),
                   ),
                   SizedBox(
                     width: ScreenUtil().setWidth(4),
                   ),
                   Text(
-                    '${datos[index].direccion}',
+                    datos[index].direccion,
                     style: TextStyle(
                       fontWeight: FontWeight.w500,
                       color: Colors.black,
@@ -318,13 +320,13 @@ class DeliveryLlevarPage extends StatelessWidget {
                   Icon(
                     Icons.phone,
                     size: ScreenUtil().setHeight(16),
-                    color: Color(0XFF585858),
+                    color: const Color(0XFF585858),
                   ),
                   SizedBox(
                     width: ScreenUtil().setWidth(4),
                   ),
                   Text(
-                    '${datos[index].telefono}',
+                    datos[index].telefono,
                     style: TextStyle(
                       fontWeight: FontWeight.w500,
                       color: Colors.black,
@@ -335,10 +337,10 @@ class DeliveryLlevarPage extends StatelessWidget {
               ),
             ],
           ),
-          iconColor: Color(0XFFFF0036),
+          iconColor: const Color(0XFFFF0036),
           trailing: Container(
             margin: EdgeInsets.symmetric(vertical: ScreenUtil().setHeight(8)),
-            child: Icon(Icons.keyboard_arrow_down),
+            child: const Icon(Icons.keyboard_arrow_down),
           ),
           children: [
             Container(
@@ -363,7 +365,7 @@ class DeliveryLlevarPage extends StatelessWidget {
                         width: ScreenUtil().setWidth(100),
                         child: MaterialButton(
                           color: Colors.white,
-                          textColor: Color(0XFF585858),
+                          textColor: const Color(0XFF585858),
                           elevation: 0,
                           onPressed: () {
                             Navigator.push(
@@ -378,7 +380,7 @@ class DeliveryLlevarPage extends StatelessWidget {
                                   );
                                 },
                                 transitionsBuilder: (context, animation, secondaryAnimation, child) {
-                                  var begin = Offset(0.0, 1.0);
+                                  var begin = const Offset(0.0, 1.0);
                                   var end = Offset.zero;
                                   var curve = Curves.ease;
 
@@ -396,14 +398,14 @@ class DeliveryLlevarPage extends StatelessWidget {
                           },
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(22),
-                            side: BorderSide(
+                            side: const BorderSide(
                               color: Color(0XFFFF0036),
                             ),
                           ),
                           child: Text(
                             'Agregar',
                             style: GoogleFonts.poppins(
-                              color: Color(0XFFFF0036),
+                              color: const Color(0XFFFF0036),
                               fontWeight: FontWeight.w500,
                               fontSize: ScreenUtil().setSp(16),
                             ),
@@ -413,7 +415,7 @@ class DeliveryLlevarPage extends StatelessWidget {
                       Container(
                         width: ScreenUtil().setWidth(200),
                         child: MaterialButton(
-                          color: Color(0XFFFF0036),
+                          color: const Color(0XFFFF0036),
                           textColor: Colors.white,
                           elevation: 0,
                           onPressed: () {
@@ -459,7 +461,7 @@ class DeliveryLlevarPage extends StatelessWidget {
               );
             },
             transitionsBuilder: (context, animation, secondaryAnimation, child) {
-              var begin = Offset(0.0, 1.0);
+              var begin = const Offset(0.0, 1.0);
               var end = Offset.zero;
               var curve = Curves.ease;
 
@@ -488,9 +490,9 @@ class DeliveryLlevarPage extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    '${pedido.nombreProducto}',
+                    pedido.nombreProducto,
                     style: GoogleFonts.poppins(
-                      color: Color(0XFF585858),
+                      color: const Color(0XFF585858),
                       fontWeight: FontWeight.w500,
                       fontSize: ScreenUtil().setSp(16),
                     ),
@@ -508,9 +510,9 @@ class DeliveryLlevarPage extends StatelessWidget {
                   SizedBox(
                     height: ScreenUtil().setHeight(5),
                   ),
-                  ('${pedido.observaciones}' == 'null')
+                  (pedido.observaciones == 'null')
                       ? Container()
-                      : Text('${pedido.observaciones}',
+                      : Text(pedido.observaciones,
                           style: GoogleFonts.poppins(
                             fontWeight: FontWeight.w500,
                             fontSize: ScreenUtil().setSp(14),
@@ -530,7 +532,7 @@ class DeliveryLlevarPage extends StatelessWidget {
               ),
             ),
             Text(
-              '${pedido.cantidad}',
+              pedido.cantidad,
               style: GoogleFonts.poppins(
                 fontWeight: FontWeight.w500,
                 fontSize: ScreenUtil().setSp(15),
@@ -545,10 +547,10 @@ class DeliveryLlevarPage extends StatelessWidget {
   _showLoading() {
     return Center(
       child: (Platform.isAndroid)
-          ? CircularProgressIndicator(
+          ? const CircularProgressIndicator(
               color: Color(0XFFFF0036),
             )
-          : CupertinoActivityIndicator(),
+          : const CupertinoActivityIndicator(),
     );
   }
 }

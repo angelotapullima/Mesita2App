@@ -20,7 +20,7 @@ class PedidosApi {
     try {
       final comandaList = await _comandaDatabase.obtenerDetallesPedidoTemporales(idMesa);
 
-      if (comandaList.length > 0) {
+      if (comandaList.isNotEmpty) {
         double totalPedido = 0.0;
 
         var detalle = '';
@@ -32,29 +32,26 @@ class PedidosApi {
               '${comandaList[i].idProducto};;;${comandaList[i].cantidad};;;${comandaList[i].subtotal};;;${comandaList[i].observaciones};;;${comandaList[i].llevar}//';
         }
 
-        final url = Uri.parse('${apiBaseURL}/api/Negocio/guardar_pedido');
+        final url = Uri.parse('$apiBaseURL/api/Negocio/guardar_pedido');
 
         final resp = await http.post(
           url,
           body: {
             'tn': '${_prefs.token}',
-            'id_mesa': '$idMesa',
+            'id_mesa': idMesa,
             'id_usuario': '${_prefs.idUser}',
             'pedido_total': '$totalPedido',
-            'detalle': '$detalle',
-            'nombre': '$nombre',
-            'direccion': '$direccion',
-            'telefono': '$telefono',
+            'detalle': detalle,
+            'nombre': nombre,
+            'direccion': direccion,
+            'telefono': telefono,
             'app': 'true',
           },
         );
 
         final decodedData = json.decode(resp.body);
-
-        print(decodedData);
         if (decodedData['result'] == 1) {
           await _comandaDatabase.deleteDetallesPedidoTemporal();
-          print('Voy a retornar true');
           return true;
         } else {
           return false;
@@ -62,16 +59,14 @@ class PedidosApi {
       } else {
         return false;
       }
-    } catch (error, stacktrace) {
-      print("Exception occured: $error stackTrace: $stacktrace");
-
+    } catch (error) {
       return false;
     }
   }
 
   Future<bool> agregarDetallePedido(String idPedido, DetalleProductoModel detail) async {
     try {
-      final url = Uri.parse('${apiBaseURL}/api/Negocio/guardar_pedido_detalle');
+      final url = Uri.parse('$apiBaseURL/api/Negocio/guardar_pedido_detalle');
       var detalle = '';
 
       detalle += '${detail.idProducto};;;${detail.cantidad};;;${detail.subtotal};;;${detail.observaciones};;;${detail.llevar}//';
@@ -80,86 +75,75 @@ class PedidosApi {
         url,
         body: {
           'tn': '${_prefs.token}',
-          'id_pedido': '$idPedido',
-          'detalle': '$detalle',
+          'id_pedido': idPedido,
+          'detalle': detalle,
           'app': 'true',
         },
       );
 
       final decodedData = json.decode(resp.body);
 
-      print(decodedData);
       if (decodedData['result'] == 1) {
         return true;
       } else {
         return false;
       }
-    } catch (error, stacktrace) {
-      print("Exception occured: $error stackTrace: $stacktrace");
-
+    } catch (error) {
       return false;
     }
   }
 
   Future<bool> editarDetallePedido(DetallePedidoModel detail) async {
     try {
-      final url = Uri.parse('${apiBaseURL}/api/Negocio/editar_pedido_detalle');
+      final url = Uri.parse('$apiBaseURL/api/Negocio/editar_pedido_detalle');
 
       final resp = await http.post(
         url,
         body: {
           'tn': '${_prefs.token}',
-          'id_pedido': '${detail.idPedido}',
-          'id_pedido_detalle': '${detail.idDetalle}',
-          'pedido_detalle_cantidad': '${detail.cantidad}',
-          'pedido_detalle_subtotal': '${detail.subtotal}',
-          'pedido_detalle_observaciones': '${detail.observaciones}',
-          'pedido_detalle_llevar': '${detail.llevar}',
+          'id_pedido': detail.idPedido,
+          'id_pedido_detalle': detail.idDetalle,
+          'pedido_detalle_cantidad': detail.cantidad,
+          'pedido_detalle_subtotal': detail.subtotal,
+          'pedido_detalle_observaciones': detail.observaciones,
+          'pedido_detalle_llevar': detail.llevar,
           'app': 'true',
         },
       );
 
       final decodedData = json.decode(resp.body);
-
-      print(decodedData);
       if (decodedData['result'] == 1) {
         return true;
       } else {
         return false;
       }
-    } catch (error, stacktrace) {
-      print("Exception occured: $error stackTrace: $stacktrace");
-
+    } catch (error) {
       return false;
     }
   }
 
   Future<bool> eliminarDetallePedido(DetallePedidoModel detail) async {
     try {
-      final url = Uri.parse('${apiBaseURL}/api/Negocio/eliminar_pedido_detalle');
+      final url = Uri.parse('$apiBaseURL/api/Negocio/eliminar_pedido_detalle');
 
       final resp = await http.post(
         url,
         body: {
           'tn': '${_prefs.token}',
-          'id_pedido': '${detail.idPedido}',
-          'id_pedido_detalle': '${detail.idDetalle}',
+          'id_pedido': detail.idPedido,
+          'id_pedido_detalle': detail.idDetalle,
           'app': 'true',
         },
       );
 
       final decodedData = json.decode(resp.body);
-
-      print(decodedData);
       if (decodedData['result'] == 1) {
         await _pedidosDatabase.deleteDetallesPedidoPorId(detail.idDetalle);
         return true;
       } else {
         return false;
       }
-    } catch (error, stacktrace) {
-      print("Exception occured: $error stackTrace: $stacktrace");
-
+    } catch (error) {
       return false;
     }
   }
@@ -168,7 +152,7 @@ class PedidosApi {
     try {
       final _pedidosAtenderDatabase = PedidosAtenderDatabase();
 
-      final url = Uri.parse('${apiBaseURL}/api/Negocio/pedidos_por_atender');
+      final url = Uri.parse('$apiBaseURL/api/Negocio/pedidos_por_atender');
 
       final resp = await http.post(
         url,
@@ -213,28 +197,24 @@ class PedidosApi {
 
   Future<bool> atenderPedido(PedidosAtenderModel pedido) async {
     try {
-      final url = Uri.parse('${apiBaseURL}/api/Negocio/atender_pedido');
+      final url = Uri.parse('$apiBaseURL/api/Negocio/atender_pedido');
 
       final resp = await http.post(
         url,
         body: {
           'tn': '${_prefs.token}',
-          'id_pedido_detalle': '${pedido.idPedidoDetalle}',
+          'id_pedido_detalle': pedido.idPedidoDetalle,
           'app': 'true',
         },
       );
 
       final decodedData = json.decode(resp.body);
-
-      print(decodedData);
       if (decodedData['result'] == 1) {
         return true;
       } else {
         return false;
       }
-    } catch (error, stacktrace) {
-      print("Exception occured: $error stackTrace: $stacktrace");
-
+    } catch (error) {
       return false;
     }
   }

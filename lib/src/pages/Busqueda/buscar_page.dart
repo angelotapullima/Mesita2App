@@ -28,7 +28,6 @@ class _BuscarPageState extends State<BuscarPage> {
   @override
   void initState() {
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      print('${widget.esComanda}');
       final busquedaBloc = ProviderBloc.productosLinea(context);
       busquedaBloc.obtenerProductosPorQuery('');
       FocusScope.of(context).requestFocus(focus);
@@ -40,10 +39,10 @@ class _BuscarPageState extends State<BuscarPage> {
   Widget build(BuildContext context) {
     final busquedaBloc = ProviderBloc.productosLinea(context);
     return Scaffold(
-      backgroundColor: Color(0XFFE5E5E5),
+      backgroundColor: const Color(0XFFE5E5E5),
       body: Column(
         children: [
-          Container(
+          SizedBox(
             height: ScreenUtil().setHeight(158),
             child: Stack(
               children: [
@@ -52,7 +51,7 @@ class _BuscarPageState extends State<BuscarPage> {
                   child: Container(
                     height: ScreenUtil().setHeight(144),
                     width: ScreenUtil().setWidth(359),
-                    decoration: BoxDecoration(
+                    decoration: const BoxDecoration(
                       color: Color(0xFFF9708D),
                       borderRadius: BorderRadius.only(
                         bottomLeft: Radius.circular(35),
@@ -63,7 +62,7 @@ class _BuscarPageState extends State<BuscarPage> {
                 ),
                 Container(
                   height: ScreenUtil().setHeight(144),
-                  decoration: BoxDecoration(
+                  decoration: const BoxDecoration(
                     color: Color(0XFFFF0036),
                     borderRadius: BorderRadius.only(
                       bottomLeft: Radius.circular(35),
@@ -78,13 +77,13 @@ class _BuscarPageState extends State<BuscarPage> {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Container(
+                          SizedBox(
                             width: ScreenUtil().setWidth(300),
                             child: CupertinoSearchTextField(
                               controller: _queryController,
                               backgroundColor: Colors.white,
                               placeholderStyle: GoogleFonts.poppins(
-                                color: Color(0XFFA8A7A7),
+                                color: const Color(0XFFA8A7A7),
                                 fontWeight: FontWeight.w400,
                                 fontSize: ScreenUtil().setSp(16),
                               ),
@@ -108,7 +107,7 @@ class _BuscarPageState extends State<BuscarPage> {
                             child: Container(
                               height: ScreenUtil().setHeight(33),
                               width: ScreenUtil().setWidth(33),
-                              decoration: BoxDecoration(
+                              decoration: const BoxDecoration(
                                 shape: BoxShape.circle,
                                 color: Color(0XFFC4C4C4),
                               ),
@@ -132,7 +131,7 @@ class _BuscarPageState extends State<BuscarPage> {
               stream: busquedaBloc.productoBusquedaStream,
               builder: (context, AsyncSnapshot<List<ProductoLineaModel>> snapshot) {
                 if (snapshot.hasData) {
-                  if (snapshot.data.length > 0) {
+                  if (snapshot.data.isNotEmpty) {
                     var food = snapshot.data;
                     return ListView.builder(
                       itemCount: food.length,
@@ -144,17 +143,17 @@ class _BuscarPageState extends State<BuscarPage> {
                       },
                     );
                   } else {
-                    return Center(
+                    return const Center(
                       child: Text('Realice una búsqueda'),
                     );
                   }
                 } else {
                   return Center(
                     child: (Platform.isAndroid)
-                        ? CircularProgressIndicator(
+                        ? const CircularProgressIndicator(
                             color: Color(0XFFFF0036),
                           )
-                        : CupertinoActivityIndicator(),
+                        : const CupertinoActivityIndicator(),
                   );
                 }
               },
@@ -188,7 +187,7 @@ class _BuscarPageState extends State<BuscarPage> {
                 );
               },
               transitionsBuilder: (context, animation, secondaryAnimation, child) {
-                var begin = Offset(0.0, 1.0);
+                var begin = const Offset(0.0, 1.0);
                 var end = Offset.zero;
                 var curve = Curves.ease;
 
@@ -219,7 +218,7 @@ class _BuscarPageState extends State<BuscarPage> {
             Container(
               height: ScreenUtil().setHeight(100),
               width: ScreenUtil().setWidth(100),
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 color: Color(0XFFEEEEEE),
                 shape: BoxShape.circle,
                 boxShadow: [
@@ -238,7 +237,7 @@ class _BuscarPageState extends State<BuscarPage> {
                       child: Container(
                         height: ScreenUtil().setHeight(80),
                         width: ScreenUtil().setWidth(80),
-                        decoration: BoxDecoration(
+                        decoration: const BoxDecoration(
                           color: Color(0XFFEEEEEE),
                           shape: BoxShape.circle,
                           boxShadow: [
@@ -250,14 +249,12 @@ class _BuscarPageState extends State<BuscarPage> {
                           ],
                         ),
                         child: CachedNetworkImage(
-                          placeholder: (context, url) => Container(
+                          placeholder: (context, url) => SizedBox(
                             child: SvgPicture.asset('assets/food_svg/food.svg'),
                           ),
-                          errorWidget: (context, url, error) => Container(
-                            child: Container(
-                              child: SvgPicture.asset(
-                                'assets/food_svg/food.svg',
-                              ),
+                          errorWidget: (context, url, error) => SizedBox(
+                            child: SvgPicture.asset(
+                              'assets/food_svg/food.svg',
                             ),
                           ),
                           imageUrl: '$apiBaseURL/${food.productoFoto}',
@@ -287,9 +284,9 @@ class _BuscarPageState extends State<BuscarPage> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    '${food.productoNombre}',
+                    food.productoNombre,
                     style: TextStyle(
-                      color: Color(0XFF585858),
+                      color: const Color(0XFF585858),
                       fontSize: ScreenUtil().setSp(16),
                       fontWeight: FontWeight.w500,
                       letterSpacing: 0.16,
@@ -299,7 +296,7 @@ class _BuscarPageState extends State<BuscarPage> {
                     height: ScreenUtil().setHeight(8),
                   ),
                   Text(
-                    '$disponible',
+                    disponible,
                     style: TextStyle(
                       color: color,
                       fontSize: ScreenUtil().setSp(14),
@@ -313,7 +310,7 @@ class _BuscarPageState extends State<BuscarPage> {
                   Text(
                     'S/${food.productoPrecio}',
                     style: TextStyle(
-                      color: Color(0XFF3A3A3A),
+                      color: const Color(0XFF3A3A3A),
                       fontSize: ScreenUtil().setSp(16),
                       fontWeight: FontWeight.w700,
                       letterSpacing: 0.16,

@@ -23,11 +23,11 @@ class SettingsLinesCategory extends StatelessWidget {
       appBar: AppBar(
         elevation: 0,
         backgroundColor: Colors.white,
-        iconTheme: IconThemeData(color: Color(0XFF585858)),
+        iconTheme: const IconThemeData(color: Color(0XFF585858)),
         title: Text(
           'Categorías',
           style: GoogleFonts.poppins(
-            color: Color(0XFFFF0036),
+            color: const Color(0XFFFF0036),
             fontSize: ScreenUtil().setSp(18),
             fontWeight: FontWeight.w600,
             letterSpacing: 0.16,
@@ -39,7 +39,7 @@ class SettingsLinesCategory extends StatelessWidget {
         stream: lineasBloc.lineasStream,
         builder: (context, AsyncSnapshot<List<LineaModel>> snapshot) {
           if (snapshot.hasData) {
-            if (snapshot.data.length > 0) {
+            if (snapshot.data.isNotEmpty) {
               return ListView.builder(
                 padding: EdgeInsets.symmetric(horizontal: ScreenUtil().setWidth(24), vertical: ScreenUtil().setHeight(16)),
                 itemCount: snapshot.data.length,
@@ -50,20 +50,20 @@ class SettingsLinesCategory extends StatelessWidget {
                       Row(
                         children: [
                           Text(
-                            '${snapshot.data[index2].lineaNombre}',
+                            snapshot.data[index2].lineaNombre,
                             style: GoogleFonts.poppins(
-                              color: Color(0XFF585858),
+                              color: const Color(0XFF585858),
                               fontWeight: FontWeight.w500,
                               fontSize: ScreenUtil().setSp(16),
                               letterSpacing: ScreenUtil().setSp(0.016),
                             ),
                           ),
-                          Spacer(),
+                          const Spacer(),
                           InkWell(
                             onTap: () {
                               editLineModal(context, snapshot.data[index2]);
                             },
-                            child: Container(
+                            child: SizedBox(
                               height: ScreenUtil().setHeight(20),
                               width: ScreenUtil().setWidth(20),
                               child: SvgPicture.asset('assets/food_svg/edit_category.svg'),
@@ -84,7 +84,7 @@ class SettingsLinesCategory extends StatelessWidget {
                                     );
                                   },
                                   transitionsBuilder: (context, animation, secondaryAnimation, child) {
-                                    var begin = Offset(0.0, 1.0);
+                                    var begin = const Offset(0.0, 1.0);
                                     var end = Offset.zero;
                                     var curve = Curves.ease;
 
@@ -100,7 +100,7 @@ class SettingsLinesCategory extends StatelessWidget {
                                 ),
                               );
                             },
-                            child: Container(
+                            child: SizedBox(
                               height: ScreenUtil().setHeight(24),
                               width: ScreenUtil().setWidth(24),
                               child: SvgPicture.asset('assets/food_svg/delete_category.svg'),
@@ -108,7 +108,7 @@ class SettingsLinesCategory extends StatelessWidget {
                           ),
                         ],
                       ),
-                      Divider(),
+                      const Divider(),
                     ],
                   );
                 },
@@ -128,13 +128,13 @@ class SettingsLinesCategory extends StatelessWidget {
     return Container(
       height: double.infinity,
       width: double.infinity,
-      color: Color.fromRGBO(0, 0, 0, 0.5),
+      color: const Color.fromRGBO(0, 0, 0, 0.5),
       child: Center(
         child: (Platform.isAndroid)
-            ? CircularProgressIndicator(
+            ? const CircularProgressIndicator(
                 color: Color(0XFFFF0036),
               )
-            : CupertinoActivityIndicator(),
+            : const CupertinoActivityIndicator(),
       ),
     );
   }

@@ -56,11 +56,11 @@ class _AgregarDetalleProductoState extends State<AgregarDetalleProducto> {
     return Scaffold(
       body: Stack(
         children: [
-          SizedBox(
+          const SizedBox(
             height: double.infinity,
             width: double.infinity,
           ),
-          Container(
+          SizedBox(
             height: ScreenUtil().setHeight(300),
             width: double.infinity,
             child: SvgPicture.asset(
@@ -79,7 +79,7 @@ class _AgregarDetalleProductoState extends State<AgregarDetalleProducto> {
                 child: Container(
                   height: ScreenUtil().setHeight(45),
                   width: ScreenUtil().setWidth(45),
-                  decoration: BoxDecoration(
+                  decoration: const BoxDecoration(
                     color: Colors.white,
                     shape: BoxShape.circle,
                   ),
@@ -96,7 +96,7 @@ class _AgregarDetalleProductoState extends State<AgregarDetalleProducto> {
             ),
             height: double.infinity,
             width: double.infinity,
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.only(
                 topLeft: Radius.circular(40),
@@ -117,9 +117,9 @@ class _AgregarDetalleProductoState extends State<AgregarDetalleProducto> {
                     Align(
                       alignment: Alignment.center,
                       child: Text(
-                        '${widget.producto.productoNombre}',
+                        widget.producto.productoNombre,
                         style: TextStyle(
-                          color: Color(0XFF585858),
+                          color: const Color(0XFF585858),
                           fontSize: ScreenUtil().setSp(20),
                           fontWeight: FontWeight.w500,
                         ),
@@ -139,7 +139,7 @@ class _AgregarDetalleProductoState extends State<AgregarDetalleProducto> {
                                 Text(
                                   (_controller.precioMuestra != '') ? 'S/. ${_controller.precioMuestra}' : 'S/. ${widget.producto.productoPrecio}',
                                   style: TextStyle(
-                                    color: Color(0XFF585858),
+                                    color: const Color(0XFF585858),
                                     fontSize: ScreenUtil().setSp(30),
                                     fontWeight: FontWeight.w700,
                                   ),
@@ -152,9 +152,9 @@ class _AgregarDetalleProductoState extends State<AgregarDetalleProducto> {
                                   height: ScreenUtil().setHeight(32),
                                   //width: ScreenUtil().setWidth(86),
                                   decoration: BoxDecoration(
-                                    color: Color(0XFFFF0036),
+                                    color: const Color(0XFFFF0036),
                                     borderRadius: BorderRadius.circular(30),
-                                    boxShadow: [
+                                    boxShadow: const [
                                       BoxShadow(
                                         color: Color.fromRGBO(88, 88, 88, 0.5),
                                       ),
@@ -167,15 +167,15 @@ class _AgregarDetalleProductoState extends State<AgregarDetalleProducto> {
                                         onTap: () {
                                           _controller.changeCantidadPrecio(-1, widget.producto.productoPrecio);
                                         },
-                                        child: Container(
+                                        child: SizedBox(
                                           child: SvgPicture.asset('assets/food_svg/minus.svg'),
                                         ),
                                       ),
                                       Container(
-                                        margin: EdgeInsets.symmetric(horizontal: 8),
+                                        margin: const EdgeInsets.symmetric(horizontal: 8),
                                         height: ScreenUtil().setHeight(22),
                                         width: ScreenUtil().setWidth(22),
-                                        decoration: BoxDecoration(
+                                        decoration: const BoxDecoration(
                                           color: Colors.white,
                                           shape: BoxShape.circle,
                                           boxShadow: [
@@ -198,7 +198,7 @@ class _AgregarDetalleProductoState extends State<AgregarDetalleProducto> {
                                           onTap: () {
                                             _controller.changeCantidadPrecio(1, widget.producto.productoPrecio);
                                           },
-                                          child: Container(
+                                          child: SizedBox(
                                             child: SvgPicture.asset('assets/food_svg/plus.svg'),
                                           )),
                                     ],
@@ -214,7 +214,7 @@ class _AgregarDetalleProductoState extends State<AgregarDetalleProducto> {
                     Text(
                       'Descripción',
                       style: TextStyle(
-                        color: Color(0XFF585858),
+                        color: const Color(0XFF585858),
                         fontSize: ScreenUtil().setSp(18),
                         fontWeight: FontWeight.w600,
                       ),
@@ -225,7 +225,7 @@ class _AgregarDetalleProductoState extends State<AgregarDetalleProducto> {
                     Text(
                       '${widget.producto.productoDescripcion} ',
                       style: TextStyle(
-                        color: Color(0XFF585858),
+                        color: const Color(0XFF585858),
                         fontSize: ScreenUtil().setSp(16),
                         fontWeight: FontWeight.w400,
                       ),
@@ -233,11 +233,11 @@ class _AgregarDetalleProductoState extends State<AgregarDetalleProducto> {
                     SizedBox(
                       height: ScreenUtil().setHeight(16),
                     ),
-                    Container(
+                    SizedBox(
                       height: ScreenUtil().setHeight(130),
                       child: Stack(
                         children: [
-                          Container(
+                          SizedBox(
                             height: ScreenUtil().setHeight(130),
                             child: TextField(
                               controller: _observacionesController,
@@ -246,7 +246,7 @@ class _AgregarDetalleProductoState extends State<AgregarDetalleProducto> {
                               decoration: InputDecoration(
                                 labelText: 'Observaciones',
                                 labelStyle: GoogleFonts.poppins(
-                                    color: Color(0XFF585858),
+                                    color: const Color(0XFF585858),
                                     fontWeight: FontWeight.w400,
                                     fontSize: ScreenUtil().setSp(12),
                                     letterSpacing: 0.16,
@@ -255,19 +255,19 @@ class _AgregarDetalleProductoState extends State<AgregarDetalleProducto> {
                                 //     left: ScreenUtil().setWidth(10), top: ScreenUtil().setHeight(10), bottom: ScreenUtil().setHeight(1)),
                                 enabledBorder: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(15),
-                                  borderSide: BorderSide(color: Color(0XFFFF0036), width: ScreenUtil().setWidth(2)),
+                                  borderSide: BorderSide(color: const Color(0XFFFF0036), width: ScreenUtil().setWidth(2)),
                                 ),
                                 focusedBorder: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(15),
-                                  borderSide: BorderSide(color: Color(0XFFFF0036), width: ScreenUtil().setWidth(2)),
+                                  borderSide: BorderSide(color: const Color(0XFFFF0036), width: ScreenUtil().setWidth(2)),
                                 ),
                                 border: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(15),
-                                  borderSide: BorderSide(color: Color(0XFFFF0036), width: ScreenUtil().setWidth(2)),
+                                  borderSide: BorderSide(color: const Color(0XFFFF0036), width: ScreenUtil().setWidth(2)),
                                 ),
                               ),
                               style: GoogleFonts.poppins(
-                                  color: Color(0XFF585858),
+                                  color: const Color(0XFF585858),
                                   fontWeight: FontWeight.w400,
                                   fontSize: ScreenUtil().setSp(14),
                                   fontStyle: FontStyle.normal),
@@ -339,9 +339,9 @@ class _AgregarDetalleProductoState extends State<AgregarDetalleProducto> {
                                 width: ScreenUtil().setWidth(130),
                                 //width: ScreenUtil().setWidth(86),
                                 decoration: BoxDecoration(
-                                  color: Color(0XFFFF0036),
+                                  color: const Color(0XFFFF0036),
                                   borderRadius: BorderRadius.circular(30),
-                                  boxShadow: [
+                                  boxShadow: const [
                                     BoxShadow(
                                       color: Color.fromRGBO(88, 88, 88, 0.5),
                                     ),
@@ -350,15 +350,15 @@ class _AgregarDetalleProductoState extends State<AgregarDetalleProducto> {
                                 child: Row(
                                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                   children: [
-                                    Container(
+                                    SizedBox(
                                       height: ScreenUtil().setHeight(36),
                                       child: SvgPicture.asset('assets/food_svg/bag.svg'),
                                     ),
                                     Container(
-                                      margin: EdgeInsets.symmetric(horizontal: 8),
+                                      margin: const EdgeInsets.symmetric(horizontal: 8),
                                       height: ScreenUtil().setHeight(40),
                                       width: ScreenUtil().setWidth(40),
-                                      decoration: BoxDecoration(
+                                      decoration: const BoxDecoration(
                                         color: Colors.white,
                                         shape: BoxShape.circle,
                                         boxShadow: [
@@ -402,11 +402,11 @@ class _AgregarDetalleProductoState extends State<AgregarDetalleProducto> {
                                   _controller.changeLlevar(!_controller.llevar);
                                 },
                                 icon: (_controller.llevar)
-                                    ? Icon(
+                                    ? const Icon(
                                         Icons.check_box_outlined,
                                         color: Color(0XFFFF0036),
                                       )
-                                    : Icon(
+                                    : const Icon(
                                         Icons.check_box_outline_blank_outlined,
                                         color: Color(0XFF585858),
                                       ),
@@ -414,7 +414,7 @@ class _AgregarDetalleProductoState extends State<AgregarDetalleProducto> {
                               Text(
                                 'Para llevar',
                                 style: TextStyle(
-                                  color: Color(0XFF585858),
+                                  color: const Color(0XFF585858),
                                   fontSize: ScreenUtil().setSp(16),
                                   fontWeight: FontWeight.w400,
                                 ),
@@ -432,7 +432,7 @@ class _AgregarDetalleProductoState extends State<AgregarDetalleProducto> {
             left: 0,
             right: 0,
             child: Container(
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 color: Color(0XFFEEEEEE),
                 shape: BoxShape.circle,
                 boxShadow: [
@@ -447,13 +447,13 @@ class _AgregarDetalleProductoState extends State<AgregarDetalleProducto> {
                 children: [
                   Hero(
                     tag: widget.producto.idProducto,
-                    child: Container(
+                    child: SizedBox(
                       height: ScreenUtil().setHeight(200),
                       width: ScreenUtil().setWidth(200),
                       child: Container(
                         height: ScreenUtil().setHeight(200),
                         width: ScreenUtil().setWidth(200),
-                        decoration: BoxDecoration(
+                        decoration: const BoxDecoration(
                           color: Color(0XFFEEEEEE),
                           shape: BoxShape.circle,
                           boxShadow: [
@@ -465,14 +465,12 @@ class _AgregarDetalleProductoState extends State<AgregarDetalleProducto> {
                           ],
                         ),
                         child: CachedNetworkImage(
-                          placeholder: (context, url) => Container(
+                          placeholder: (context, url) => SizedBox(
                             child: SvgPicture.asset('assets/food_svg/food.svg'),
                           ),
-                          errorWidget: (context, url, error) => Container(
-                            child: Container(
-                              child: SvgPicture.asset(
-                                'assets/food_svg/food.svg',
-                              ),
+                          errorWidget: (context, url, error) => SizedBox(
+                            child: SvgPicture.asset(
+                              'assets/food_svg/food.svg',
                             ),
                           ),
                           imageUrl: '$apiBaseURL/${widget.producto.productoFoto}',
@@ -507,13 +505,13 @@ class _AgregarDetalleProductoState extends State<AgregarDetalleProducto> {
     return Container(
       height: double.infinity,
       width: double.infinity,
-      color: Color.fromRGBO(0, 0, 0, 0.5),
+      color: const Color.fromRGBO(0, 0, 0, 0.5),
       child: Center(
         child: (Platform.isAndroid)
-            ? CircularProgressIndicator(
+            ? const CircularProgressIndicator(
                 color: Color(0XFFFF0036),
               )
-            : CupertinoActivityIndicator(),
+            : const CupertinoActivityIndicator(),
       ),
     );
   }

@@ -99,27 +99,26 @@ class ProductoLineaApi {
   // }
 
   Future<int> cambiarFotoProducto(File _image, String idProducto) async {
-    print('Entré para cambiar foto WEB SERVICE');
     try {
       int resp;
       final uri = Uri.parse('$apiBaseURL/api/Negocio/cambiar_foto_producto');
 
-      var multipartFile;
+      dynamic multipartFile;
 
       if (_image != null) {
-        var stream = new http.ByteStream(Stream.castFrom(_image.openRead()));
+        var stream = http.ByteStream(Stream.castFrom(_image.openRead()));
 
         var length = await _image.length();
 
-        multipartFile = new http.MultipartFile('imagen', stream, length, filename: basename(_image.path));
+        multipartFile = http.MultipartFile('imagen', stream, length, filename: basename(_image.path));
       }
 
-      var request = new http.MultipartRequest("POST", uri);
+      var request = http.MultipartRequest("POST", uri);
 
       request.fields["app"] = 'true';
       request.fields["tn"] = '${_prefs.token}';
-      request.fields["id_producto"] = '$idProducto';
-      request.fields["id"] = '$idProducto';
+      request.fields["id_producto"] = idProducto;
+      request.fields["id"] = idProducto;
 
       if (_image != null) {
         request.files.add(multipartFile);
@@ -129,7 +128,6 @@ class ProductoLineaApi {
         // listen for response
         response.stream.transform(utf8.decoder).listen((value) {
           final decodedData = json.decode(value);
-          print(decodedData);
 
           if (decodedData["result"] == 1) {
             resp = 1;
@@ -138,12 +136,10 @@ class ProductoLineaApi {
           }
         });
       }).catchError((e) {
-        print(e);
         resp = 2;
       });
       return resp;
     } catch (e) {
-      print('Exeption cambiar foto: $e');
       return 2;
     }
   }
@@ -154,18 +150,17 @@ class ProductoLineaApi {
 
       final resp = await http.post(url, body: {
         'tn': '${_prefs.token}',
-        'id_linea': '${producto.idLinea}',
-        'producto_nombre': '${producto.productoNombre}',
-        'producto_descripcion': '${producto.productoDescripcion}',
-        'producto_precio': '${producto.productoPrecio}',
-        'producto_estado': '${producto.productoEstado}',
-        'producto_cocina': '${producto.productoCocina}',
-        'producto_costo': '${producto.productoCosto}',
+        'id_linea': producto.idLinea,
+        'producto_nombre': producto.productoNombre,
+        'producto_descripcion': producto.productoDescripcion,
+        'producto_precio': producto.productoPrecio,
+        'producto_estado': producto.productoEstado,
+        'producto_cocina': producto.productoCocina,
+        'producto_costo': producto.productoCosto,
         'app': 'true',
       });
 
       final decodedData = json.decode(resp.body);
-      print(decodedData);
 
       if (decodedData["result"] == 1) {
         return 1;
@@ -183,18 +178,17 @@ class ProductoLineaApi {
 
       final resp = await http.post(url, body: {
         'tn': '${_prefs.token}',
-        'id_linea': '${producto.idLinea}',
-        'id_producto': '${producto.idProducto}',
-        'producto_nombre': '${producto.productoNombre}',
-        'producto_descripcion': '${producto.productoDescripcion}',
-        'producto_precio': '${producto.productoPrecio}',
-        'producto_estado': '${producto.productoEstado}',
-        'producto_costo': '${producto.productoCosto}',
+        'id_linea': producto.idLinea,
+        'id_producto': producto.idProducto,
+        'producto_nombre': producto.productoNombre,
+        'producto_descripcion': producto.productoDescripcion,
+        'producto_precio': producto.productoPrecio,
+        'producto_estado': producto.productoEstado,
+        'producto_costo': producto.productoCosto,
         'app': 'true',
       });
 
       final decodedData = json.decode(resp.body);
-      print(decodedData);
 
       if (decodedData["result"] == 1) {
         return 1;
@@ -212,7 +206,7 @@ class ProductoLineaApi {
 
       final resp = await http.post(url, body: {
         'tn': '${_prefs.token}',
-        'id': '$idProducto',
+        'id': idProducto,
         'app': 'true',
       });
 

@@ -9,7 +9,7 @@ class BuscarUserBloc {
   Stream<List<BuscarUserModel>> get busquedaStream => _busquedaController.stream;
 
   void buscarUsers(String query) async {
-    if (query.length > 0) {
+    if (query.isNotEmpty) {
       _busquedaController.sink.add(null);
       _busquedaController.sink.add(await _buscarApi.busacarUser(query));
     } else {

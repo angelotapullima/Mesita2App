@@ -43,11 +43,11 @@ class _EditarDetalleProductoPedidoState extends State<EditarDetalleProductoPedid
     return Scaffold(
       body: Stack(
         children: [
-          SizedBox(
+          const SizedBox(
             height: double.infinity,
             width: double.infinity,
           ),
-          Container(
+          SizedBox(
             height: ScreenUtil().setHeight(300),
             width: double.infinity,
             child: SvgPicture.asset(
@@ -66,7 +66,7 @@ class _EditarDetalleProductoPedidoState extends State<EditarDetalleProductoPedid
                 child: Container(
                   height: ScreenUtil().setHeight(45),
                   width: ScreenUtil().setWidth(45),
-                  decoration: BoxDecoration(
+                  decoration: const BoxDecoration(
                     color: Colors.white,
                     shape: BoxShape.circle,
                   ),
@@ -95,7 +95,7 @@ class _EditarDetalleProductoPedidoState extends State<EditarDetalleProductoPedid
                         );
                       },
                       transitionsBuilder: (context, animation, secondaryAnimation, child) {
-                        var begin = Offset(0.0, 1.0);
+                        var begin = const Offset(0.0, 1.0);
                         var end = Offset.zero;
                         var curve = Curves.ease;
 
@@ -114,7 +114,7 @@ class _EditarDetalleProductoPedidoState extends State<EditarDetalleProductoPedid
                 child: Container(
                   height: ScreenUtil().setHeight(45),
                   width: ScreenUtil().setWidth(45),
-                  decoration: BoxDecoration(
+                  decoration: const BoxDecoration(
                     color: Colors.white,
                     shape: BoxShape.circle,
                   ),
@@ -131,7 +131,7 @@ class _EditarDetalleProductoPedidoState extends State<EditarDetalleProductoPedid
             ),
             height: double.infinity,
             width: double.infinity,
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.only(
                 topLeft: Radius.circular(40),
@@ -152,9 +152,9 @@ class _EditarDetalleProductoPedidoState extends State<EditarDetalleProductoPedid
                     Align(
                       alignment: Alignment.center,
                       child: Text(
-                        '${widget.producto.nombreProducto}',
+                        widget.producto.nombreProducto,
                         style: TextStyle(
-                          color: Color(0XFF585858),
+                          color: const Color(0XFF585858),
                           fontSize: ScreenUtil().setSp(20),
                           fontWeight: FontWeight.w500,
                         ),
@@ -174,7 +174,7 @@ class _EditarDetalleProductoPedidoState extends State<EditarDetalleProductoPedid
                                 Text(
                                   (_controller.precioMuestra != '') ? 'S/. ${_controller.precioMuestra}' : 'S/. ${widget.producto.subtotal}',
                                   style: TextStyle(
-                                    color: Color(0XFF585858),
+                                    color: const Color(0XFF585858),
                                     fontSize: ScreenUtil().setSp(30),
                                     fontWeight: FontWeight.w700,
                                   ),
@@ -187,9 +187,9 @@ class _EditarDetalleProductoPedidoState extends State<EditarDetalleProductoPedid
                                   height: ScreenUtil().setHeight(32),
                                   //width: ScreenUtil().setWidth(86),
                                   decoration: BoxDecoration(
-                                    color: Color(0XFFFF0036),
+                                    color: const Color(0XFFFF0036),
                                     borderRadius: BorderRadius.circular(30),
-                                    boxShadow: [
+                                    boxShadow: const [
                                       BoxShadow(
                                         color: Color.fromRGBO(88, 88, 88, 0.5),
                                       ),
@@ -202,15 +202,15 @@ class _EditarDetalleProductoPedidoState extends State<EditarDetalleProductoPedid
                                         onTap: () {
                                           _controller.changeCantidadPrecio(-1);
                                         },
-                                        child: Container(
+                                        child: SizedBox(
                                           child: SvgPicture.asset('assets/food_svg/minus.svg'),
                                         ),
                                       ),
                                       Container(
-                                        margin: EdgeInsets.symmetric(horizontal: 8),
+                                        margin: const EdgeInsets.symmetric(horizontal: 8),
                                         height: ScreenUtil().setHeight(22),
                                         width: ScreenUtil().setWidth(22),
-                                        decoration: BoxDecoration(
+                                        decoration: const BoxDecoration(
                                           color: Colors.white,
                                           shape: BoxShape.circle,
                                           boxShadow: [
@@ -233,7 +233,7 @@ class _EditarDetalleProductoPedidoState extends State<EditarDetalleProductoPedid
                                           onTap: () {
                                             _controller.changeCantidadPrecio(1);
                                           },
-                                          child: Container(
+                                          child: SizedBox(
                                             child: SvgPicture.asset('assets/food_svg/plus.svg'),
                                           )),
                                     ],
@@ -249,11 +249,11 @@ class _EditarDetalleProductoPedidoState extends State<EditarDetalleProductoPedid
                     SizedBox(
                       height: ScreenUtil().setHeight(16),
                     ),
-                    Container(
+                    SizedBox(
                       height: ScreenUtil().setHeight(130),
                       child: Stack(
                         children: [
-                          Container(
+                          SizedBox(
                             height: ScreenUtil().setHeight(130),
                             child: TextField(
                               controller: _observacionesController,
@@ -262,26 +262,26 @@ class _EditarDetalleProductoPedidoState extends State<EditarDetalleProductoPedid
                               decoration: InputDecoration(
                                 labelText: 'Observaciones',
                                 labelStyle: GoogleFonts.poppins(
-                                    color: Color(0XFF585858),
+                                    color: const Color(0XFF585858),
                                     fontWeight: FontWeight.w400,
                                     fontSize: ScreenUtil().setSp(12),
                                     letterSpacing: 0.16,
                                     fontStyle: FontStyle.normal),
                                 enabledBorder: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(15),
-                                  borderSide: BorderSide(color: Color(0XFFFF0036), width: ScreenUtil().setWidth(2)),
+                                  borderSide: BorderSide(color: const Color(0XFFFF0036), width: ScreenUtil().setWidth(2)),
                                 ),
                                 focusedBorder: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(15),
-                                  borderSide: BorderSide(color: Color(0XFFFF0036), width: ScreenUtil().setWidth(2)),
+                                  borderSide: BorderSide(color: const Color(0XFFFF0036), width: ScreenUtil().setWidth(2)),
                                 ),
                                 border: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(15),
-                                  borderSide: BorderSide(color: Color(0XFFFF0036), width: ScreenUtil().setWidth(2)),
+                                  borderSide: BorderSide(color: const Color(0XFFFF0036), width: ScreenUtil().setWidth(2)),
                                 ),
                               ),
                               style: GoogleFonts.poppins(
-                                  color: Color(0XFF585858),
+                                  color: const Color(0XFF585858),
                                   fontWeight: FontWeight.w400,
                                   fontSize: ScreenUtil().setSp(14),
                                   fontStyle: FontStyle.normal),
@@ -321,9 +321,9 @@ class _EditarDetalleProductoPedidoState extends State<EditarDetalleProductoPedid
                                 width: ScreenUtil().setWidth(130),
                                 //width: ScreenUtil().setWidth(86),
                                 decoration: BoxDecoration(
-                                  color: Color(0XFFFF0036),
+                                  color: const Color(0XFFFF0036),
                                   borderRadius: BorderRadius.circular(30),
-                                  boxShadow: [
+                                  boxShadow: const [
                                     BoxShadow(
                                       color: Color.fromRGBO(88, 88, 88, 0.5),
                                     ),
@@ -332,15 +332,15 @@ class _EditarDetalleProductoPedidoState extends State<EditarDetalleProductoPedid
                                 child: Row(
                                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                   children: [
-                                    Container(
+                                    SizedBox(
                                       height: ScreenUtil().setHeight(36),
                                       child: SvgPicture.asset('assets/food_svg/bag.svg'),
                                     ),
                                     Container(
-                                      margin: EdgeInsets.symmetric(horizontal: 8),
+                                      margin: const EdgeInsets.symmetric(horizontal: 8),
                                       height: ScreenUtil().setHeight(40),
                                       width: ScreenUtil().setWidth(40),
-                                      decoration: BoxDecoration(
+                                      decoration: const BoxDecoration(
                                         color: Colors.white,
                                         shape: BoxShape.circle,
                                         boxShadow: [
@@ -381,7 +381,7 @@ class _EditarDetalleProductoPedidoState extends State<EditarDetalleProductoPedid
             left: 0,
             right: 0,
             child: Container(
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 color: Color(0XFFEEEEEE),
                 shape: BoxShape.circle,
                 boxShadow: [
@@ -396,13 +396,13 @@ class _EditarDetalleProductoPedidoState extends State<EditarDetalleProductoPedid
                 children: [
                   Hero(
                     tag: widget.producto.idProducto,
-                    child: Container(
+                    child: SizedBox(
                       height: ScreenUtil().setHeight(200),
                       width: ScreenUtil().setWidth(200),
                       child: Container(
                         height: ScreenUtil().setHeight(200),
                         width: ScreenUtil().setWidth(200),
-                        decoration: BoxDecoration(
+                        decoration: const BoxDecoration(
                           color: Color(0XFFEEEEEE),
                           shape: BoxShape.circle,
                           boxShadow: [
@@ -414,14 +414,12 @@ class _EditarDetalleProductoPedidoState extends State<EditarDetalleProductoPedid
                           ],
                         ),
                         child: CachedNetworkImage(
-                          placeholder: (context, url) => Container(
+                          placeholder: (context, url) => SizedBox(
                             child: SvgPicture.asset('assets/food_svg/food.svg'),
                           ),
-                          errorWidget: (context, url, error) => Container(
-                            child: Container(
-                              child: SvgPicture.asset(
-                                'assets/food_svg/food.svg',
-                              ),
+                          errorWidget: (context, url, error) => SizedBox(
+                            child: SvgPicture.asset(
+                              'assets/food_svg/food.svg',
                             ),
                           ),
                           imageUrl: '$apiBaseURL/${widget.producto.fotoProducto}',
@@ -456,13 +454,13 @@ class _EditarDetalleProductoPedidoState extends State<EditarDetalleProductoPedid
     return Container(
       height: double.infinity,
       width: double.infinity,
-      color: Color.fromRGBO(0, 0, 0, 0.5),
+      color: const Color.fromRGBO(0, 0, 0, 0.5),
       child: Center(
         child: (Platform.isAndroid)
-            ? CircularProgressIndicator(
+            ? const CircularProgressIndicator(
                 color: Color(0XFFFF0036),
               )
-            : CupertinoActivityIndicator(),
+            : const CupertinoActivityIndicator(),
       ),
     );
   }
@@ -496,7 +494,7 @@ class ChangeController extends ChangeNotifier {
   }
 
   void obtenerPrecioIncial(String c, String p) {
-    if (cantidad == '1') {
+    if (c == '1') {
       precioMuestra = p;
       cantidad = 1;
     } else {

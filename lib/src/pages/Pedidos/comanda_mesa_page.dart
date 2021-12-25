@@ -19,7 +19,7 @@ import 'package:mesita_aplication_2/src/utils/utils.dart';
 class ComandaPage extends StatefulWidget {
   final MesaModel mesa;
   final bool esComandaCero;
-  ComandaPage({Key key, @required this.mesa, @required this.esComandaCero}) : super(key: key);
+  const ComandaPage({Key key, @required this.mesa, @required this.esComandaCero}) : super(key: key);
 
   @override
   _ComandaPageState createState() => _ComandaPageState();
@@ -38,7 +38,7 @@ class _ComandaPageState extends State<ComandaPage> {
       stream: comandaBloc.comandaStream,
       builder: (context, AsyncSnapshot<List<DetallePedidoTemporalModel>> snapshot) {
         if (snapshot.hasData) {
-          if (snapshot.data.length > 0) {
+          if (snapshot.data.isNotEmpty) {
             var comanda = snapshot.data;
             double total = 00.00;
             for (var i = 0; i < comanda.length; i++) {
@@ -63,7 +63,7 @@ class _ComandaPageState extends State<ComandaPage> {
                                 Container(
                                   height: ScreenUtil().setHeight(80),
                                   width: ScreenUtil().setWidth(80),
-                                  decoration: BoxDecoration(
+                                  decoration: const BoxDecoration(
                                     color: Color(0XFFEEEEEE),
                                     shape: BoxShape.circle,
                                     boxShadow: [
@@ -82,7 +82,7 @@ class _ComandaPageState extends State<ComandaPage> {
                                           child: Container(
                                             height: ScreenUtil().setHeight(64),
                                             width: ScreenUtil().setWidth(64),
-                                            decoration: BoxDecoration(
+                                            decoration: const BoxDecoration(
                                               color: Color(0XFFEEEEEE),
                                               shape: BoxShape.circle,
                                               boxShadow: [
@@ -94,14 +94,12 @@ class _ComandaPageState extends State<ComandaPage> {
                                               ],
                                             ),
                                             child: CachedNetworkImage(
-                                              placeholder: (context, url) => Container(
+                                              placeholder: (context, url) => SizedBox(
                                                 child: SvgPicture.asset('assets/food_svg/food.svg'),
                                               ),
-                                              errorWidget: (context, url, error) => Container(
-                                                child: Container(
-                                                  child: SvgPicture.asset(
-                                                    'assets/food_svg/food.svg',
-                                                  ),
+                                              errorWidget: (context, url, error) => SizedBox(
+                                                child: SvgPicture.asset(
+                                                  'assets/food_svg/food.svg',
                                                 ),
                                               ),
                                               imageUrl: '$apiBaseURL/${comanda[index].foto}',
@@ -122,15 +120,15 @@ class _ComandaPageState extends State<ComandaPage> {
                                     ],
                                   ),
                                 ),
-                                Container(
+                                SizedBox(
                                   width: ScreenUtil().setWidth(150),
                                   child: Column(
                                     crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
                                       Text(
-                                        '${comanda[index].nombre}',
+                                        comanda[index].nombre,
                                         style: GoogleFonts.poppins(
-                                          color: Color(0XFF585858),
+                                          color: const Color(0XFF585858),
                                           fontWeight: FontWeight.w500,
                                           fontSize: ScreenUtil().setSp(16),
                                         ),
@@ -153,9 +151,9 @@ class _ComandaPageState extends State<ComandaPage> {
                                   height: ScreenUtil().setHeight(32),
                                   //width: ScreenUtil().setWidth(86),
                                   decoration: BoxDecoration(
-                                    color: Color(0XFFFF0036),
+                                    color: const Color(0XFFFF0036),
                                     borderRadius: BorderRadius.circular(30),
-                                    boxShadow: [
+                                    boxShadow: const [
                                       BoxShadow(
                                         color: Color.fromRGBO(88, 88, 88, 0.5),
                                       ),
@@ -172,16 +170,16 @@ class _ComandaPageState extends State<ComandaPage> {
                                             comandaBloc.obtenerComandaPorMesa(widget.mesa.idMesa);
                                           }
                                         },
-                                        child: Container(
+                                        child: SizedBox(
                                           width: ScreenUtil().setWidth(16),
                                           child: SvgPicture.asset('assets/food_svg/minus.svg'),
                                         ),
                                       ),
                                       Container(
-                                        margin: EdgeInsets.symmetric(horizontal: 8),
+                                        margin: const EdgeInsets.symmetric(horizontal: 8),
                                         height: ScreenUtil().setHeight(22),
                                         width: ScreenUtil().setWidth(22),
-                                        decoration: BoxDecoration(
+                                        decoration: const BoxDecoration(
                                           color: Colors.white,
                                           shape: BoxShape.circle,
                                           boxShadow: [
@@ -192,7 +190,7 @@ class _ComandaPageState extends State<ComandaPage> {
                                         ),
                                         child: Center(
                                           child: Text(
-                                            '${comanda[index].cantidad}',
+                                            comanda[index].cantidad,
                                             style: GoogleFonts.poppins(
                                               fontWeight: FontWeight.w700,
                                               fontSize: ScreenUtil().setSp(16),
@@ -208,7 +206,7 @@ class _ComandaPageState extends State<ComandaPage> {
                                               comandaBloc.obtenerComandaPorMesa(widget.mesa.idMesa);
                                             }
                                           },
-                                          child: Container(
+                                          child: SizedBox(
                                             width: ScreenUtil().setWidth(16),
                                             child: SvgPicture.asset('assets/food_svg/plus.svg'),
                                           )),
@@ -307,7 +305,7 @@ class _ComandaPageState extends State<ComandaPage> {
                       width: double.infinity,
                       child: MaterialButton(
                         color: Colors.white,
-                        textColor: Color(0XFF585858),
+                        textColor: const Color(0XFF585858),
                         elevation: 1,
                         onPressed: () {
                           Navigator.push(
@@ -322,7 +320,7 @@ class _ComandaPageState extends State<ComandaPage> {
                                 );
                               },
                               transitionsBuilder: (context, animation, secondaryAnimation, child) {
-                                var begin = Offset(0.0, 1.0);
+                                var begin = const Offset(0.0, 1.0);
                                 var end = Offset.zero;
                                 var curve = Curves.ease;
 
@@ -340,14 +338,14 @@ class _ComandaPageState extends State<ComandaPage> {
                         },
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(22),
-                          side: BorderSide(
+                          side: const BorderSide(
                             color: Color(0XFFFF0036),
                           ),
                         ),
                         child: Text(
                           'Agregar pedidos',
                           style: GoogleFonts.poppins(
-                            color: Color(0XFFFF0036),
+                            color: const Color(0XFFFF0036),
                             fontWeight: FontWeight.w500,
                             fontSize: ScreenUtil().setSp(16),
                           ),
@@ -358,7 +356,7 @@ class _ComandaPageState extends State<ComandaPage> {
                       margin: EdgeInsets.only(left: ScreenUtil().setWidth(24), right: ScreenUtil().setWidth(24), bottom: ScreenUtil().setHeight(16)),
                       width: double.infinity,
                       child: MaterialButton(
-                        color: Color(0XFFFF0036),
+                        color: const Color(0XFFFF0036),
                         textColor: Colors.white,
                         elevation: 10,
                         onPressed: () async {
@@ -414,7 +412,7 @@ class _ComandaPageState extends State<ComandaPage> {
                 ),
                 width: double.infinity,
                 child: MaterialButton(
-                  color: Color(0XFFFF0036),
+                  color: const Color(0XFFFF0036),
                   textColor: Colors.white,
                   elevation: 10,
                   onPressed: () {
@@ -430,7 +428,7 @@ class _ComandaPageState extends State<ComandaPage> {
                           );
                         },
                         transitionsBuilder: (context, animation, secondaryAnimation, child) {
-                          var begin = Offset(0.0, 1.0);
+                          var begin = const Offset(0.0, 1.0);
                           var end = Offset.zero;
                           var curve = Curves.ease;
 
@@ -474,13 +472,13 @@ class _ComandaPageState extends State<ComandaPage> {
     return Container(
       height: double.infinity,
       width: double.infinity,
-      color: Color.fromRGBO(0, 0, 0, 0.5),
+      color: const Color.fromRGBO(0, 0, 0, 0.5),
       child: Center(
         child: (Platform.isAndroid)
-            ? CircularProgressIndicator(
+            ? const CircularProgressIndicator(
                 color: Color(0XFFFF0036),
               )
-            : CupertinoActivityIndicator(),
+            : const CupertinoActivityIndicator(),
       ),
     );
   }
@@ -496,7 +494,7 @@ class _ComandaPageState extends State<ComandaPage> {
               (index) => SizedBox(
                 height: ScreenUtil().setHeight(1),
                 width: ScreenUtil().setWidth(5),
-                child: DecoratedBox(
+                child: const DecoratedBox(
                   decoration: BoxDecoration(
                     color: Color(0xFFC4C4C4),
                   ),
@@ -525,18 +523,18 @@ class _ComandaPageState extends State<ComandaPage> {
           return Stack(
             children: [
               Container(
-                color: Color.fromRGBO(0, 0, 0, 0.001),
+                color: const Color.fromRGBO(0, 0, 0, 0.001),
                 child: DraggableScrollableSheet(
                     initialChildSize: 0.93,
                     minChildSize: 0.2,
                     maxChildSize: 0.93,
                     builder: (_, controller) {
                       return Container(
-                        decoration: BoxDecoration(
+                        decoration: const BoxDecoration(
                           color: Colors.white,
                           borderRadius: BorderRadius.only(
-                            topLeft: const Radius.circular(30),
-                            topRight: const Radius.circular(30),
+                            topLeft: Radius.circular(30),
+                            topRight: Radius.circular(30),
                           ),
                         ),
                         child: KeyboardActions(
@@ -556,7 +554,7 @@ class _ComandaPageState extends State<ComandaPage> {
                                     child: Center(
                                       child: Container(
                                         width: ScreenUtil().setWidth(48),
-                                        decoration: BoxDecoration(
+                                        decoration: const BoxDecoration(
                                           color: Color(0XFFBABABA),
                                         ),
                                       ),
@@ -569,7 +567,7 @@ class _ComandaPageState extends State<ComandaPage> {
                                     child: Text(
                                       'Detalles de entrega',
                                       style: GoogleFonts.poppins(
-                                        color: Color(0XFFFF0036),
+                                        color: const Color(0XFFFF0036),
                                         fontWeight: FontWeight.w600,
                                         fontSize: ScreenUtil().setSp(18),
                                       ),
@@ -587,30 +585,30 @@ class _ComandaPageState extends State<ComandaPage> {
                                       counterText: '',
                                       hintText: 'Ingrese nombre del cliente',
                                       hintStyle: TextStyle(
-                                        color: Color(0XFFBEBEBE),
+                                        color: const Color(0XFFBEBEBE),
                                         fontWeight: FontWeight.w400,
                                         fontSize: ScreenUtil().setSp(16),
                                         fontStyle: FontStyle.normal,
                                       ),
                                       filled: true,
-                                      fillColor: Color(0XFFEDEDED),
+                                      fillColor: const Color(0XFFEDEDED),
                                       contentPadding: EdgeInsets.only(
                                           left: ScreenUtil().setWidth(10), top: ScreenUtil().setHeight(5), bottom: ScreenUtil().setHeight(1)),
                                       enabledBorder: OutlineInputBorder(
                                         borderRadius: BorderRadius.circular(15),
-                                        borderSide: BorderSide(color: Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
+                                        borderSide: BorderSide(color: const Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
                                       ),
                                       focusedBorder: OutlineInputBorder(
                                         borderRadius: BorderRadius.circular(15),
-                                        borderSide: BorderSide(color: Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
+                                        borderSide: BorderSide(color: const Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
                                       ),
                                       border: OutlineInputBorder(
                                         borderRadius: BorderRadius.circular(15),
-                                        borderSide: BorderSide(color: Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
+                                        borderSide: BorderSide(color: const Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
                                       ),
                                     ),
                                     style: TextStyle(
-                                      color: Color(0XFF585858),
+                                      color: const Color(0XFF585858),
                                       fontWeight: FontWeight.w400,
                                       fontSize: ScreenUtil().setSp(16),
                                       fontStyle: FontStyle.normal,
@@ -628,30 +626,30 @@ class _ComandaPageState extends State<ComandaPage> {
                                       counterText: '',
                                       hintText: 'Ingrese direccion',
                                       hintStyle: TextStyle(
-                                        color: Color(0XFFBEBEBE),
+                                        color: const Color(0XFFBEBEBE),
                                         fontWeight: FontWeight.w400,
                                         fontSize: ScreenUtil().setSp(16),
                                         fontStyle: FontStyle.normal,
                                       ),
                                       filled: true,
-                                      fillColor: Color(0XFFEDEDED),
+                                      fillColor: const Color(0XFFEDEDED),
                                       contentPadding: EdgeInsets.only(
                                           left: ScreenUtil().setWidth(10), top: ScreenUtil().setHeight(5), bottom: ScreenUtil().setHeight(1)),
                                       enabledBorder: OutlineInputBorder(
                                         borderRadius: BorderRadius.circular(15),
-                                        borderSide: BorderSide(color: Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
+                                        borderSide: BorderSide(color: const Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
                                       ),
                                       focusedBorder: OutlineInputBorder(
                                         borderRadius: BorderRadius.circular(15),
-                                        borderSide: BorderSide(color: Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
+                                        borderSide: BorderSide(color: const Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
                                       ),
                                       border: OutlineInputBorder(
                                         borderRadius: BorderRadius.circular(15),
-                                        borderSide: BorderSide(color: Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
+                                        borderSide: BorderSide(color: const Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
                                       ),
                                     ),
                                     style: TextStyle(
-                                      color: Color(0XFF585858),
+                                      color: const Color(0XFF585858),
                                       fontWeight: FontWeight.w400,
                                       fontSize: ScreenUtil().setSp(16),
                                       fontStyle: FontStyle.normal,
@@ -670,30 +668,30 @@ class _ComandaPageState extends State<ComandaPage> {
                                       counterText: '',
                                       hintText: 'Ingrese teléfono',
                                       hintStyle: TextStyle(
-                                        color: Color(0XFFBEBEBE),
+                                        color: const Color(0XFFBEBEBE),
                                         fontWeight: FontWeight.w400,
                                         fontSize: ScreenUtil().setSp(16),
                                         fontStyle: FontStyle.normal,
                                       ),
                                       filled: true,
-                                      fillColor: Color(0XFFEDEDED),
+                                      fillColor: const Color(0XFFEDEDED),
                                       contentPadding: EdgeInsets.only(
                                           left: ScreenUtil().setWidth(10), top: ScreenUtil().setHeight(5), bottom: ScreenUtil().setHeight(1)),
                                       enabledBorder: OutlineInputBorder(
                                         borderRadius: BorderRadius.circular(15),
-                                        borderSide: BorderSide(color: Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
+                                        borderSide: BorderSide(color: const Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
                                       ),
                                       focusedBorder: OutlineInputBorder(
                                         borderRadius: BorderRadius.circular(15),
-                                        borderSide: BorderSide(color: Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
+                                        borderSide: BorderSide(color: const Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
                                       ),
                                       border: OutlineInputBorder(
                                         borderRadius: BorderRadius.circular(15),
-                                        borderSide: BorderSide(color: Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
+                                        borderSide: BorderSide(color: const Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
                                       ),
                                     ),
                                     style: TextStyle(
-                                      color: Color(0XFF585858),
+                                      color: const Color(0XFF585858),
                                       fontWeight: FontWeight.w400,
                                       fontSize: ScreenUtil().setSp(16),
                                       fontStyle: FontStyle.normal,
@@ -704,7 +702,7 @@ class _ComandaPageState extends State<ComandaPage> {
                                     onTap: () async {
                                       _controller.changeCargando(true);
 
-                                      if (_nombre.text.length > 0) {
+                                      if (_nombre.text.isNotEmpty) {
                                         final _pedidoApi = PedidosApi();
                                         final res = await _pedidoApi.enviarComanda(
                                             widget.mesa.idMesa, total.toString(), _nombre.text, _direccion.text, _telefono.text);
@@ -729,7 +727,7 @@ class _ComandaPageState extends State<ComandaPage> {
                                             child: Container(
                                               decoration: BoxDecoration(
                                                 borderRadius: BorderRadius.circular(50),
-                                                color: Color(0XFFFF0036),
+                                                color: const Color(0XFFFF0036),
                                               ),
                                               child: Center(
                                                 child: Text(
@@ -758,7 +756,7 @@ class _ComandaPageState extends State<ComandaPage> {
                                       child: Text(
                                         'Cancelar',
                                         style: GoogleFonts.poppins(
-                                          color: Color(0XFF8A8A8A),
+                                          color: const Color(0XFF8A8A8A),
                                           fontWeight: FontWeight.w500,
                                           fontSize: ScreenUtil().setSp(16),
                                         ),

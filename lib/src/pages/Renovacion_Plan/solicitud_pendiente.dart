@@ -19,7 +19,7 @@ class SolicitudPendiente extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Center(
-                child: Container(
+                child: SizedBox(
                   height: ScreenUtil().setHeight(150),
                   width: ScreenUtil().setWidth(150),
                   child: SvgPicture.asset('assets/food_svg/order_pendiente.svg'),
@@ -32,7 +32,7 @@ class SolicitudPendiente extends StatelessWidget {
                 'Solicitud pendiente de aprobación',
                 textAlign: TextAlign.center,
                 style: GoogleFonts.poppins(
-                  color: Color(0XFF585858),
+                  color: const Color(0XFF585858),
                   fontSize: ScreenUtil().setSp(20),
                   fontWeight: FontWeight.w500,
                   letterSpacing: ScreenUtil().setSp(0.016),
@@ -45,7 +45,7 @@ class SolicitudPendiente extends StatelessWidget {
                 'Por favor espere mientras actualizamos los datos de tu plan',
                 textAlign: TextAlign.center,
                 style: GoogleFonts.poppins(
-                  color: Color(0XFF585858),
+                  color: const Color(0XFF585858),
                   fontSize: ScreenUtil().setSp(14),
                   fontWeight: FontWeight.w400,
                   letterSpacing: ScreenUtil().setSp(0.016),
@@ -61,7 +61,7 @@ class SolicitudPendiente extends StatelessWidget {
                 child: Container(
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(50),
-                    color: Color(0XFFFF0036),
+                    color: const Color(0XFFFF0036),
                   ),
                   child: Center(
                     child: Text(

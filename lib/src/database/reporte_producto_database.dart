@@ -13,7 +13,7 @@ class ReporteProductoDatabase {
 
       return res;
     } catch (exception) {
-      print(exception);
+      return exception;
     }
   }
 

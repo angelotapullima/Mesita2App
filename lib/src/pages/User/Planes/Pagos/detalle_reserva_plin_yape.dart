@@ -25,7 +25,7 @@ class DetalleReservaPlinYape extends StatefulWidget {
 }
 
 class _DetalleReservaPlinYapeState extends State<DetalleReservaPlinYape> {
-  ValueNotifier<bool> _cargando = ValueNotifier(false);
+  final ValueNotifier<bool> _cargando = ValueNotifier(false);
   final TextEditingController _contactoController = TextEditingController();
   @override
   void initState() {
@@ -43,12 +43,12 @@ class _DetalleReservaPlinYapeState extends State<DetalleReservaPlinYape> {
         title: Text(
           'Generar pago',
           style: GoogleFonts.poppins(
-            color: Color(0XFF585858),
+            color: const Color(0XFF585858),
             fontSize: ScreenUtil().setSp(18),
             fontWeight: FontWeight.w700,
           ),
         ),
-        iconTheme: IconThemeData(color: Color(0XFF585858)),
+        iconTheme: const IconThemeData(color: Color(0XFF585858)),
         elevation: 0,
       ),
       body: ValueListenableBuilder(
@@ -81,7 +81,7 @@ class _DetalleReservaPlinYapeState extends State<DetalleReservaPlinYape> {
                                   '${prefs.negocioNombre}',
                                   textAlign: TextAlign.center,
                                   style: GoogleFonts.poppins(
-                                    color: Color(0XFFFF0036),
+                                    color: const Color(0XFFFF0036),
                                     fontSize: ScreenUtil().setSp(18),
                                     fontWeight: FontWeight.w600,
                                     letterSpacing: ScreenUtil().setSp(0.016),
@@ -96,7 +96,7 @@ class _DetalleReservaPlinYapeState extends State<DetalleReservaPlinYape> {
                                 text: TextSpan(
                                   text: 'Precio del plan  ${widget.plan.nombre}',
                                   style: GoogleFonts.poppins(
-                                    color: Color(0XFF585858),
+                                    color: const Color(0XFF585858),
                                     fontWeight: FontWeight.w500,
                                     fontSize: ScreenUtil().setSp(14),
                                     fontStyle: FontStyle.normal,
@@ -106,7 +106,7 @@ class _DetalleReservaPlinYapeState extends State<DetalleReservaPlinYape> {
                                     TextSpan(
                                       text: '  ',
                                       style: GoogleFonts.poppins(
-                                        color: Color(0XFF585858),
+                                        color: const Color(0XFF585858),
                                         fontWeight: FontWeight.w600,
                                         fontSize: ScreenUtil().setSp(14),
                                         fontStyle: FontStyle.normal,
@@ -116,7 +116,7 @@ class _DetalleReservaPlinYapeState extends State<DetalleReservaPlinYape> {
                                     TextSpan(
                                       text: 'S/${widget.plan.costo}',
                                       style: GoogleFonts.poppins(
-                                        color: Color(0XFF585858),
+                                        color: const Color(0XFF585858),
                                         fontWeight: FontWeight.w600,
                                         fontSize: ScreenUtil().setSp(14),
                                         fontStyle: FontStyle.normal,
@@ -132,7 +132,7 @@ class _DetalleReservaPlinYapeState extends State<DetalleReservaPlinYape> {
                               Text(
                                 'Monto a pagar',
                                 style: GoogleFonts.poppins(
-                                  color: Color(0XFF585858),
+                                  color: const Color(0XFF585858),
                                   fontWeight: FontWeight.w500,
                                   fontSize: ScreenUtil().setSp(14),
                                   fontStyle: FontStyle.normal,
@@ -144,7 +144,7 @@ class _DetalleReservaPlinYapeState extends State<DetalleReservaPlinYape> {
                                 text: TextSpan(
                                   text: 'S/',
                                   style: GoogleFonts.poppins(
-                                    color: Color(0XFF00C2FF).withOpacity(0.6),
+                                    color: const Color(0XFF00C2FF).withOpacity(0.6),
                                     fontWeight: FontWeight.w600,
                                     fontSize: ScreenUtil().setSp(42),
                                     fontStyle: FontStyle.normal,
@@ -154,7 +154,7 @@ class _DetalleReservaPlinYapeState extends State<DetalleReservaPlinYape> {
                                     TextSpan(
                                       text: ' ',
                                       style: GoogleFonts.poppins(
-                                        color: Color(0XFF00C2FF),
+                                        color: const Color(0XFF00C2FF),
                                         fontWeight: FontWeight.w600,
                                         fontSize: ScreenUtil().setSp(42),
                                         fontStyle: FontStyle.normal,
@@ -162,9 +162,9 @@ class _DetalleReservaPlinYapeState extends State<DetalleReservaPlinYape> {
                                       ),
                                     ),
                                     TextSpan(
-                                      text: '${widget.plan.costo}',
+                                      text: widget.plan.costo,
                                       style: GoogleFonts.poppins(
-                                        color: Color(0XFF00C2FF),
+                                        color: const Color(0XFF00C2FF),
                                         fontWeight: FontWeight.w600,
                                         fontSize: ScreenUtil().setSp(42),
                                         fontStyle: FontStyle.normal,
@@ -182,7 +182,7 @@ class _DetalleReservaPlinYapeState extends State<DetalleReservaPlinYape> {
                                   : Text(
                                       (widget.tipoMetodoPago == 1) ? 'Yapea el monto indicado' : 'Plinea el monto indicado',
                                       style: GoogleFonts.poppins(
-                                        color: Color(0XFF585858),
+                                        color: const Color(0XFF585858),
                                         fontWeight: FontWeight.w600,
                                         fontSize: ScreenUtil().setSp(16),
                                         fontStyle: FontStyle.normal,
@@ -196,7 +196,7 @@ class _DetalleReservaPlinYapeState extends State<DetalleReservaPlinYape> {
                                   ? Container()
                                   : Container(
                                       margin: EdgeInsets.symmetric(horizontal: ScreenUtil().setWidth(10)),
-                                      padding: EdgeInsets.all(10),
+                                      padding: const EdgeInsets.all(10),
                                       decoration: BoxDecoration(
                                         borderRadius: BorderRadius.circular(3),
                                         color: Colors.white,
@@ -226,7 +226,7 @@ class _DetalleReservaPlinYapeState extends State<DetalleReservaPlinYape> {
                                                 Text(
                                                   'Bufeo Tec S.A.C.',
                                                   style: GoogleFonts.poppins(
-                                                    color: Color(0XFF585858),
+                                                    color: const Color(0XFF585858),
                                                     fontWeight: FontWeight.w600,
                                                     fontSize: ScreenUtil().setSp(16),
                                                     fontStyle: FontStyle.normal,
@@ -237,7 +237,7 @@ class _DetalleReservaPlinYapeState extends State<DetalleReservaPlinYape> {
                                                   '927663998',
                                                   textAlign: TextAlign.center,
                                                   style: GoogleFonts.poppins(
-                                                    color: Color(0XFF585858),
+                                                    color: const Color(0XFF585858),
                                                     fontWeight: FontWeight.w400,
                                                     fontSize: ScreenUtil().setSp(12),
                                                     fontStyle: FontStyle.normal,
@@ -260,14 +260,14 @@ class _DetalleReservaPlinYapeState extends State<DetalleReservaPlinYape> {
                                           ),
                                           InkWell(
                                             onTap: () {
-                                              Clipboard.setData(new ClipboardData(text: '927663998')).then((_) {
-                                                ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('¡Número copiado!')));
+                                              Clipboard.setData(const ClipboardData(text: '927663998')).then((_) {
+                                                ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('¡Número copiado!')));
                                               });
                                             },
-                                            child: Container(
+                                            child: SizedBox(
                                               height: ScreenUtil().setHeight(24),
                                               width: ScreenUtil().setWidth(24),
-                                              child: Icon(
+                                              child: const Icon(
                                                 Icons.copy,
                                                 color: Color(0XFFC4C4C4),
                                               ),
@@ -282,7 +282,7 @@ class _DetalleReservaPlinYapeState extends State<DetalleReservaPlinYape> {
                               Text(
                                 'Realizado por',
                                 style: GoogleFonts.poppins(
-                                  color: Color(0XFF585858),
+                                  color: const Color(0XFF585858),
                                   fontWeight: FontWeight.w600,
                                   fontSize: ScreenUtil().setSp(16),
                                   fontStyle: FontStyle.normal,
@@ -293,18 +293,18 @@ class _DetalleReservaPlinYapeState extends State<DetalleReservaPlinYape> {
                                 padding: EdgeInsets.symmetric(horizontal: ScreenUtil().setWidth(27)),
                                 child: Row(
                                   children: [
-                                    Container(
+                                    SizedBox(
                                       width: ScreenUtil().setWidth(60),
                                       height: ScreenUtil().setHeight(60),
                                       child: ClipRRect(
                                         borderRadius: BorderRadius.circular(100),
                                         child: CachedNetworkImage(
-                                          placeholder: (context, url) => Container(
+                                          placeholder: (context, url) => const SizedBox(
                                             width: double.infinity,
                                             height: double.infinity,
                                             child: Image(image: AssetImage('assets/settings_svg/porfile.svg'), fit: BoxFit.cover),
                                           ),
-                                          errorWidget: (context, url, error) => Container(
+                                          errorWidget: (context, url, error) => SizedBox(
                                             width: double.infinity,
                                             height: double.infinity,
                                             child: Center(
@@ -339,7 +339,7 @@ class _DetalleReservaPlinYapeState extends State<DetalleReservaPlinYape> {
                                           Text(
                                             '${prefs.personName} ${prefs.personSurname}',
                                             style: GoogleFonts.poppins(
-                                              color: Color(0XFF585858),
+                                              color: const Color(0XFF585858),
                                               fontWeight: FontWeight.w500,
                                               fontSize: ScreenUtil().setSp(14),
                                               fontStyle: FontStyle.normal,
@@ -349,7 +349,7 @@ class _DetalleReservaPlinYapeState extends State<DetalleReservaPlinYape> {
                                           Text(
                                             'Cliente',
                                             style: GoogleFonts.poppins(
-                                              color: Color(0XFF00C2FF),
+                                              color: const Color(0XFF00C2FF),
                                               fontWeight: FontWeight.w400,
                                               fontSize: ScreenUtil().setSp(12),
                                               fontStyle: FontStyle.normal,
@@ -376,7 +376,7 @@ class _DetalleReservaPlinYapeState extends State<DetalleReservaPlinYape> {
                                       child: Icon(
                                         Icons.phone,
                                         size: ScreenUtil().setHeight(40),
-                                        color: Color(0XFF00C2FF),
+                                        color: const Color(0XFF00C2FF),
                                       ),
                                     ),
                                     SizedBox(
@@ -386,7 +386,7 @@ class _DetalleReservaPlinYapeState extends State<DetalleReservaPlinYape> {
                                       child: Column(
                                         crossAxisAlignment: CrossAxisAlignment.start,
                                         children: [
-                                          Container(
+                                          SizedBox(
                                             height: ScreenUtil().setHeight(35),
                                             child: TextField(
                                               controller: _contactoController,
@@ -394,7 +394,7 @@ class _DetalleReservaPlinYapeState extends State<DetalleReservaPlinYape> {
                                               keyboardType: TextInputType.number,
                                               maxLength: 9,
                                               decoration: InputDecoration(
-                                                suffixIcon: Icon(
+                                                suffixIcon: const Icon(
                                                   Icons.edit,
                                                   color: Color(0XFFC4C4C4),
                                                 ),
@@ -419,7 +419,7 @@ class _DetalleReservaPlinYapeState extends State<DetalleReservaPlinYape> {
                                           Text(
                                             'Número de contacto',
                                             style: GoogleFonts.poppins(
-                                              color: Color(0XFF00C2FF),
+                                              color: const Color(0XFF00C2FF),
                                               fontWeight: FontWeight.w400,
                                               fontSize: ScreenUtil().setSp(12),
                                               fontStyle: FontStyle.normal,
@@ -478,7 +478,7 @@ class _DetalleReservaPlinYapeState extends State<DetalleReservaPlinYape> {
                           child: Container(
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(50),
-                              color: Color(0XFFFF0036),
+                              color: const Color(0XFFFF0036),
                             ),
                             child: Center(
                               child: Text(
@@ -501,7 +501,7 @@ class _DetalleReservaPlinYapeState extends State<DetalleReservaPlinYape> {
                         width: double.infinity,
                         color: Colors.black.withOpacity(.2),
                         child: Center(
-                          child: (Platform.isAndroid) ? CircularProgressIndicator() : CupertinoActivityIndicator(),
+                          child: (Platform.isAndroid) ? const CircularProgressIndicator() : const CupertinoActivityIndicator(),
                         ),
                       )
                     : Container()

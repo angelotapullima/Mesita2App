@@ -49,22 +49,22 @@ class _VentasPageState extends State<VentasPage> {
         stream: ventasBloc.ventasStream,
         builder: (context, AsyncSnapshot<List<VentaModel>> snapshot) {
           if (snapshot.hasData) {
-            if (snapshot.data.length > 0) {
+            if (snapshot.data.isNotEmpty) {
               var ventas = snapshot.data;
               double total = 0;
               for (var i = 0; i < ventas.length; i++) {
                 total = total + double.parse(ventas[i].total);
               }
               return Scaffold(
-                backgroundColor: Color(0XFFE5E5E5),
+                backgroundColor: const Color(0XFFE5E5E5),
                 appBar: AppBar(
-                  backgroundColor: Color(0XFFE5E5E5),
+                  backgroundColor: const Color(0XFFE5E5E5),
                   leading: InkWell(
                     child: Container(),
                   ),
                   actions: [
                     Container(
-                      padding: EdgeInsets.all(16),
+                      padding: const EdgeInsets.all(16),
                       child: Text(
                         'S/${total.toStringAsFixed(2)}',
                         style: GoogleFonts.poppins(
@@ -106,7 +106,7 @@ class _VentasPageState extends State<VentasPage> {
                               return Container(
                                 height: ScreenUtil().setHeight(48),
                                 width: double.infinity,
-                                decoration: BoxDecoration(color: Color(0XFFEDEDED), borderRadius: BorderRadius.circular(15)),
+                                decoration: BoxDecoration(color: const Color(0XFFEDEDED), borderRadius: BorderRadius.circular(15)),
                                 padding: EdgeInsets.symmetric(horizontal: ScreenUtil().setWidth(10)),
                                 child: Row(
                                   children: [
@@ -115,7 +115,7 @@ class _VentasPageState extends State<VentasPage> {
                                         _controller.rangoFecha,
                                         textAlign: TextAlign.center,
                                         style: TextStyle(
-                                          color: (_controller.rangoFecha != 'Seleccionar fecha') ? Color(0XFF585858) : Color(0XFFBEBEBE),
+                                          color: (_controller.rangoFecha != 'Seleccionar fecha') ? const Color(0XFF585858) : const Color(0XFFBEBEBE),
                                           fontWeight: FontWeight.w400,
                                           fontSize: ScreenUtil().setSp(16),
                                           fontStyle: FontStyle.normal,
@@ -125,7 +125,7 @@ class _VentasPageState extends State<VentasPage> {
                                     Icon(
                                       Icons.arrow_drop_down,
                                       size: ScreenUtil().setHeight(20),
-                                      color: Color(0XFF585858),
+                                      color: const Color(0XFF585858),
                                     ),
                                   ],
                                 ),
@@ -138,13 +138,13 @@ class _VentasPageState extends State<VentasPage> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Container(
+                          SizedBox(
                             width: ScreenUtil().setWidth(50),
                             child: Center(
                               child: Text(
                                 'N°',
                                 style: GoogleFonts.poppins(
-                                  color: Color(0XFFD1D1D1),
+                                  color: const Color(0XFFD1D1D1),
                                   fontWeight: FontWeight.w500,
                                   fontSize: ScreenUtil().setSp(16),
                                   letterSpacing: 0.16,
@@ -152,13 +152,13 @@ class _VentasPageState extends State<VentasPage> {
                               ),
                             ),
                           ),
-                          Container(
+                          SizedBox(
                             width: ScreenUtil().setWidth(90),
                             child: Center(
                               child: Text(
                                 'Tipo',
                                 style: GoogleFonts.poppins(
-                                  color: Color(0XFFD1D1D1),
+                                  color: const Color(0XFFD1D1D1),
                                   fontWeight: FontWeight.w500,
                                   fontSize: ScreenUtil().setSp(16),
                                   letterSpacing: 0.16,
@@ -169,7 +169,7 @@ class _VentasPageState extends State<VentasPage> {
                           Text(
                             'Cant.',
                             style: GoogleFonts.poppins(
-                              color: Color(0XFFD1D1D1),
+                              color: const Color(0XFFD1D1D1),
                               fontWeight: FontWeight.w500,
                               fontSize: ScreenUtil().setSp(16),
                               letterSpacing: 0.16,
@@ -178,7 +178,7 @@ class _VentasPageState extends State<VentasPage> {
                           Text(
                             'Estado',
                             style: GoogleFonts.poppins(
-                              color: Color(0XFFD1D1D1),
+                              color: const Color(0XFFD1D1D1),
                               fontWeight: FontWeight.w500,
                               fontSize: ScreenUtil().setSp(16),
                               letterSpacing: 0.16,
@@ -186,7 +186,7 @@ class _VentasPageState extends State<VentasPage> {
                           ),
                         ],
                       ),
-                      Divider(
+                      const Divider(
                         color: Color(0XFFD1D1D1),
                         thickness: 1.5,
                       ),
@@ -203,9 +203,9 @@ class _VentasPageState extends State<VentasPage> {
               );
             } else {
               return Scaffold(
-                backgroundColor: Color(0XFFE5E5E5),
+                backgroundColor: const Color(0XFFE5E5E5),
                 appBar: AppBar(
-                  backgroundColor: Color(0XFFE5E5E5),
+                  backgroundColor: const Color(0XFFE5E5E5),
                   leading: InkWell(
                     child: Container(),
                   ),
@@ -239,7 +239,7 @@ class _VentasPageState extends State<VentasPage> {
                               return Container(
                                 height: ScreenUtil().setHeight(48),
                                 width: double.infinity,
-                                decoration: BoxDecoration(color: Color(0XFFEDEDED), borderRadius: BorderRadius.circular(15)),
+                                decoration: BoxDecoration(color: const Color(0XFFEDEDED), borderRadius: BorderRadius.circular(15)),
                                 padding: EdgeInsets.symmetric(horizontal: ScreenUtil().setWidth(10)),
                                 child: Row(
                                   children: [
@@ -248,7 +248,7 @@ class _VentasPageState extends State<VentasPage> {
                                         _controller.rangoFecha,
                                         textAlign: TextAlign.center,
                                         style: TextStyle(
-                                          color: (_controller.rangoFecha != 'Seleccionar fecha') ? Color(0XFF585858) : Color(0XFFBEBEBE),
+                                          color: (_controller.rangoFecha != 'Seleccionar fecha') ? const Color(0XFF585858) : const Color(0XFFBEBEBE),
                                           fontWeight: FontWeight.w400,
                                           fontSize: ScreenUtil().setSp(16),
                                           fontStyle: FontStyle.normal,
@@ -258,7 +258,7 @@ class _VentasPageState extends State<VentasPage> {
                                     Icon(
                                       Icons.arrow_drop_down,
                                       size: ScreenUtil().setHeight(20),
-                                      color: Color(0XFF585858),
+                                      color: const Color(0XFF585858),
                                     ),
                                   ],
                                 ),
@@ -271,13 +271,13 @@ class _VentasPageState extends State<VentasPage> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Container(
+                          SizedBox(
                             width: ScreenUtil().setWidth(50),
                             child: Center(
                               child: Text(
                                 'N°',
                                 style: GoogleFonts.poppins(
-                                  color: Color(0XFFD1D1D1),
+                                  color: const Color(0XFFD1D1D1),
                                   fontWeight: FontWeight.w500,
                                   fontSize: ScreenUtil().setSp(16),
                                   letterSpacing: 0.16,
@@ -285,13 +285,13 @@ class _VentasPageState extends State<VentasPage> {
                               ),
                             ),
                           ),
-                          Container(
+                          SizedBox(
                             width: ScreenUtil().setWidth(90),
                             child: Center(
                               child: Text(
                                 'Tipo',
                                 style: GoogleFonts.poppins(
-                                  color: Color(0XFFD1D1D1),
+                                  color: const Color(0XFFD1D1D1),
                                   fontWeight: FontWeight.w500,
                                   fontSize: ScreenUtil().setSp(16),
                                   letterSpacing: 0.16,
@@ -302,7 +302,7 @@ class _VentasPageState extends State<VentasPage> {
                           Text(
                             'Cant.',
                             style: GoogleFonts.poppins(
-                              color: Color(0XFFD1D1D1),
+                              color: const Color(0XFFD1D1D1),
                               fontWeight: FontWeight.w500,
                               fontSize: ScreenUtil().setSp(16),
                               letterSpacing: 0.16,
@@ -311,7 +311,7 @@ class _VentasPageState extends State<VentasPage> {
                           Text(
                             'Estado',
                             style: GoogleFonts.poppins(
-                              color: Color(0XFFD1D1D1),
+                              color: const Color(0XFFD1D1D1),
                               fontWeight: FontWeight.w500,
                               fontSize: ScreenUtil().setSp(16),
                               letterSpacing: 0.16,
@@ -319,7 +319,7 @@ class _VentasPageState extends State<VentasPage> {
                           ),
                         ],
                       ),
-                      Divider(
+                      const Divider(
                         color: Color(0XFFD1D1D1),
                         thickness: 1.5,
                       ),
@@ -328,7 +328,7 @@ class _VentasPageState extends State<VentasPage> {
                           child: Text(
                             'Sin ventas',
                             style: GoogleFonts.poppins(
-                              color: Color(0XFF585858),
+                              color: const Color(0XFF585858),
                               fontWeight: FontWeight.w400,
                               fontSize: ScreenUtil().setSp(16),
                               letterSpacing: 0.16,
@@ -343,9 +343,9 @@ class _VentasPageState extends State<VentasPage> {
             }
           } else {
             return Scaffold(
-              backgroundColor: Color(0XFFE5E5E5),
+              backgroundColor: const Color(0XFFE5E5E5),
               appBar: AppBar(
-                backgroundColor: Color(0XFFE5E5E5),
+                backgroundColor: const Color(0XFFE5E5E5),
                 leading: InkWell(
                   child: Container(),
                 ),
@@ -379,7 +379,7 @@ class _VentasPageState extends State<VentasPage> {
                             return Container(
                               height: ScreenUtil().setHeight(48),
                               width: double.infinity,
-                              decoration: BoxDecoration(color: Color(0XFFEDEDED), borderRadius: BorderRadius.circular(15)),
+                              decoration: BoxDecoration(color: const Color(0XFFEDEDED), borderRadius: BorderRadius.circular(15)),
                               padding: EdgeInsets.symmetric(horizontal: ScreenUtil().setWidth(10)),
                               child: Row(
                                 children: [
@@ -388,7 +388,7 @@ class _VentasPageState extends State<VentasPage> {
                                       _controller.rangoFecha,
                                       textAlign: TextAlign.center,
                                       style: TextStyle(
-                                        color: (_controller.rangoFecha != 'Seleccionar fecha') ? Color(0XFF585858) : Color(0XFFBEBEBE),
+                                        color: (_controller.rangoFecha != 'Seleccionar fecha') ? const Color(0XFF585858) : const Color(0XFFBEBEBE),
                                         fontWeight: FontWeight.w400,
                                         fontSize: ScreenUtil().setSp(16),
                                         fontStyle: FontStyle.normal,
@@ -398,7 +398,7 @@ class _VentasPageState extends State<VentasPage> {
                                   Icon(
                                     Icons.arrow_drop_down,
                                     size: ScreenUtil().setHeight(20),
-                                    color: Color(0XFF585858),
+                                    color: const Color(0XFF585858),
                                   ),
                                 ],
                               ),
@@ -411,13 +411,13 @@ class _VentasPageState extends State<VentasPage> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Container(
+                        SizedBox(
                           width: ScreenUtil().setWidth(50),
                           child: Center(
                             child: Text(
                               'N°',
                               style: GoogleFonts.poppins(
-                                color: Color(0XFFD1D1D1),
+                                color: const Color(0XFFD1D1D1),
                                 fontWeight: FontWeight.w500,
                                 fontSize: ScreenUtil().setSp(16),
                                 letterSpacing: 0.16,
@@ -425,13 +425,13 @@ class _VentasPageState extends State<VentasPage> {
                             ),
                           ),
                         ),
-                        Container(
+                        SizedBox(
                           width: ScreenUtil().setWidth(90),
                           child: Center(
                             child: Text(
                               'Tipo',
                               style: GoogleFonts.poppins(
-                                color: Color(0XFFD1D1D1),
+                                color: const Color(0XFFD1D1D1),
                                 fontWeight: FontWeight.w500,
                                 fontSize: ScreenUtil().setSp(16),
                                 letterSpacing: 0.16,
@@ -442,7 +442,7 @@ class _VentasPageState extends State<VentasPage> {
                         Text(
                           'Cant.',
                           style: GoogleFonts.poppins(
-                            color: Color(0XFFD1D1D1),
+                            color: const Color(0XFFD1D1D1),
                             fontWeight: FontWeight.w500,
                             fontSize: ScreenUtil().setSp(16),
                             letterSpacing: 0.16,
@@ -451,7 +451,7 @@ class _VentasPageState extends State<VentasPage> {
                         Text(
                           'Estado',
                           style: GoogleFonts.poppins(
-                            color: Color(0XFFD1D1D1),
+                            color: const Color(0XFFD1D1D1),
                             fontWeight: FontWeight.w500,
                             fontSize: ScreenUtil().setSp(16),
                             letterSpacing: 0.16,
@@ -459,17 +459,17 @@ class _VentasPageState extends State<VentasPage> {
                         ),
                       ],
                     ),
-                    Divider(
+                    const Divider(
                       color: Color(0XFFD1D1D1),
                       thickness: 1.5,
                     ),
                     Expanded(
                       child: Center(
                         child: (Platform.isAndroid)
-                            ? CircularProgressIndicator(
+                            ? const CircularProgressIndicator(
                                 color: Color(0XFFFF0036),
                               )
-                            : CupertinoActivityIndicator(),
+                            : const CupertinoActivityIndicator(),
                       ),
                     ),
                   ],
@@ -537,13 +537,13 @@ class _VentasPageState extends State<VentasPage> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Container(
+          SizedBox(
             width: ScreenUtil().setWidth(60),
             child: Center(
               child: Text(
                 '${venta.serie}-${venta.correlativo}',
                 style: GoogleFonts.poppins(
-                  color: Color(0XFF585858),
+                  color: const Color(0XFF585858),
                   fontWeight: FontWeight.w400,
                   fontSize: ScreenUtil().setSp(16),
                   letterSpacing: 0.16,
@@ -551,13 +551,13 @@ class _VentasPageState extends State<VentasPage> {
               ),
             ),
           ),
-          Container(
+          SizedBox(
             width: ScreenUtil().setWidth(80),
             child: Center(
               child: Text(
                 doc,
                 style: GoogleFonts.poppins(
-                  color: Color(0XFF585858),
+                  color: const Color(0XFF585858),
                   fontWeight: FontWeight.w400,
                   fontSize: ScreenUtil().setSp(16),
                   letterSpacing: 0.16,
@@ -566,9 +566,9 @@ class _VentasPageState extends State<VentasPage> {
             ),
           ),
           Text(
-            '${venta.total}',
+            venta.total,
             style: GoogleFonts.poppins(
-              color: Color(0XFF585858),
+              color: const Color(0XFF585858),
               fontWeight: FontWeight.w400,
               fontSize: ScreenUtil().setSp(16),
               letterSpacing: 0.16,
@@ -577,7 +577,7 @@ class _VentasPageState extends State<VentasPage> {
           Text(
             estado,
             style: GoogleFonts.poppins(
-              color: Color(0XFF585858),
+              color: const Color(0XFF585858),
               fontWeight: FontWeight.w400,
               fontSize: ScreenUtil().setSp(16),
               letterSpacing: 0.16,
@@ -597,35 +597,35 @@ class _VentasPageState extends State<VentasPage> {
       decoration: InputDecoration(
         hintText: title,
         hintStyle: TextStyle(
-          color: Color(0XFFBEBEBE),
+          color: const Color(0XFFBEBEBE),
           fontWeight: FontWeight.w400,
           fontSize: ScreenUtil().setSp(16),
           fontStyle: FontStyle.normal,
         ),
         filled: true,
-        fillColor: Color(0XFFEDEDED),
+        fillColor: const Color(0XFFEDEDED),
         contentPadding: EdgeInsets.only(left: ScreenUtil().setWidth(10), top: ScreenUtil().setHeight(5), bottom: ScreenUtil().setHeight(1)),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(15),
-          borderSide: BorderSide(color: Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
+          borderSide: BorderSide(color: const Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(15),
-          borderSide: BorderSide(color: Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
+          borderSide: BorderSide(color: const Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
         ),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(15),
-          borderSide: BorderSide(color: Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
+          borderSide: BorderSide(color: const Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
         ),
       ),
       style: TextStyle(
-        color: Color(0XFF585858),
+        color: const Color(0XFF585858),
         fontWeight: FontWeight.w400,
         fontSize: ScreenUtil().setSp(16),
         fontStyle: FontStyle.normal,
       ),
       onTap: () async {
-        FocusScope.of(context).requestFocus(new FocusNode());
+        FocusScope.of(context).requestFocus(FocusNode());
         DateTime picked = await PlatformDatePicker.showDate(
           context: context,
           backgroundColor: Colors.white,
@@ -634,13 +634,12 @@ class _VentasPageState extends State<VentasPage> {
           lastDate: DateTime(DateTime.now().year + 1),
         );
 
-        print('date $picked');
         if (picked != null) {
           control.text =
               "${picked.year.toString().padLeft(2, '0')}-${picked.month.toString().padLeft(2, '0')}-${picked.day.toString().padLeft(2, '0')}";
         }
 
-        if (fechaI.text.length > 0 && fechaF.text.length > 0) {
+        if (fechaI.text.isNotEmpty && fechaF.text.isNotEmpty) {
           _controller.changeBoton(true);
         } else {
           _controller.changeBoton(false);
@@ -658,18 +657,18 @@ class _VentasPageState extends State<VentasPage> {
           return Stack(
             children: [
               Container(
-                color: Color.fromRGBO(0, 0, 0, 0.001),
+                color: const Color.fromRGBO(0, 0, 0, 0.001),
                 child: DraggableScrollableSheet(
                     initialChildSize: 0.93,
                     minChildSize: 0.2,
                     maxChildSize: 0.93,
                     builder: (_, controller) {
                       return Container(
-                        decoration: BoxDecoration(
+                        decoration: const BoxDecoration(
                           color: Colors.white,
                           borderRadius: BorderRadius.only(
-                            topLeft: const Radius.circular(30),
-                            topRight: const Radius.circular(30),
+                            topLeft: Radius.circular(30),
+                            topRight: Radius.circular(30),
                           ),
                         ),
                         child: Padding(
@@ -683,7 +682,7 @@ class _VentasPageState extends State<VentasPage> {
                                   child: Center(
                                     child: Container(
                                       width: ScreenUtil().setWidth(48),
-                                      decoration: BoxDecoration(
+                                      decoration: const BoxDecoration(
                                         color: Color(0XFFBABABA),
                                       ),
                                     ),
@@ -696,7 +695,7 @@ class _VentasPageState extends State<VentasPage> {
                                   child: Text(
                                     'Establecer fecha',
                                     style: GoogleFonts.poppins(
-                                      color: Color(0XFFFF0036),
+                                      color: const Color(0XFFFF0036),
                                       fontWeight: FontWeight.w600,
                                       fontSize: ScreenUtil().setSp(18),
                                     ),
@@ -708,7 +707,7 @@ class _VentasPageState extends State<VentasPage> {
                                 Text(
                                   'Fecha inicio',
                                   style: GoogleFonts.poppins(
-                                    color: Color(0XFF585858),
+                                    color: const Color(0XFF585858),
                                     fontWeight: FontWeight.w500,
                                     fontSize: ScreenUtil().setSp(16),
                                   ),
@@ -720,7 +719,7 @@ class _VentasPageState extends State<VentasPage> {
                                 Text(
                                   'Fecha fin',
                                   style: GoogleFonts.poppins(
-                                    color: Color(0XFF585858),
+                                    color: const Color(0XFF585858),
                                     fontWeight: FontWeight.w500,
                                     fontSize: ScreenUtil().setSp(16),
                                   ),
@@ -748,7 +747,7 @@ class _VentasPageState extends State<VentasPage> {
                                           child: Container(
                                             decoration: BoxDecoration(
                                               borderRadius: BorderRadius.circular(50),
-                                              color: (_controller.boton) ? Color(0XFFFF0036) : Color(0XFFFF0036).withOpacity(0.6),
+                                              color: (_controller.boton) ? const Color(0XFFFF0036) : const Color(0XFFFF0036).withOpacity(0.6),
                                             ),
                                             child: Center(
                                               child: Text(
@@ -776,7 +775,7 @@ class _VentasPageState extends State<VentasPage> {
                                         return Text(
                                           _controller.text,
                                           style: TextStyle(
-                                            color: Color(0XFFFF0036),
+                                            color: const Color(0XFFFF0036),
                                             fontWeight: FontWeight.w600,
                                             fontSize: ScreenUtil().setSp(16),
                                             fontStyle: FontStyle.normal,
@@ -794,7 +793,7 @@ class _VentasPageState extends State<VentasPage> {
                                     child: Text(
                                       'Cancelar',
                                       style: GoogleFonts.poppins(
-                                        color: Color(0XFF8A8A8A),
+                                        color: const Color(0XFF8A8A8A),
                                         fontWeight: FontWeight.w500,
                                         fontSize: ScreenUtil().setSp(16),
                                       ),
@@ -826,13 +825,13 @@ class _VentasPageState extends State<VentasPage> {
     return Container(
       height: double.infinity,
       width: double.infinity,
-      color: Color.fromRGBO(0, 0, 0, 0.5),
+      color: const Color.fromRGBO(0, 0, 0, 0.5),
       child: Center(
         child: (Platform.isAndroid)
-            ? CircularProgressIndicator(
+            ? const CircularProgressIndicator(
                 color: Color(0XFFFF0036),
               )
-            : CupertinoActivityIndicator(),
+            : const CupertinoActivityIndicator(),
       ),
     );
   }

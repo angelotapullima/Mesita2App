@@ -38,7 +38,7 @@ void modalSeletPayMetod(BuildContext context, PlanesModel planCambio, String tit
         children: [
           GestureDetector(
             child: Container(
-              color: Color.fromRGBO(0, 0, 0, 0.001),
+              color: const Color.fromRGBO(0, 0, 0, 0.001),
               child: GestureDetector(
                 onTap: () {},
                 child: DraggableScrollableSheet(
@@ -47,11 +47,11 @@ void modalSeletPayMetod(BuildContext context, PlanesModel planCambio, String tit
                   maxChildSize: 0.9,
                   builder: (_, controller) {
                     return Container(
-                      decoration: BoxDecoration(
+                      decoration: const BoxDecoration(
                         color: Colors.white,
                         borderRadius: BorderRadius.only(
-                          topLeft: const Radius.circular(25.0),
-                          topRight: const Radius.circular(25.0),
+                          topLeft: Radius.circular(25.0),
+                          topRight: Radius.circular(25.0),
                         ),
                       ),
                       child: SingleChildScrollView(
@@ -67,14 +67,14 @@ void modalSeletPayMetod(BuildContext context, PlanesModel planCambio, String tit
                               ),
                               Row(
                                 children: [
-                                  BackButton(),
+                                  const BackButton(),
                                   SizedBox(
                                     width: ScreenUtil().setWidth(30),
                                   ),
                                   Text(
                                     titulo,
                                     style: GoogleFonts.poppins(
-                                      color: Color(0XFF585858),
+                                      color: const Color(0XFF585858),
                                       fontSize: ScreenUtil().setSp(18),
                                       fontWeight: FontWeight.w700,
                                     ),
@@ -87,7 +87,7 @@ void modalSeletPayMetod(BuildContext context, PlanesModel planCambio, String tit
                               Text(
                                 'Seleccione método de pago',
                                 style: GoogleFonts.poppins(
-                                  color: Color(0XFF585858),
+                                  color: const Color(0XFF585858),
                                   fontSize: ScreenUtil().setSp(16),
                                   fontWeight: FontWeight.w700,
                                   letterSpacing: ScreenUtil().setSp(0.016),
@@ -96,15 +96,15 @@ void modalSeletPayMetod(BuildContext context, PlanesModel planCambio, String tit
                               SizedBox(
                                 height: ScreenUtil().setHeight(16),
                               ),
-                              _otions('yape', 'yapeOn', 1, Color(0xFF9E00FF), _controller),
+                              _otions('yape', 'yapeOn', 1, const Color(0xFF9E00FF), _controller),
                               SizedBox(
                                 height: ScreenUtil().setHeight(18),
                               ),
-                              _otions('plin', 'plinOn', 2, Color(0xFF00C7FE), _controller),
+                              _otions('plin', 'plinOn', 2, const Color(0xFF00C7FE), _controller),
                               SizedBox(
                                 height: ScreenUtil().setHeight(18),
                               ),
-                              _otions('tarjetas', 'cardOn', 3, Color(0xFF003663), _controller),
+                              _otions('tarjetas', 'cardOn', 3, const Color(0xFF003663), _controller),
                               SizedBox(height: ScreenUtil().setHeight(48)),
                               InkWell(
                                 onTap: () async {
@@ -166,7 +166,7 @@ void modalSeletPayMetod(BuildContext context, PlanesModel planCambio, String tit
                                       return Container(
                                         decoration: BoxDecoration(
                                             borderRadius: BorderRadius.circular(50),
-                                            color: (_controller.botton) ? Color(0XFFFF0036) : Color(0XFFFF0036).withOpacity(0.6)),
+                                            color: (_controller.botton) ? const Color(0XFFFF0036) : const Color(0XFFFF0036).withOpacity(0.6)),
                                         child: Center(
                                           child: Text(
                                             'Continuar',
@@ -208,13 +208,13 @@ _showLoading() {
   return Container(
     height: double.infinity,
     width: double.infinity,
-    color: Color.fromRGBO(0, 0, 0, 0.5),
+    color: const Color.fromRGBO(0, 0, 0, 0.5),
     child: Center(
       child: (Platform.isAndroid)
-          ? CircularProgressIndicator(
+          ? const CircularProgressIndicator(
               color: Color(0XFFFF0036),
             )
-          : CupertinoActivityIndicator(),
+          : const CupertinoActivityIndicator(),
     ),
   );
 }
@@ -228,7 +228,7 @@ Widget _otions(String logo, String select, int value, Color selectColor, ChangeD
             onTap: () {
               controller.changeOption(value);
             },
-            child: Container(
+            child: SizedBox(
               height: ScreenUtil().setHeight(80),
               // decoration: BoxDecoration(
               //   border: Border.all(color: (controller.select == value) ? selectColor : Colors.white),

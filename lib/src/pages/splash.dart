@@ -1,5 +1,4 @@
 import 'package:after_layout/after_layout.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:mesita_aplication_2/src/api/linea_api.dart';
@@ -37,10 +36,8 @@ class _SplashState extends State<Splash> with AfterLayoutMixin<Splash> {
             final resp = compararFechaConActual(preferences.finPlan);
 
             if (resp) {
-              print('Necesitar renovar');
               Navigator.pushReplacementNamed(context, 'planes');
             } else {
-              print('No necesitas renovars');
               Navigator.pushReplacementNamed(context, 'home');
             }
           }

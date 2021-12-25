@@ -64,9 +64,9 @@ class _BebidasPageState extends State<BebidasPage> {
     final provider = Provider.of<CategoryController>(context, listen: false);
     final productosLineaBloc = ProviderBloc.productosLinea(context);
     return Scaffold(
-      backgroundColor: Color(0XFFE5E5E5),
+      backgroundColor: const Color(0XFFE5E5E5),
       appBar: AppBar(
-        backgroundColor: Color(0XFFE5E5E5),
+        backgroundColor: const Color(0XFFE5E5E5),
         leading: InkWell(
           child: Container(),
         ),
@@ -75,7 +75,7 @@ class _BebidasPageState extends State<BebidasPage> {
             onTap: () {
               addModal(context, idCategoria, 'bebida', 'drink_icon');
             },
-            child: Container(
+            child: SizedBox(
               width: ScreenUtil().setWidth(20),
               height: ScreenUtil().setHeight(20),
               child: SvgPicture.asset('assets/food_svg/add_food.svg'),
@@ -106,7 +106,7 @@ class _BebidasPageState extends State<BebidasPage> {
               stream: lineasBloc.lineasStream,
               builder: (context, AsyncSnapshot<List<LineaModel>> snapshot) {
                 if (snapshot.hasData) {
-                  if (snapshot.data.length > 0) {
+                  if (snapshot.data.isNotEmpty) {
                     var lineas = snapshot.data;
                     productosLineaBloc.obtenerProductosPorLinea(lineas[value].idLinea);
                     return SmartRefresher(
@@ -116,7 +116,7 @@ class _BebidasPageState extends State<BebidasPage> {
                       },
                       child: Column(
                         children: [
-                          Container(
+                          SizedBox(
                             height: ScreenUtil().setHeight(40),
                             child: ListView.builder(
                               itemCount: lineas.length + 1,
@@ -135,7 +135,7 @@ class _BebidasPageState extends State<BebidasPage> {
                                             );
                                           },
                                           transitionsBuilder: (context, animation, secondaryAnimation, child) {
-                                            var begin = Offset(0.0, 1.0);
+                                            var begin = const Offset(0.0, 1.0);
                                             var end = Offset.zero;
                                             var curve = Curves.ease;
 
@@ -173,17 +173,17 @@ class _BebidasPageState extends State<BebidasPage> {
                                     ),
                                     decoration: BoxDecoration(
                                         borderRadius: BorderRadius.circular(22),
-                                        color: (index == value) ? Color(0XFFFF0036) : Color(0XFFE5E5E5),
+                                        color: (index == value) ? const Color(0XFFFF0036) : const Color(0XFFE5E5E5),
                                         boxShadow: [
                                           BoxShadow(
-                                            color: (index == value) ? Color.fromRGBO(255, 0, 54, 0.5) : Colors.transparent,
+                                            color: (index == value) ? const Color.fromRGBO(255, 0, 54, 0.5) : Colors.transparent,
                                           )
                                         ]),
                                     child: Center(
                                         child: Text(
                                       lineas[index].lineaNombre,
                                       style: TextStyle(
-                                        color: (index == value) ? Colors.white : Color(0xFF585858),
+                                        color: (index == value) ? Colors.white : const Color(0xFF585858),
                                         fontSize: ScreenUtil().setSp(14),
                                         fontWeight: FontWeight.w500,
                                         letterSpacing: 0.16,
@@ -199,7 +199,7 @@ class _BebidasPageState extends State<BebidasPage> {
                               stream: productosLineaBloc.productosLineaStream,
                               builder: (context, AsyncSnapshot<List<ProductoLineaModel>> snapshot) {
                                 if (snapshot.hasData) {
-                                  if (snapshot.data.length > 0) {
+                                  if (snapshot.data.isNotEmpty) {
                                     var food = snapshot.data;
                                     return ListView.builder(
                                       itemCount: food.length,
@@ -211,7 +211,7 @@ class _BebidasPageState extends State<BebidasPage> {
                                       },
                                     );
                                   } else {
-                                    return Center(
+                                    return const Center(
                                       child: Text('Aún no existen bebidas para esta línea'),
                                     );
                                   }
@@ -225,7 +225,7 @@ class _BebidasPageState extends State<BebidasPage> {
                       ),
                     );
                   } else {
-                    return Center(
+                    return const Center(
                       child: Text('Aún no se agregaron líneas'),
                     );
                   }
@@ -242,13 +242,13 @@ class _BebidasPageState extends State<BebidasPage> {
     return Container(
       height: double.infinity,
       width: double.infinity,
-      color: Color.fromRGBO(0, 0, 0, 0.1),
+      color: const Color.fromRGBO(0, 0, 0, 0.1),
       child: Center(
         child: (Platform.isAndroid)
-            ? CircularProgressIndicator(
+            ? const CircularProgressIndicator(
                 color: Color(0XFFFF0036),
               )
-            : CupertinoActivityIndicator(),
+            : const CupertinoActivityIndicator(),
       ),
     );
   }
@@ -273,7 +273,7 @@ class _BebidasPageState extends State<BebidasPage> {
               );
             },
             transitionsBuilder: (context, animation, secondaryAnimation, child) {
-              var begin = Offset(0.0, 1.0);
+              var begin = const Offset(0.0, 1.0);
               var end = Offset.zero;
               var curve = Curves.ease;
 
@@ -303,7 +303,7 @@ class _BebidasPageState extends State<BebidasPage> {
             Container(
               height: ScreenUtil().setHeight(100),
               width: ScreenUtil().setWidth(100),
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 color: Color(0XFFEEEEEE),
                 shape: BoxShape.circle,
                 boxShadow: [
@@ -322,7 +322,7 @@ class _BebidasPageState extends State<BebidasPage> {
                       child: Container(
                         height: ScreenUtil().setHeight(80),
                         width: ScreenUtil().setWidth(80),
-                        decoration: BoxDecoration(
+                        decoration: const BoxDecoration(
                           color: Color(0XFFEEEEEE),
                           shape: BoxShape.circle,
                           boxShadow: [
@@ -334,14 +334,12 @@ class _BebidasPageState extends State<BebidasPage> {
                           ],
                         ),
                         child: CachedNetworkImage(
-                          placeholder: (context, url) => Container(
+                          placeholder: (context, url) => SizedBox(
                             child: SvgPicture.asset('assets/food_svg/food.svg'),
                           ),
-                          errorWidget: (context, url, error) => Container(
-                            child: Container(
-                              child: SvgPicture.asset(
-                                'assets/food_svg/food.svg',
-                              ),
+                          errorWidget: (context, url, error) => SizedBox(
+                            child: SvgPicture.asset(
+                              'assets/food_svg/food.svg',
                             ),
                           ),
                           imageUrl: '$apiBaseURL/${food.productoFoto}',
@@ -371,9 +369,9 @@ class _BebidasPageState extends State<BebidasPage> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    '${food.productoNombre}',
+                    food.productoNombre,
                     style: TextStyle(
-                      color: Color(0XFF585858),
+                      color: const Color(0XFF585858),
                       fontSize: ScreenUtil().setSp(16),
                       fontWeight: FontWeight.w500,
                       letterSpacing: 0.16,
@@ -383,7 +381,7 @@ class _BebidasPageState extends State<BebidasPage> {
                     height: ScreenUtil().setHeight(8),
                   ),
                   Text(
-                    '$disponible',
+                    disponible,
                     style: TextStyle(
                       color: color,
                       fontSize: ScreenUtil().setSp(14),
@@ -397,7 +395,7 @@ class _BebidasPageState extends State<BebidasPage> {
                   Text(
                     'S/${food.productoPrecio}',
                     style: TextStyle(
-                      color: Color(0XFF3A3A3A),
+                      color: const Color(0XFF3A3A3A),
                       fontSize: ScreenUtil().setSp(16),
                       fontWeight: FontWeight.w700,
                       letterSpacing: 0.16,

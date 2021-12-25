@@ -22,14 +22,14 @@ class _DeleteProductState extends State<DeleteProduct> {
   @override
   Widget build(BuildContext context) {
     return Material(
-      color: Color(0XFFC4C4C4).withOpacity(.6),
+      color: const Color(0XFFC4C4C4).withOpacity(.6),
       child: Stack(
         children: [
           InkWell(
             onTap: () {
               //Navigator.pop(context);
             },
-            child: Container(
+            child: const SizedBox(
               height: double.infinity,
               width: double.infinity,
             ),
@@ -60,14 +60,14 @@ class _DeleteProductState extends State<DeleteProduct> {
                     margin: EdgeInsets.symmetric(horizontal: ScreenUtil().setWidth(24)),
                     padding: EdgeInsets.symmetric(vertical: ScreenUtil().setHeight(10)),
                     decoration: BoxDecoration(
-                      color: Color(0XFFEDEDED),
+                      color: const Color(0XFFEDEDED),
                       borderRadius: BorderRadius.circular(22),
                     ),
                     child: Center(
                       child: Text(
                         'Eliminar ${widget.nameCategory}',
                         style: TextStyle(
-                          color: Color(0XFFFF0036),
+                          color: const Color(0XFFFF0036),
                           fontSize: ScreenUtil().setSp(16),
                           fontWeight: FontWeight.w400,
                           letterSpacing: 0.16,
@@ -88,14 +88,14 @@ class _DeleteProductState extends State<DeleteProduct> {
                     margin: EdgeInsets.symmetric(horizontal: ScreenUtil().setWidth(24)),
                     padding: EdgeInsets.symmetric(vertical: ScreenUtil().setHeight(10)),
                     decoration: BoxDecoration(
-                      color: Color(0XFFEDEDED),
+                      color: const Color(0XFFEDEDED),
                       borderRadius: BorderRadius.circular(22),
                     ),
                     child: Center(
                       child: Text(
                         'Cancelar',
                         style: TextStyle(
-                          color: Color(0XFF585858),
+                          color: const Color(0XFF585858),
                           fontSize: ScreenUtil().setSp(16),
                           fontWeight: FontWeight.w400,
                           letterSpacing: 0.16,
@@ -114,7 +114,7 @@ class _DeleteProductState extends State<DeleteProduct> {
                         return Text(
                           _controller.text,
                           style: TextStyle(
-                            color: Color(0XFFFF0036),
+                            color: const Color(0XFFFF0036),
                             fontWeight: FontWeight.w600,
                             fontSize: ScreenUtil().setSp(16),
                             fontStyle: FontStyle.normal,
@@ -147,13 +147,13 @@ class _DeleteProductState extends State<DeleteProduct> {
     return Container(
       height: double.infinity,
       width: double.infinity,
-      color: Color.fromRGBO(0, 0, 0, 0.5),
+      color: const Color.fromRGBO(0, 0, 0, 0.5),
       child: Center(
         child: (Platform.isAndroid)
-            ? CircularProgressIndicator(
+            ? const CircularProgressIndicator(
                 color: Color(0XFFFF0036),
               )
-            : CupertinoActivityIndicator(),
+            : const CupertinoActivityIndicator(),
       ),
     );
   }

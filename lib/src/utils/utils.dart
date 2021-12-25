@@ -8,7 +8,7 @@ import 'package:intl/intl.dart';
 obtenerPrimerNombre(String nombre) {
   if (nombre != '') {
     var separarNombre = nombre.split(' ');
-    return '${separarNombre[0]}';
+    return separarNombre[0];
   } else {
     return '';
   }
@@ -21,7 +21,7 @@ obtenerFecha(String date) {
 
   var fecha = DateTime.parse(date);
 
-  final DateFormat fech = new DateFormat('dd MMM', 'es');
+  final DateFormat fech = DateFormat('dd MMM', 'es');
 
   return fech.format(fecha);
 }
@@ -34,10 +34,9 @@ obtenerRangoFecha(String dateInicio, String dateFin) {
   var fecha1 = DateTime.parse(dateInicio);
   var fecha2 = DateTime.parse(dateFin);
 
-  final DateFormat dia = new DateFormat('dd', 'es');
-  final DateFormat mes = new DateFormat('MMMM', 'es');
-  final DateFormat mes0 = new DateFormat('MMM', 'es');
-  //final DateFormat year = new DateFormat('yyyy', 'es');
+  final DateFormat dia = DateFormat('dd', 'es');
+  final DateFormat mes = DateFormat('MMMM', 'es');
+  final DateFormat mes0 = DateFormat('MMM', 'es');
 
   var mes1 = mes.format(fecha1);
   var mes2 = mes.format(fecha2);
@@ -59,15 +58,15 @@ obtenerRangoFecha(String dateInicio, String dateFin) {
 
 obtenerFechaActual() {
   var date = DateTime.now();
-  final DateFormat fecha = new DateFormat('dd MMM yyyy', 'es');
+  final DateFormat fecha = DateFormat('dd MMM yyyy', 'es');
 
   return fecha.format(date);
 }
 
 obtenerFechaFinSuscripcion(int tiempo) {
   var date = DateTime.now();
-  final DateFormat fecha = new DateFormat('dd MMM yyyy', 'es');
-  var fechaRegreso;
+  final DateFormat fecha = DateFormat('dd MMM yyyy', 'es');
+  DateTime fechaRegreso;
   if (tiempo == 7) {
     fechaRegreso = DateTime(date.year, date.month, date.day + tiempo);
   } else {
@@ -79,15 +78,15 @@ obtenerFechaFinSuscripcion(int tiempo) {
 
 obtenerFechaActualApi() {
   var date = DateTime.now();
-  final DateFormat fecha = new DateFormat('yyyy-MM-dd');
+  final DateFormat fecha = DateFormat('yyyy-MM-dd');
 
   return fecha.format(date);
 }
 
 obtenerFechaFinSuscripcionApi(int tiempo) {
   var date = DateTime.now();
-  final DateFormat fecha = new DateFormat('yyyy-MM-dd');
-  var fechaRegreso;
+  final DateFormat fecha = DateFormat('yyyy-MM-dd');
+  DateTime fechaRegreso;
   if (tiempo == 7) {
     fechaRegreso = DateTime(date.year, date.month, date.day + tiempo);
   } else {
@@ -98,16 +97,16 @@ obtenerFechaFinSuscripcionApi(int tiempo) {
 }
 
 void showToast(String texto, Color color) {
-  Fluttertoast.showToast(msg: "$texto", toastLength: Toast.LENGTH_SHORT, timeInSecForIosWeb: 3, backgroundColor: color, textColor: Colors.white);
+  Fluttertoast.showToast(msg: texto, toastLength: Toast.LENGTH_SHORT, timeInSecForIosWeb: 3, backgroundColor: color, textColor: Colors.white);
 }
 
 showLoading() {
   return Center(
     child: (Platform.isAndroid)
-        ? CircularProgressIndicator(
+        ? const CircularProgressIndicator(
             color: Color(0XFFFF0036),
           )
-        : CupertinoActivityIndicator(),
+        : const CupertinoActivityIndicator(),
   );
 }
 
@@ -129,7 +128,7 @@ compararFechaConActual(String fecha) {
 }
 
 verificarNull(String value) {
-  if (value.length > 0 && value != 'null') {
+  if (value.isNotEmpty && value != 'null') {
     return value;
   } else {
     return '-';

@@ -11,9 +11,9 @@ class NegocioApi {
       final url = Uri.parse('$apiBaseURL/api/Negocio/actualizar_negocio');
 
       final resp = await http.post(url, body: {
-        'nombre': '$nombre',
-        'telefono': '$telefono',
-        'direccion': '$direccion',
+        'nombre': nombre,
+        'telefono': telefono,
+        'direccion': direccion,
         'id_negocio': _prefs.idNegocio,
         'tn': _prefs.token,
         'app': 'true',

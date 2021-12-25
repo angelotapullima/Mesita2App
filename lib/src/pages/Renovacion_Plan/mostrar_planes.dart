@@ -6,7 +6,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mesita_aplication_2/src/bloc/provider.dart';
 import 'package:mesita_aplication_2/src/models/planes_model.dart';
-import 'package:mesita_aplication_2/src/pages/User/Planes/Pagos/modals_metodoPago.dart';
+import 'package:mesita_aplication_2/src/pages/User/Planes/Pagos/modals_metodo_pago.dart';
 import 'package:mesita_aplication_2/src/preferences/preferences.dart';
 
 class MostrarPlanesPage extends StatelessWidget {
@@ -22,13 +22,13 @@ class MostrarPlanesPage extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 0,
-        iconTheme: IconThemeData(
+        iconTheme: const IconThemeData(
           color: Color(0XFF3A3A3A),
         ),
         title: Text(
           'Planes',
           style: GoogleFonts.poppins(
-            color: Color(0XFF3A3A3A),
+            color: const Color(0XFF3A3A3A),
             fontSize: ScreenUtil().setSp(18),
             fontWeight: FontWeight.w600,
             letterSpacing: 0.16,
@@ -39,19 +39,19 @@ class MostrarPlanesPage extends StatelessWidget {
           stream: planesBloc.planesStream,
           builder: (context, AsyncSnapshot<List<PlanesModel>> snapshot) {
             if (snapshot.hasData) {
-              if (snapshot.data.length > 0) {
+              if (snapshot.data.isNotEmpty) {
                 var planes = snapshot.data;
                 return SingleChildScrollView(
                   child: ListView.builder(
                       itemCount: planes.length,
                       shrinkWrap: true,
-                      physics: NeverScrollableScrollPhysics(),
+                      physics: const NeverScrollableScrollPhysics(),
                       itemBuilder: (context, index) {
                         return planTarjeta(context, planes[index], prefs);
                       }),
                 );
               } else {
-                return Center(
+                return const Center(
                   child: Text('Sin planes disponibles'),
                 );
               }
@@ -65,10 +65,10 @@ class MostrarPlanesPage extends StatelessWidget {
   _showLoading() {
     return Center(
       child: (Platform.isAndroid)
-          ? CircularProgressIndicator(
+          ? const CircularProgressIndicator(
               color: Color(0XFFFF0036),
             )
-          : CupertinoActivityIndicator(),
+          : const CupertinoActivityIndicator(),
     );
   }
 
@@ -81,14 +81,14 @@ class MostrarPlanesPage extends StatelessWidget {
     Color color2;
 
     if (plan.idPlan == '1') {
-      color1 = Color(0XFF3DE8F3).withOpacity(.6);
-      color2 = Color(0XFF00C2FF).withOpacity(.8);
+      color1 = const Color(0XFF3DE8F3).withOpacity(.6);
+      color2 = const Color(0XFF00C2FF).withOpacity(.8);
     } else if (plan.idPlan == '2') {
-      color1 = Color(0XFF5782F0).withOpacity(.6);
-      color2 = Color(0XFF0047FF).withOpacity(.8);
+      color1 = const Color(0XFF5782F0).withOpacity(.6);
+      color2 = const Color(0XFF0047FF).withOpacity(.8);
     } else {
-      color1 = Color(0XFFB367FF).withOpacity(.6);
-      color2 = Color(0XFF7000FF).withOpacity(.8);
+      color1 = const Color(0XFFB367FF).withOpacity(.6);
+      color2 = const Color(0XFF7000FF).withOpacity(.8);
     }
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: ScreenUtil().setWidth(24), vertical: ScreenUtil().setHeight(16)),
@@ -116,7 +116,7 @@ class MostrarPlanesPage extends StatelessWidget {
                 ? Container(
                     height: ScreenUtil().setHeight(40),
                     width: double.infinity,
-                    decoration: BoxDecoration(
+                    decoration: const BoxDecoration(
                       borderRadius: BorderRadius.only(
                         topLeft: Radius.circular(15),
                         topRight: Radius.circular(15),
@@ -131,7 +131,7 @@ class MostrarPlanesPage extends StatelessWidget {
                         Text(
                           'PLAN ACTUAL',
                           style: GoogleFonts.poppins(
-                            color: Color(0XFF585858),
+                            color: const Color(0XFF585858),
                             fontSize: ScreenUtil().setSp(16),
                             fontWeight: FontWeight.w500,
                             letterSpacing: 0.16,
@@ -141,7 +141,7 @@ class MostrarPlanesPage extends StatelessWidget {
                     ),
                   )
                 : Container(),
-            Spacer(),
+            const Spacer(),
             Text(
               plan.nombre,
               style: GoogleFonts.poppins(
@@ -227,7 +227,7 @@ class MostrarPlanesPage extends StatelessWidget {
                           modalSeletPayMetod(context, plan, 'Cambiar plan', false, true);
                         },
                         child: Container(
-                          padding: EdgeInsets.all(8),
+                          padding: const EdgeInsets.all(8),
                           decoration: BoxDecoration(
                             border: Border.all(color: Colors.white),
                             borderRadius: BorderRadius.circular(22),

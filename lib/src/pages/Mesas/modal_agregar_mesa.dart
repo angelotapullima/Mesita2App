@@ -33,8 +33,8 @@ class ChangeController extends ChangeNotifier {
 void mesaModal(BuildContext context) {
   final _controller = ChangeController();
 
-  TextEditingController _numberTableController = new TextEditingController();
-  TextEditingController _capacityController = new TextEditingController();
+  TextEditingController _numberTableController = TextEditingController();
+  TextEditingController _capacityController = TextEditingController();
 
   FocusNode _focus1 = FocusNode();
   FocusNode _focus2 = FocusNode();
@@ -47,18 +47,18 @@ void mesaModal(BuildContext context) {
         return Stack(
           children: [
             Container(
-              color: Color.fromRGBO(0, 0, 0, 0.001),
+              color: const Color.fromRGBO(0, 0, 0, 0.001),
               child: DraggableScrollableSheet(
                   initialChildSize: 0.93,
                   minChildSize: 0.2,
                   maxChildSize: 0.93,
                   builder: (_, controller) {
                     return Container(
-                      decoration: BoxDecoration(
+                      decoration: const BoxDecoration(
                         color: Colors.white,
                         borderRadius: BorderRadius.only(
-                          topLeft: const Radius.circular(30),
-                          topRight: const Radius.circular(30),
+                          topLeft: Radius.circular(30),
+                          topRight: Radius.circular(30),
                         ),
                       ),
                       child: KeyboardActions(
@@ -77,7 +77,7 @@ void mesaModal(BuildContext context) {
                                   child: Center(
                                     child: Container(
                                       width: ScreenUtil().setWidth(48),
-                                      decoration: BoxDecoration(
+                                      decoration: const BoxDecoration(
                                         color: Color(0XFFBABABA),
                                       ),
                                     ),
@@ -90,7 +90,7 @@ void mesaModal(BuildContext context) {
                                   child: Text(
                                     'Agregar mesa',
                                     style: GoogleFonts.poppins(
-                                      color: Color(0XFFFF0036),
+                                      color: const Color(0XFFFF0036),
                                       fontWeight: FontWeight.w600,
                                       fontSize: ScreenUtil().setSp(18),
                                     ),
@@ -102,7 +102,7 @@ void mesaModal(BuildContext context) {
                                 Text(
                                   'Número de mesa',
                                   style: GoogleFonts.poppins(
-                                    color: Color(0XFF585858),
+                                    color: const Color(0XFF585858),
                                     fontWeight: FontWeight.w500,
                                     fontSize: ScreenUtil().setSp(16),
                                   ),
@@ -112,7 +112,7 @@ void mesaModal(BuildContext context) {
                                   controller: _numberTableController,
                                   maxLines: 1,
                                   onChanged: (value) {
-                                    if (value.length > 0 && _capacityController.text.length > 0) {
+                                    if (value.isNotEmpty && _capacityController.text.isNotEmpty) {
                                       _controller.changeBoton(true);
                                     } else {
                                       _controller.changeBoton(false);
@@ -122,30 +122,30 @@ void mesaModal(BuildContext context) {
                                   decoration: InputDecoration(
                                     hintText: 'Ingrese número de mesa',
                                     hintStyle: TextStyle(
-                                      color: Color(0XFFBEBEBE),
+                                      color: const Color(0XFFBEBEBE),
                                       fontWeight: FontWeight.w400,
                                       fontSize: ScreenUtil().setSp(16),
                                       fontStyle: FontStyle.normal,
                                     ),
                                     filled: true,
-                                    fillColor: Color(0XFFEDEDED),
+                                    fillColor: const Color(0XFFEDEDED),
                                     contentPadding: EdgeInsets.only(
                                         left: ScreenUtil().setWidth(10), top: ScreenUtil().setHeight(5), bottom: ScreenUtil().setHeight(1)),
                                     enabledBorder: OutlineInputBorder(
                                       borderRadius: BorderRadius.circular(15),
-                                      borderSide: BorderSide(color: Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
+                                      borderSide: BorderSide(color: const Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
                                     ),
                                     focusedBorder: OutlineInputBorder(
                                       borderRadius: BorderRadius.circular(15),
-                                      borderSide: BorderSide(color: Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
+                                      borderSide: BorderSide(color: const Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
                                     ),
                                     border: OutlineInputBorder(
                                       borderRadius: BorderRadius.circular(15),
-                                      borderSide: BorderSide(color: Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
+                                      borderSide: BorderSide(color: const Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
                                     ),
                                   ),
                                   style: TextStyle(
-                                    color: Color(0XFF585858),
+                                    color: const Color(0XFF585858),
                                     fontWeight: FontWeight.w400,
                                     fontSize: ScreenUtil().setSp(16),
                                     fontStyle: FontStyle.normal,
@@ -155,7 +155,7 @@ void mesaModal(BuildContext context) {
                                 Text(
                                   'Capacidad de mesa',
                                   style: GoogleFonts.poppins(
-                                    color: Color(0XFF585858),
+                                    color: const Color(0XFF585858),
                                     fontWeight: FontWeight.w500,
                                     fontSize: ScreenUtil().setSp(16),
                                   ),
@@ -166,7 +166,7 @@ void mesaModal(BuildContext context) {
                                   maxLines: 1,
                                   keyboardType: TextInputType.number,
                                   onChanged: (value) {
-                                    if (value.length > 0 && _numberTableController.text.length > 0) {
+                                    if (value.isNotEmpty && _numberTableController.text.isNotEmpty) {
                                       _controller.changeBoton(true);
                                     } else {
                                       _controller.changeBoton(false);
@@ -175,30 +175,30 @@ void mesaModal(BuildContext context) {
                                   decoration: InputDecoration(
                                     hintText: 'Ingrese capacidad de mesa',
                                     hintStyle: TextStyle(
-                                      color: Color(0XFFBEBEBE),
+                                      color: const Color(0XFFBEBEBE),
                                       fontWeight: FontWeight.w400,
                                       fontSize: ScreenUtil().setSp(16),
                                       fontStyle: FontStyle.normal,
                                     ),
                                     filled: true,
-                                    fillColor: Color(0XFFEDEDED),
+                                    fillColor: const Color(0XFFEDEDED),
                                     contentPadding: EdgeInsets.only(
                                         left: ScreenUtil().setWidth(10), top: ScreenUtil().setHeight(5), bottom: ScreenUtil().setHeight(1)),
                                     enabledBorder: OutlineInputBorder(
                                       borderRadius: BorderRadius.circular(15),
-                                      borderSide: BorderSide(color: Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
+                                      borderSide: BorderSide(color: const Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
                                     ),
                                     focusedBorder: OutlineInputBorder(
                                       borderRadius: BorderRadius.circular(15),
-                                      borderSide: BorderSide(color: Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
+                                      borderSide: BorderSide(color: const Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
                                     ),
                                     border: OutlineInputBorder(
                                       borderRadius: BorderRadius.circular(15),
-                                      borderSide: BorderSide(color: Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
+                                      borderSide: BorderSide(color: const Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
                                     ),
                                   ),
                                   style: TextStyle(
-                                    color: Color(0XFF585858),
+                                    color: const Color(0XFF585858),
                                     fontWeight: FontWeight.w400,
                                     fontSize: ScreenUtil().setSp(16),
                                     fontStyle: FontStyle.normal,
@@ -229,7 +229,7 @@ void mesaModal(BuildContext context) {
                                         return Container(
                                           decoration: BoxDecoration(
                                             borderRadius: BorderRadius.circular(50),
-                                            color: (_controller.boton) ? Color(0XFFFF0036) : Color(0XFFFF0036).withOpacity(0.6),
+                                            color: (_controller.boton) ? const Color(0XFFFF0036) : const Color(0XFFFF0036).withOpacity(0.6),
                                           ),
                                           child: Center(
                                             child: Text(
@@ -256,7 +256,7 @@ void mesaModal(BuildContext context) {
                                         return Text(
                                           _controller.text,
                                           style: TextStyle(
-                                            color: Color(0XFFFF0036),
+                                            color: const Color(0XFFFF0036),
                                             fontWeight: FontWeight.w600,
                                             fontSize: ScreenUtil().setSp(16),
                                             fontStyle: FontStyle.normal,
@@ -274,7 +274,7 @@ void mesaModal(BuildContext context) {
                                     child: Text(
                                       'Cancelar',
                                       style: GoogleFonts.poppins(
-                                        color: Color(0XFF8A8A8A),
+                                        color: const Color(0XFF8A8A8A),
                                         fontWeight: FontWeight.w500,
                                         fontSize: ScreenUtil().setSp(16),
                                       ),
@@ -306,8 +306,8 @@ void mesaModal(BuildContext context) {
 void editMesaModal(BuildContext context, MesaModel mesaData) {
   final _controller = ChangeController();
 
-  TextEditingController _numberTableController = new TextEditingController();
-  TextEditingController _capacityController = new TextEditingController();
+  TextEditingController _numberTableController = TextEditingController();
+  TextEditingController _capacityController = TextEditingController();
 
   FocusNode _focus1 = FocusNode();
   FocusNode _focus2 = FocusNode();
@@ -315,7 +315,7 @@ void editMesaModal(BuildContext context, MesaModel mesaData) {
   _numberTableController.text = mesaData.mesaNombre;
   _capacityController.text = mesaData.mesaCapacidad;
 
-  if (_numberTableController.text.length > 0 && _capacityController.text.length > 0) {
+  if (_numberTableController.text.isNotEmpty && _capacityController.text.isNotEmpty) {
     _controller.changeBoton(true);
   }
 
@@ -327,18 +327,18 @@ void editMesaModal(BuildContext context, MesaModel mesaData) {
         return Stack(
           children: [
             Container(
-              color: Color.fromRGBO(0, 0, 0, 0.001),
+              color: const Color.fromRGBO(0, 0, 0, 0.001),
               child: DraggableScrollableSheet(
                   initialChildSize: 0.93,
                   minChildSize: 0.2,
                   maxChildSize: 0.93,
                   builder: (_, controller) {
                     return Container(
-                      decoration: BoxDecoration(
+                      decoration: const BoxDecoration(
                         color: Colors.white,
                         borderRadius: BorderRadius.only(
-                          topLeft: const Radius.circular(30),
-                          topRight: const Radius.circular(30),
+                          topLeft: Radius.circular(30),
+                          topRight: Radius.circular(30),
                         ),
                       ),
                       child: KeyboardActions(
@@ -357,7 +357,7 @@ void editMesaModal(BuildContext context, MesaModel mesaData) {
                                   child: Center(
                                     child: Container(
                                       width: ScreenUtil().setWidth(48),
-                                      decoration: BoxDecoration(
+                                      decoration: const BoxDecoration(
                                         color: Color(0XFFBABABA),
                                       ),
                                     ),
@@ -370,7 +370,7 @@ void editMesaModal(BuildContext context, MesaModel mesaData) {
                                   child: Text(
                                     'Editar mesa',
                                     style: GoogleFonts.poppins(
-                                      color: Color(0XFFFF0036),
+                                      color: const Color(0XFFFF0036),
                                       fontWeight: FontWeight.w600,
                                       fontSize: ScreenUtil().setSp(18),
                                     ),
@@ -382,7 +382,7 @@ void editMesaModal(BuildContext context, MesaModel mesaData) {
                                 Text(
                                   'Número de mesa',
                                   style: GoogleFonts.poppins(
-                                    color: Color(0XFF585858),
+                                    color: const Color(0XFF585858),
                                     fontWeight: FontWeight.w500,
                                     fontSize: ScreenUtil().setSp(16),
                                   ),
@@ -392,7 +392,7 @@ void editMesaModal(BuildContext context, MesaModel mesaData) {
                                   controller: _numberTableController,
                                   maxLines: 1,
                                   onChanged: (value) {
-                                    if (value.length > 0 && _capacityController.text.length > 0) {
+                                    if (value.isNotEmpty && _capacityController.text.isNotEmpty) {
                                       _controller.changeBoton(true);
                                     } else {
                                       _controller.changeBoton(false);
@@ -402,30 +402,30 @@ void editMesaModal(BuildContext context, MesaModel mesaData) {
                                   decoration: InputDecoration(
                                     hintText: 'Ingrese número de mesa',
                                     hintStyle: TextStyle(
-                                      color: Color(0XFFBEBEBE),
+                                      color: const Color(0XFFBEBEBE),
                                       fontWeight: FontWeight.w400,
                                       fontSize: ScreenUtil().setSp(16),
                                       fontStyle: FontStyle.normal,
                                     ),
                                     filled: true,
-                                    fillColor: Color(0XFFEDEDED),
+                                    fillColor: const Color(0XFFEDEDED),
                                     contentPadding: EdgeInsets.only(
                                         left: ScreenUtil().setWidth(10), top: ScreenUtil().setHeight(5), bottom: ScreenUtil().setHeight(1)),
                                     enabledBorder: OutlineInputBorder(
                                       borderRadius: BorderRadius.circular(15),
-                                      borderSide: BorderSide(color: Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
+                                      borderSide: BorderSide(color: const Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
                                     ),
                                     focusedBorder: OutlineInputBorder(
                                       borderRadius: BorderRadius.circular(15),
-                                      borderSide: BorderSide(color: Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
+                                      borderSide: BorderSide(color: const Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
                                     ),
                                     border: OutlineInputBorder(
                                       borderRadius: BorderRadius.circular(15),
-                                      borderSide: BorderSide(color: Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
+                                      borderSide: BorderSide(color: const Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
                                     ),
                                   ),
                                   style: TextStyle(
-                                    color: Color(0XFF585858),
+                                    color: const Color(0XFF585858),
                                     fontWeight: FontWeight.w400,
                                     fontSize: ScreenUtil().setSp(16),
                                     fontStyle: FontStyle.normal,
@@ -435,7 +435,7 @@ void editMesaModal(BuildContext context, MesaModel mesaData) {
                                 Text(
                                   'Capacidad de mesa',
                                   style: GoogleFonts.poppins(
-                                    color: Color(0XFF585858),
+                                    color: const Color(0XFF585858),
                                     fontWeight: FontWeight.w500,
                                     fontSize: ScreenUtil().setSp(16),
                                   ),
@@ -446,7 +446,7 @@ void editMesaModal(BuildContext context, MesaModel mesaData) {
                                   maxLines: 1,
                                   keyboardType: TextInputType.number,
                                   onChanged: (value) {
-                                    if (value.length > 0 && _numberTableController.text.length > 0) {
+                                    if (value.isNotEmpty && _numberTableController.text.isNotEmpty) {
                                       _controller.changeBoton(true);
                                     } else {
                                       _controller.changeBoton(false);
@@ -455,30 +455,30 @@ void editMesaModal(BuildContext context, MesaModel mesaData) {
                                   decoration: InputDecoration(
                                     hintText: 'Ingrese capacidad de mesa',
                                     hintStyle: TextStyle(
-                                      color: Color(0XFFBEBEBE),
+                                      color: const Color(0XFFBEBEBE),
                                       fontWeight: FontWeight.w400,
                                       fontSize: ScreenUtil().setSp(16),
                                       fontStyle: FontStyle.normal,
                                     ),
                                     filled: true,
-                                    fillColor: Color(0XFFEDEDED),
+                                    fillColor: const Color(0XFFEDEDED),
                                     contentPadding: EdgeInsets.only(
                                         left: ScreenUtil().setWidth(10), top: ScreenUtil().setHeight(5), bottom: ScreenUtil().setHeight(1)),
                                     enabledBorder: OutlineInputBorder(
                                       borderRadius: BorderRadius.circular(15),
-                                      borderSide: BorderSide(color: Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
+                                      borderSide: BorderSide(color: const Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
                                     ),
                                     focusedBorder: OutlineInputBorder(
                                       borderRadius: BorderRadius.circular(15),
-                                      borderSide: BorderSide(color: Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
+                                      borderSide: BorderSide(color: const Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
                                     ),
                                     border: OutlineInputBorder(
                                       borderRadius: BorderRadius.circular(15),
-                                      borderSide: BorderSide(color: Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
+                                      borderSide: BorderSide(color: const Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
                                     ),
                                   ),
                                   style: TextStyle(
-                                    color: Color(0XFF585858),
+                                    color: const Color(0XFF585858),
                                     fontWeight: FontWeight.w400,
                                     fontSize: ScreenUtil().setSp(16),
                                     fontStyle: FontStyle.normal,
@@ -514,7 +514,7 @@ void editMesaModal(BuildContext context, MesaModel mesaData) {
                                         return Container(
                                           decoration: BoxDecoration(
                                             borderRadius: BorderRadius.circular(50),
-                                            color: (_controller.boton) ? Color(0XFFFF0036) : Color(0XFFFF0036).withOpacity(0.6),
+                                            color: (_controller.boton) ? const Color(0XFFFF0036) : const Color(0XFFFF0036).withOpacity(0.6),
                                           ),
                                           child: Center(
                                             child: Text(
@@ -541,7 +541,7 @@ void editMesaModal(BuildContext context, MesaModel mesaData) {
                                         return Text(
                                           _controller.text,
                                           style: TextStyle(
-                                            color: Color(0XFFFF0036),
+                                            color: const Color(0XFFFF0036),
                                             fontWeight: FontWeight.w600,
                                             fontSize: ScreenUtil().setSp(16),
                                             fontStyle: FontStyle.normal,
@@ -559,7 +559,7 @@ void editMesaModal(BuildContext context, MesaModel mesaData) {
                                     child: Text(
                                       'Cancelar',
                                       style: GoogleFonts.poppins(
-                                        color: Color(0XFF8A8A8A),
+                                        color: const Color(0XFF8A8A8A),
                                         fontWeight: FontWeight.w500,
                                         fontSize: ScreenUtil().setSp(16),
                                       ),
@@ -592,13 +592,13 @@ _showLoading() {
   return Container(
     height: double.infinity,
     width: double.infinity,
-    color: Color.fromRGBO(0, 0, 0, 0.5),
+    color: const Color.fromRGBO(0, 0, 0, 0.5),
     child: Center(
       child: (Platform.isAndroid)
-          ? CircularProgressIndicator(
+          ? const CircularProgressIndicator(
               color: Color(0XFFFF0036),
             )
-          : CupertinoActivityIndicator(),
+          : const CupertinoActivityIndicator(),
     ),
   );
 }

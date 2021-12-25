@@ -15,7 +15,6 @@ class VentasBloc {
   void obtenerVentas(bool esHoy) async {
     DateTime hoy = DateTime.now();
     String fech = hoy.toString();
-    print(fech);
     var dia = fech.split(' ');
     String fecha1;
     String fecha2;

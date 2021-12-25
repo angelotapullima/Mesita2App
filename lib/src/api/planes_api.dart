@@ -178,8 +178,6 @@ class PlanesApi {
       });
 
       final decodedData = json.decode(resp.body);
-
-      print(decodedData);
       if (decodedData["result"] == 1) {
         return 1;
       } else {
@@ -202,8 +200,6 @@ class PlanesApi {
       });
 
       final decodedData = json.decode(resp.body);
-
-      print(decodedData);
       if (decodedData["result"] == 1) {
         await _miembrosDatabase.deleteMiembroPlanPorId(idMiembro);
         return 1;
@@ -224,24 +220,22 @@ class PlanesApi {
       String inicio = obtenerFechaActualApi();
       String fin = obtenerFechaFinSuscripcionApi(tiempo);
 
-      print('del $inicio - $fin');
-
-      var multipartFile;
+      dynamic multipartFile;
 
       if (_image != null) {
-        var stream = new http.ByteStream(Stream.castFrom(_image.openRead()));
+        var stream = http.ByteStream(Stream.castFrom(_image.openRead()));
         var length = await _image.length();
-        multipartFile = new http.MultipartFile('imagen', stream, length, filename: basename(_image.path));
+        multipartFile = http.MultipartFile('imagen', stream, length, filename: basename(_image.path));
       }
 
-      var request = new http.MultipartRequest("POST", url);
+      var request = http.MultipartRequest("POST", url);
 
       request.fields["tn"] = _prefs.token;
       request.fields["app"] = 'true';
       request.fields["id_plan"] = '${_prefs.idPlan}';
-      request.fields["plan_tipo"] = '$idPlanNuevo';
-      request.fields["plan_inicio"] = '$inicio';
-      request.fields["plan_fin"] = '$fin';
+      request.fields["plan_tipo"] = idPlanNuevo;
+      request.fields["plan_inicio"] = inicio;
+      request.fields["plan_fin"] = fin;
 
       if (_image != null) {
         request.files.add(multipartFile);
@@ -251,7 +245,6 @@ class PlanesApi {
         // listen for response
         response.stream.transform(utf8.decoder).listen((value) {
           final decodedData = json.decode(value);
-          print('Respuesta p $decodedData');
           if (decodedData['result'] == 1) {
             resp = true;
           } else {
@@ -259,13 +252,11 @@ class PlanesApi {
           }
         });
       }).catchError((e) {
-        print(e);
         resp = false;
       });
 
       return resp;
-    } catch (error, stacktrace) {
-      print("Exception occured: $error stackTrace: $stacktrace");
+    } catch (error) {
       return false;
     }
   }
@@ -279,23 +270,21 @@ class PlanesApi {
       String inicio = obtenerFechaActualApi();
       String fin = obtenerFechaFinSuscripcionApi(tiempo);
 
-      print('del $inicio - $fin');
-
-      var multipartFile;
+      dynamic multipartFile;
 
       if (_image != null) {
-        var stream = new http.ByteStream(Stream.castFrom(_image.openRead()));
+        var stream = http.ByteStream(Stream.castFrom(_image.openRead()));
         var length = await _image.length();
-        multipartFile = new http.MultipartFile('imagen', stream, length, filename: basename(_image.path));
+        multipartFile = http.MultipartFile('imagen', stream, length, filename: basename(_image.path));
       }
 
-      var request = new http.MultipartRequest("POST", url);
+      var request = http.MultipartRequest("POST", url);
 
       request.fields["tn"] = _prefs.token;
       request.fields["app"] = 'true';
       request.fields["id_plan"] = '${_prefs.idPlan}';
-      request.fields["plan_inicio"] = '$inicio';
-      request.fields["plan_fin"] = '$fin';
+      request.fields["plan_inicio"] = inicio;
+      request.fields["plan_fin"] = fin;
 
       if (_image != null) {
         request.files.add(multipartFile);
@@ -305,7 +294,6 @@ class PlanesApi {
         // listen for response
         response.stream.transform(utf8.decoder).listen((value) {
           final decodedData = json.decode(value);
-          print('Respuesta p $decodedData');
           if (decodedData['result'] == 1) {
             resp = true;
           } else {
@@ -313,13 +301,11 @@ class PlanesApi {
           }
         });
       }).catchError((e) {
-        print(e);
         resp = false;
       });
 
       return resp;
-    } catch (error, stacktrace) {
-      print("Exception occured: $error stackTrace: $stacktrace");
+    } catch (error) {
       return false;
     }
   }

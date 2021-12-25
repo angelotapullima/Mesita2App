@@ -14,7 +14,7 @@ class PedidosAtenderDatabase {
 
       return res;
     } catch (exception) {
-      print(exception);
+      return exception;
     }
   }
 

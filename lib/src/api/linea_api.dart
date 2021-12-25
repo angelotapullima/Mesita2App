@@ -67,13 +67,12 @@ class LineaApi {
       final resp = await http.post(url, body: {
         'tn': '${_prefs.token}',
         'id_negocio': '${_prefs.idNegocio}',
-        'linea_nombre': '$nombreLinea',
-        'id_categoria': '$idCategoria',
+        'linea_nombre': nombreLinea,
+        'id_categoria': idCategoria,
         'app': 'true',
       });
 
       final decodedData = json.decode(resp.body);
-      print(decodedData);
       if (decodedData["result"] == 1) {
         return 1;
       } else {
@@ -91,9 +90,9 @@ class LineaApi {
       final resp = await http.post(url, body: {
         'tn': '${_prefs.token}',
         'id_negocio': '${_prefs.idNegocio}',
-        'linea_nombre': '$nombreLinea',
-        'id_linea': '$idLinea',
-        'id_categoria': '$idCategoria',
+        'linea_nombre': nombreLinea,
+        'id_linea': idLinea,
+        'id_categoria': idCategoria,
         'app': 'true',
       });
 
@@ -114,7 +113,7 @@ class LineaApi {
 
       final resp = await http.post(url, body: {
         'tn': '${_prefs.token}',
-        'id': '$idLinea',
+        'id': idLinea,
         'app': 'true',
       });
 

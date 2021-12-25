@@ -16,12 +16,11 @@ class BuscarUserApi {
 
       final resp = await http.post(url, body: {
         'tn': '${_prefs.token}',
-        'dato': '$query',
+        'dato': query,
         'app': 'true',
       });
 
       final decodedData = json.decode(resp.body);
-      print('resultado con $query  : $decodedData');
 
       if (decodedData["result"].length > 0) {
         for (var i = 0; i < decodedData["result"].length; i++) {

@@ -40,7 +40,7 @@ class _ValidarPagoPageState extends State<ValidarPagoPage> {
   final TextEditingController _rucController = TextEditingController();
   final TextEditingController _razonSocialController = TextEditingController();
   final TextEditingController _direccionSocialController = TextEditingController();
-  Future<Null> _cropImage(filePath) async {
+  Future<void> _cropImage(filePath) async {
     File croppedImage = await ImageCropper.cropImage(
         sourcePath: filePath,
         aspectRatioPresets: Platform.isAndroid
@@ -61,22 +61,22 @@ class _ValidarPagoPageState extends State<ValidarPagoPage> {
                 CropAspectRatioPreset.ratio7x5,
                 CropAspectRatioPreset.ratio16x9
               ],
-        androidUiSettings: AndroidUiSettings(
+        androidUiSettings: const AndroidUiSettings(
             toolbarTitle: 'Cortar Imagen',
             toolbarColor: Colors.green,
             toolbarWidgetColor: Colors.white,
             initAspectRatio: CropAspectRatioPreset.original,
             showCropGrid: true,
             lockAspectRatio: false),
-        iosUiSettings: IOSUiSettings(minimumAspectRatio: 1.0, title: 'Cortar Imagen'));
+        iosUiSettings: const IOSUiSettings(minimumAspectRatio: 1.0, title: 'Cortar Imagen'));
     if (croppedImage != null) {
       _controller.changeImage(croppedImage);
       if (_controller.tipoDoc == '03') {
         _controller.changeBoton(true);
       } else if (_controller.tipoDoc == '01' &&
           _rucController.text.length > 10 &&
-          _razonSocialController.text.length > 0 &&
-          _direccionSocialController.text.length > 0) {
+          _razonSocialController.text.isNotEmpty &&
+          _direccionSocialController.text.isNotEmpty) {
         _controller.changeBoton(true);
       } else {
         _controller.changeBoton(false);
@@ -112,12 +112,12 @@ class _ValidarPagoPageState extends State<ValidarPagoPage> {
         title: Text(
           'Validar pago',
           style: GoogleFonts.poppins(
-            color: Color(0XFF585858),
+            color: const Color(0XFF585858),
             fontSize: ScreenUtil().setSp(18),
             fontWeight: FontWeight.w700,
           ),
         ),
-        iconTheme: IconThemeData(color: Color(0XFF585858)),
+        iconTheme: const IconThemeData(color: Color(0XFF585858)),
         elevation: 0,
       ),
       body: Stack(
@@ -135,7 +135,7 @@ class _ValidarPagoPageState extends State<ValidarPagoPage> {
                   Container(
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(20),
-                      color: Color(0XFFF7F7F7),
+                      color: const Color(0XFFF7F7F7),
                     ),
                     child: Column(
                       children: [
@@ -149,7 +149,7 @@ class _ValidarPagoPageState extends State<ValidarPagoPage> {
                                   (widget.tipoMetodoPago == 1) ? 'Adjunta captura del yape' : 'Adjunta captura del plin',
                                   textAlign: TextAlign.center,
                                   style: GoogleFonts.poppins(
-                                    color: Color(0XFF585858),
+                                    color: const Color(0XFF585858),
                                     fontSize: ScreenUtil().setSp(16),
                                     fontWeight: FontWeight.w600,
                                     letterSpacing: ScreenUtil().setSp(0.016),
@@ -164,7 +164,7 @@ class _ValidarPagoPageState extends State<ValidarPagoPage> {
                             : AnimatedBuilder(
                                 animation: _controller,
                                 builder: (_, f) {
-                                  return Container(
+                                  return SizedBox(
                                     width: ScreenUtil().setWidth(215),
                                     height: ScreenUtil().setHeight(210),
                                     child: (_controller.image != null)
@@ -172,7 +172,7 @@ class _ValidarPagoPageState extends State<ValidarPagoPage> {
                                             onTap: () {
                                               getImageGallery();
                                             },
-                                            child: Container(
+                                            child: SizedBox(
                                               child: Image.file(_controller.image),
                                             ),
                                           )
@@ -197,19 +197,19 @@ class _ValidarPagoPageState extends State<ValidarPagoPage> {
                                                 child: Column(
                                                   mainAxisAlignment: MainAxisAlignment.center,
                                                   children: [
-                                                    Container(
+                                                    SizedBox(
                                                       width: ScreenUtil().setWidth(120),
                                                       height: ScreenUtil().setHeight(103),
                                                       child: Icon(
                                                         Icons.file_copy,
                                                         size: ScreenUtil().setHeight(50),
-                                                        color: Color(0XFF00C2FF),
+                                                        color: const Color(0XFF00C2FF),
                                                       ),
                                                     ),
                                                     Text(
                                                       'Subir imagen',
                                                       style: GoogleFonts.poppins(
-                                                        color: Color(0XFF585858),
+                                                        color: const Color(0XFF585858),
                                                         fontWeight: FontWeight.w500,
                                                         fontSize: ScreenUtil().setSp(16),
                                                         fontStyle: FontStyle.normal,
@@ -229,7 +229,7 @@ class _ValidarPagoPageState extends State<ValidarPagoPage> {
                         Text(
                           'Realizado por',
                           style: GoogleFonts.poppins(
-                            color: Color(0XFF585858),
+                            color: const Color(0XFF585858),
                             fontWeight: FontWeight.w600,
                             fontSize: ScreenUtil().setSp(16),
                             fontStyle: FontStyle.normal,
@@ -240,18 +240,18 @@ class _ValidarPagoPageState extends State<ValidarPagoPage> {
                           padding: EdgeInsets.symmetric(horizontal: ScreenUtil().setWidth(27)),
                           child: Row(
                             children: [
-                              Container(
+                              SizedBox(
                                 width: ScreenUtil().setWidth(60),
                                 height: ScreenUtil().setHeight(60),
                                 child: ClipRRect(
                                   borderRadius: BorderRadius.circular(100),
                                   child: CachedNetworkImage(
-                                    placeholder: (context, url) => Container(
+                                    placeholder: (context, url) => const SizedBox(
                                       width: double.infinity,
                                       height: double.infinity,
                                       child: Image(image: AssetImage('assets/img/loading.gif'), fit: BoxFit.cover),
                                     ),
-                                    errorWidget: (context, url, error) => Container(
+                                    errorWidget: (context, url, error) => SizedBox(
                                       width: double.infinity,
                                       height: double.infinity,
                                       child: Center(
@@ -286,7 +286,7 @@ class _ValidarPagoPageState extends State<ValidarPagoPage> {
                                     Text(
                                       '${prefs.personName} ${prefs.personSurname}',
                                       style: GoogleFonts.poppins(
-                                        color: Color(0XFF585858),
+                                        color: const Color(0XFF585858),
                                         fontWeight: FontWeight.w500,
                                         fontSize: ScreenUtil().setSp(14),
                                         fontStyle: FontStyle.normal,
@@ -296,7 +296,7 @@ class _ValidarPagoPageState extends State<ValidarPagoPage> {
                                     Text(
                                       'Cliente',
                                       style: GoogleFonts.poppins(
-                                        color: Color(0XFF00C2FF),
+                                        color: const Color(0XFF00C2FF),
                                         fontWeight: FontWeight.w400,
                                         fontSize: ScreenUtil().setSp(12),
                                         fontStyle: FontStyle.normal,
@@ -323,7 +323,7 @@ class _ValidarPagoPageState extends State<ValidarPagoPage> {
                                 child: Icon(
                                   Icons.phone,
                                   size: ScreenUtil().setHeight(25),
-                                  color: Color(0XFF00C2FF),
+                                  color: const Color(0XFF00C2FF),
                                 ),
                               ),
                               SizedBox(
@@ -334,9 +334,9 @@ class _ValidarPagoPageState extends State<ValidarPagoPage> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(
-                                      '${widget.numContacto}',
+                                      widget.numContacto,
                                       style: GoogleFonts.poppins(
-                                        color: Color(0XFF585858),
+                                        color: const Color(0XFF585858),
                                         fontWeight: FontWeight.w500,
                                         fontSize: ScreenUtil().setSp(14),
                                         fontStyle: FontStyle.normal,
@@ -346,7 +346,7 @@ class _ValidarPagoPageState extends State<ValidarPagoPage> {
                                     Text(
                                       'Número de contacto',
                                       style: GoogleFonts.poppins(
-                                        color: Color(0XFF00C2FF),
+                                        color: const Color(0XFF00C2FF),
                                         fontWeight: FontWeight.w400,
                                         fontSize: ScreenUtil().setSp(12),
                                         fontStyle: FontStyle.normal,
@@ -373,7 +373,7 @@ class _ValidarPagoPageState extends State<ValidarPagoPage> {
                                 child: Icon(
                                   Icons.calendar_today,
                                   size: ScreenUtil().setHeight(25),
-                                  color: Color(0XFF00C2FF),
+                                  color: const Color(0XFF00C2FF),
                                 ),
                               ),
                               SizedBox(
@@ -386,7 +386,7 @@ class _ValidarPagoPageState extends State<ValidarPagoPage> {
                                     Text(
                                       '${obtenerFechaActual()}',
                                       style: GoogleFonts.poppins(
-                                        color: Color(0XFF585858),
+                                        color: const Color(0XFF585858),
                                         fontWeight: FontWeight.w500,
                                         fontSize: ScreenUtil().setSp(14),
                                         fontStyle: FontStyle.normal,
@@ -396,7 +396,7 @@ class _ValidarPagoPageState extends State<ValidarPagoPage> {
                                     Text(
                                       'Inicio de suscripción',
                                       style: GoogleFonts.poppins(
-                                        color: Color(0XFF00C2FF),
+                                        color: const Color(0XFF00C2FF),
                                         fontWeight: FontWeight.w400,
                                         fontSize: ScreenUtil().setSp(12),
                                         fontStyle: FontStyle.normal,
@@ -423,7 +423,7 @@ class _ValidarPagoPageState extends State<ValidarPagoPage> {
                                 child: Icon(
                                   Icons.calendar_today,
                                   size: ScreenUtil().setHeight(25),
-                                  color: Color(0XFF00C2FF),
+                                  color: const Color(0XFF00C2FF),
                                 ),
                               ),
                               SizedBox(
@@ -436,7 +436,7 @@ class _ValidarPagoPageState extends State<ValidarPagoPage> {
                                     Text(
                                       '${obtenerFechaFinSuscripcion(widget.tiempoPlan)}',
                                       style: GoogleFonts.poppins(
-                                        color: Color(0XFF585858),
+                                        color: const Color(0XFF585858),
                                         fontWeight: FontWeight.w500,
                                         fontSize: ScreenUtil().setSp(14),
                                         fontStyle: FontStyle.normal,
@@ -446,7 +446,7 @@ class _ValidarPagoPageState extends State<ValidarPagoPage> {
                                     Text(
                                       'Fin de suscripción',
                                       style: GoogleFonts.poppins(
-                                        color: Color(0XFF00C2FF),
+                                        color: const Color(0XFF00C2FF),
                                         fontWeight: FontWeight.w400,
                                         fontSize: ScreenUtil().setSp(12),
                                         fontStyle: FontStyle.normal,
@@ -495,9 +495,9 @@ class _ValidarPagoPageState extends State<ValidarPagoPage> {
                                     width: ScreenUtil().setWidth(20),
                                     decoration: BoxDecoration(
                                       shape: BoxShape.circle,
-                                      color: (_controller.tipoDoc == '03') ? Color(0XFFFF0036) : Color(0XFFf7f7f7),
+                                      color: (_controller.tipoDoc == '03') ? const Color(0XFFFF0036) : const Color(0XFFf7f7f7),
                                       border: Border.all(
-                                        color: Color(0XFFF7F7F7),
+                                        color: const Color(0XFFF7F7F7),
                                         width: ScreenUtil().setWidth(4),
                                       ),
                                     ),
@@ -508,7 +508,7 @@ class _ValidarPagoPageState extends State<ValidarPagoPage> {
                                   Text(
                                     'Boleta',
                                     style: GoogleFonts.poppins(
-                                      color: Color(0XFF585858),
+                                      color: const Color(0XFF585858),
                                       fontSize: ScreenUtil().setSp(14),
                                       fontWeight: FontWeight.w500,
                                       letterSpacing: ScreenUtil().setSp(0.016),
@@ -526,8 +526,8 @@ class _ValidarPagoPageState extends State<ValidarPagoPage> {
                                 if (_controller.image != null &&
                                     _controller.tipoDoc == '01' &&
                                     _rucController.text.length > 10 &&
-                                    _razonSocialController.text.length > 0 &&
-                                    _direccionSocialController.text.length > 0) {
+                                    _razonSocialController.text.isNotEmpty &&
+                                    _direccionSocialController.text.isNotEmpty) {
                                   _controller.changeBoton(true);
                                 } else {
                                   _controller.changeBoton(false);
@@ -540,9 +540,9 @@ class _ValidarPagoPageState extends State<ValidarPagoPage> {
                                     width: ScreenUtil().setWidth(20),
                                     decoration: BoxDecoration(
                                       shape: BoxShape.circle,
-                                      color: (_controller.tipoDoc == '01') ? Color(0XFFFF0036) : Color(0XFFF7F7F7),
+                                      color: (_controller.tipoDoc == '01') ? const Color(0XFFFF0036) : const Color(0XFFF7F7F7),
                                       border: Border.all(
-                                        color: Color(0XFFF7F7F7),
+                                        color: const Color(0XFFF7F7F7),
                                         width: ScreenUtil().setWidth(4),
                                       ),
                                     ),
@@ -553,7 +553,7 @@ class _ValidarPagoPageState extends State<ValidarPagoPage> {
                                   Text(
                                     'Factura',
                                     style: GoogleFonts.poppins(
-                                      color: Color(0XFF585858),
+                                      color: const Color(0XFF585858),
                                       fontSize: ScreenUtil().setSp(14),
                                       fontWeight: FontWeight.w500,
                                       letterSpacing: ScreenUtil().setSp(0.016),
@@ -577,8 +577,8 @@ class _ValidarPagoPageState extends State<ValidarPagoPage> {
                                 if (_controller.image != null &&
                                     _controller.tipoDoc == '01' &&
                                     value.length > 10 &&
-                                    _razonSocialController.text.length > 0 &&
-                                    _direccionSocialController.text.length > 0) {
+                                    _razonSocialController.text.isNotEmpty &&
+                                    _direccionSocialController.text.isNotEmpty) {
                                   _controller.changeBoton(true);
                                 } else {
                                   _controller.changeBoton(false);
@@ -592,16 +592,16 @@ class _ValidarPagoPageState extends State<ValidarPagoPage> {
                                 contentPadding: EdgeInsets.symmetric(horizontal: ScreenUtil().setWidth(8)),
                                 counterText: "",
                                 enabledBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(color: Color(0XFFFF0036)),
+                                  borderSide: const BorderSide(color: Color(0XFFFF0036)),
                                   borderRadius: BorderRadius.circular(8),
                                 ),
                                 focusedBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(color: Color(0XFFFF0036)),
+                                  borderSide: const BorderSide(color: Color(0XFFFF0036)),
                                   borderRadius: BorderRadius.circular(8),
                                 ),
                                 hintText: 'Ingrese RUC',
                                 hintStyle: GoogleFonts.poppins(
-                                  color: Color(0XFFA8A8A8),
+                                  color: const Color(0XFFA8A8A8),
                                   fontSize: ScreenUtil().setSp(16),
                                   fontWeight: FontWeight.w500,
                                   letterSpacing: ScreenUtil().setSp(0.016),
@@ -617,9 +617,9 @@ class _ValidarPagoPageState extends State<ValidarPagoPage> {
                               onChanged: (value) {
                                 if (_controller.image != null &&
                                     _controller.tipoDoc == '01' &&
-                                    value.length > 0 &&
+                                    value.isNotEmpty &&
                                     _rucController.text.length > 10 &&
-                                    _direccionSocialController.text.length > 0) {
+                                    _direccionSocialController.text.isNotEmpty) {
                                   _controller.changeBoton(true);
                                 } else {
                                   _controller.changeBoton(false);
@@ -632,16 +632,16 @@ class _ValidarPagoPageState extends State<ValidarPagoPage> {
                                 contentPadding: EdgeInsets.symmetric(horizontal: ScreenUtil().setWidth(8)),
                                 counterText: "",
                                 enabledBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(color: Color(0XFFFF0036)),
+                                  borderSide: const BorderSide(color: Color(0XFFFF0036)),
                                   borderRadius: BorderRadius.circular(8),
                                 ),
                                 focusedBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(color: Color(0XFFFF0036)),
+                                  borderSide: const BorderSide(color: Color(0XFFFF0036)),
                                   borderRadius: BorderRadius.circular(8),
                                 ),
                                 hintText: 'Ingrese razón social',
                                 hintStyle: GoogleFonts.poppins(
-                                  color: Color(0XFFA8A8A8),
+                                  color: const Color(0XFFA8A8A8),
                                   fontSize: ScreenUtil().setSp(16),
                                   fontWeight: FontWeight.w500,
                                   letterSpacing: ScreenUtil().setSp(0.016),
@@ -657,9 +657,9 @@ class _ValidarPagoPageState extends State<ValidarPagoPage> {
                               onChanged: (value) {
                                 if (_controller.image != null &&
                                     _controller.tipoDoc == '01' &&
-                                    value.length > 0 &&
+                                    value.isNotEmpty &&
                                     _rucController.text.length > 10 &&
-                                    _razonSocialController.text.length > 0) {
+                                    _razonSocialController.text.isNotEmpty) {
                                   _controller.changeBoton(true);
                                 } else {
                                   _controller.changeBoton(false);
@@ -672,16 +672,16 @@ class _ValidarPagoPageState extends State<ValidarPagoPage> {
                                 contentPadding: EdgeInsets.symmetric(horizontal: ScreenUtil().setWidth(8)),
                                 counterText: "",
                                 enabledBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(color: Color(0XFFFF0036)),
+                                  borderSide: const BorderSide(color: Color(0XFFFF0036)),
                                   borderRadius: BorderRadius.circular(8),
                                 ),
                                 focusedBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(color: Color(0XFFFF0036)),
+                                  borderSide: const BorderSide(color: Color(0XFFFF0036)),
                                   borderRadius: BorderRadius.circular(8),
                                 ),
                                 hintText: 'Ingrese dirección',
                                 hintStyle: GoogleFonts.poppins(
-                                  color: Color(0XFFA8A8A8),
+                                  color: const Color(0XFFA8A8A8),
                                   fontSize: ScreenUtil().setSp(16),
                                   fontWeight: FontWeight.w500,
                                   letterSpacing: ScreenUtil().setSp(0.016),
@@ -706,7 +706,7 @@ class _ValidarPagoPageState extends State<ValidarPagoPage> {
                       if (_controller.boton) {
                         final api = PlanesApi();
 
-                        var resp;
+                        bool resp;
 
                         if (widget.esRenovacion) {
                           resp = await api.renovarPlan(_controller.image, widget.plan.idPlan, widget.tiempoPlan, '', '', '', '', '');
@@ -779,7 +779,7 @@ class _ValidarPagoPageState extends State<ValidarPagoPage> {
                         return Container(
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(50),
-                            color: (_controller.boton) ? Color(0XFFFF0036) : Color(0XFFFF0036).withOpacity(0.6),
+                            color: (_controller.boton) ? const Color(0XFFFF0036) : const Color(0XFFFF0036).withOpacity(0.6),
                           ),
                           child: Center(
                             child: Text(
@@ -802,7 +802,7 @@ class _ValidarPagoPageState extends State<ValidarPagoPage> {
                           return Text(
                             _controller.text,
                             style: GoogleFonts.poppins(
-                              color: Color(0XFFFF0036),
+                              color: const Color(0XFFFF0036),
                               fontWeight: FontWeight.w600,
                               fontSize: ScreenUtil().setSp(14),
                               fontStyle: FontStyle.normal,
@@ -835,13 +835,13 @@ class _ValidarPagoPageState extends State<ValidarPagoPage> {
     return Container(
       height: double.infinity,
       width: double.infinity,
-      color: Color.fromRGBO(0, 0, 0, 0.5),
+      color: const Color.fromRGBO(0, 0, 0, 0.5),
       child: Center(
         child: (Platform.isAndroid)
-            ? CircularProgressIndicator(
+            ? const CircularProgressIndicator(
                 color: Color(0XFFFF0036),
               )
-            : CupertinoActivityIndicator(),
+            : const CupertinoActivityIndicator(),
       ),
     );
   }

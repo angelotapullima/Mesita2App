@@ -4,15 +4,15 @@ import 'package:mesita_aplication_2/src/preferences/preferences.dart';
 import 'package:mesita_aplication_2/src/utils/constants.dart';
 
 class LoginApi {
-  final _prefs = new Preferences();
+  final _prefs = Preferences();
 
   Future<LoginModel> login(String user, String pass) async {
     try {
       final url = Uri.parse('$apiBaseURL/api/Login/validar_sesion');
 
       final resp = await http.post(url, body: {
-        'usuario_nickname': '$user',
-        'usuario_contrasenha': '$pass',
+        'usuario_nickname': user,
+        'usuario_contrasenha': pass,
         'app': 'true',
       });
 
@@ -62,8 +62,7 @@ class LoginApi {
       } else {
         return loginModel;
       }
-    } catch (error, stacktrace) {
-      print("Exception occured: $error stackTrace: $stacktrace");
+    } catch (error) {
       LoginModel loginModel = LoginModel();
       loginModel.code = '2';
       loginModel.message = 'Error en la petición';

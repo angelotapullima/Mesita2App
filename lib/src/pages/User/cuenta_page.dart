@@ -22,9 +22,9 @@ class CuentaPage extends StatefulWidget {
 }
 
 class _CuentaPageState extends State<CuentaPage> {
-  TextEditingController _nombreController = TextEditingController();
-  TextEditingController _emailController = TextEditingController();
-  TextEditingController _contraController = TextEditingController();
+  final TextEditingController _nombreController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _contraController = TextEditingController();
 
   final _controller = CuentaController();
 
@@ -47,13 +47,13 @@ class _CuentaPageState extends State<CuentaPage> {
       appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 0,
-        iconTheme: IconThemeData(
+        iconTheme: const IconThemeData(
           color: Color(0XFF3A3A3A),
         ),
         title: Text(
           'Cuenta',
           style: GoogleFonts.poppins(
-            color: Color(0XFF3A3A3A),
+            color: const Color(0XFF3A3A3A),
             fontSize: ScreenUtil().setSp(18),
             fontWeight: FontWeight.w600,
             letterSpacing: 0.16,
@@ -78,25 +78,23 @@ class _CuentaPageState extends State<CuentaPage> {
                       child: Container(
                         width: ScreenUtil().setWidth(120),
                         height: ScreenUtil().setHeight(140),
-                        decoration: BoxDecoration(
+                        decoration: const BoxDecoration(
                           shape: BoxShape.circle,
                         ),
                         child: ClipRRect(
                           borderRadius: BorderRadius.circular(150),
                           child: Stack(
                             children: [
-                              Container(
+                              SizedBox(
                                 width: double.infinity,
                                 height: double.infinity,
                                 child: CachedNetworkImage(
-                                  placeholder: (context, url) => Container(
+                                  placeholder: (context, url) => SizedBox(
                                     child: SvgPicture.asset('assets/settings_svg/porfile.svg'),
                                   ),
-                                  errorWidget: (context, url, error) => Container(
-                                    child: Container(
-                                      child: SvgPicture.asset(
-                                        'assets/settings_svg/porfile.svg',
-                                      ),
+                                  errorWidget: (context, url, error) => SizedBox(
+                                    child: SvgPicture.asset(
+                                      'assets/settings_svg/porfile.svg',
                                     ),
                                   ),
                                   imageUrl: '${prefs.userImage}',
@@ -121,10 +119,10 @@ class _CuentaPageState extends State<CuentaPage> {
                                   child: Container(
                                     height: ScreenUtil().setHeight(30),
                                     width: ScreenUtil().setWidth(120),
-                                    decoration: BoxDecoration(
+                                    decoration: const BoxDecoration(
                                       color: Colors.black,
                                     ),
-                                    child: Center(
+                                    child: const Center(
                                       child: Icon(
                                         Icons.photo_camera,
                                         color: Colors.white,
@@ -156,36 +154,36 @@ class _CuentaPageState extends State<CuentaPage> {
                       decoration: InputDecoration(
                         hintText: 'Nombre',
                         hintStyle: TextStyle(
-                          color: Color(0XFFBEBEBE),
+                          color: const Color(0XFFBEBEBE),
                           fontWeight: FontWeight.w400,
                           fontSize: ScreenUtil().setSp(16),
                           fontStyle: FontStyle.normal,
                         ),
                         filled: true,
-                        fillColor: Color(0XFFEDEDED),
+                        fillColor: const Color(0XFFEDEDED),
                         contentPadding:
                             EdgeInsets.only(left: ScreenUtil().setWidth(10), top: ScreenUtil().setHeight(5), bottom: ScreenUtil().setHeight(1)),
                         enabledBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(15),
-                          borderSide: BorderSide(color: Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
+                          borderSide: BorderSide(color: const Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
                         ),
                         focusedBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(15),
-                          borderSide: BorderSide(color: Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
+                          borderSide: BorderSide(color: const Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
                         ),
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(15),
-                          borderSide: BorderSide(color: Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
+                          borderSide: BorderSide(color: const Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
                         ),
                       ),
                       style: TextStyle(
-                        color: Color(0XFF585858),
+                        color: const Color(0XFF585858),
                         fontWeight: FontWeight.w400,
                         fontSize: ScreenUtil().setSp(16),
                         fontStyle: FontStyle.normal,
                       ),
                       onTap: () {
-                        FocusScope.of(context).requestFocus(new FocusNode());
+                        FocusScope.of(context).requestFocus(FocusNode());
                         if (!_controller.enableImput) {
                           _editPersonData(context);
                         }
@@ -208,30 +206,30 @@ class _CuentaPageState extends State<CuentaPage> {
                       decoration: InputDecoration(
                         hintText: 'Usuario',
                         hintStyle: TextStyle(
-                          color: Color(0XFFBEBEBE),
+                          color: const Color(0XFFBEBEBE),
                           fontWeight: FontWeight.w400,
                           fontSize: ScreenUtil().setSp(16),
                           fontStyle: FontStyle.normal,
                         ),
                         filled: true,
-                        fillColor: Color(0XFFEDEDED),
+                        fillColor: const Color(0XFFEDEDED),
                         contentPadding:
                             EdgeInsets.only(left: ScreenUtil().setWidth(10), top: ScreenUtil().setHeight(5), bottom: ScreenUtil().setHeight(1)),
                         enabledBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(15),
-                          borderSide: BorderSide(color: Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
+                          borderSide: BorderSide(color: const Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
                         ),
                         focusedBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(15),
-                          borderSide: BorderSide(color: Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
+                          borderSide: BorderSide(color: const Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
                         ),
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(15),
-                          borderSide: BorderSide(color: Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
+                          borderSide: BorderSide(color: const Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
                         ),
                       ),
                       style: TextStyle(
-                        color: Color(0XFF585858),
+                        color: const Color(0XFF585858),
                         fontWeight: FontWeight.w400,
                         fontSize: ScreenUtil().setSp(16),
                         fontStyle: FontStyle.normal,
@@ -256,36 +254,36 @@ class _CuentaPageState extends State<CuentaPage> {
                       decoration: InputDecoration(
                         hintText: 'Contraseña',
                         hintStyle: TextStyle(
-                          color: Color(0XFFBEBEBE),
+                          color: const Color(0XFFBEBEBE),
                           fontWeight: FontWeight.w400,
                           fontSize: ScreenUtil().setSp(16),
                           fontStyle: FontStyle.normal,
                         ),
                         filled: true,
-                        fillColor: Color(0XFFEDEDED),
+                        fillColor: const Color(0XFFEDEDED),
                         contentPadding:
                             EdgeInsets.only(left: ScreenUtil().setWidth(10), top: ScreenUtil().setHeight(5), bottom: ScreenUtil().setHeight(1)),
                         enabledBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(15),
-                          borderSide: BorderSide(color: Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
+                          borderSide: BorderSide(color: const Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
                         ),
                         focusedBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(15),
-                          borderSide: BorderSide(color: Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
+                          borderSide: BorderSide(color: const Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
                         ),
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(15),
-                          borderSide: BorderSide(color: Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
+                          borderSide: BorderSide(color: const Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
                         ),
                       ),
                       style: TextStyle(
-                        color: Color(0XFF585858),
+                        color: const Color(0XFF585858),
                         fontWeight: FontWeight.w400,
                         fontSize: ScreenUtil().setSp(16),
                         fontStyle: FontStyle.normal,
                       ),
                       onTap: () {
-                        FocusScope.of(context).requestFocus(new FocusNode());
+                        FocusScope.of(context).requestFocus(FocusNode());
                         if (!_controller.enableImput) {
                           _changePassword(context);
                         }
@@ -320,7 +318,7 @@ class _CuentaPageState extends State<CuentaPage> {
                                 padding: EdgeInsets.symmetric(horizontal: ScreenUtil().setWidth(50), vertical: ScreenUtil().setHeight(10)),
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(22),
-                                  color: Color(0XFFFF0036),
+                                  color: const Color(0XFFFF0036),
                                 ),
                                 child: Text(
                                   'Hecho',
@@ -345,9 +343,9 @@ class _CuentaPageState extends State<CuentaPage> {
     final _controller = ChangeEditPerfilController();
     final _prefs = Preferences();
 
-    TextEditingController _nombre2Controller = new TextEditingController();
-    TextEditingController _apellidoPaternoController = new TextEditingController();
-    TextEditingController _apellidoMaternoController = new TextEditingController();
+    final TextEditingController _nombre2Controller = TextEditingController();
+    final TextEditingController _apellidoPaternoController = TextEditingController();
+    final TextEditingController _apellidoMaternoController = TextEditingController();
 
     FocusNode _focus1 = FocusNode();
     FocusNode _focus2 = FocusNode();
@@ -365,18 +363,18 @@ class _CuentaPageState extends State<CuentaPage> {
           return Stack(
             children: [
               Container(
-                color: Color.fromRGBO(0, 0, 0, 0.001),
+                color: const Color.fromRGBO(0, 0, 0, 0.001),
                 child: DraggableScrollableSheet(
                     initialChildSize: 0.93,
                     minChildSize: 0.2,
                     maxChildSize: 0.93,
                     builder: (_, controller) {
                       return Container(
-                        decoration: BoxDecoration(
+                        decoration: const BoxDecoration(
                           color: Colors.white,
                           borderRadius: BorderRadius.only(
-                            topLeft: const Radius.circular(30),
-                            topRight: const Radius.circular(30),
+                            topLeft: Radius.circular(30),
+                            topRight: Radius.circular(30),
                           ),
                         ),
                         child: KeyboardActions(
@@ -396,7 +394,7 @@ class _CuentaPageState extends State<CuentaPage> {
                                     child: Center(
                                       child: Container(
                                         width: ScreenUtil().setWidth(48),
-                                        decoration: BoxDecoration(
+                                        decoration: const BoxDecoration(
                                           color: Color(0XFFBABABA),
                                         ),
                                       ),
@@ -409,7 +407,7 @@ class _CuentaPageState extends State<CuentaPage> {
                                     child: Text(
                                       'Editar perfil',
                                       style: GoogleFonts.poppins(
-                                        color: Color(0XFFFF0036),
+                                        color: const Color(0XFFFF0036),
                                         fontWeight: FontWeight.w600,
                                         fontSize: ScreenUtil().setSp(18),
                                       ),
@@ -421,7 +419,7 @@ class _CuentaPageState extends State<CuentaPage> {
                                   Text(
                                     'Nombre',
                                     style: GoogleFonts.poppins(
-                                      color: Color(0XFF585858),
+                                      color: const Color(0XFF585858),
                                       fontWeight: FontWeight.w500,
                                       fontSize: ScreenUtil().setSp(16),
                                     ),
@@ -431,9 +429,9 @@ class _CuentaPageState extends State<CuentaPage> {
                                     controller: _nombre2Controller,
                                     maxLines: 1,
                                     onChanged: (value) {
-                                      if (_nombre2Controller.text.length > 0 &&
-                                          _apellidoPaternoController.text.length > 0 &&
-                                          _apellidoMaternoController.text.length > 0) {
+                                      if (_nombre2Controller.text.isNotEmpty &&
+                                          _apellidoPaternoController.text.isNotEmpty &&
+                                          _apellidoMaternoController.text.isNotEmpty) {
                                         _controller.changeBoton(true);
                                       } else {
                                         _controller.changeBoton(false);
@@ -443,30 +441,30 @@ class _CuentaPageState extends State<CuentaPage> {
                                     decoration: InputDecoration(
                                       hintText: 'Nombre',
                                       hintStyle: TextStyle(
-                                        color: Color(0XFFBEBEBE),
+                                        color: const Color(0XFFBEBEBE),
                                         fontWeight: FontWeight.w400,
                                         fontSize: ScreenUtil().setSp(16),
                                         fontStyle: FontStyle.normal,
                                       ),
                                       filled: true,
-                                      fillColor: Color(0XFFEDEDED),
+                                      fillColor: const Color(0XFFEDEDED),
                                       contentPadding: EdgeInsets.only(
                                           left: ScreenUtil().setWidth(10), top: ScreenUtil().setHeight(5), bottom: ScreenUtil().setHeight(1)),
                                       enabledBorder: OutlineInputBorder(
                                         borderRadius: BorderRadius.circular(15),
-                                        borderSide: BorderSide(color: Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
+                                        borderSide: BorderSide(color: const Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
                                       ),
                                       focusedBorder: OutlineInputBorder(
                                         borderRadius: BorderRadius.circular(15),
-                                        borderSide: BorderSide(color: Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
+                                        borderSide: BorderSide(color: const Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
                                       ),
                                       border: OutlineInputBorder(
                                         borderRadius: BorderRadius.circular(15),
-                                        borderSide: BorderSide(color: Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
+                                        borderSide: BorderSide(color: const Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
                                       ),
                                     ),
                                     style: TextStyle(
-                                      color: Color(0XFF585858),
+                                      color: const Color(0XFF585858),
                                       fontWeight: FontWeight.w400,
                                       fontSize: ScreenUtil().setSp(16),
                                       fontStyle: FontStyle.normal,
@@ -478,7 +476,7 @@ class _CuentaPageState extends State<CuentaPage> {
                                   Text(
                                     'Apellido paterno',
                                     style: GoogleFonts.poppins(
-                                      color: Color(0XFF585858),
+                                      color: const Color(0XFF585858),
                                       fontWeight: FontWeight.w500,
                                       fontSize: ScreenUtil().setSp(16),
                                     ),
@@ -488,9 +486,9 @@ class _CuentaPageState extends State<CuentaPage> {
                                     controller: _apellidoPaternoController,
                                     maxLines: 1,
                                     onChanged: (value) {
-                                      if (_nombre2Controller.text.length > 0 &&
-                                          _apellidoPaternoController.text.length > 0 &&
-                                          _apellidoMaternoController.text.length > 0) {
+                                      if (_nombre2Controller.text.isNotEmpty &&
+                                          _apellidoPaternoController.text.isNotEmpty &&
+                                          _apellidoMaternoController.text.isNotEmpty) {
                                         _controller.changeBoton(true);
                                       } else {
                                         _controller.changeBoton(false);
@@ -500,30 +498,30 @@ class _CuentaPageState extends State<CuentaPage> {
                                     decoration: InputDecoration(
                                       hintText: 'Apellido paterno',
                                       hintStyle: TextStyle(
-                                        color: Color(0XFFBEBEBE),
+                                        color: const Color(0XFFBEBEBE),
                                         fontWeight: FontWeight.w400,
                                         fontSize: ScreenUtil().setSp(16),
                                         fontStyle: FontStyle.normal,
                                       ),
                                       filled: true,
-                                      fillColor: Color(0XFFEDEDED),
+                                      fillColor: const Color(0XFFEDEDED),
                                       contentPadding: EdgeInsets.only(
                                           left: ScreenUtil().setWidth(10), top: ScreenUtil().setHeight(5), bottom: ScreenUtil().setHeight(1)),
                                       enabledBorder: OutlineInputBorder(
                                         borderRadius: BorderRadius.circular(15),
-                                        borderSide: BorderSide(color: Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
+                                        borderSide: BorderSide(color: const Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
                                       ),
                                       focusedBorder: OutlineInputBorder(
                                         borderRadius: BorderRadius.circular(15),
-                                        borderSide: BorderSide(color: Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
+                                        borderSide: BorderSide(color: const Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
                                       ),
                                       border: OutlineInputBorder(
                                         borderRadius: BorderRadius.circular(15),
-                                        borderSide: BorderSide(color: Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
+                                        borderSide: BorderSide(color: const Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
                                       ),
                                     ),
                                     style: TextStyle(
-                                      color: Color(0XFF585858),
+                                      color: const Color(0XFF585858),
                                       fontWeight: FontWeight.w400,
                                       fontSize: ScreenUtil().setSp(16),
                                       fontStyle: FontStyle.normal,
@@ -535,7 +533,7 @@ class _CuentaPageState extends State<CuentaPage> {
                                   Text(
                                     'Apellido materno',
                                     style: GoogleFonts.poppins(
-                                      color: Color(0XFF585858),
+                                      color: const Color(0XFF585858),
                                       fontWeight: FontWeight.w500,
                                       fontSize: ScreenUtil().setSp(16),
                                     ),
@@ -545,9 +543,9 @@ class _CuentaPageState extends State<CuentaPage> {
                                     controller: _apellidoMaternoController,
                                     maxLines: 1,
                                     onChanged: (value) {
-                                      if (_nombre2Controller.text.length > 0 &&
-                                          _apellidoPaternoController.text.length > 0 &&
-                                          _apellidoMaternoController.text.length > 0) {
+                                      if (_nombre2Controller.text.isNotEmpty &&
+                                          _apellidoPaternoController.text.isNotEmpty &&
+                                          _apellidoMaternoController.text.isNotEmpty) {
                                         _controller.changeBoton(true);
                                       } else {
                                         _controller.changeBoton(false);
@@ -557,30 +555,30 @@ class _CuentaPageState extends State<CuentaPage> {
                                     decoration: InputDecoration(
                                       hintText: 'Apellido materno',
                                       hintStyle: TextStyle(
-                                        color: Color(0XFFBEBEBE),
+                                        color: const Color(0XFFBEBEBE),
                                         fontWeight: FontWeight.w400,
                                         fontSize: ScreenUtil().setSp(16),
                                         fontStyle: FontStyle.normal,
                                       ),
                                       filled: true,
-                                      fillColor: Color(0XFFEDEDED),
+                                      fillColor: const Color(0XFFEDEDED),
                                       contentPadding: EdgeInsets.only(
                                           left: ScreenUtil().setWidth(10), top: ScreenUtil().setHeight(5), bottom: ScreenUtil().setHeight(1)),
                                       enabledBorder: OutlineInputBorder(
                                         borderRadius: BorderRadius.circular(15),
-                                        borderSide: BorderSide(color: Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
+                                        borderSide: BorderSide(color: const Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
                                       ),
                                       focusedBorder: OutlineInputBorder(
                                         borderRadius: BorderRadius.circular(15),
-                                        borderSide: BorderSide(color: Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
+                                        borderSide: BorderSide(color: const Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
                                       ),
                                       border: OutlineInputBorder(
                                         borderRadius: BorderRadius.circular(15),
-                                        borderSide: BorderSide(color: Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
+                                        borderSide: BorderSide(color: const Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
                                       ),
                                     ),
                                     style: TextStyle(
-                                      color: Color(0XFF585858),
+                                      color: const Color(0XFF585858),
                                       fontWeight: FontWeight.w400,
                                       fontSize: ScreenUtil().setSp(16),
                                       fontStyle: FontStyle.normal,
@@ -614,7 +612,7 @@ class _CuentaPageState extends State<CuentaPage> {
                                             child: Container(
                                               decoration: BoxDecoration(
                                                 borderRadius: BorderRadius.circular(50),
-                                                color: (_controller.boton) ? Color(0XFFFF0036) : Color(0XFFFF0036).withOpacity(0.6),
+                                                color: (_controller.boton) ? const Color(0XFFFF0036) : const Color(0XFFFF0036).withOpacity(0.6),
                                               ),
                                               child: Center(
                                                 child: Text(
@@ -642,7 +640,7 @@ class _CuentaPageState extends State<CuentaPage> {
                                           return Text(
                                             _controller.text,
                                             style: TextStyle(
-                                              color: Color(0XFFFF0036),
+                                              color: const Color(0XFFFF0036),
                                               fontWeight: FontWeight.w600,
                                               fontSize: ScreenUtil().setSp(16),
                                               fontStyle: FontStyle.normal,
@@ -660,7 +658,7 @@ class _CuentaPageState extends State<CuentaPage> {
                                       child: Text(
                                         'Cancelar',
                                         style: GoogleFonts.poppins(
-                                          color: Color(0XFF8A8A8A),
+                                          color: const Color(0XFF8A8A8A),
                                           fontWeight: FontWeight.w500,
                                           fontSize: ScreenUtil().setSp(16),
                                         ),
@@ -692,8 +690,8 @@ class _CuentaPageState extends State<CuentaPage> {
   void _changePassword(BuildContext context) {
     final _controller = ChangeEditPerfilController();
 
-    TextEditingController _passwordController = new TextEditingController();
-    TextEditingController _confirmPasswordController = new TextEditingController();
+    final TextEditingController _passwordController = TextEditingController();
+    final TextEditingController _confirmPasswordController = TextEditingController();
 
     FocusNode _focus1 = FocusNode();
     FocusNode _focus2 = FocusNode();
@@ -706,18 +704,18 @@ class _CuentaPageState extends State<CuentaPage> {
           return Stack(
             children: [
               Container(
-                color: Color.fromRGBO(0, 0, 0, 0.001),
+                color: const Color.fromRGBO(0, 0, 0, 0.001),
                 child: DraggableScrollableSheet(
                     initialChildSize: 0.93,
                     minChildSize: 0.2,
                     maxChildSize: 0.93,
                     builder: (_, controller) {
                       return Container(
-                        decoration: BoxDecoration(
+                        decoration: const BoxDecoration(
                           color: Colors.white,
                           borderRadius: BorderRadius.only(
-                            topLeft: const Radius.circular(30),
-                            topRight: const Radius.circular(30),
+                            topLeft: Radius.circular(30),
+                            topRight: Radius.circular(30),
                           ),
                         ),
                         child: KeyboardActions(
@@ -736,7 +734,7 @@ class _CuentaPageState extends State<CuentaPage> {
                                     child: Center(
                                       child: Container(
                                         width: ScreenUtil().setWidth(48),
-                                        decoration: BoxDecoration(
+                                        decoration: const BoxDecoration(
                                           color: Color(0XFFBABABA),
                                         ),
                                       ),
@@ -749,7 +747,7 @@ class _CuentaPageState extends State<CuentaPage> {
                                     child: Text(
                                       'Actualizar contraseña',
                                       style: GoogleFonts.poppins(
-                                        color: Color(0XFFFF0036),
+                                        color: const Color(0XFFFF0036),
                                         fontWeight: FontWeight.w600,
                                         fontSize: ScreenUtil().setSp(18),
                                       ),
@@ -761,7 +759,7 @@ class _CuentaPageState extends State<CuentaPage> {
                                   Text(
                                     'Contraseña',
                                     style: GoogleFonts.poppins(
-                                      color: Color(0XFF585858),
+                                      color: const Color(0XFF585858),
                                       fontWeight: FontWeight.w500,
                                       fontSize: ScreenUtil().setSp(16),
                                     ),
@@ -772,7 +770,7 @@ class _CuentaPageState extends State<CuentaPage> {
                                     obscureText: true,
                                     maxLines: 1,
                                     onChanged: (value) {
-                                      if (_confirmPasswordController.text.length > 0 && _passwordController.text.length > 0) {
+                                      if (_confirmPasswordController.text.isNotEmpty && _passwordController.text.isNotEmpty) {
                                         if (_confirmPasswordController.text == _passwordController.text) {
                                           _controller.changeBoton(true);
                                         } else {
@@ -786,30 +784,30 @@ class _CuentaPageState extends State<CuentaPage> {
                                     decoration: InputDecoration(
                                       hintText: 'Ingresar contraseña',
                                       hintStyle: TextStyle(
-                                        color: Color(0XFFBEBEBE),
+                                        color: const Color(0XFFBEBEBE),
                                         fontWeight: FontWeight.w400,
                                         fontSize: ScreenUtil().setSp(16),
                                         fontStyle: FontStyle.normal,
                                       ),
                                       filled: true,
-                                      fillColor: Color(0XFFEDEDED),
+                                      fillColor: const Color(0XFFEDEDED),
                                       contentPadding: EdgeInsets.only(
                                           left: ScreenUtil().setWidth(10), top: ScreenUtil().setHeight(5), bottom: ScreenUtil().setHeight(1)),
                                       enabledBorder: OutlineInputBorder(
                                         borderRadius: BorderRadius.circular(15),
-                                        borderSide: BorderSide(color: Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
+                                        borderSide: BorderSide(color: const Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
                                       ),
                                       focusedBorder: OutlineInputBorder(
                                         borderRadius: BorderRadius.circular(15),
-                                        borderSide: BorderSide(color: Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
+                                        borderSide: BorderSide(color: const Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
                                       ),
                                       border: OutlineInputBorder(
                                         borderRadius: BorderRadius.circular(15),
-                                        borderSide: BorderSide(color: Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
+                                        borderSide: BorderSide(color: const Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
                                       ),
                                     ),
                                     style: TextStyle(
-                                      color: Color(0XFF585858),
+                                      color: const Color(0XFF585858),
                                       fontWeight: FontWeight.w400,
                                       fontSize: ScreenUtil().setSp(16),
                                       fontStyle: FontStyle.normal,
@@ -821,7 +819,7 @@ class _CuentaPageState extends State<CuentaPage> {
                                   Text(
                                     'Confirmar contraseña',
                                     style: GoogleFonts.poppins(
-                                      color: Color(0XFF585858),
+                                      color: const Color(0XFF585858),
                                       fontWeight: FontWeight.w500,
                                       fontSize: ScreenUtil().setSp(16),
                                     ),
@@ -832,7 +830,7 @@ class _CuentaPageState extends State<CuentaPage> {
                                     obscureText: true,
                                     maxLines: 1,
                                     onChanged: (value) {
-                                      if (_confirmPasswordController.text.length > 0 && _passwordController.text.length > 0) {
+                                      if (_confirmPasswordController.text.isNotEmpty && _passwordController.text.isNotEmpty) {
                                         if (_confirmPasswordController.text == _passwordController.text) {
                                           _controller.changeBoton(true);
                                         } else {
@@ -846,30 +844,30 @@ class _CuentaPageState extends State<CuentaPage> {
                                     decoration: InputDecoration(
                                       hintText: 'Confirma tu contraseña',
                                       hintStyle: TextStyle(
-                                        color: Color(0XFFBEBEBE),
+                                        color: const Color(0XFFBEBEBE),
                                         fontWeight: FontWeight.w400,
                                         fontSize: ScreenUtil().setSp(16),
                                         fontStyle: FontStyle.normal,
                                       ),
                                       filled: true,
-                                      fillColor: Color(0XFFEDEDED),
+                                      fillColor: const Color(0XFFEDEDED),
                                       contentPadding: EdgeInsets.only(
                                           left: ScreenUtil().setWidth(10), top: ScreenUtil().setHeight(5), bottom: ScreenUtil().setHeight(1)),
                                       enabledBorder: OutlineInputBorder(
                                         borderRadius: BorderRadius.circular(15),
-                                        borderSide: BorderSide(color: Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
+                                        borderSide: BorderSide(color: const Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
                                       ),
                                       focusedBorder: OutlineInputBorder(
                                         borderRadius: BorderRadius.circular(15),
-                                        borderSide: BorderSide(color: Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
+                                        borderSide: BorderSide(color: const Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
                                       ),
                                       border: OutlineInputBorder(
                                         borderRadius: BorderRadius.circular(15),
-                                        borderSide: BorderSide(color: Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
+                                        borderSide: BorderSide(color: const Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
                                       ),
                                     ),
                                     style: TextStyle(
-                                      color: Color(0XFF585858),
+                                      color: const Color(0XFF585858),
                                       fontWeight: FontWeight.w400,
                                       fontSize: ScreenUtil().setSp(16),
                                       fontStyle: FontStyle.normal,
@@ -900,7 +898,7 @@ class _CuentaPageState extends State<CuentaPage> {
                                             child: Container(
                                               decoration: BoxDecoration(
                                                 borderRadius: BorderRadius.circular(50),
-                                                color: (_controller.boton) ? Color(0XFFFF0036) : Color(0XFFFF0036).withOpacity(0.6),
+                                                color: (_controller.boton) ? const Color(0XFFFF0036) : const Color(0XFFFF0036).withOpacity(0.6),
                                               ),
                                               child: Center(
                                                 child: Text(
@@ -928,7 +926,7 @@ class _CuentaPageState extends State<CuentaPage> {
                                           return Text(
                                             _controller.text,
                                             style: TextStyle(
-                                              color: Color(0XFFFF0036),
+                                              color: const Color(0XFFFF0036),
                                               fontWeight: FontWeight.w600,
                                               fontSize: ScreenUtil().setSp(16),
                                               fontStyle: FontStyle.normal,
@@ -946,7 +944,7 @@ class _CuentaPageState extends State<CuentaPage> {
                                       child: Text(
                                         'Cancelar',
                                         style: GoogleFonts.poppins(
-                                          color: Color(0XFF8A8A8A),
+                                          color: const Color(0XFF8A8A8A),
                                           fontWeight: FontWeight.w500,
                                           fontSize: ScreenUtil().setSp(16),
                                         ),
@@ -978,7 +976,7 @@ class _CuentaPageState extends State<CuentaPage> {
   void _updatePhotoProductModal(BuildContext context) {
     final _controller = CuentaController();
     final picker = ImagePicker();
-    Future<Null> _cropImage(filePath) async {
+    Future<void> _cropImage(filePath) async {
       File croppedImage = await ImageCropper.cropImage(
           sourcePath: filePath,
           aspectRatioPresets: Platform.isAndroid
@@ -999,14 +997,14 @@ class _CuentaPageState extends State<CuentaPage> {
                   CropAspectRatioPreset.ratio7x5,
                   CropAspectRatioPreset.ratio16x9
                 ],
-          androidUiSettings: AndroidUiSettings(
+          androidUiSettings: const AndroidUiSettings(
               toolbarTitle: 'Cortar Imagen',
               toolbarColor: Color(0XFFFF0036),
               toolbarWidgetColor: Colors.white,
               initAspectRatio: CropAspectRatioPreset.original,
               showCropGrid: true,
               lockAspectRatio: false),
-          iosUiSettings: IOSUiSettings(minimumAspectRatio: 1.0, title: 'Cortar Imagen'));
+          iosUiSettings: const IOSUiSettings(minimumAspectRatio: 1.0, title: 'Cortar Imagen'));
       if (croppedImage != null) {
         _controller.changeImage(croppedImage);
       }
@@ -1037,7 +1035,7 @@ class _CuentaPageState extends State<CuentaPage> {
         return GestureDetector(
           onTap: () => Navigator.of(context).pop(),
           child: Container(
-            color: Color.fromRGBO(0, 0, 0, 0.001),
+            color: const Color.fromRGBO(0, 0, 0, 0.001),
             child: GestureDetector(
               onTap: () {},
               child: DraggableScrollableSheet(
@@ -1046,11 +1044,11 @@ class _CuentaPageState extends State<CuentaPage> {
                 maxChildSize: 0.2,
                 builder: (_, controller) {
                   return Container(
-                    decoration: BoxDecoration(
+                    decoration: const BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.only(
-                        topLeft: const Radius.circular(25.0),
-                        topRight: const Radius.circular(25.0),
+                        topLeft: Radius.circular(25.0),
+                        topRight: Radius.circular(25.0),
                       ),
                     ),
                     child: Padding(
@@ -1074,22 +1072,22 @@ class _CuentaPageState extends State<CuentaPage> {
                                   'Seleccionar foto',
                                   style: GoogleFonts.poppins(
                                     fontStyle: FontStyle.normal,
-                                    color: Color(0XFF585858),
+                                    color: const Color(0XFF585858),
                                     fontWeight: FontWeight.w400,
                                     fontSize: ScreenUtil().setSp(16),
                                     letterSpacing: ScreenUtil().setSp(0.016),
                                   ),
                                 ),
-                                Spacer(),
+                                const Spacer(),
                                 Icon(
                                   Icons.photo_album_outlined,
-                                  color: Color(0XFFFF0036),
+                                  color: const Color(0XFFFF0036),
                                   size: ScreenUtil().setHeight(24),
                                 )
                               ],
                             ),
                           ),
-                          Divider(
+                          const Divider(
                             thickness: 1,
                           ),
                           SizedBox(
@@ -1107,21 +1105,21 @@ class _CuentaPageState extends State<CuentaPage> {
                                   style: GoogleFonts.poppins(
                                     fontStyle: FontStyle.normal,
                                     fontWeight: FontWeight.w400,
-                                    color: Color(0XFF585858),
+                                    color: const Color(0XFF585858),
                                     fontSize: ScreenUtil().setSp(16),
                                     letterSpacing: ScreenUtil().setSp(0.016),
                                   ),
                                 ),
-                                Spacer(),
+                                const Spacer(),
                                 Icon(
                                   Icons.photo_camera_outlined,
-                                  color: Color(0XFFFF0036),
+                                  color: const Color(0XFFFF0036),
                                   size: ScreenUtil().setHeight(24),
                                 )
                               ],
                             ),
                           ),
-                          Divider(
+                          const Divider(
                             thickness: 1,
                           ),
                         ],
@@ -1141,13 +1139,13 @@ class _CuentaPageState extends State<CuentaPage> {
     return Container(
       height: double.infinity,
       width: double.infinity,
-      color: Color.fromRGBO(0, 0, 0, 0.5),
+      color: const Color.fromRGBO(0, 0, 0, 0.5),
       child: Center(
         child: (Platform.isAndroid)
-            ? CircularProgressIndicator(
+            ? const CircularProgressIndicator(
                 color: Color(0XFFFF0036),
               )
-            : CupertinoActivityIndicator(),
+            : const CupertinoActivityIndicator(),
       ),
     );
   }

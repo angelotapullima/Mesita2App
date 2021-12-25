@@ -67,9 +67,9 @@ class ChangeController extends ChangeNotifier {
 void pagarPedidoModal(BuildContext context, PedidoModel pedido, bool esDeliveryLlevar, String mesaTipo) {
   final _controller = ChangeController();
 
-  TextEditingController _rucController = new TextEditingController();
-  TextEditingController _razonController = new TextEditingController();
-  TextEditingController _domicilioController = new TextEditingController();
+  TextEditingController _rucController = TextEditingController();
+  TextEditingController _razonController = TextEditingController();
+  TextEditingController _domicilioController = TextEditingController();
 
   FocusNode _focus1 = FocusNode();
   FocusNode _focus2 = FocusNode();
@@ -83,18 +83,18 @@ void pagarPedidoModal(BuildContext context, PedidoModel pedido, bool esDeliveryL
         return Stack(
           children: [
             Container(
-              color: Color.fromRGBO(0, 0, 0, 0.001),
+              color: const Color.fromRGBO(0, 0, 0, 0.001),
               child: DraggableScrollableSheet(
                   initialChildSize: 0.93,
                   minChildSize: 0.2,
                   maxChildSize: 0.93,
                   builder: (_, controller) {
                     return Container(
-                      decoration: BoxDecoration(
+                      decoration: const BoxDecoration(
                         color: Colors.white,
                         borderRadius: BorderRadius.only(
-                          topLeft: const Radius.circular(30),
-                          topRight: const Radius.circular(30),
+                          topLeft: Radius.circular(30),
+                          topRight: Radius.circular(30),
                         ),
                       ),
                       child: KeyboardActions(
@@ -114,7 +114,7 @@ void pagarPedidoModal(BuildContext context, PedidoModel pedido, bool esDeliveryL
                                   child: Center(
                                     child: Container(
                                       width: ScreenUtil().setWidth(48),
-                                      decoration: BoxDecoration(
+                                      decoration: const BoxDecoration(
                                         color: Color(0XFFBABABA),
                                       ),
                                     ),
@@ -127,7 +127,7 @@ void pagarPedidoModal(BuildContext context, PedidoModel pedido, bool esDeliveryL
                                   child: Text(
                                     'Pagar',
                                     style: GoogleFonts.poppins(
-                                      color: Color(0XFFFF0036),
+                                      color: const Color(0XFFFF0036),
                                       fontWeight: FontWeight.w600,
                                       fontSize: ScreenUtil().setSp(18),
                                     ),
@@ -139,7 +139,7 @@ void pagarPedidoModal(BuildContext context, PedidoModel pedido, bool esDeliveryL
                                 Text(
                                   'Tipo de pago',
                                   style: GoogleFonts.poppins(
-                                    color: Color(0XFF585858),
+                                    color: const Color(0XFF585858),
                                     fontWeight: FontWeight.w500,
                                     fontSize: ScreenUtil().setSp(16),
                                   ),
@@ -158,9 +158,9 @@ void pagarPedidoModal(BuildContext context, PedidoModel pedido, bool esDeliveryL
                                             _controller.changeTipoPago('1');
                                             if (_controller.tipoDoc != '') {
                                               if (_controller.tipoDoc == '01') {
-                                                if (_rucController.text.length > 0 &&
-                                                    _razonController.text.length > 0 &&
-                                                    _domicilioController.text.length > 0) {
+                                                if (_rucController.text.isNotEmpty &&
+                                                    _razonController.text.isNotEmpty &&
+                                                    _domicilioController.text.isNotEmpty) {
                                                   _controller.changeBoton(true);
                                                 } else {
                                                   _controller.changeBoton(false);
@@ -179,9 +179,9 @@ void pagarPedidoModal(BuildContext context, PedidoModel pedido, bool esDeliveryL
                                                 width: ScreenUtil().setWidth(20),
                                                 decoration: BoxDecoration(
                                                   shape: BoxShape.circle,
-                                                  color: (_controller.tipoPago == '1') ? Color(0XFFFF0036) : Color(0XFFE5E5E5),
+                                                  color: (_controller.tipoPago == '1') ? const Color(0XFFFF0036) : const Color(0XFFE5E5E5),
                                                   border: Border.all(
-                                                    color: Color(0XFFE5E5E5),
+                                                    color: const Color(0XFFE5E5E5),
                                                     width: ScreenUtil().setWidth(4),
                                                   ),
                                                 ),
@@ -192,7 +192,7 @@ void pagarPedidoModal(BuildContext context, PedidoModel pedido, bool esDeliveryL
                                               Text(
                                                 'Efectivo',
                                                 style: GoogleFonts.poppins(
-                                                  color: Color(0XFF585858),
+                                                  color: const Color(0XFF585858),
                                                   fontSize: ScreenUtil().setSp(14),
                                                   fontWeight: FontWeight.w500,
                                                   letterSpacing: ScreenUtil().setSp(0.016),
@@ -210,9 +210,9 @@ void pagarPedidoModal(BuildContext context, PedidoModel pedido, bool esDeliveryL
 
                                             if (_controller.tipoDoc != '') {
                                               if (_controller.tipoDoc == '01') {
-                                                if (_rucController.text.length > 0 &&
-                                                    _razonController.text.length > 0 &&
-                                                    _domicilioController.text.length > 0) {
+                                                if (_rucController.text.isNotEmpty &&
+                                                    _razonController.text.isNotEmpty &&
+                                                    _domicilioController.text.isNotEmpty) {
                                                   _controller.changeBoton(true);
                                                 } else {
                                                   _controller.changeBoton(false);
@@ -231,9 +231,9 @@ void pagarPedidoModal(BuildContext context, PedidoModel pedido, bool esDeliveryL
                                                 width: ScreenUtil().setWidth(20),
                                                 decoration: BoxDecoration(
                                                   shape: BoxShape.circle,
-                                                  color: (_controller.tipoPago == '2') ? Color(0XFFFF0036) : Color(0XFFE5E5E5),
+                                                  color: (_controller.tipoPago == '2') ? const Color(0XFFFF0036) : const Color(0XFFE5E5E5),
                                                   border: Border.all(
-                                                    color: Color(0XFFE5E5E5),
+                                                    color: const Color(0XFFE5E5E5),
                                                     width: ScreenUtil().setWidth(4),
                                                   ),
                                                 ),
@@ -244,7 +244,7 @@ void pagarPedidoModal(BuildContext context, PedidoModel pedido, bool esDeliveryL
                                               Text(
                                                 'Tarjeta',
                                                 style: GoogleFonts.poppins(
-                                                  color: Color(0XFF585858),
+                                                  color: const Color(0XFF585858),
                                                   fontSize: ScreenUtil().setSp(14),
                                                   fontWeight: FontWeight.w500,
                                                   letterSpacing: ScreenUtil().setSp(0.016),
@@ -258,9 +258,9 @@ void pagarPedidoModal(BuildContext context, PedidoModel pedido, bool esDeliveryL
                                             _controller.changeTipoPago('3');
                                             if (_controller.tipoDoc != '') {
                                               if (_controller.tipoDoc == '01') {
-                                                if (_rucController.text.length > 0 &&
-                                                    _razonController.text.length > 0 &&
-                                                    _domicilioController.text.length > 0) {
+                                                if (_rucController.text.isNotEmpty &&
+                                                    _razonController.text.isNotEmpty &&
+                                                    _domicilioController.text.isNotEmpty) {
                                                   _controller.changeBoton(true);
                                                 } else {
                                                   _controller.changeBoton(false);
@@ -279,9 +279,9 @@ void pagarPedidoModal(BuildContext context, PedidoModel pedido, bool esDeliveryL
                                                 width: ScreenUtil().setWidth(20),
                                                 decoration: BoxDecoration(
                                                   shape: BoxShape.circle,
-                                                  color: (_controller.tipoPago == '3') ? Color(0XFFFF0036) : Color(0XFFE5E5E5),
+                                                  color: (_controller.tipoPago == '3') ? const Color(0XFFFF0036) : const Color(0XFFE5E5E5),
                                                   border: Border.all(
-                                                    color: Color(0XFFE5E5E5),
+                                                    color: const Color(0XFFE5E5E5),
                                                     width: ScreenUtil().setWidth(4),
                                                   ),
                                                 ),
@@ -292,7 +292,7 @@ void pagarPedidoModal(BuildContext context, PedidoModel pedido, bool esDeliveryL
                                               Text(
                                                 'Transferencia',
                                                 style: GoogleFonts.poppins(
-                                                  color: Color(0XFF585858),
+                                                  color: const Color(0XFF585858),
                                                   fontSize: ScreenUtil().setSp(14),
                                                   fontWeight: FontWeight.w500,
                                                   letterSpacing: ScreenUtil().setSp(0.016),
@@ -311,7 +311,7 @@ void pagarPedidoModal(BuildContext context, PedidoModel pedido, bool esDeliveryL
                                 Text(
                                   'Tipo de documento',
                                   style: GoogleFonts.poppins(
-                                    color: Color(0XFF585858),
+                                    color: const Color(0XFF585858),
                                     fontWeight: FontWeight.w500,
                                     fontSize: ScreenUtil().setSp(16),
                                   ),
@@ -338,7 +338,7 @@ void pagarPedidoModal(BuildContext context, PedidoModel pedido, bool esDeliveryL
                                             // }
 
                                             if (_controller.tipoDoc == '03' && _controller.tipoPago != '') {
-                                              if (_razonController.text.length > 0) {
+                                              if (_razonController.text.isNotEmpty) {
                                                 _controller.changeBoton(true);
                                               } else {
                                                 _controller.changeBoton(false);
@@ -354,9 +354,9 @@ void pagarPedidoModal(BuildContext context, PedidoModel pedido, bool esDeliveryL
                                                 width: ScreenUtil().setWidth(20),
                                                 decoration: BoxDecoration(
                                                   shape: BoxShape.circle,
-                                                  color: (_controller.tipoDoc == '03') ? Color(0XFFFF0036) : Color(0XFFE5E5E5),
+                                                  color: (_controller.tipoDoc == '03') ? const Color(0XFFFF0036) : const Color(0XFFE5E5E5),
                                                   border: Border.all(
-                                                    color: Color(0XFFE5E5E5),
+                                                    color: const Color(0XFFE5E5E5),
                                                     width: ScreenUtil().setWidth(4),
                                                   ),
                                                 ),
@@ -367,7 +367,7 @@ void pagarPedidoModal(BuildContext context, PedidoModel pedido, bool esDeliveryL
                                               Text(
                                                 'Boleta',
                                                 style: GoogleFonts.poppins(
-                                                  color: Color(0XFF585858),
+                                                  color: const Color(0XFF585858),
                                                   fontSize: ScreenUtil().setSp(14),
                                                   fontWeight: FontWeight.w500,
                                                   letterSpacing: ScreenUtil().setSp(0.016),
@@ -384,9 +384,9 @@ void pagarPedidoModal(BuildContext context, PedidoModel pedido, bool esDeliveryL
                                             _controller.changeDoc('01');
 
                                             if (_controller.tipoDoc == '01' && _controller.tipoPago != '') {
-                                              if (_rucController.text.length > 0 &&
-                                                  _razonController.text.length > 0 &&
-                                                  _domicilioController.text.length > 0) {
+                                              if (_rucController.text.isNotEmpty &&
+                                                  _razonController.text.isNotEmpty &&
+                                                  _domicilioController.text.isNotEmpty) {
                                                 _controller.changeBoton(true);
                                               } else {
                                                 _controller.changeBoton(false);
@@ -402,9 +402,9 @@ void pagarPedidoModal(BuildContext context, PedidoModel pedido, bool esDeliveryL
                                                 width: ScreenUtil().setWidth(20),
                                                 decoration: BoxDecoration(
                                                   shape: BoxShape.circle,
-                                                  color: (_controller.tipoDoc == '01') ? Color(0XFFFF0036) : Color(0XFFE5E5E5),
+                                                  color: (_controller.tipoDoc == '01') ? const Color(0XFFFF0036) : const Color(0XFFE5E5E5),
                                                   border: Border.all(
-                                                    color: Color(0XFFE5E5E5),
+                                                    color: const Color(0XFFE5E5E5),
                                                     width: ScreenUtil().setWidth(4),
                                                   ),
                                                 ),
@@ -415,7 +415,7 @@ void pagarPedidoModal(BuildContext context, PedidoModel pedido, bool esDeliveryL
                                               Text(
                                                 'Factura',
                                                 style: GoogleFonts.poppins(
-                                                  color: Color(0XFF585858),
+                                                  color: const Color(0XFF585858),
                                                   fontSize: ScreenUtil().setSp(14),
                                                   fontWeight: FontWeight.w500,
                                                   letterSpacing: ScreenUtil().setSp(0.016),
@@ -443,9 +443,9 @@ void pagarPedidoModal(BuildContext context, PedidoModel pedido, bool esDeliveryL
                                                 width: ScreenUtil().setWidth(20),
                                                 decoration: BoxDecoration(
                                                   shape: BoxShape.circle,
-                                                  color: (_controller.tipoDoc == '02') ? Color(0XFFFF0036) : Color(0XFFE5E5E5),
+                                                  color: (_controller.tipoDoc == '02') ? const Color(0XFFFF0036) : const Color(0XFFE5E5E5),
                                                   border: Border.all(
-                                                    color: Color(0XFFE5E5E5),
+                                                    color: const Color(0XFFE5E5E5),
                                                     width: ScreenUtil().setWidth(4),
                                                   ),
                                                 ),
@@ -456,7 +456,7 @@ void pagarPedidoModal(BuildContext context, PedidoModel pedido, bool esDeliveryL
                                               Text(
                                                 'N. venta',
                                                 style: GoogleFonts.poppins(
-                                                  color: Color(0XFF585858),
+                                                  color: const Color(0XFF585858),
                                                   fontSize: ScreenUtil().setSp(14),
                                                   fontWeight: FontWeight.w500,
                                                   letterSpacing: ScreenUtil().setSp(0.016),
@@ -484,9 +484,9 @@ void pagarPedidoModal(BuildContext context, PedidoModel pedido, bool esDeliveryL
                                             controller: _rucController,
                                             maxLines: 1,
                                             onChanged: (value) {
-                                              if (_rucController.text.length > 0 &&
-                                                  _razonController.text.length > 0 &&
-                                                  _domicilioController.text.length > 0) {
+                                              if (_rucController.text.isNotEmpty &&
+                                                  _razonController.text.isNotEmpty &&
+                                                  _domicilioController.text.isNotEmpty) {
                                                 _controller.changeBoton(true);
                                               } else {
                                                 _controller.changeBoton(false);
@@ -498,30 +498,30 @@ void pagarPedidoModal(BuildContext context, PedidoModel pedido, bool esDeliveryL
                                               counterText: '',
                                               hintText: 'Ingrese RUC',
                                               hintStyle: TextStyle(
-                                                color: Color(0XFFBEBEBE),
+                                                color: const Color(0XFFBEBEBE),
                                                 fontWeight: FontWeight.w400,
                                                 fontSize: ScreenUtil().setSp(16),
                                                 fontStyle: FontStyle.normal,
                                               ),
                                               filled: true,
-                                              fillColor: Color(0XFFEDEDED),
+                                              fillColor: const Color(0XFFEDEDED),
                                               contentPadding: EdgeInsets.only(
                                                   left: ScreenUtil().setWidth(10), top: ScreenUtil().setHeight(5), bottom: ScreenUtil().setHeight(1)),
                                               enabledBorder: OutlineInputBorder(
                                                 borderRadius: BorderRadius.circular(15),
-                                                borderSide: BorderSide(color: Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
+                                                borderSide: BorderSide(color: const Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
                                               ),
                                               focusedBorder: OutlineInputBorder(
                                                 borderRadius: BorderRadius.circular(15),
-                                                borderSide: BorderSide(color: Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
+                                                borderSide: BorderSide(color: const Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
                                               ),
                                               border: OutlineInputBorder(
                                                 borderRadius: BorderRadius.circular(15),
-                                                borderSide: BorderSide(color: Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
+                                                borderSide: BorderSide(color: const Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
                                               ),
                                             ),
                                             style: TextStyle(
-                                              color: Color(0XFF585858),
+                                              color: const Color(0XFF585858),
                                               fontWeight: FontWeight.w400,
                                               fontSize: ScreenUtil().setSp(16),
                                               fontStyle: FontStyle.normal,
@@ -535,9 +535,9 @@ void pagarPedidoModal(BuildContext context, PedidoModel pedido, bool esDeliveryL
                                             controller: _razonController,
                                             maxLines: 1,
                                             onChanged: (value) {
-                                              if (_rucController.text.length > 0 &&
-                                                  _razonController.text.length > 0 &&
-                                                  _domicilioController.text.length > 0) {
+                                              if (_rucController.text.isNotEmpty &&
+                                                  _razonController.text.isNotEmpty &&
+                                                  _domicilioController.text.isNotEmpty) {
                                                 _controller.changeBoton(true);
                                               } else {
                                                 _controller.changeBoton(false);
@@ -547,30 +547,30 @@ void pagarPedidoModal(BuildContext context, PedidoModel pedido, bool esDeliveryL
                                             decoration: InputDecoration(
                                               hintText: 'Ingrese razón social',
                                               hintStyle: TextStyle(
-                                                color: Color(0XFFBEBEBE),
+                                                color: const Color(0XFFBEBEBE),
                                                 fontWeight: FontWeight.w400,
                                                 fontSize: ScreenUtil().setSp(16),
                                                 fontStyle: FontStyle.normal,
                                               ),
                                               filled: true,
-                                              fillColor: Color(0XFFEDEDED),
+                                              fillColor: const Color(0XFFEDEDED),
                                               contentPadding: EdgeInsets.only(
                                                   left: ScreenUtil().setWidth(10), top: ScreenUtil().setHeight(5), bottom: ScreenUtil().setHeight(1)),
                                               enabledBorder: OutlineInputBorder(
                                                 borderRadius: BorderRadius.circular(15),
-                                                borderSide: BorderSide(color: Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
+                                                borderSide: BorderSide(color: const Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
                                               ),
                                               focusedBorder: OutlineInputBorder(
                                                 borderRadius: BorderRadius.circular(15),
-                                                borderSide: BorderSide(color: Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
+                                                borderSide: BorderSide(color: const Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
                                               ),
                                               border: OutlineInputBorder(
                                                 borderRadius: BorderRadius.circular(15),
-                                                borderSide: BorderSide(color: Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
+                                                borderSide: BorderSide(color: const Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
                                               ),
                                             ),
                                             style: TextStyle(
-                                              color: Color(0XFF585858),
+                                              color: const Color(0XFF585858),
                                               fontWeight: FontWeight.w400,
                                               fontSize: ScreenUtil().setSp(16),
                                               fontStyle: FontStyle.normal,
@@ -584,9 +584,9 @@ void pagarPedidoModal(BuildContext context, PedidoModel pedido, bool esDeliveryL
                                             controller: _domicilioController,
                                             maxLines: 1,
                                             onChanged: (value) {
-                                              if (_rucController.text.length > 0 &&
-                                                  _razonController.text.length > 0 &&
-                                                  _domicilioController.text.length > 0) {
+                                              if (_rucController.text.isNotEmpty &&
+                                                  _razonController.text.isNotEmpty &&
+                                                  _domicilioController.text.isNotEmpty) {
                                                 _controller.changeBoton(true);
                                               } else {
                                                 _controller.changeBoton(false);
@@ -596,30 +596,30 @@ void pagarPedidoModal(BuildContext context, PedidoModel pedido, bool esDeliveryL
                                             decoration: InputDecoration(
                                               hintText: 'Ingrese domicilio',
                                               hintStyle: TextStyle(
-                                                color: Color(0XFFBEBEBE),
+                                                color: const Color(0XFFBEBEBE),
                                                 fontWeight: FontWeight.w400,
                                                 fontSize: ScreenUtil().setSp(16),
                                                 fontStyle: FontStyle.normal,
                                               ),
                                               filled: true,
-                                              fillColor: Color(0XFFEDEDED),
+                                              fillColor: const Color(0XFFEDEDED),
                                               contentPadding: EdgeInsets.only(
                                                   left: ScreenUtil().setWidth(10), top: ScreenUtil().setHeight(5), bottom: ScreenUtil().setHeight(1)),
                                               enabledBorder: OutlineInputBorder(
                                                 borderRadius: BorderRadius.circular(15),
-                                                borderSide: BorderSide(color: Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
+                                                borderSide: BorderSide(color: const Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
                                               ),
                                               focusedBorder: OutlineInputBorder(
                                                 borderRadius: BorderRadius.circular(15),
-                                                borderSide: BorderSide(color: Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
+                                                borderSide: BorderSide(color: const Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
                                               ),
                                               border: OutlineInputBorder(
                                                 borderRadius: BorderRadius.circular(15),
-                                                borderSide: BorderSide(color: Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
+                                                borderSide: BorderSide(color: const Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
                                               ),
                                             ),
                                             style: TextStyle(
-                                              color: Color(0XFF585858),
+                                              color: const Color(0XFF585858),
                                               fontWeight: FontWeight.w400,
                                               fontSize: ScreenUtil().setSp(16),
                                               fontStyle: FontStyle.normal,
@@ -635,7 +635,7 @@ void pagarPedidoModal(BuildContext context, PedidoModel pedido, bool esDeliveryL
                                             controller: _razonController,
                                             maxLines: 1,
                                             onChanged: (value) {
-                                              if (_razonController.text.length > 0) {
+                                              if (_razonController.text.isNotEmpty) {
                                                 _controller.changeBoton(true);
                                               } else {
                                                 _controller.changeBoton(false);
@@ -645,30 +645,30 @@ void pagarPedidoModal(BuildContext context, PedidoModel pedido, bool esDeliveryL
                                             decoration: InputDecoration(
                                               hintText: 'Ingrese Nombre',
                                               hintStyle: TextStyle(
-                                                color: Color(0XFFBEBEBE),
+                                                color: const Color(0XFFBEBEBE),
                                                 fontWeight: FontWeight.w400,
                                                 fontSize: ScreenUtil().setSp(16),
                                                 fontStyle: FontStyle.normal,
                                               ),
                                               filled: true,
-                                              fillColor: Color(0XFFEDEDED),
+                                              fillColor: const Color(0XFFEDEDED),
                                               contentPadding: EdgeInsets.only(
                                                   left: ScreenUtil().setWidth(10), top: ScreenUtil().setHeight(5), bottom: ScreenUtil().setHeight(1)),
                                               enabledBorder: OutlineInputBorder(
                                                 borderRadius: BorderRadius.circular(15),
-                                                borderSide: BorderSide(color: Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
+                                                borderSide: BorderSide(color: const Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
                                               ),
                                               focusedBorder: OutlineInputBorder(
                                                 borderRadius: BorderRadius.circular(15),
-                                                borderSide: BorderSide(color: Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
+                                                borderSide: BorderSide(color: const Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
                                               ),
                                               border: OutlineInputBorder(
                                                 borderRadius: BorderRadius.circular(15),
-                                                borderSide: BorderSide(color: Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
+                                                borderSide: BorderSide(color: const Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
                                               ),
                                             ),
                                             style: TextStyle(
-                                              color: Color(0XFF585858),
+                                              color: const Color(0XFF585858),
                                               fontWeight: FontWeight.w400,
                                               fontSize: ScreenUtil().setSp(16),
                                               fontStyle: FontStyle.normal,
@@ -687,30 +687,30 @@ void pagarPedidoModal(BuildContext context, PedidoModel pedido, bool esDeliveryL
                                               counterText: '',
                                               hintText: 'Ingrese N° doc',
                                               hintStyle: TextStyle(
-                                                color: Color(0XFFBEBEBE),
+                                                color: const Color(0XFFBEBEBE),
                                                 fontWeight: FontWeight.w400,
                                                 fontSize: ScreenUtil().setSp(16),
                                                 fontStyle: FontStyle.normal,
                                               ),
                                               filled: true,
-                                              fillColor: Color(0XFFEDEDED),
+                                              fillColor: const Color(0XFFEDEDED),
                                               contentPadding: EdgeInsets.only(
                                                   left: ScreenUtil().setWidth(10), top: ScreenUtil().setHeight(5), bottom: ScreenUtil().setHeight(1)),
                                               enabledBorder: OutlineInputBorder(
                                                 borderRadius: BorderRadius.circular(15),
-                                                borderSide: BorderSide(color: Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
+                                                borderSide: BorderSide(color: const Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
                                               ),
                                               focusedBorder: OutlineInputBorder(
                                                 borderRadius: BorderRadius.circular(15),
-                                                borderSide: BorderSide(color: Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
+                                                borderSide: BorderSide(color: const Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
                                               ),
                                               border: OutlineInputBorder(
                                                 borderRadius: BorderRadius.circular(15),
-                                                borderSide: BorderSide(color: Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
+                                                borderSide: BorderSide(color: const Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
                                               ),
                                             ),
                                             style: TextStyle(
-                                              color: Color(0XFF585858),
+                                              color: const Color(0XFF585858),
                                               fontWeight: FontWeight.w400,
                                               fontSize: ScreenUtil().setSp(16),
                                               fontStyle: FontStyle.normal,
@@ -757,7 +757,7 @@ void pagarPedidoModal(BuildContext context, PedidoModel pedido, bool esDeliveryL
                                           child: Container(
                                             decoration: BoxDecoration(
                                               borderRadius: BorderRadius.circular(50),
-                                              color: (_controller.boton) ? Color(0XFFFF0036) : Color(0XFFFF0036).withOpacity(0.6),
+                                              color: (_controller.boton) ? const Color(0XFFFF0036) : const Color(0XFFFF0036).withOpacity(0.6),
                                             ),
                                             child: Center(
                                               child: Text(
@@ -785,7 +785,7 @@ void pagarPedidoModal(BuildContext context, PedidoModel pedido, bool esDeliveryL
                                         return Text(
                                           _controller.text,
                                           style: TextStyle(
-                                            color: Color(0XFFFF0036),
+                                            color: const Color(0XFFFF0036),
                                             fontWeight: FontWeight.w600,
                                             fontSize: ScreenUtil().setSp(16),
                                             fontStyle: FontStyle.normal,
@@ -803,7 +803,7 @@ void pagarPedidoModal(BuildContext context, PedidoModel pedido, bool esDeliveryL
                                     child: Text(
                                       'Cancelar',
                                       style: GoogleFonts.poppins(
-                                        color: Color(0XFF8A8A8A),
+                                        color: const Color(0XFF8A8A8A),
                                         fontWeight: FontWeight.w500,
                                         fontSize: ScreenUtil().setSp(16),
                                       ),
@@ -836,13 +836,13 @@ _showLoading() {
   return Container(
     height: double.infinity,
     width: double.infinity,
-    color: Color.fromRGBO(0, 0, 0, 0.5),
+    color: const Color.fromRGBO(0, 0, 0, 0.5),
     child: Center(
       child: (Platform.isAndroid)
-          ? CircularProgressIndicator(
+          ? const CircularProgressIndicator(
               color: Color(0XFFFF0036),
             )
-          : CupertinoActivityIndicator(),
+          : const CupertinoActivityIndicator(),
     ),
   );
 }

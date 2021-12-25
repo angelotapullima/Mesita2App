@@ -31,7 +31,7 @@ class _DetailProductState extends State<DetailProduct> {
   final _productoApi = ProductoLineaApi();
 
   final picker = ImagePicker();
-  Future<Null> _cropImage(filePath, String idProducto, String idLinea) async {
+  Future<void> _cropImage(filePath, String idProducto, String idLinea) async {
     File croppedImage = await ImageCropper.cropImage(
         sourcePath: filePath,
         aspectRatioPresets: Platform.isAndroid
@@ -52,21 +52,17 @@ class _DetailProductState extends State<DetailProduct> {
                 CropAspectRatioPreset.ratio7x5,
                 CropAspectRatioPreset.ratio16x9
               ],
-        androidUiSettings: AndroidUiSettings(
+        androidUiSettings: const AndroidUiSettings(
             toolbarTitle: 'Cortar Imagen',
             toolbarColor: Color(0XFFFF0036),
             toolbarWidgetColor: Colors.white,
             initAspectRatio: CropAspectRatioPreset.original,
             showCropGrid: true,
             lockAspectRatio: false),
-        iosUiSettings: IOSUiSettings(minimumAspectRatio: 1.0, title: 'Cortar Imagen'));
+        iosUiSettings: const IOSUiSettings(minimumAspectRatio: 1.0, title: 'Cortar Imagen'));
     _controller.changeCargando(true);
     if (croppedImage != null) {
-      print('Entré para cambiar foto');
-
       final res = await _productoApi.cambiarFotoProducto(croppedImage, idProducto);
-
-      print('respuesta p : $res');
 
       if (res == 1) {
         final productoBloc = ProviderBloc.productosLinea(context);
@@ -105,15 +101,15 @@ class _DetailProductState extends State<DetailProduct> {
           stream: productoBloc.productoStream,
           builder: (context, AsyncSnapshot<List<ProductoLineaModel>> snapshot) {
             if (snapshot.hasData) {
-              if (snapshot.data.length > 0) {
+              if (snapshot.data.isNotEmpty) {
                 var prod = snapshot.data;
                 return Stack(
                   children: [
-                    SizedBox(
+                    const SizedBox(
                       height: double.infinity,
                       width: double.infinity,
                     ),
-                    Container(
+                    SizedBox(
                       height: ScreenUtil().setHeight(300),
                       width: double.infinity,
                       child: SvgPicture.asset(
@@ -138,7 +134,7 @@ class _DetailProductState extends State<DetailProduct> {
                                   );
                                 },
                                 transitionsBuilder: (context, animation, secondaryAnimation, child) {
-                                  var begin = Offset(0.0, 1.0);
+                                  var begin = const Offset(0.0, 1.0);
                                   var end = Offset.zero;
                                   var curve = Curves.ease;
 
@@ -157,7 +153,7 @@ class _DetailProductState extends State<DetailProduct> {
                           child: Container(
                             height: ScreenUtil().setHeight(45),
                             width: ScreenUtil().setWidth(45),
-                            decoration: BoxDecoration(
+                            decoration: const BoxDecoration(
                               color: Colors.white,
                               shape: BoxShape.circle,
                             ),
@@ -177,7 +173,7 @@ class _DetailProductState extends State<DetailProduct> {
                             editProductModal(
                                 context, prod[0], widget.idCategory, widget.nameCategory, (widget.nameCategory == 'comida') ? 'food' : 'drink_image');
                           },
-                          child: Container(
+                          child: SizedBox(
                             height: ScreenUtil().setHeight(45),
                             width: ScreenUtil().setWidth(45),
                             child: SvgPicture.asset(
@@ -198,7 +194,7 @@ class _DetailProductState extends State<DetailProduct> {
                           child: Container(
                             height: ScreenUtil().setHeight(45),
                             width: ScreenUtil().setWidth(45),
-                            decoration: BoxDecoration(
+                            decoration: const BoxDecoration(
                               color: Colors.white,
                               shape: BoxShape.circle,
                             ),
@@ -218,7 +214,7 @@ class _DetailProductState extends State<DetailProduct> {
                 ), */
                       height: double.infinity,
                       width: double.infinity,
-                      decoration: BoxDecoration(
+                      decoration: const BoxDecoration(
                         color: Colors.white,
                         borderRadius: BorderRadius.only(
                           topLeft: Radius.circular(40),
@@ -239,9 +235,9 @@ class _DetailProductState extends State<DetailProduct> {
                               Align(
                                 alignment: Alignment.center,
                                 child: Text(
-                                  '${prod[0].productoNombre}',
+                                  prod[0].productoNombre,
                                   style: TextStyle(
-                                    color: Color(0XFF585858),
+                                    color: const Color(0XFF585858),
                                     fontSize: ScreenUtil().setSp(20),
                                     fontWeight: FontWeight.w500,
                                   ),
@@ -255,7 +251,7 @@ class _DetailProductState extends State<DetailProduct> {
                                 child: Text(
                                   'S/. ${prod[0].productoPrecio}',
                                   style: TextStyle(
-                                    color: Color(0XFF585858),
+                                    color: const Color(0XFF585858),
                                     fontSize: ScreenUtil().setSp(30),
                                     fontWeight: FontWeight.w700,
                                   ),
@@ -267,7 +263,7 @@ class _DetailProductState extends State<DetailProduct> {
                               Text(
                                 'Descripción',
                                 style: TextStyle(
-                                  color: Color(0XFF585858),
+                                  color: const Color(0XFF585858),
                                   fontSize: ScreenUtil().setSp(18),
                                   fontWeight: FontWeight.w600,
                                 ),
@@ -276,9 +272,9 @@ class _DetailProductState extends State<DetailProduct> {
                                 height: ScreenUtil().setHeight(16),
                               ),
                               Text(
-                                '${prod[0].productoDescripcion} ',
+                                prod[0].productoDescripcion,
                                 style: TextStyle(
-                                  color: Color(0XFF585858),
+                                  color: const Color(0XFF585858),
                                   fontSize: ScreenUtil().setSp(16),
                                   fontWeight: FontWeight.w400,
                                 ),
@@ -293,7 +289,7 @@ class _DetailProductState extends State<DetailProduct> {
                       left: 0,
                       right: 0,
                       child: Container(
-                        decoration: BoxDecoration(
+                        decoration: const BoxDecoration(
                           color: Color(0XFFEEEEEE),
                           shape: BoxShape.circle,
                           boxShadow: [
@@ -318,7 +314,7 @@ class _DetailProductState extends State<DetailProduct> {
                                       return GestureDetector(
                                         onTap: () => Navigator.of(context).pop(),
                                         child: Container(
-                                          color: Color.fromRGBO(0, 0, 0, 0.001),
+                                          color: const Color.fromRGBO(0, 0, 0, 0.001),
                                           child: GestureDetector(
                                             onTap: () {},
                                             child: DraggableScrollableSheet(
@@ -327,11 +323,11 @@ class _DetailProductState extends State<DetailProduct> {
                                               maxChildSize: 0.2,
                                               builder: (_, controller) {
                                                 return Container(
-                                                  decoration: BoxDecoration(
+                                                  decoration: const BoxDecoration(
                                                     color: Colors.white,
                                                     borderRadius: BorderRadius.only(
-                                                      topLeft: const Radius.circular(25.0),
-                                                      topRight: const Radius.circular(25.0),
+                                                      topLeft: Radius.circular(25.0),
+                                                      topRight: Radius.circular(25.0),
                                                     ),
                                                   ),
                                                   child: Padding(
@@ -355,22 +351,22 @@ class _DetailProductState extends State<DetailProduct> {
                                                                 'Seleccionar foto',
                                                                 style: GoogleFonts.poppins(
                                                                   fontStyle: FontStyle.normal,
-                                                                  color: Color(0XFF585858),
+                                                                  color: const Color(0XFF585858),
                                                                   fontWeight: FontWeight.w400,
                                                                   fontSize: ScreenUtil().setSp(16),
                                                                   letterSpacing: ScreenUtil().setSp(0.016),
                                                                 ),
                                                               ),
-                                                              Spacer(),
+                                                              const Spacer(),
                                                               Icon(
                                                                 Icons.photo_album_outlined,
-                                                                color: Color(0XFFFF0036),
+                                                                color: const Color(0XFFFF0036),
                                                                 size: ScreenUtil().setHeight(24),
                                                               )
                                                             ],
                                                           ),
                                                         ),
-                                                        Divider(
+                                                        const Divider(
                                                           thickness: 1,
                                                         ),
                                                         SizedBox(
@@ -388,21 +384,21 @@ class _DetailProductState extends State<DetailProduct> {
                                                                 style: GoogleFonts.poppins(
                                                                   fontStyle: FontStyle.normal,
                                                                   fontWeight: FontWeight.w400,
-                                                                  color: Color(0XFF585858),
+                                                                  color: const Color(0XFF585858),
                                                                   fontSize: ScreenUtil().setSp(16),
                                                                   letterSpacing: ScreenUtil().setSp(0.016),
                                                                 ),
                                                               ),
-                                                              Spacer(),
+                                                              const Spacer(),
                                                               Icon(
                                                                 Icons.photo_camera_outlined,
-                                                                color: Color(0XFFFF0036),
+                                                                color: const Color(0XFFFF0036),
                                                                 size: ScreenUtil().setHeight(24),
                                                               )
                                                             ],
                                                           ),
                                                         ),
-                                                        Divider(
+                                                        const Divider(
                                                           thickness: 1,
                                                         ),
                                                       ],
@@ -417,7 +413,7 @@ class _DetailProductState extends State<DetailProduct> {
                                     },
                                   );
                                 },
-                                child: Container(
+                                child: SizedBox(
                                   height: ScreenUtil().setHeight(200),
                                   width: ScreenUtil().setWidth(200),
                                   child: Stack(
@@ -425,7 +421,7 @@ class _DetailProductState extends State<DetailProduct> {
                                       Container(
                                         height: ScreenUtil().setHeight(200),
                                         width: ScreenUtil().setWidth(200),
-                                        decoration: BoxDecoration(
+                                        decoration: const BoxDecoration(
                                           color: Color(0XFFEEEEEE),
                                           shape: BoxShape.circle,
                                           boxShadow: [
@@ -437,14 +433,12 @@ class _DetailProductState extends State<DetailProduct> {
                                           ],
                                         ),
                                         child: CachedNetworkImage(
-                                          placeholder: (context, url) => Container(
+                                          placeholder: (context, url) => SizedBox(
                                             child: SvgPicture.asset('assets/food_svg/food.svg'),
                                           ),
-                                          errorWidget: (context, url, error) => Container(
-                                            child: Container(
-                                              child: SvgPicture.asset(
-                                                'assets/food_svg/food.svg',
-                                              ),
+                                          errorWidget: (context, url, error) => SizedBox(
+                                            child: SvgPicture.asset(
+                                              'assets/food_svg/food.svg',
                                             ),
                                           ),
                                           imageUrl: '$apiBaseURL/${prod[0].productoFoto}',
@@ -461,7 +455,7 @@ class _DetailProductState extends State<DetailProduct> {
                                       ),
                                       Align(
                                         alignment: Alignment.bottomRight,
-                                        child: Container(
+                                        child: SizedBox(
                                             height: ScreenUtil().setHeight(30),
                                             width: ScreenUtil().setWidth(30),
                                             child: SvgPicture.asset('assets/food_svg/add_image.svg')),
@@ -484,7 +478,7 @@ class _DetailProductState extends State<DetailProduct> {
                           horizontal: ScreenUtil().setWidth(24),
                           vertical: ScreenUtil().setWidth(12),
                         ),
-                        decoration: BoxDecoration(
+                        decoration: const BoxDecoration(
                           color: Colors.white,
                         ),
                         child: Row(
@@ -493,12 +487,12 @@ class _DetailProductState extends State<DetailProduct> {
                             Text(
                               'Disponible',
                               style: TextStyle(
-                                color: Color(0XFF585858),
+                                color: const Color(0XFF585858),
                                 fontSize: ScreenUtil().setSp(18),
                                 fontWeight: FontWeight.w600,
                               ),
                             ),
-                            Spacer(),
+                            const Spacer(),
                             Switch.adaptive(
                               value: (prod[0].productoEstado == '1') ? true : false,
                               activeColor: Colors.green,
@@ -557,13 +551,13 @@ class _DetailProductState extends State<DetailProduct> {
     return Container(
       height: double.infinity,
       width: double.infinity,
-      color: Color.fromRGBO(0, 0, 0, 0.5),
+      color: const Color.fromRGBO(0, 0, 0, 0.5),
       child: Center(
         child: (Platform.isAndroid)
-            ? CircularProgressIndicator(
+            ? const CircularProgressIndicator(
                 color: Color(0XFFFF0036),
               )
-            : CupertinoActivityIndicator(),
+            : const CupertinoActivityIndicator(),
       ),
     );
   }

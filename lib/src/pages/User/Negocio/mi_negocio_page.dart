@@ -16,12 +16,11 @@ class MiNegocioPage extends StatefulWidget {
 }
 
 class _MiNegocioPageState extends State<MiNegocioPage> {
-  TextEditingController _nombreNegocioController = TextEditingController();
-  TextEditingController _direccionController = TextEditingController();
-  TextEditingController _rucController = TextEditingController();
-  TextEditingController _telefonoController = TextEditingController();
-  //TextEditingController _emailController = TextEditingController();
-  TextEditingController _razonController = TextEditingController();
+  final TextEditingController _nombreNegocioController = TextEditingController();
+  final TextEditingController _direccionController = TextEditingController();
+  final TextEditingController _rucController = TextEditingController();
+  final TextEditingController _telefonoController = TextEditingController();
+  final TextEditingController _razonController = TextEditingController();
 
   final _controller = NegocioController();
 
@@ -48,13 +47,13 @@ class _MiNegocioPageState extends State<MiNegocioPage> {
             appBar: AppBar(
               backgroundColor: Colors.white,
               elevation: 0,
-              iconTheme: IconThemeData(
+              iconTheme: const IconThemeData(
                 color: Color(0XFF3A3A3A),
               ),
               title: Text(
                 'Mi negocio',
                 style: GoogleFonts.poppins(
-                  color: Color(0XFF3A3A3A),
+                  color: const Color(0XFF3A3A3A),
                   fontSize: ScreenUtil().setSp(18),
                   fontWeight: FontWeight.w600,
                   letterSpacing: 0.16,
@@ -122,7 +121,7 @@ class _MiNegocioPageState extends State<MiNegocioPage> {
                           height: ScreenUtil().setHeight(20),
                         ),
                         Center(
-                          child: Container(
+                          child: SizedBox(
                             height: ScreenUtil().setHeight(70),
                             width: ScreenUtil().setWidth(70),
                             child: SvgPicture.asset('assets/settings_svg/negocio.svg'),
@@ -143,9 +142,9 @@ class _MiNegocioPageState extends State<MiNegocioPage> {
                           controller: _nombreNegocioController,
                           maxLines: 1,
                           onChanged: (value) {
-                            if (_nombreNegocioController.text.length > 0 &&
-                                _telefonoController.text.length > 0 &&
-                                _direccionController.text.length > 0) {
+                            if (_nombreNegocioController.text.isNotEmpty &&
+                                _telefonoController.text.isNotEmpty &&
+                                _direccionController.text.isNotEmpty) {
                               _controller.changeBotton(true);
                             } else {
                               _controller.changeBotton(false);
@@ -155,30 +154,30 @@ class _MiNegocioPageState extends State<MiNegocioPage> {
                           decoration: InputDecoration(
                             hintText: 'Nombre',
                             hintStyle: TextStyle(
-                              color: Color(0XFFBEBEBE),
+                              color: const Color(0XFFBEBEBE),
                               fontWeight: FontWeight.w400,
                               fontSize: ScreenUtil().setSp(16),
                               fontStyle: FontStyle.normal,
                             ),
                             filled: true,
-                            fillColor: Color(0XFFEDEDED),
+                            fillColor: const Color(0XFFEDEDED),
                             contentPadding:
                                 EdgeInsets.only(left: ScreenUtil().setWidth(10), top: ScreenUtil().setHeight(5), bottom: ScreenUtil().setHeight(1)),
                             enabledBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(15),
-                              borderSide: BorderSide(color: Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
+                              borderSide: BorderSide(color: const Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
                             ),
                             focusedBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(15),
-                              borderSide: BorderSide(color: Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
+                              borderSide: BorderSide(color: const Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
                             ),
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(15),
-                              borderSide: BorderSide(color: Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
+                              borderSide: BorderSide(color: const Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
                             ),
                           ),
                           style: TextStyle(
-                            color: Color(0XFF585858),
+                            color: const Color(0XFF585858),
                             fontWeight: FontWeight.w400,
                             fontSize: ScreenUtil().setSp(16),
                             fontStyle: FontStyle.normal,
@@ -201,30 +200,30 @@ class _MiNegocioPageState extends State<MiNegocioPage> {
                           decoration: InputDecoration(
                             hintText: 'R.U.C.',
                             hintStyle: TextStyle(
-                              color: Color(0XFFBEBEBE),
+                              color: const Color(0XFFBEBEBE),
                               fontWeight: FontWeight.w400,
                               fontSize: ScreenUtil().setSp(16),
                               fontStyle: FontStyle.normal,
                             ),
                             filled: true,
-                            fillColor: Color(0XFFEDEDED),
+                            fillColor: const Color(0XFFEDEDED),
                             contentPadding:
                                 EdgeInsets.only(left: ScreenUtil().setWidth(10), top: ScreenUtil().setHeight(5), bottom: ScreenUtil().setHeight(1)),
                             enabledBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(15),
-                              borderSide: BorderSide(color: Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
+                              borderSide: BorderSide(color: const Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
                             ),
                             focusedBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(15),
-                              borderSide: BorderSide(color: Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
+                              borderSide: BorderSide(color: const Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
                             ),
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(15),
-                              borderSide: BorderSide(color: Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
+                              borderSide: BorderSide(color: const Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
                             ),
                           ),
                           style: TextStyle(
-                            color: Color(0XFF585858),
+                            color: const Color(0XFF585858),
                             fontWeight: FontWeight.w400,
                             fontSize: ScreenUtil().setSp(16),
                             fontStyle: FontStyle.normal,
@@ -247,30 +246,30 @@ class _MiNegocioPageState extends State<MiNegocioPage> {
                           decoration: InputDecoration(
                             hintText: 'Razón social',
                             hintStyle: TextStyle(
-                              color: Color(0XFFBEBEBE),
+                              color: const Color(0XFFBEBEBE),
                               fontWeight: FontWeight.w400,
                               fontSize: ScreenUtil().setSp(16),
                               fontStyle: FontStyle.normal,
                             ),
                             filled: true,
-                            fillColor: Color(0XFFEDEDED),
+                            fillColor: const Color(0XFFEDEDED),
                             contentPadding:
                                 EdgeInsets.only(left: ScreenUtil().setWidth(10), top: ScreenUtil().setHeight(5), bottom: ScreenUtil().setHeight(1)),
                             enabledBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(15),
-                              borderSide: BorderSide(color: Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
+                              borderSide: BorderSide(color: const Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
                             ),
                             focusedBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(15),
-                              borderSide: BorderSide(color: Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
+                              borderSide: BorderSide(color: const Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
                             ),
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(15),
-                              borderSide: BorderSide(color: Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
+                              borderSide: BorderSide(color: const Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
                             ),
                           ),
                           style: TextStyle(
-                            color: Color(0XFF585858),
+                            color: const Color(0XFF585858),
                             fontWeight: FontWeight.w400,
                             fontSize: ScreenUtil().setSp(16),
                             fontStyle: FontStyle.normal,
@@ -290,9 +289,9 @@ class _MiNegocioPageState extends State<MiNegocioPage> {
                           readOnly: _controller.enableImput,
                           controller: _direccionController,
                           onChanged: (value) {
-                            if (_nombreNegocioController.text.length > 0 &&
-                                _telefonoController.text.length > 0 &&
-                                _direccionController.text.length > 0) {
+                            if (_nombreNegocioController.text.isNotEmpty &&
+                                _telefonoController.text.isNotEmpty &&
+                                _direccionController.text.isNotEmpty) {
                               _controller.changeBotton(true);
                             } else {
                               _controller.changeBotton(false);
@@ -302,30 +301,30 @@ class _MiNegocioPageState extends State<MiNegocioPage> {
                           decoration: InputDecoration(
                             hintText: 'Domicilio fiscal',
                             hintStyle: TextStyle(
-                              color: Color(0XFFBEBEBE),
+                              color: const Color(0XFFBEBEBE),
                               fontWeight: FontWeight.w400,
                               fontSize: ScreenUtil().setSp(16),
                               fontStyle: FontStyle.normal,
                             ),
                             filled: true,
-                            fillColor: Color(0XFFEDEDED),
+                            fillColor: const Color(0XFFEDEDED),
                             contentPadding:
                                 EdgeInsets.only(left: ScreenUtil().setWidth(10), top: ScreenUtil().setHeight(5), bottom: ScreenUtil().setHeight(1)),
                             enabledBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(15),
-                              borderSide: BorderSide(color: Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
+                              borderSide: BorderSide(color: const Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
                             ),
                             focusedBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(15),
-                              borderSide: BorderSide(color: Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
+                              borderSide: BorderSide(color: const Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
                             ),
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(15),
-                              borderSide: BorderSide(color: Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
+                              borderSide: BorderSide(color: const Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
                             ),
                           ),
                           style: TextStyle(
-                            color: Color(0XFF585858),
+                            color: const Color(0XFF585858),
                             fontWeight: FontWeight.w400,
                             fontSize: ScreenUtil().setSp(16),
                             fontStyle: FontStyle.normal,
@@ -345,9 +344,9 @@ class _MiNegocioPageState extends State<MiNegocioPage> {
                           readOnly: _controller.enableImput,
                           controller: _telefonoController,
                           onChanged: (value) {
-                            if (_nombreNegocioController.text.length > 0 &&
-                                _telefonoController.text.length > 0 &&
-                                _direccionController.text.length > 0) {
+                            if (_nombreNegocioController.text.isNotEmpty &&
+                                _telefonoController.text.isNotEmpty &&
+                                _direccionController.text.isNotEmpty) {
                               _controller.changeBotton(true);
                             } else {
                               _controller.changeBotton(false);
@@ -359,30 +358,30 @@ class _MiNegocioPageState extends State<MiNegocioPage> {
                             counterText: '',
                             hintText: 'Teléfono de contacto',
                             hintStyle: TextStyle(
-                              color: Color(0XFFBEBEBE),
+                              color: const Color(0XFFBEBEBE),
                               fontWeight: FontWeight.w400,
                               fontSize: ScreenUtil().setSp(16),
                               fontStyle: FontStyle.normal,
                             ),
                             filled: true,
-                            fillColor: Color(0XFFEDEDED),
+                            fillColor: const Color(0XFFEDEDED),
                             contentPadding:
                                 EdgeInsets.only(left: ScreenUtil().setWidth(10), top: ScreenUtil().setHeight(5), bottom: ScreenUtil().setHeight(1)),
                             enabledBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(15),
-                              borderSide: BorderSide(color: Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
+                              borderSide: BorderSide(color: const Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
                             ),
                             focusedBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(15),
-                              borderSide: BorderSide(color: Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
+                              borderSide: BorderSide(color: const Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
                             ),
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(15),
-                              borderSide: BorderSide(color: Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
+                              borderSide: BorderSide(color: const Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
                             ),
                           ),
                           style: TextStyle(
-                            color: Color(0XFF585858),
+                            color: const Color(0XFF585858),
                             fontWeight: FontWeight.w400,
                             fontSize: ScreenUtil().setSp(16),
                             fontStyle: FontStyle.normal,
@@ -459,13 +458,13 @@ class _MiNegocioPageState extends State<MiNegocioPage> {
     return Container(
       height: double.infinity,
       width: double.infinity,
-      color: Color.fromRGBO(0, 0, 0, 0.5),
+      color: const Color.fromRGBO(0, 0, 0, 0.5),
       child: Center(
         child: (Platform.isAndroid)
-            ? CircularProgressIndicator(
+            ? const CircularProgressIndicator(
                 color: Color(0XFFFF0036),
               )
-            : CupertinoActivityIndicator(),
+            : const CupertinoActivityIndicator(),
       ),
     );
   }

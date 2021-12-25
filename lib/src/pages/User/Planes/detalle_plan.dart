@@ -21,17 +21,17 @@ class DetallePlanPage extends StatelessWidget {
     final planBloc = ProviderBloc.planes(context);
     planBloc.obtenerPlanUser();
     return Scaffold(
-      backgroundColor: Color(0XFFE5E5E5),
+      backgroundColor: const Color(0XFFE5E5E5),
       appBar: AppBar(
-        backgroundColor: Color(0XFFE5E5E5),
+        backgroundColor: const Color(0XFFE5E5E5),
         elevation: 0,
-        iconTheme: IconThemeData(
+        iconTheme: const IconThemeData(
           color: Color(0XFF3A3A3A),
         ),
         title: Text(
           'Plan $nombrePlan',
           style: GoogleFonts.poppins(
-            color: Color(0XFF3A3A3A),
+            color: const Color(0XFF3A3A3A),
             fontSize: ScreenUtil().setSp(18),
             fontWeight: FontWeight.w600,
             letterSpacing: 0.16,
@@ -42,7 +42,7 @@ class DetallePlanPage extends StatelessWidget {
         stream: planBloc.planUserStream,
         builder: (context, AsyncSnapshot<List<PlanUserModel>> snapshot) {
           if (snapshot.hasData) {
-            if (snapshot.data.length > 0) {
+            if (snapshot.data.isNotEmpty) {
               planBloc.obtenerMiembrosPlan(snapshot.data[0].idUserPlan);
               return Padding(
                 padding: EdgeInsets.symmetric(horizontal: ScreenUtil().setWidth(24)),
@@ -54,7 +54,7 @@ class DetallePlanPage extends StatelessWidget {
                         Text(
                           'Miembros del plan',
                           style: GoogleFonts.poppins(
-                            color: Color(0XFF3A3A3A),
+                            color: const Color(0XFF3A3A3A),
                             fontSize: ScreenUtil().setSp(16),
                             fontWeight: FontWeight.w500,
                             letterSpacing: 0.16,
@@ -65,7 +65,7 @@ class DetallePlanPage extends StatelessWidget {
                             stream: planBloc.miembrosPlanStream,
                             builder: (context, AsyncSnapshot<List<MiembrosModel>> snapshot2) {
                               if (snapshot2.hasData) {
-                                if (snapshot2.data.length > 0) {
+                                if (snapshot2.data.isNotEmpty) {
                                   var miembros = snapshot2.data;
                                   return ListView.builder(
                                       itemCount: miembros.length,
@@ -73,7 +73,7 @@ class DetallePlanPage extends StatelessWidget {
                                         return _itemMiembro(context, miembros[index]);
                                       });
                                 } else {
-                                  return Center(
+                                  return const Center(
                                     child: Text('Sin miembros'),
                                   );
                                 }
@@ -90,10 +90,10 @@ class DetallePlanPage extends StatelessWidget {
                       left: 0,
                       right: 0,
                       child: Container(
-                        margin: EdgeInsets.symmetric(),
+                        margin: const EdgeInsets.symmetric(),
                         width: double.infinity,
                         child: MaterialButton(
-                          color: Color(0XFFFF0036),
+                          color: const Color(0XFFFF0036),
                           textColor: Colors.white,
                           elevation: 1,
                           onPressed: () {
@@ -119,7 +119,7 @@ class DetallePlanPage extends StatelessWidget {
                 ),
               );
             } else {
-              return Center(
+              return const Center(
                 child: Text('No existe información'),
               );
             }
@@ -145,7 +145,7 @@ class DetallePlanPage extends StatelessWidget {
               child: Container(
                 height: ScreenUtil().setHeight(60),
                 width: ScreenUtil().setWidth(60),
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                   color: Color(0XFFEEEEEE),
                   shape: BoxShape.circle,
                   boxShadow: [
@@ -157,14 +157,12 @@ class DetallePlanPage extends StatelessWidget {
                   ],
                 ),
                 child: CachedNetworkImage(
-                  placeholder: (context, url) => Container(
+                  placeholder: (context, url) => SizedBox(
                     child: SvgPicture.asset('assets/settings_svg/porfile.svg'),
                   ),
-                  errorWidget: (context, url, error) => Container(
-                    child: Container(
-                      child: SvgPicture.asset(
-                        'assets/settings_svg/porfile.svg',
-                      ),
+                  errorWidget: (context, url, error) => SizedBox(
+                    child: SvgPicture.asset(
+                      'assets/settings_svg/porfile.svg',
                     ),
                   ),
                   imageUrl: '$apiBaseURL/${miembro.imagen}',
@@ -190,7 +188,7 @@ class DetallePlanPage extends StatelessWidget {
                 Text(
                   '${miembro.nombre} ${miembro.apellidoPaterno}',
                   style: GoogleFonts.poppins(
-                    color: Color(0XFF3A3A3A),
+                    color: const Color(0XFF3A3A3A),
                     fontWeight: FontWeight.w400,
                     fontSize: ScreenUtil().setSp(16),
                   ),
@@ -199,9 +197,9 @@ class DetallePlanPage extends StatelessWidget {
                   height: ScreenUtil().setHeight(12),
                 ),
                 Text(
-                  '${miembro.puesto}',
+                  miembro.puesto,
                   style: GoogleFonts.poppins(
-                    color: Color(0XFF868686),
+                    color: const Color(0XFF868686),
                     fontWeight: FontWeight.w400,
                     fontSize: ScreenUtil().setSp(16),
                   ),
@@ -217,10 +215,10 @@ class DetallePlanPage extends StatelessWidget {
   _showLoading() {
     return Center(
       child: (Platform.isAndroid)
-          ? CircularProgressIndicator(
+          ? const CircularProgressIndicator(
               color: Color(0XFFFF0036),
             )
-          : CupertinoActivityIndicator(),
+          : const CupertinoActivityIndicator(),
     );
   }
 }

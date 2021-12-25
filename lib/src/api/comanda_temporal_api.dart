@@ -41,8 +41,7 @@ class ComandaTemporalApi {
   Future<int> guardarDetallePedidoTemporal(DetallePedidoTemporalModel comanda) async {
     try {
       final _listProducto = await _comandaTemporalDatabase.obtenerDetallePedidoTemporalePorId(comanda.idProducto, comanda.llevar, comanda.idMesa);
-      if (_listProducto.length > 0) {
-        print('YA HAY AHORA A ACTUALIZAR');
+      if (_listProducto.isNotEmpty) {
         DetallePedidoTemporalModel detalle = DetallePedidoTemporalModel();
         detalle.id = _listProducto[0].id;
         detalle.idMesa = _listProducto[0].idMesa;
@@ -64,7 +63,6 @@ class ComandaTemporalApi {
           return 2;
         }
       } else {
-        print('NO HAY AHORA A GENERAL NUEVO');
         final res = await _comandaTemporalDatabase.insertarDetallePedidoTemporal(comanda);
         if (res > 0) {
           return 1;

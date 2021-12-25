@@ -12,10 +12,10 @@ Widget circleUser(BuildContext context, Preferences prefs) {
         context,
         PageRouteBuilder(
           pageBuilder: (context, animation, secondaryAnimation) {
-            return UserPage();
+            return const UserPage();
           },
           transitionsBuilder: (context, animation, secondaryAnimation, child) {
-            var begin = Offset(0.0, 1.0);
+            var begin = const Offset(0.0, 1.0);
             var end = Offset.zero;
             var curve = Curves.ease;
 
@@ -31,18 +31,16 @@ Widget circleUser(BuildContext context, Preferences prefs) {
         ),
       );
     },
-    child: Container(
+    child: SizedBox(
       width: ScreenUtil().setWidth(32),
       height: ScreenUtil().setHeight(32),
       child: CachedNetworkImage(
-        placeholder: (context, url) => Container(
+        placeholder: (context, url) => SizedBox(
           child: SvgPicture.asset('assets/settings_svg/porfile.svg'),
         ),
-        errorWidget: (context, url, error) => Container(
-          child: Container(
-            child: SvgPicture.asset(
-              'assets/settings_svg/porfile.svg',
-            ),
+        errorWidget: (context, url, error) => SizedBox(
+          child: SvgPicture.asset(
+            'assets/settings_svg/porfile.svg',
           ),
         ),
         imageUrl: '${prefs.userImage}',

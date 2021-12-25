@@ -39,7 +39,7 @@ class ChangeController extends ChangeNotifier {
 
     if (id != '') {
       final lin = await _lineasDatabase.obtenerLineasPorIdLinea(id);
-      if (lin.length > 0) {
+      if (lin.isNotEmpty) {
         idLinea = lin[0].idLinea;
         linea = lin[0].lineaNombre;
       }
@@ -81,7 +81,7 @@ void addModal(BuildContext context, String idCategoria, String nameCategory, Str
       return GestureDetector(
         onTap: () => Navigator.of(context).pop(),
         child: Container(
-          color: Color.fromRGBO(0, 0, 0, 0.001),
+          color: const Color.fromRGBO(0, 0, 0, 0.001),
           child: GestureDetector(
             onTap: () {},
             child: DraggableScrollableSheet(
@@ -90,11 +90,11 @@ void addModal(BuildContext context, String idCategoria, String nameCategory, Str
               maxChildSize: 0.3,
               builder: (_, controller) {
                 return Container(
-                  decoration: BoxDecoration(
+                  decoration: const BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.only(
-                      topLeft: const Radius.circular(25.0),
-                      topRight: const Radius.circular(25.0),
+                      topLeft: Radius.circular(25.0),
+                      topRight: Radius.circular(25.0),
                     ),
                   ),
                   child: Padding(
@@ -112,7 +112,7 @@ void addModal(BuildContext context, String idCategoria, String nameCategory, Str
                           child: Center(
                             child: Container(
                               width: ScreenUtil().setWidth(48),
-                              decoration: BoxDecoration(
+                              decoration: const BoxDecoration(
                                 color: Color(0XFFBABABA),
                               ),
                             ),
@@ -125,7 +125,7 @@ void addModal(BuildContext context, String idCategoria, String nameCategory, Str
                           child: Text(
                             'Agregar',
                             style: GoogleFonts.poppins(
-                              color: Color(0XFF3A3A3A),
+                              color: const Color(0XFF3A3A3A),
                               fontWeight: FontWeight.w600,
                               fontSize: ScreenUtil().setSp(18),
                             ),
@@ -134,7 +134,7 @@ void addModal(BuildContext context, String idCategoria, String nameCategory, Str
                         SizedBox(
                           height: ScreenUtil().setHeight(10),
                         ),
-                        Divider(
+                        const Divider(
                           thickness: 1,
                         ),
                         SizedBox(
@@ -161,7 +161,7 @@ void addModal(BuildContext context, String idCategoria, String nameCategory, Str
                                 style: GoogleFonts.poppins(
                                   fontStyle: FontStyle.normal,
                                   fontWeight: FontWeight.w500,
-                                  color: Color(0XFF585858),
+                                  color: const Color(0XFF585858),
                                   fontSize: ScreenUtil().setSp(16),
                                   letterSpacing: 0.16,
                                 ),
@@ -169,7 +169,7 @@ void addModal(BuildContext context, String idCategoria, String nameCategory, Str
                             ],
                           ),
                         ),
-                        Divider(
+                        const Divider(
                           thickness: 1,
                         ),
                         SizedBox(
@@ -196,7 +196,7 @@ void addModal(BuildContext context, String idCategoria, String nameCategory, Str
                                 style: GoogleFonts.poppins(
                                   fontStyle: FontStyle.normal,
                                   fontWeight: FontWeight.w500,
-                                  color: Color(0XFF585858),
+                                  color: const Color(0XFF585858),
                                   fontSize: ScreenUtil().setSp(16),
                                   letterSpacing: 0.16,
                                 ),
@@ -204,7 +204,7 @@ void addModal(BuildContext context, String idCategoria, String nameCategory, Str
                             ],
                           ),
                         ),
-                        Divider(
+                        const Divider(
                           thickness: 1,
                         ),
                       ],
@@ -225,10 +225,10 @@ void _newProductModal(BuildContext context, String idCategoria, String nameCateg
   lineasBloc.obtenerLineasPorNegocio(idCategoria);
   final _controller = ChangeController();
 
-  TextEditingController _precioController = new TextEditingController();
-  TextEditingController _costoController = new TextEditingController();
-  TextEditingController _nombreController = new TextEditingController();
-  TextEditingController _descripcionController = new TextEditingController();
+  TextEditingController _precioController = TextEditingController();
+  TextEditingController _costoController = TextEditingController();
+  TextEditingController _nombreController = TextEditingController();
+  TextEditingController _descripcionController = TextEditingController();
 
   _costoController.text = '0.00';
 
@@ -247,18 +247,18 @@ void _newProductModal(BuildContext context, String idCategoria, String nameCateg
         return Stack(
           children: [
             Container(
-              color: Color.fromRGBO(0, 0, 0, 0.001),
+              color: const Color.fromRGBO(0, 0, 0, 0.001),
               child: DraggableScrollableSheet(
                   initialChildSize: 0.93,
                   minChildSize: 0.2,
                   maxChildSize: 0.93,
                   builder: (_, controller) {
                     return Container(
-                      decoration: BoxDecoration(
+                      decoration: const BoxDecoration(
                         color: Colors.white,
                         borderRadius: BorderRadius.only(
-                          topLeft: const Radius.circular(30),
-                          topRight: const Radius.circular(30),
+                          topLeft: Radius.circular(30),
+                          topRight: Radius.circular(30),
                         ),
                       ),
                       child: KeyboardActions(
@@ -279,7 +279,7 @@ void _newProductModal(BuildContext context, String idCategoria, String nameCateg
                                   child: Center(
                                     child: Container(
                                       width: ScreenUtil().setWidth(48),
-                                      decoration: BoxDecoration(
+                                      decoration: const BoxDecoration(
                                         color: Color(0XFFBABABA),
                                       ),
                                     ),
@@ -292,7 +292,7 @@ void _newProductModal(BuildContext context, String idCategoria, String nameCateg
                                   child: Text(
                                     'Nueva $nameCategory',
                                     style: GoogleFonts.poppins(
-                                      color: Color(0XFFFF0036),
+                                      color: const Color(0XFFFF0036),
                                       fontWeight: FontWeight.w600,
                                       fontSize: ScreenUtil().setSp(18),
                                     ),
@@ -307,7 +307,7 @@ void _newProductModal(BuildContext context, String idCategoria, String nameCateg
                                     Container(
                                       height: ScreenUtil().setHeight(150),
                                       width: ScreenUtil().setWidth(150),
-                                      decoration: BoxDecoration(
+                                      decoration: const BoxDecoration(
                                         color: Color(0XFFEEEEEE),
                                         shape: BoxShape.circle,
                                         boxShadow: [
@@ -324,7 +324,7 @@ void _newProductModal(BuildContext context, String idCategoria, String nameCateg
                                             child: Container(
                                                 height: ScreenUtil().setHeight(120),
                                                 width: ScreenUtil().setWidth(120),
-                                                decoration: BoxDecoration(
+                                                decoration: const BoxDecoration(
                                                   color: Color(0XFFEEEEEE),
                                                   shape: BoxShape.circle,
                                                   boxShadow: [
@@ -340,14 +340,14 @@ void _newProductModal(BuildContext context, String idCategoria, String nameCateg
                                         ],
                                       ),
                                     ),
-                                    Container(
+                                    SizedBox(
                                       width: ScreenUtil().setWidth(156),
                                       child: Column(
                                         children: [
                                           Text(
                                             'Precio',
                                             style: GoogleFonts.poppins(
-                                              color: Color(0XFF585858),
+                                              color: const Color(0XFF585858),
                                               fontWeight: FontWeight.w500,
                                               fontSize: ScreenUtil().setSp(16),
                                             ),
@@ -357,8 +357,8 @@ void _newProductModal(BuildContext context, String idCategoria, String nameCateg
                                             controller: _precioController,
                                             maxLines: 1,
                                             onChanged: (value) {
-                                              if (value.length > 0 &&
-                                                  _nombreController.text.length > 0 &&
+                                              if (value.isNotEmpty &&
+                                                  _nombreController.text.isNotEmpty &&
                                                   //_descripcionController.text.length > 0 &&
                                                   _controller.idLinea != '') {
                                                 _controller.changeBoton(true);
@@ -370,30 +370,30 @@ void _newProductModal(BuildContext context, String idCategoria, String nameCateg
                                             decoration: InputDecoration(
                                               hintText: 'S/00.00',
                                               hintStyle: TextStyle(
-                                                color: Color(0XFFBEBEBE),
+                                                color: const Color(0XFFBEBEBE),
                                                 fontWeight: FontWeight.w400,
                                                 fontSize: ScreenUtil().setSp(16),
                                                 fontStyle: FontStyle.normal,
                                               ),
                                               filled: true,
-                                              fillColor: Color(0XFFEDEDED),
+                                              fillColor: const Color(0XFFEDEDED),
                                               contentPadding: EdgeInsets.only(
                                                   left: ScreenUtil().setWidth(10), top: ScreenUtil().setHeight(5), bottom: ScreenUtil().setHeight(1)),
                                               enabledBorder: OutlineInputBorder(
                                                 borderRadius: BorderRadius.circular(15),
-                                                borderSide: BorderSide(color: Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
+                                                borderSide: BorderSide(color: const Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
                                               ),
                                               focusedBorder: OutlineInputBorder(
                                                 borderRadius: BorderRadius.circular(15),
-                                                borderSide: BorderSide(color: Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
+                                                borderSide: BorderSide(color: const Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
                                               ),
                                               border: OutlineInputBorder(
                                                 borderRadius: BorderRadius.circular(15),
-                                                borderSide: BorderSide(color: Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
+                                                borderSide: BorderSide(color: const Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
                                               ),
                                             ),
                                             style: TextStyle(
-                                              color: Color(0XFF585858),
+                                              color: const Color(0XFF585858),
                                               fontWeight: FontWeight.w400,
                                               fontSize: ScreenUtil().setSp(16),
                                               fontStyle: FontStyle.normal,
@@ -402,7 +402,7 @@ void _newProductModal(BuildContext context, String idCategoria, String nameCateg
                                           Text(
                                             'Costo',
                                             style: GoogleFonts.poppins(
-                                              color: Color(0XFF585858),
+                                              color: const Color(0XFF585858),
                                               fontWeight: FontWeight.w500,
                                               fontSize: ScreenUtil().setSp(16),
                                             ),
@@ -412,8 +412,8 @@ void _newProductModal(BuildContext context, String idCategoria, String nameCateg
                                             controller: _costoController,
                                             maxLines: 1,
                                             onChanged: (value) {
-                                              if (value.length > 0 &&
-                                                  _nombreController.text.length > 0 &&
+                                              if (value.isNotEmpty &&
+                                                  _nombreController.text.isNotEmpty &&
                                                   // _descripcionController.text.length > 0 &&
                                                   _controller.idLinea != '') {
                                                 _controller.changeBoton(true);
@@ -425,30 +425,30 @@ void _newProductModal(BuildContext context, String idCategoria, String nameCateg
                                             decoration: InputDecoration(
                                               hintText: 'S/00.00',
                                               hintStyle: TextStyle(
-                                                color: Color(0XFFBEBEBE),
+                                                color: const Color(0XFFBEBEBE),
                                                 fontWeight: FontWeight.w400,
                                                 fontSize: ScreenUtil().setSp(16),
                                                 fontStyle: FontStyle.normal,
                                               ),
                                               filled: true,
-                                              fillColor: Color(0XFFEDEDED),
+                                              fillColor: const Color(0XFFEDEDED),
                                               contentPadding: EdgeInsets.only(
                                                   left: ScreenUtil().setWidth(10), top: ScreenUtil().setHeight(5), bottom: ScreenUtil().setHeight(1)),
                                               enabledBorder: OutlineInputBorder(
                                                 borderRadius: BorderRadius.circular(15),
-                                                borderSide: BorderSide(color: Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
+                                                borderSide: BorderSide(color: const Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
                                               ),
                                               focusedBorder: OutlineInputBorder(
                                                 borderRadius: BorderRadius.circular(15),
-                                                borderSide: BorderSide(color: Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
+                                                borderSide: BorderSide(color: const Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
                                               ),
                                               border: OutlineInputBorder(
                                                 borderRadius: BorderRadius.circular(15),
-                                                borderSide: BorderSide(color: Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
+                                                borderSide: BorderSide(color: const Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
                                               ),
                                             ),
                                             style: TextStyle(
-                                              color: Color(0XFF585858),
+                                              color: const Color(0XFF585858),
                                               fontWeight: FontWeight.w400,
                                               fontSize: ScreenUtil().setSp(16),
                                               fontStyle: FontStyle.normal,
@@ -463,7 +463,7 @@ void _newProductModal(BuildContext context, String idCategoria, String nameCateg
                                 Text(
                                   'Nombre',
                                   style: GoogleFonts.poppins(
-                                    color: Color(0XFF585858),
+                                    color: const Color(0XFF585858),
                                     fontWeight: FontWeight.w500,
                                     fontSize: ScreenUtil().setSp(16),
                                   ),
@@ -474,8 +474,8 @@ void _newProductModal(BuildContext context, String idCategoria, String nameCateg
                                   maxLines: 1,
                                   keyboardType: TextInputType.text,
                                   onChanged: (value) {
-                                    if (value.length > 0 &&
-                                        _precioController.text.length > 0 &&
+                                    if (value.isNotEmpty &&
+                                        _precioController.text.isNotEmpty &&
                                         // _descripcionController.text.length > 0 &&
                                         _controller.idLinea != '') {
                                       _controller.changeBoton(true);
@@ -486,30 +486,30 @@ void _newProductModal(BuildContext context, String idCategoria, String nameCateg
                                   decoration: InputDecoration(
                                     hintText: 'Ingrese nombre de $nameCategory',
                                     hintStyle: TextStyle(
-                                      color: Color(0XFFBEBEBE),
+                                      color: const Color(0XFFBEBEBE),
                                       fontWeight: FontWeight.w400,
                                       fontSize: ScreenUtil().setSp(16),
                                       fontStyle: FontStyle.normal,
                                     ),
                                     filled: true,
-                                    fillColor: Color(0XFFEDEDED),
+                                    fillColor: const Color(0XFFEDEDED),
                                     contentPadding: EdgeInsets.only(
                                         left: ScreenUtil().setWidth(10), top: ScreenUtil().setHeight(5), bottom: ScreenUtil().setHeight(1)),
                                     enabledBorder: OutlineInputBorder(
                                       borderRadius: BorderRadius.circular(15),
-                                      borderSide: BorderSide(color: Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
+                                      borderSide: BorderSide(color: const Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
                                     ),
                                     focusedBorder: OutlineInputBorder(
                                       borderRadius: BorderRadius.circular(15),
-                                      borderSide: BorderSide(color: Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
+                                      borderSide: BorderSide(color: const Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
                                     ),
                                     border: OutlineInputBorder(
                                       borderRadius: BorderRadius.circular(15),
-                                      borderSide: BorderSide(color: Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
+                                      borderSide: BorderSide(color: const Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
                                     ),
                                   ),
                                   style: TextStyle(
-                                    color: Color(0XFF585858),
+                                    color: const Color(0XFF585858),
                                     fontWeight: FontWeight.w400,
                                     fontSize: ScreenUtil().setSp(16),
                                     fontStyle: FontStyle.normal,
@@ -519,7 +519,7 @@ void _newProductModal(BuildContext context, String idCategoria, String nameCateg
                                 Text(
                                   'Categoría',
                                   style: GoogleFonts.poppins(
-                                    color: Color(0XFF585858),
+                                    color: const Color(0XFF585858),
                                     fontWeight: FontWeight.w500,
                                     fontSize: ScreenUtil().setSp(16),
                                   ),
@@ -534,11 +534,11 @@ void _newProductModal(BuildContext context, String idCategoria, String nameCateg
                                         return StreamBuilder(
                                             stream: lineasBloc.lineasStream,
                                             builder: (BuildContext context, AsyncSnapshot<List<LineaModel>> snapshot) {
-                                              if (snapshot.hasData && snapshot.data.length >= 0) {
+                                              if (snapshot.hasData && snapshot.data.isNotEmpty) {
                                                 return GestureDetector(
                                                   onTap: () => Navigator.of(context).pop(),
                                                   child: Container(
-                                                    color: Color.fromRGBO(0, 0, 0, 0.001),
+                                                    color: const Color.fromRGBO(0, 0, 0, 0.001),
                                                     child: GestureDetector(
                                                       onTap: () {},
                                                       child: DraggableScrollableSheet(
@@ -547,11 +547,11 @@ void _newProductModal(BuildContext context, String idCategoria, String nameCateg
                                                         maxChildSize: 0.9,
                                                         builder: (_, controller) {
                                                           return Container(
-                                                            decoration: BoxDecoration(
+                                                            decoration: const BoxDecoration(
                                                               color: Colors.white,
                                                               borderRadius: BorderRadius.only(
-                                                                topLeft: const Radius.circular(30),
-                                                                topRight: const Radius.circular(30),
+                                                                topLeft: Radius.circular(30),
+                                                                topRight: Radius.circular(30),
                                                               ),
                                                             ),
                                                             child: Padding(
@@ -563,7 +563,7 @@ void _newProductModal(BuildContext context, String idCategoria, String nameCateg
                                                                   Row(
                                                                     children: [
                                                                       IconButton(
-                                                                        icon: Icon(
+                                                                        icon: const Icon(
                                                                           Icons.arrow_back_ios,
                                                                         ),
                                                                         iconSize: ScreenUtil().setSp(20),
@@ -574,7 +574,7 @@ void _newProductModal(BuildContext context, String idCategoria, String nameCateg
                                                                         'Seleccione una línea',
                                                                         textAlign: TextAlign.center,
                                                                         style: GoogleFonts.poppins(
-                                                                          color: Color(0XFF585858),
+                                                                          color: const Color(0XFF585858),
                                                                           fontStyle: FontStyle.normal,
                                                                           fontWeight: FontWeight.w700,
                                                                           fontSize: ScreenUtil().setSp(18),
@@ -596,8 +596,8 @@ void _newProductModal(BuildContext context, String idCategoria, String nameCateg
                                                                                 provider.changeIndex(index2);
                                                                                 final productosLineaBloc = ProviderBloc.productosLinea(context);
                                                                                 productosLineaBloc.updateProductosPorLinea(_controller.idLinea);
-                                                                                if (_precioController.text.length > 0 &&
-                                                                                    _nombreController.text.length > 0 &&
+                                                                                if (_precioController.text.isNotEmpty &&
+                                                                                    _nombreController.text.isNotEmpty &&
                                                                                     //_descripcionController.text.length > 0 &&
                                                                                     _controller.idLinea != '') {
                                                                                   _controller.changeBoton(true);
@@ -612,9 +612,9 @@ void _newProductModal(BuildContext context, String idCategoria, String nameCateg
                                                                                     width: ScreenUtil().setWidth(8),
                                                                                   ),
                                                                                   Text(
-                                                                                    '${snapshot.data[index2].lineaNombre}',
+                                                                                    snapshot.data[index2].lineaNombre,
                                                                                     style: GoogleFonts.poppins(
-                                                                                      color: Color(0XFF585858),
+                                                                                      color: const Color(0XFF585858),
                                                                                       fontWeight: FontWeight.w500,
                                                                                       fontSize: ScreenUtil().setSp(16),
                                                                                       letterSpacing: ScreenUtil().setSp(0.016),
@@ -623,7 +623,7 @@ void _newProductModal(BuildContext context, String idCategoria, String nameCateg
                                                                                 ],
                                                                               ),
                                                                             ),
-                                                                            Divider(),
+                                                                            const Divider(),
                                                                           ],
                                                                         );
                                                                       },
@@ -651,7 +651,7 @@ void _newProductModal(BuildContext context, String idCategoria, String nameCateg
                                         return Container(
                                           height: ScreenUtil().setHeight(48),
                                           width: double.infinity,
-                                          decoration: BoxDecoration(color: Color(0XFFEDEDED), borderRadius: BorderRadius.circular(15)),
+                                          decoration: BoxDecoration(color: const Color(0XFFEDEDED), borderRadius: BorderRadius.circular(15)),
                                           padding: EdgeInsets.symmetric(horizontal: ScreenUtil().setWidth(10)),
                                           child: Row(
                                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -659,7 +659,7 @@ void _newProductModal(BuildContext context, String idCategoria, String nameCateg
                                               Text(
                                                 _controller.linea,
                                                 style: TextStyle(
-                                                  color: (_controller.idLinea != '') ? Color(0XFF585858) : Color(0XFFBEBEBE),
+                                                  color: (_controller.idLinea != '') ? const Color(0XFF585858) : const Color(0XFFBEBEBE),
                                                   fontWeight: FontWeight.w400,
                                                   fontSize: ScreenUtil().setSp(16),
                                                   fontStyle: FontStyle.normal,
@@ -668,7 +668,7 @@ void _newProductModal(BuildContext context, String idCategoria, String nameCateg
                                               Icon(
                                                 Icons.arrow_drop_down,
                                                 size: ScreenUtil().setHeight(20),
-                                                color: Color(0XFF585858),
+                                                color: const Color(0XFF585858),
                                               ),
                                             ],
                                           ),
@@ -679,7 +679,7 @@ void _newProductModal(BuildContext context, String idCategoria, String nameCateg
                                 Text(
                                   'Descripción',
                                   style: GoogleFonts.poppins(
-                                    color: Color(0XFF585858),
+                                    color: const Color(0XFF585858),
                                     fontWeight: FontWeight.w500,
                                     fontSize: ScreenUtil().setSp(16),
                                   ),
@@ -702,30 +702,30 @@ void _newProductModal(BuildContext context, String idCategoria, String nameCateg
                                   decoration: InputDecoration(
                                     hintText: 'Ingredientes, tiempo de preparación, etc.',
                                     hintStyle: TextStyle(
-                                      color: Color(0XFFBEBEBE),
+                                      color: const Color(0XFFBEBEBE),
                                       fontWeight: FontWeight.w400,
                                       fontSize: ScreenUtil().setSp(16),
                                       fontStyle: FontStyle.normal,
                                     ),
                                     filled: true,
-                                    fillColor: Color(0XFFEDEDED),
+                                    fillColor: const Color(0XFFEDEDED),
                                     contentPadding: EdgeInsets.only(
                                         left: ScreenUtil().setWidth(10), top: ScreenUtil().setHeight(5), bottom: ScreenUtil().setHeight(1)),
                                     enabledBorder: OutlineInputBorder(
                                       borderRadius: BorderRadius.circular(15),
-                                      borderSide: BorderSide(color: Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
+                                      borderSide: BorderSide(color: const Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
                                     ),
                                     focusedBorder: OutlineInputBorder(
                                       borderRadius: BorderRadius.circular(15),
-                                      borderSide: BorderSide(color: Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
+                                      borderSide: BorderSide(color: const Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
                                     ),
                                     border: OutlineInputBorder(
                                       borderRadius: BorderRadius.circular(15),
-                                      borderSide: BorderSide(color: Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
+                                      borderSide: BorderSide(color: const Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
                                     ),
                                   ),
                                   style: TextStyle(
-                                    color: Color(0XFF585858),
+                                    color: const Color(0XFF585858),
                                     fontWeight: FontWeight.w400,
                                     fontSize: ScreenUtil().setSp(16),
                                     fontStyle: FontStyle.normal,
@@ -737,7 +737,7 @@ void _newProductModal(BuildContext context, String idCategoria, String nameCateg
                                     _controller.changeCargando(true);
                                     _controller.changeText('');
                                     if (_controller.boton) {
-                                      if (_costoController.text.length < 1) {
+                                      if (_costoController.text.isEmpty) {
                                         _costoController.text = '0';
                                       }
                                       final _productoLineaApi = ProductoLineaApi();
@@ -746,7 +746,7 @@ void _newProductModal(BuildContext context, String idCategoria, String nameCateg
                                       producto.productoNombre = _nombreController.text;
                                       producto.productoPrecio = _precioController.text;
 
-                                      producto.productoDescripcion = (_descripcionController.text.length > 0) ? _descripcionController.text : '-';
+                                      producto.productoDescripcion = (_descripcionController.text.isNotEmpty) ? _descripcionController.text : '-';
                                       producto.productoEstado = '1';
                                       producto.productoCocina = '1';
                                       producto.productoCosto = _costoController.text;
@@ -770,7 +770,7 @@ void _newProductModal(BuildContext context, String idCategoria, String nameCateg
                                           child: Container(
                                             decoration: BoxDecoration(
                                               borderRadius: BorderRadius.circular(50),
-                                              color: (_controller.boton) ? Color(0XFFFF0036) : Color(0XFFFF0036).withOpacity(0.6),
+                                              color: (_controller.boton) ? const Color(0XFFFF0036) : const Color(0XFFFF0036).withOpacity(0.6),
                                             ),
                                             child: Center(
                                               child: Text(
@@ -798,7 +798,7 @@ void _newProductModal(BuildContext context, String idCategoria, String nameCateg
                                         return Text(
                                           _controller.text,
                                           style: TextStyle(
-                                            color: Color(0XFFFF0036),
+                                            color: const Color(0XFFFF0036),
                                             fontWeight: FontWeight.w600,
                                             fontSize: ScreenUtil().setSp(16),
                                             fontStyle: FontStyle.normal,
@@ -816,7 +816,7 @@ void _newProductModal(BuildContext context, String idCategoria, String nameCateg
                                     child: Text(
                                       'Cancelar',
                                       style: GoogleFonts.poppins(
-                                        color: Color(0XFF8A8A8A),
+                                        color: const Color(0XFF8A8A8A),
                                         fontWeight: FontWeight.w500,
                                         fontSize: ScreenUtil().setSp(16),
                                       ),
@@ -848,7 +848,7 @@ void _newProductModal(BuildContext context, String idCategoria, String nameCateg
 void _addCategoryModal(BuildContext context, String idCategoria) {
   final _controller = ChangeController();
 
-  TextEditingController _nombreLineaController = new TextEditingController();
+  TextEditingController _nombreLineaController = TextEditingController();
 
   FocusNode _focus1 = FocusNode();
 
@@ -860,18 +860,18 @@ void _addCategoryModal(BuildContext context, String idCategoria) {
         return Stack(
           children: [
             Container(
-              color: Color.fromRGBO(0, 0, 0, 0.001),
+              color: const Color.fromRGBO(0, 0, 0, 0.001),
               child: DraggableScrollableSheet(
                   initialChildSize: 0.93,
                   minChildSize: 0.2,
                   maxChildSize: 0.93,
                   builder: (_, controller) {
                     return Container(
-                      decoration: BoxDecoration(
+                      decoration: const BoxDecoration(
                         color: Colors.white,
                         borderRadius: BorderRadius.only(
-                          topLeft: const Radius.circular(30),
-                          topRight: const Radius.circular(30),
+                          topLeft: Radius.circular(30),
+                          topRight: Radius.circular(30),
                         ),
                       ),
                       child: KeyboardActions(
@@ -889,7 +889,7 @@ void _addCategoryModal(BuildContext context, String idCategoria) {
                                   child: Center(
                                     child: Container(
                                       width: ScreenUtil().setWidth(48),
-                                      decoration: BoxDecoration(
+                                      decoration: const BoxDecoration(
                                         color: Color(0XFFBABABA),
                                       ),
                                     ),
@@ -902,7 +902,7 @@ void _addCategoryModal(BuildContext context, String idCategoria) {
                                   child: Text(
                                     'Nueva categoría',
                                     style: GoogleFonts.poppins(
-                                      color: Color(0XFFFF0036),
+                                      color: const Color(0XFFFF0036),
                                       fontWeight: FontWeight.w600,
                                       fontSize: ScreenUtil().setSp(18),
                                     ),
@@ -914,7 +914,7 @@ void _addCategoryModal(BuildContext context, String idCategoria) {
                                 Text(
                                   'Categoría',
                                   style: GoogleFonts.poppins(
-                                    color: Color(0XFF585858),
+                                    color: const Color(0XFF585858),
                                     fontWeight: FontWeight.w500,
                                     fontSize: ScreenUtil().setSp(16),
                                   ),
@@ -924,7 +924,7 @@ void _addCategoryModal(BuildContext context, String idCategoria) {
                                   controller: _nombreLineaController,
                                   maxLines: 1,
                                   onChanged: (value) {
-                                    if (value.length > 0) {
+                                    if (value.isNotEmpty) {
                                       _controller.changeBoton(true);
                                     } else {
                                       _controller.changeBoton(false);
@@ -934,30 +934,30 @@ void _addCategoryModal(BuildContext context, String idCategoria) {
                                   decoration: InputDecoration(
                                     hintText: 'Ingrese nombre de la categoría',
                                     hintStyle: TextStyle(
-                                      color: Color(0XFFBEBEBE),
+                                      color: const Color(0XFFBEBEBE),
                                       fontWeight: FontWeight.w400,
                                       fontSize: ScreenUtil().setSp(16),
                                       fontStyle: FontStyle.normal,
                                     ),
                                     filled: true,
-                                    fillColor: Color(0XFFEDEDED),
+                                    fillColor: const Color(0XFFEDEDED),
                                     contentPadding: EdgeInsets.only(
                                         left: ScreenUtil().setWidth(10), top: ScreenUtil().setHeight(5), bottom: ScreenUtil().setHeight(1)),
                                     enabledBorder: OutlineInputBorder(
                                       borderRadius: BorderRadius.circular(15),
-                                      borderSide: BorderSide(color: Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
+                                      borderSide: BorderSide(color: const Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
                                     ),
                                     focusedBorder: OutlineInputBorder(
                                       borderRadius: BorderRadius.circular(15),
-                                      borderSide: BorderSide(color: Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
+                                      borderSide: BorderSide(color: const Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
                                     ),
                                     border: OutlineInputBorder(
                                       borderRadius: BorderRadius.circular(15),
-                                      borderSide: BorderSide(color: Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
+                                      borderSide: BorderSide(color: const Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
                                     ),
                                   ),
                                   style: TextStyle(
-                                    color: Color(0XFF585858),
+                                    color: const Color(0XFF585858),
                                     fontWeight: FontWeight.w400,
                                     fontSize: ScreenUtil().setSp(16),
                                     fontStyle: FontStyle.normal,
@@ -991,7 +991,7 @@ void _addCategoryModal(BuildContext context, String idCategoria) {
                                           child: Container(
                                             decoration: BoxDecoration(
                                               borderRadius: BorderRadius.circular(50),
-                                              color: (_controller.boton) ? Color(0XFFFF0036) : Color(0XFFFF0036).withOpacity(0.6),
+                                              color: (_controller.boton) ? const Color(0XFFFF0036) : const Color(0XFFFF0036).withOpacity(0.6),
                                             ),
                                             child: Center(
                                               child: Text(
@@ -1019,7 +1019,7 @@ void _addCategoryModal(BuildContext context, String idCategoria) {
                                         return Text(
                                           _controller.text,
                                           style: TextStyle(
-                                            color: Color(0XFFFF0036),
+                                            color: const Color(0XFFFF0036),
                                             fontWeight: FontWeight.w600,
                                             fontSize: ScreenUtil().setSp(16),
                                             fontStyle: FontStyle.normal,
@@ -1037,7 +1037,7 @@ void _addCategoryModal(BuildContext context, String idCategoria) {
                                     child: Text(
                                       'Cancelar',
                                       style: GoogleFonts.poppins(
-                                        color: Color(0XFF8A8A8A),
+                                        color: const Color(0XFF8A8A8A),
                                         fontWeight: FontWeight.w500,
                                         fontSize: ScreenUtil().setSp(16),
                                       ),
@@ -1071,10 +1071,10 @@ void editProductModal(BuildContext context, ProductoLineaModel productData, Stri
   lineasBloc.obtenerLineasPorNegocio(idCategoria);
   final _controller = ChangeController();
 
-  TextEditingController _precioController = new TextEditingController();
-  TextEditingController _costoController = new TextEditingController();
-  TextEditingController _nombreController = new TextEditingController();
-  TextEditingController _descripcionController = new TextEditingController();
+  TextEditingController _precioController = TextEditingController();
+  TextEditingController _costoController = TextEditingController();
+  TextEditingController _nombreController = TextEditingController();
+  TextEditingController _descripcionController = TextEditingController();
 
   FocusNode _focus1 = FocusNode();
   FocusNode _focus2 = FocusNode();
@@ -1097,18 +1097,18 @@ void editProductModal(BuildContext context, ProductoLineaModel productData, Stri
         return Stack(
           children: [
             Container(
-              color: Color.fromRGBO(0, 0, 0, 0.001),
+              color: const Color.fromRGBO(0, 0, 0, 0.001),
               child: DraggableScrollableSheet(
                   initialChildSize: 0.93,
                   minChildSize: 0.2,
                   maxChildSize: 0.93,
                   builder: (_, controller) {
                     return Container(
-                      decoration: BoxDecoration(
+                      decoration: const BoxDecoration(
                         color: Colors.white,
                         borderRadius: BorderRadius.only(
-                          topLeft: const Radius.circular(30),
-                          topRight: const Radius.circular(30),
+                          topLeft: Radius.circular(30),
+                          topRight: Radius.circular(30),
                         ),
                       ),
                       child: KeyboardActions(
@@ -1129,7 +1129,7 @@ void editProductModal(BuildContext context, ProductoLineaModel productData, Stri
                                   child: Center(
                                     child: Container(
                                       width: ScreenUtil().setWidth(48),
-                                      decoration: BoxDecoration(
+                                      decoration: const BoxDecoration(
                                         color: Color(0XFFBABABA),
                                       ),
                                     ),
@@ -1142,7 +1142,7 @@ void editProductModal(BuildContext context, ProductoLineaModel productData, Stri
                                   child: Text(
                                     'Editar $nameCategory',
                                     style: GoogleFonts.poppins(
-                                      color: Color(0XFFFF0036),
+                                      color: const Color(0XFFFF0036),
                                       fontWeight: FontWeight.w600,
                                       fontSize: ScreenUtil().setSp(18),
                                     ),
@@ -1157,7 +1157,7 @@ void editProductModal(BuildContext context, ProductoLineaModel productData, Stri
                                     Container(
                                       height: ScreenUtil().setHeight(150),
                                       width: ScreenUtil().setWidth(150),
-                                      decoration: BoxDecoration(
+                                      decoration: const BoxDecoration(
                                         color: Color(0XFFEEEEEE),
                                         shape: BoxShape.circle,
                                         boxShadow: [
@@ -1169,14 +1169,12 @@ void editProductModal(BuildContext context, ProductoLineaModel productData, Stri
                                         ],
                                       ),
                                       child: CachedNetworkImage(
-                                        placeholder: (context, url) => Container(
+                                        placeholder: (context, url) => SizedBox(
                                           child: SvgPicture.asset('assets/food_svg/$iconProduct.svg'),
                                         ),
-                                        errorWidget: (context, url, error) => Container(
-                                          child: Container(
-                                            child: SvgPicture.asset(
-                                              'assets/food_svg/$iconProduct.svg',
-                                            ),
+                                        errorWidget: (context, url, error) => SizedBox(
+                                          child: SvgPicture.asset(
+                                            'assets/food_svg/$iconProduct.svg',
                                           ),
                                         ),
                                         imageUrl: '$apiBaseURL/${productData.productoFoto}',
@@ -1191,14 +1189,14 @@ void editProductModal(BuildContext context, ProductoLineaModel productData, Stri
                                         ),
                                       ),
                                     ),
-                                    Container(
+                                    SizedBox(
                                       width: ScreenUtil().setWidth(156),
                                       child: Column(
                                         children: [
                                           Text(
                                             'Precio',
                                             style: GoogleFonts.poppins(
-                                              color: Color(0XFF585858),
+                                              color: const Color(0XFF585858),
                                               fontWeight: FontWeight.w500,
                                               fontSize: ScreenUtil().setSp(16),
                                             ),
@@ -1208,9 +1206,9 @@ void editProductModal(BuildContext context, ProductoLineaModel productData, Stri
                                             controller: _precioController,
                                             maxLines: 1,
                                             onChanged: (value) {
-                                              if (value.length > 0 &&
-                                                  _nombreController.text.length > 0 &&
-                                                  _descripcionController.text.length > 0 &&
+                                              if (value.isNotEmpty &&
+                                                  _nombreController.text.isNotEmpty &&
+                                                  _descripcionController.text.isNotEmpty &&
                                                   _controller.idLinea != '') {
                                                 _controller.changeBoton(true);
                                               } else {
@@ -1221,30 +1219,30 @@ void editProductModal(BuildContext context, ProductoLineaModel productData, Stri
                                             decoration: InputDecoration(
                                               hintText: 'S/00.00',
                                               hintStyle: TextStyle(
-                                                color: Color(0XFFBEBEBE),
+                                                color: const Color(0XFFBEBEBE),
                                                 fontWeight: FontWeight.w400,
                                                 fontSize: ScreenUtil().setSp(16),
                                                 fontStyle: FontStyle.normal,
                                               ),
                                               filled: true,
-                                              fillColor: Color(0XFFEDEDED),
+                                              fillColor: const Color(0XFFEDEDED),
                                               contentPadding: EdgeInsets.only(
                                                   left: ScreenUtil().setWidth(10), top: ScreenUtil().setHeight(5), bottom: ScreenUtil().setHeight(1)),
                                               enabledBorder: OutlineInputBorder(
                                                 borderRadius: BorderRadius.circular(15),
-                                                borderSide: BorderSide(color: Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
+                                                borderSide: BorderSide(color: const Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
                                               ),
                                               focusedBorder: OutlineInputBorder(
                                                 borderRadius: BorderRadius.circular(15),
-                                                borderSide: BorderSide(color: Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
+                                                borderSide: BorderSide(color: const Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
                                               ),
                                               border: OutlineInputBorder(
                                                 borderRadius: BorderRadius.circular(15),
-                                                borderSide: BorderSide(color: Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
+                                                borderSide: BorderSide(color: const Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
                                               ),
                                             ),
                                             style: TextStyle(
-                                              color: Color(0XFF585858),
+                                              color: const Color(0XFF585858),
                                               fontWeight: FontWeight.w400,
                                               fontSize: ScreenUtil().setSp(16),
                                               fontStyle: FontStyle.normal,
@@ -1253,7 +1251,7 @@ void editProductModal(BuildContext context, ProductoLineaModel productData, Stri
                                           Text(
                                             'Costo',
                                             style: GoogleFonts.poppins(
-                                              color: Color(0XFF585858),
+                                              color: const Color(0XFF585858),
                                               fontWeight: FontWeight.w500,
                                               fontSize: ScreenUtil().setSp(16),
                                             ),
@@ -1263,9 +1261,9 @@ void editProductModal(BuildContext context, ProductoLineaModel productData, Stri
                                             controller: _costoController,
                                             maxLines: 1,
                                             onChanged: (value) {
-                                              if (value.length > 0 &&
-                                                  _nombreController.text.length > 0 &&
-                                                  _descripcionController.text.length > 0 &&
+                                              if (value.isNotEmpty &&
+                                                  _nombreController.text.isNotEmpty &&
+                                                  _descripcionController.text.isNotEmpty &&
                                                   _controller.idLinea != '') {
                                                 _controller.changeBoton(true);
                                               } else {
@@ -1276,30 +1274,30 @@ void editProductModal(BuildContext context, ProductoLineaModel productData, Stri
                                             decoration: InputDecoration(
                                               hintText: 'S/00.00',
                                               hintStyle: TextStyle(
-                                                color: Color(0XFFBEBEBE),
+                                                color: const Color(0XFFBEBEBE),
                                                 fontWeight: FontWeight.w400,
                                                 fontSize: ScreenUtil().setSp(16),
                                                 fontStyle: FontStyle.normal,
                                               ),
                                               filled: true,
-                                              fillColor: Color(0XFFEDEDED),
+                                              fillColor: const Color(0XFFEDEDED),
                                               contentPadding: EdgeInsets.only(
                                                   left: ScreenUtil().setWidth(10), top: ScreenUtil().setHeight(5), bottom: ScreenUtil().setHeight(1)),
                                               enabledBorder: OutlineInputBorder(
                                                 borderRadius: BorderRadius.circular(15),
-                                                borderSide: BorderSide(color: Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
+                                                borderSide: BorderSide(color: const Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
                                               ),
                                               focusedBorder: OutlineInputBorder(
                                                 borderRadius: BorderRadius.circular(15),
-                                                borderSide: BorderSide(color: Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
+                                                borderSide: BorderSide(color: const Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
                                               ),
                                               border: OutlineInputBorder(
                                                 borderRadius: BorderRadius.circular(15),
-                                                borderSide: BorderSide(color: Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
+                                                borderSide: BorderSide(color: const Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
                                               ),
                                             ),
                                             style: TextStyle(
-                                              color: Color(0XFF585858),
+                                              color: const Color(0XFF585858),
                                               fontWeight: FontWeight.w400,
                                               fontSize: ScreenUtil().setSp(16),
                                               fontStyle: FontStyle.normal,
@@ -1314,7 +1312,7 @@ void editProductModal(BuildContext context, ProductoLineaModel productData, Stri
                                 Text(
                                   'Nombre',
                                   style: GoogleFonts.poppins(
-                                    color: Color(0XFF585858),
+                                    color: const Color(0XFF585858),
                                     fontWeight: FontWeight.w500,
                                     fontSize: ScreenUtil().setSp(16),
                                   ),
@@ -1325,9 +1323,9 @@ void editProductModal(BuildContext context, ProductoLineaModel productData, Stri
                                   maxLines: 1,
                                   keyboardType: TextInputType.text,
                                   onChanged: (value) {
-                                    if (value.length > 0 &&
-                                        _precioController.text.length > 0 &&
-                                        _descripcionController.text.length > 0 &&
+                                    if (value.isNotEmpty &&
+                                        _precioController.text.isNotEmpty &&
+                                        _descripcionController.text.isNotEmpty &&
                                         _controller.idLinea != '') {
                                       _controller.changeBoton(true);
                                     } else {
@@ -1337,30 +1335,30 @@ void editProductModal(BuildContext context, ProductoLineaModel productData, Stri
                                   decoration: InputDecoration(
                                     hintText: 'Ingrese nombre de $nameCategory',
                                     hintStyle: TextStyle(
-                                      color: Color(0XFFBEBEBE),
+                                      color: const Color(0XFFBEBEBE),
                                       fontWeight: FontWeight.w400,
                                       fontSize: ScreenUtil().setSp(16),
                                       fontStyle: FontStyle.normal,
                                     ),
                                     filled: true,
-                                    fillColor: Color(0XFFEDEDED),
+                                    fillColor: const Color(0XFFEDEDED),
                                     contentPadding: EdgeInsets.only(
                                         left: ScreenUtil().setWidth(10), top: ScreenUtil().setHeight(5), bottom: ScreenUtil().setHeight(1)),
                                     enabledBorder: OutlineInputBorder(
                                       borderRadius: BorderRadius.circular(15),
-                                      borderSide: BorderSide(color: Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
+                                      borderSide: BorderSide(color: const Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
                                     ),
                                     focusedBorder: OutlineInputBorder(
                                       borderRadius: BorderRadius.circular(15),
-                                      borderSide: BorderSide(color: Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
+                                      borderSide: BorderSide(color: const Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
                                     ),
                                     border: OutlineInputBorder(
                                       borderRadius: BorderRadius.circular(15),
-                                      borderSide: BorderSide(color: Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
+                                      borderSide: BorderSide(color: const Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
                                     ),
                                   ),
                                   style: TextStyle(
-                                    color: Color(0XFF585858),
+                                    color: const Color(0XFF585858),
                                     fontWeight: FontWeight.w400,
                                     fontSize: ScreenUtil().setSp(16),
                                     fontStyle: FontStyle.normal,
@@ -1370,7 +1368,7 @@ void editProductModal(BuildContext context, ProductoLineaModel productData, Stri
                                 Text(
                                   'Categoría',
                                   style: GoogleFonts.poppins(
-                                    color: Color(0XFF585858),
+                                    color: const Color(0XFF585858),
                                     fontWeight: FontWeight.w500,
                                     fontSize: ScreenUtil().setSp(16),
                                   ),
@@ -1385,11 +1383,11 @@ void editProductModal(BuildContext context, ProductoLineaModel productData, Stri
                                         return StreamBuilder(
                                             stream: lineasBloc.lineasStream,
                                             builder: (BuildContext context, AsyncSnapshot<List<LineaModel>> snapshot) {
-                                              if (snapshot.hasData && snapshot.data.length >= 0) {
+                                              if (snapshot.hasData && snapshot.data.isNotEmpty) {
                                                 return GestureDetector(
                                                   onTap: () => Navigator.of(context).pop(),
                                                   child: Container(
-                                                    color: Color.fromRGBO(0, 0, 0, 0.001),
+                                                    color: const Color.fromRGBO(0, 0, 0, 0.001),
                                                     child: GestureDetector(
                                                       onTap: () {},
                                                       child: DraggableScrollableSheet(
@@ -1398,11 +1396,11 @@ void editProductModal(BuildContext context, ProductoLineaModel productData, Stri
                                                         maxChildSize: 0.9,
                                                         builder: (_, controller) {
                                                           return Container(
-                                                            decoration: BoxDecoration(
+                                                            decoration: const BoxDecoration(
                                                               color: Colors.white,
                                                               borderRadius: BorderRadius.only(
-                                                                topLeft: const Radius.circular(30),
-                                                                topRight: const Radius.circular(30),
+                                                                topLeft: Radius.circular(30),
+                                                                topRight: Radius.circular(30),
                                                               ),
                                                             ),
                                                             child: Padding(
@@ -1414,7 +1412,7 @@ void editProductModal(BuildContext context, ProductoLineaModel productData, Stri
                                                                   Row(
                                                                     children: [
                                                                       IconButton(
-                                                                        icon: Icon(
+                                                                        icon: const Icon(
                                                                           Icons.arrow_back_ios,
                                                                         ),
                                                                         iconSize: ScreenUtil().setSp(20),
@@ -1425,7 +1423,7 @@ void editProductModal(BuildContext context, ProductoLineaModel productData, Stri
                                                                         'Seleccione una línea',
                                                                         textAlign: TextAlign.center,
                                                                         style: GoogleFonts.poppins(
-                                                                          color: Color(0XFF585858),
+                                                                          color: const Color(0XFF585858),
                                                                           fontStyle: FontStyle.normal,
                                                                           fontWeight: FontWeight.w700,
                                                                           fontSize: ScreenUtil().setSp(18),
@@ -1444,9 +1442,9 @@ void editProductModal(BuildContext context, ProductoLineaModel productData, Stri
                                                                               onTap: () {
                                                                                 _controller.changeLinea(
                                                                                     snapshot.data[index2].idLinea, snapshot.data[index2].lineaNombre);
-                                                                                if (_precioController.text.length > 0 &&
-                                                                                    _nombreController.text.length > 0 &&
-                                                                                    _descripcionController.text.length > 0 &&
+                                                                                if (_precioController.text.isNotEmpty &&
+                                                                                    _nombreController.text.isNotEmpty &&
+                                                                                    _descripcionController.text.isNotEmpty &&
                                                                                     _controller.idLinea != '') {
                                                                                   _controller.changeBoton(true);
                                                                                 } else {
@@ -1460,9 +1458,9 @@ void editProductModal(BuildContext context, ProductoLineaModel productData, Stri
                                                                                     width: ScreenUtil().setWidth(8),
                                                                                   ),
                                                                                   Text(
-                                                                                    '${snapshot.data[index2].lineaNombre}',
+                                                                                    snapshot.data[index2].lineaNombre,
                                                                                     style: GoogleFonts.poppins(
-                                                                                      color: Color(0XFF585858),
+                                                                                      color: const Color(0XFF585858),
                                                                                       fontWeight: FontWeight.w500,
                                                                                       fontSize: ScreenUtil().setSp(16),
                                                                                       letterSpacing: ScreenUtil().setSp(0.016),
@@ -1471,7 +1469,7 @@ void editProductModal(BuildContext context, ProductoLineaModel productData, Stri
                                                                                 ],
                                                                               ),
                                                                             ),
-                                                                            Divider(),
+                                                                            const Divider(),
                                                                           ],
                                                                         );
                                                                       },
@@ -1499,7 +1497,7 @@ void editProductModal(BuildContext context, ProductoLineaModel productData, Stri
                                         return Container(
                                           height: ScreenUtil().setHeight(48),
                                           width: double.infinity,
-                                          decoration: BoxDecoration(color: Color(0XFFEDEDED), borderRadius: BorderRadius.circular(15)),
+                                          decoration: BoxDecoration(color: const Color(0XFFEDEDED), borderRadius: BorderRadius.circular(15)),
                                           padding: EdgeInsets.symmetric(horizontal: ScreenUtil().setWidth(10)),
                                           child: Row(
                                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -1507,7 +1505,7 @@ void editProductModal(BuildContext context, ProductoLineaModel productData, Stri
                                               Text(
                                                 _controller.linea,
                                                 style: TextStyle(
-                                                  color: (_controller.idLinea != '') ? Color(0XFF585858) : Color(0XFFBEBEBE),
+                                                  color: (_controller.idLinea != '') ? const Color(0XFF585858) : const Color(0XFFBEBEBE),
                                                   fontWeight: FontWeight.w400,
                                                   fontSize: ScreenUtil().setSp(16),
                                                   fontStyle: FontStyle.normal,
@@ -1516,7 +1514,7 @@ void editProductModal(BuildContext context, ProductoLineaModel productData, Stri
                                               Icon(
                                                 Icons.arrow_drop_down,
                                                 size: ScreenUtil().setHeight(20),
-                                                color: Color(0XFF585858),
+                                                color: const Color(0XFF585858),
                                               ),
                                             ],
                                           ),
@@ -1527,7 +1525,7 @@ void editProductModal(BuildContext context, ProductoLineaModel productData, Stri
                                 Text(
                                   'Descripción',
                                   style: GoogleFonts.poppins(
-                                    color: Color(0XFF585858),
+                                    color: const Color(0XFF585858),
                                     fontWeight: FontWeight.w500,
                                     fontSize: ScreenUtil().setSp(16),
                                   ),
@@ -1538,9 +1536,9 @@ void editProductModal(BuildContext context, ProductoLineaModel productData, Stri
                                   maxLines: null,
                                   keyboardType: TextInputType.multiline,
                                   onChanged: (value) {
-                                    if (value.length > 0 &&
-                                        _precioController.text.length > 0 &&
-                                        _nombreController.text.length > 0 &&
+                                    if (value.isNotEmpty &&
+                                        _precioController.text.isNotEmpty &&
+                                        _nombreController.text.isNotEmpty &&
                                         _controller.idLinea != '') {
                                       _controller.changeBoton(true);
                                     } else {
@@ -1550,30 +1548,30 @@ void editProductModal(BuildContext context, ProductoLineaModel productData, Stri
                                   decoration: InputDecoration(
                                     hintText: 'Ingredientes, tiempo de preparación, etc.',
                                     hintStyle: TextStyle(
-                                      color: Color(0XFFBEBEBE),
+                                      color: const Color(0XFFBEBEBE),
                                       fontWeight: FontWeight.w400,
                                       fontSize: ScreenUtil().setSp(16),
                                       fontStyle: FontStyle.normal,
                                     ),
                                     filled: true,
-                                    fillColor: Color(0XFFEDEDED),
+                                    fillColor: const Color(0XFFEDEDED),
                                     contentPadding: EdgeInsets.only(
                                         left: ScreenUtil().setWidth(10), top: ScreenUtil().setHeight(5), bottom: ScreenUtil().setHeight(1)),
                                     enabledBorder: OutlineInputBorder(
                                       borderRadius: BorderRadius.circular(15),
-                                      borderSide: BorderSide(color: Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
+                                      borderSide: BorderSide(color: const Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
                                     ),
                                     focusedBorder: OutlineInputBorder(
                                       borderRadius: BorderRadius.circular(15),
-                                      borderSide: BorderSide(color: Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
+                                      borderSide: BorderSide(color: const Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
                                     ),
                                     border: OutlineInputBorder(
                                       borderRadius: BorderRadius.circular(15),
-                                      borderSide: BorderSide(color: Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
+                                      borderSide: BorderSide(color: const Color(0XFFEDEDED), width: ScreenUtil().setWidth(1)),
                                     ),
                                   ),
                                   style: TextStyle(
-                                    color: Color(0XFF585858),
+                                    color: const Color(0XFF585858),
                                     fontWeight: FontWeight.w400,
                                     fontSize: ScreenUtil().setSp(16),
                                     fontStyle: FontStyle.normal,
@@ -1585,7 +1583,7 @@ void editProductModal(BuildContext context, ProductoLineaModel productData, Stri
                                     _controller.changeCargando(true);
                                     _controller.changeText('');
                                     if (_controller.boton) {
-                                      if (_costoController.text.length < 1) {
+                                      if (_costoController.text.isEmpty) {
                                         _costoController.text = '0';
                                       }
                                       final _productoLineaApi = ProductoLineaApi();
@@ -1618,7 +1616,7 @@ void editProductModal(BuildContext context, ProductoLineaModel productData, Stri
                                           child: Container(
                                             decoration: BoxDecoration(
                                               borderRadius: BorderRadius.circular(50),
-                                              color: (_controller.boton) ? Color(0XFFFF0036) : Color(0XFFFF0036).withOpacity(0.6),
+                                              color: (_controller.boton) ? const Color(0XFFFF0036) : const Color(0XFFFF0036).withOpacity(0.6),
                                             ),
                                             child: Center(
                                               child: Text(
@@ -1646,7 +1644,7 @@ void editProductModal(BuildContext context, ProductoLineaModel productData, Stri
                                         return Text(
                                           _controller.text,
                                           style: TextStyle(
-                                            color: Color(0XFFFF0036),
+                                            color: const Color(0XFFFF0036),
                                             fontWeight: FontWeight.w600,
                                             fontSize: ScreenUtil().setSp(16),
                                             fontStyle: FontStyle.normal,
@@ -1664,7 +1662,7 @@ void editProductModal(BuildContext context, ProductoLineaModel productData, Stri
                                     child: Text(
                                       'Cancelar',
                                       style: GoogleFonts.poppins(
-                                        color: Color(0XFF8A8A8A),
+                                        color: const Color(0XFF8A8A8A),
                                         fontWeight: FontWeight.w500,
                                         fontSize: ScreenUtil().setSp(16),
                                       ),
@@ -1696,7 +1694,7 @@ void editProductModal(BuildContext context, ProductoLineaModel productData, Stri
 void updatePhotoProductModal(BuildContext context, String idCategoria, String idProducto) {
   final _controller = ChangeController();
   final picker = ImagePicker();
-  Future<Null> _cropImage(filePath) async {
+  Future<void> _cropImage(filePath) async {
     File croppedImage = await ImageCropper.cropImage(
         sourcePath: filePath,
         aspectRatioPresets: Platform.isAndroid
@@ -1717,14 +1715,14 @@ void updatePhotoProductModal(BuildContext context, String idCategoria, String id
                 CropAspectRatioPreset.ratio7x5,
                 CropAspectRatioPreset.ratio16x9
               ],
-        androidUiSettings: AndroidUiSettings(
+        androidUiSettings: const AndroidUiSettings(
             toolbarTitle: 'Cortar Imagen',
             toolbarColor: Color(0XFFFF0036),
             toolbarWidgetColor: Colors.white,
             initAspectRatio: CropAspectRatioPreset.original,
             showCropGrid: true,
             lockAspectRatio: false),
-        iosUiSettings: IOSUiSettings(minimumAspectRatio: 1.0, title: 'Cortar Imagen'));
+        iosUiSettings: const IOSUiSettings(minimumAspectRatio: 1.0, title: 'Cortar Imagen'));
     if (croppedImage != null) {
       _controller.changeImage(croppedImage);
     }
@@ -1755,7 +1753,7 @@ void updatePhotoProductModal(BuildContext context, String idCategoria, String id
       return GestureDetector(
         onTap: () => Navigator.of(context).pop(),
         child: Container(
-          color: Color.fromRGBO(0, 0, 0, 0.001),
+          color: const Color.fromRGBO(0, 0, 0, 0.001),
           child: GestureDetector(
             onTap: () {},
             child: DraggableScrollableSheet(
@@ -1764,11 +1762,11 @@ void updatePhotoProductModal(BuildContext context, String idCategoria, String id
               maxChildSize: 0.2,
               builder: (_, controller) {
                 return Container(
-                  decoration: BoxDecoration(
+                  decoration: const BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.only(
-                      topLeft: const Radius.circular(25.0),
-                      topRight: const Radius.circular(25.0),
+                      topLeft: Radius.circular(25.0),
+                      topRight: Radius.circular(25.0),
                     ),
                   ),
                   child: Padding(
@@ -1792,22 +1790,22 @@ void updatePhotoProductModal(BuildContext context, String idCategoria, String id
                                 'Seleccionar foto',
                                 style: GoogleFonts.poppins(
                                   fontStyle: FontStyle.normal,
-                                  color: Color(0XFF585858),
+                                  color: const Color(0XFF585858),
                                   fontWeight: FontWeight.w400,
                                   fontSize: ScreenUtil().setSp(16),
                                   letterSpacing: ScreenUtil().setSp(0.016),
                                 ),
                               ),
-                              Spacer(),
+                              const Spacer(),
                               Icon(
                                 Icons.photo_album_outlined,
-                                color: Color(0XFFFF0036),
+                                color: const Color(0XFFFF0036),
                                 size: ScreenUtil().setHeight(24),
                               )
                             ],
                           ),
                         ),
-                        Divider(
+                        const Divider(
                           thickness: 1,
                         ),
                         SizedBox(
@@ -1825,21 +1823,21 @@ void updatePhotoProductModal(BuildContext context, String idCategoria, String id
                                 style: GoogleFonts.poppins(
                                   fontStyle: FontStyle.normal,
                                   fontWeight: FontWeight.w400,
-                                  color: Color(0XFF585858),
+                                  color: const Color(0XFF585858),
                                   fontSize: ScreenUtil().setSp(16),
                                   letterSpacing: ScreenUtil().setSp(0.016),
                                 ),
                               ),
-                              Spacer(),
+                              const Spacer(),
                               Icon(
                                 Icons.photo_camera_outlined,
-                                color: Color(0XFFFF0036),
+                                color: const Color(0XFFFF0036),
                                 size: ScreenUtil().setHeight(24),
                               )
                             ],
                           ),
                         ),
-                        Divider(
+                        const Divider(
                           thickness: 1,
                         ),
                       ],
@@ -1859,13 +1857,13 @@ _showLoading() {
   return Container(
     height: double.infinity,
     width: double.infinity,
-    color: Color.fromRGBO(0, 0, 0, 0.5),
+    color: const Color.fromRGBO(0, 0, 0, 0.5),
     child: Center(
       child: (Platform.isAndroid)
-          ? CircularProgressIndicator(
+          ? const CircularProgressIndicator(
               color: Color(0XFFFF0036),
             )
-          : CupertinoActivityIndicator(),
+          : const CupertinoActivityIndicator(),
     ),
   );
 }

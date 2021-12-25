@@ -22,9 +22,9 @@ class PedidosPage extends StatelessWidget {
     final atenderBloc = ProviderBloc.atender(context);
     atenderBloc.obtenerPedidosAtenderPorEmpresa();
     return Scaffold(
-      backgroundColor: Color(0XFFE5E5E5),
+      backgroundColor: const Color(0XFFE5E5E5),
       appBar: AppBar(
-        backgroundColor: Color(0XFFE5E5E5),
+        backgroundColor: const Color(0XFFE5E5E5),
         leading: InkWell(
           child: Container(),
         ),
@@ -51,7 +51,7 @@ class PedidosPage extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Container(
+                SizedBox(
                   height: ScreenUtil().setHeight(21),
                   width: ScreenUtil().setWidth(21),
                   child: SvgPicture.asset('assets/food_svg/order_listo.svg'),
@@ -62,7 +62,7 @@ class PedidosPage extends StatelessWidget {
                 Text(
                   'Listo',
                   style: GoogleFonts.poppins(
-                    color: Color(0XFF585858),
+                    color: const Color(0XFF585858),
                     fontWeight: FontWeight.w400,
                     fontSize: ScreenUtil().setSp(14),
                     letterSpacing: 0.16,
@@ -71,7 +71,7 @@ class PedidosPage extends StatelessWidget {
                 SizedBox(
                   width: ScreenUtil().setWidth(48),
                 ),
-                Container(
+                SizedBox(
                   height: ScreenUtil().setHeight(21),
                   width: ScreenUtil().setWidth(21),
                   child: SvgPicture.asset('assets/food_svg/order_pendiente.svg'),
@@ -82,7 +82,7 @@ class PedidosPage extends StatelessWidget {
                 Text(
                   'Cocinando',
                   style: GoogleFonts.poppins(
-                    color: Color(0XFF585858),
+                    color: const Color(0XFF585858),
                     fontWeight: FontWeight.w400,
                     fontSize: ScreenUtil().setSp(14),
                     letterSpacing: 0.16,
@@ -96,24 +96,24 @@ class PedidosPage extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Container(
+                SizedBox(
                   width: ScreenUtil().setWidth(120),
                   child: Text(
                     'Mesa',
                     style: GoogleFonts.poppins(
-                      color: Color(0XFFD1D1D1),
+                      color: const Color(0XFFD1D1D1),
                       fontWeight: FontWeight.w500,
                       fontSize: ScreenUtil().setSp(16),
                       letterSpacing: 0.16,
                     ),
                   ),
                 ),
-                Container(
+                SizedBox(
                   width: ScreenUtil().setWidth(85),
                   child: Text(
                     'Producto',
                     style: GoogleFonts.poppins(
-                      color: Color(0XFFD1D1D1),
+                      color: const Color(0XFFD1D1D1),
                       fontWeight: FontWeight.w500,
                       fontSize: ScreenUtil().setSp(16),
                       letterSpacing: 0.16,
@@ -123,7 +123,7 @@ class PedidosPage extends StatelessWidget {
                 Text(
                   'Cant.',
                   style: GoogleFonts.poppins(
-                    color: Color(0XFFD1D1D1),
+                    color: const Color(0XFFD1D1D1),
                     fontWeight: FontWeight.w500,
                     fontSize: ScreenUtil().setSp(16),
                     letterSpacing: 0.16,
@@ -132,7 +132,7 @@ class PedidosPage extends StatelessWidget {
                 Text(
                   'Estado',
                   style: GoogleFonts.poppins(
-                    color: Color(0XFFD1D1D1),
+                    color: const Color(0XFFD1D1D1),
                     fontWeight: FontWeight.w500,
                     fontSize: ScreenUtil().setSp(16),
                     letterSpacing: 0.16,
@@ -140,7 +140,7 @@ class PedidosPage extends StatelessWidget {
                 ),
               ],
             ),
-            Divider(
+            const Divider(
               color: Color(0XFFD1D1D1),
               thickness: 1.5,
             ),
@@ -149,7 +149,7 @@ class PedidosPage extends StatelessWidget {
                 stream: atenderBloc.atenderStream,
                 builder: (context, AsyncSnapshot<List<PedidosAtenderModel>> snapshot) {
                   if (snapshot.hasData) {
-                    if (snapshot.data.length > 0) {
+                    if (snapshot.data.isNotEmpty) {
                       var pedidos = snapshot.data;
                       return ListView.builder(
                         itemCount: pedidos.length,
@@ -158,7 +158,7 @@ class PedidosPage extends StatelessWidget {
                         },
                       );
                     } else {
-                      return Center(
+                      return const Center(
                         child: Text('Sin pedidos'),
                       );
                     }
@@ -189,7 +189,7 @@ class PedidosPage extends StatelessWidget {
                 );
               },
               transitionsBuilder: (context, animation, secondaryAnimation, child) {
-                var begin = Offset(0.0, 1.0);
+                var begin = const Offset(0.0, 1.0);
                 var end = Offset.zero;
                 var curve = Curves.ease;
 
@@ -208,7 +208,7 @@ class PedidosPage extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Container(
+            SizedBox(
               width: ScreenUtil().setWidth(100),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -217,7 +217,7 @@ class PedidosPage extends StatelessWidget {
                     pedido.mesaNombre,
                     style: GoogleFonts.poppins(
                       fontSize: (pedido.mesaNombre.length > 2) ? ScreenUtil().setSp(8) : ScreenUtil().setSp(35),
-                      color: Color(0xfff9708d),
+                      color: const Color(0xfff9708d),
                       fontWeight: FontWeight.bold,
                       letterSpacing: 0.16,
                     ),
@@ -225,7 +225,7 @@ class PedidosPage extends StatelessWidget {
                   Container(
                     height: ScreenUtil().setHeight(55),
                     width: ScreenUtil().setWidth(55),
-                    decoration: BoxDecoration(
+                    decoration: const BoxDecoration(
                       color: Color(0XFFEEEEEE),
                       shape: BoxShape.circle,
                       boxShadow: [
@@ -244,7 +244,7 @@ class PedidosPage extends StatelessWidget {
                             child: Container(
                               height: ScreenUtil().setHeight(64),
                               width: ScreenUtil().setWidth(64),
-                              decoration: BoxDecoration(
+                              decoration: const BoxDecoration(
                                 color: Color(0XFFEEEEEE),
                                 shape: BoxShape.circle,
                                 boxShadow: [
@@ -256,14 +256,12 @@ class PedidosPage extends StatelessWidget {
                                 ],
                               ),
                               child: CachedNetworkImage(
-                                placeholder: (context, url) => Container(
+                                placeholder: (context, url) => SizedBox(
                                   child: SvgPicture.asset('assets/food_svg/food.svg'),
                                 ),
-                                errorWidget: (context, url, error) => Container(
-                                  child: Container(
-                                    child: SvgPicture.asset(
-                                      'assets/food_svg/food.svg',
-                                    ),
+                                errorWidget: (context, url, error) => SizedBox(
+                                  child: SvgPicture.asset(
+                                    'assets/food_svg/food.svg',
                                   ),
                                 ),
                                 imageUrl: '$apiBaseURL/${pedido.fotoProducto}',
@@ -286,31 +284,31 @@ class PedidosPage extends StatelessWidget {
                 ],
               ),
             ),
-            Container(
+            SizedBox(
               width: ScreenUtil().setWidth(78),
               child: Text(
                 pedido.nombreProducto,
                 style: GoogleFonts.poppins(
-                  color: Color(0XFF585858),
+                  color: const Color(0XFF585858),
                   fontWeight: FontWeight.w400,
                   fontSize: ScreenUtil().setSp(14),
                   letterSpacing: 0.16,
                 ),
               ),
             ),
-            Container(
+            SizedBox(
               width: ScreenUtil().setWidth(25),
               child: Text(
                 'X${pedido.cantidad}',
                 style: GoogleFonts.poppins(
-                  color: Color(0XFF585858),
+                  color: const Color(0XFF585858),
                   fontWeight: FontWeight.w500,
                   fontSize: ScreenUtil().setSp(16),
                   letterSpacing: 0.16,
                 ),
               ),
             ),
-            Container(
+            SizedBox(
               height: ScreenUtil().setHeight(33),
               width: ScreenUtil().setWidth(28),
               child: SvgPicture.asset('assets/food_svg/${(pedido.estado == '1') ? 'order_pendiente' : 'order_listo'}.svg'),
@@ -325,13 +323,13 @@ class PedidosPage extends StatelessWidget {
     return Container(
       height: double.infinity,
       width: double.infinity,
-      color: Color.fromRGBO(0, 0, 0, 0.1),
+      color: const Color.fromRGBO(0, 0, 0, 0.1),
       child: Center(
         child: (Platform.isAndroid)
-            ? CircularProgressIndicator(
+            ? const CircularProgressIndicator(
                 color: Color(0xffFF0036),
               )
-            : CupertinoActivityIndicator(),
+            : const CupertinoActivityIndicator(),
       ),
     );
   }

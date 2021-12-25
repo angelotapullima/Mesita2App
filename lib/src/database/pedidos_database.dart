@@ -13,7 +13,7 @@ class PedidosDatabase {
 
       return res;
     } catch (exception) {
-      print(exception);
+      return exception;
     }
   }
 
@@ -30,7 +30,7 @@ class PedidosDatabase {
 
       return res;
     } catch (exception) {
-      print(exception);
+      return exception;
     }
   }
 

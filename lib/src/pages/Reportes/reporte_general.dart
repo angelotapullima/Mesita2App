@@ -16,7 +16,7 @@ class ReporteGeneral extends StatelessWidget {
         stream: reporteBloc.reporteGeneralStream,
         builder: (context, AsyncSnapshot<List<ReporteGeneralModel>> snapshot) {
           if (snapshot.hasData) {
-            if (snapshot.data.length > 0) {
+            if (snapshot.data.isNotEmpty) {
               return Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -26,14 +26,14 @@ class ReporteGeneral extends StatelessWidget {
                   Text(
                     'Total de productos vendidos',
                     style: TextStyle(
-                      color: Color(0XFF585858),
+                      color: const Color(0XFF585858),
                       fontWeight: FontWeight.w600,
                       fontSize: ScreenUtil().setSp(16),
                       fontStyle: FontStyle.normal,
                     ),
                   ),
                   Container(
-                    padding: EdgeInsets.all(24),
+                    padding: const EdgeInsets.all(24),
                     margin: EdgeInsets.symmetric(vertical: ScreenUtil().setHeight(16)),
                     width: ScreenUtil().setWidth(120),
                     decoration: BoxDecoration(
@@ -68,14 +68,14 @@ class ReporteGeneral extends StatelessWidget {
                   Text(
                     'Equivalente a',
                     style: TextStyle(
-                      color: Color(0XFF585858),
+                      color: const Color(0XFF585858),
                       fontWeight: FontWeight.w600,
                       fontSize: ScreenUtil().setSp(16),
                       fontStyle: FontStyle.normal,
                     ),
                   ),
                   Container(
-                    padding: EdgeInsets.all(24),
+                    padding: const EdgeInsets.all(24),
                     margin: EdgeInsets.symmetric(vertical: ScreenUtil().setHeight(16)),
                     width: ScreenUtil().setWidth(250),
                     decoration: BoxDecoration(
@@ -107,7 +107,7 @@ class ReporteGeneral extends StatelessWidget {
                 ],
               );
             } else {
-              return Expanded(
+              return const Expanded(
                 child: Center(
                   child: Text('Sin información disponible'),
                 ),
@@ -124,10 +124,10 @@ class ReporteGeneral extends StatelessWidget {
   _showLoading() {
     return Center(
       child: (Platform.isAndroid)
-          ? CircularProgressIndicator(
+          ? const CircularProgressIndicator(
               color: Color(0XFFFF0036),
             )
-          : CupertinoActivityIndicator(),
+          : const CupertinoActivityIndicator(),
     );
   }
 }

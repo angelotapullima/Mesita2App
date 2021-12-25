@@ -1,3 +1,5 @@
+// ignore_for_file: sized_box_for_whitespace
+
 import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
@@ -19,7 +21,7 @@ class _DeleteMesaState extends State<DeleteMesa> {
   @override
   Widget build(BuildContext context) {
     return Material(
-      color: Color(0XFFC4C4C4).withOpacity(.6),
+      color: const Color(0XFFC4C4C4).withOpacity(.6),
       child: Stack(
         children: [
           InkWell(
@@ -57,14 +59,14 @@ class _DeleteMesaState extends State<DeleteMesa> {
                     margin: EdgeInsets.symmetric(horizontal: ScreenUtil().setWidth(24)),
                     padding: EdgeInsets.symmetric(vertical: ScreenUtil().setHeight(10)),
                     decoration: BoxDecoration(
-                      color: Color(0XFFEDEDED),
+                      color: const Color(0XFFEDEDED),
                       borderRadius: BorderRadius.circular(22),
                     ),
                     child: Center(
                       child: Text(
                         'Eliminar mesa',
                         style: TextStyle(
-                          color: Color(0XFFFF0036),
+                          color: const Color(0XFFFF0036),
                           fontSize: ScreenUtil().setSp(16),
                           fontWeight: FontWeight.w400,
                           letterSpacing: 0.16,
@@ -85,14 +87,14 @@ class _DeleteMesaState extends State<DeleteMesa> {
                     margin: EdgeInsets.symmetric(horizontal: ScreenUtil().setWidth(24)),
                     padding: EdgeInsets.symmetric(vertical: ScreenUtil().setHeight(10)),
                     decoration: BoxDecoration(
-                      color: Color(0XFFEDEDED),
+                      color: const Color(0XFFEDEDED),
                       borderRadius: BorderRadius.circular(22),
                     ),
                     child: Center(
                       child: Text(
                         'Cancelar',
                         style: TextStyle(
-                          color: Color(0XFF585858),
+                          color: const Color(0XFF585858),
                           fontSize: ScreenUtil().setSp(16),
                           fontWeight: FontWeight.w400,
                           letterSpacing: 0.16,
@@ -111,7 +113,7 @@ class _DeleteMesaState extends State<DeleteMesa> {
                         return Text(
                           _controller.text,
                           style: TextStyle(
-                            color: Color(0XFFFF0036),
+                            color: const Color(0XFFFF0036),
                             fontWeight: FontWeight.w600,
                             fontSize: ScreenUtil().setSp(16),
                             fontStyle: FontStyle.normal,
@@ -144,13 +146,13 @@ class _DeleteMesaState extends State<DeleteMesa> {
     return Container(
       height: double.infinity,
       width: double.infinity,
-      color: Color.fromRGBO(0, 0, 0, 0.5),
+      color: const Color.fromRGBO(0, 0, 0, 0.5),
       child: Center(
         child: (Platform.isAndroid)
-            ? CircularProgressIndicator(
+            ? const CircularProgressIndicator(
                 color: Color(0XFFFF0036),
               )
-            : CupertinoActivityIndicator(),
+            : const CupertinoActivityIndicator(),
       ),
     );
   }

@@ -15,14 +15,14 @@ class ReporteUtilidades extends StatelessWidget {
           stream: reporteBloc.reporteUtilidadesLineaStream,
           builder: (context, AsyncSnapshot<List<ReporteUtilidadesLineaModel>> snapshot) {
             if (snapshot.hasData) {
-              if (snapshot.data.length > 0) {
+              if (snapshot.data.isNotEmpty) {
                 var lineas = snapshot.data;
                 return ListView.builder(
                     shrinkWrap: true,
                     itemCount: lineas.length,
                     itemBuilder: (_, index) {
                       return Container(
-                        margin: EdgeInsets.all(8),
+                        margin: const EdgeInsets.all(8),
                         padding: EdgeInsets.symmetric(vertical: ScreenUtil().setHeight(8), horizontal: ScreenUtil().setWidth(16)),
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(10),
@@ -32,9 +32,9 @@ class ReporteUtilidades extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              '${lineas[index].nombre}',
+                              lineas[index].nombre,
                               style: TextStyle(
-                                color: Color(0XFF585858),
+                                color: const Color(0XFF585858),
                                 fontWeight: FontWeight.w600,
                                 fontSize: ScreenUtil().setSp(16),
                                 fontStyle: FontStyle.normal,
@@ -45,17 +45,17 @@ class ReporteUtilidades extends StatelessWidget {
                                 Text(
                                   'Total productos vendidos',
                                   style: TextStyle(
-                                    color: Color(0XFF585858),
+                                    color: const Color(0XFF585858),
                                     fontWeight: FontWeight.w400,
                                     fontSize: ScreenUtil().setSp(14),
                                     fontStyle: FontStyle.normal,
                                   ),
                                 ),
-                                Spacer(),
+                                const Spacer(),
                                 Text(
-                                  '${lineas[index].cantidad}',
+                                  lineas[index].cantidad,
                                   style: TextStyle(
-                                    color: Color(0XFF585858),
+                                    color: const Color(0XFF585858),
                                     fontWeight: FontWeight.w700,
                                     fontSize: ScreenUtil().setSp(16),
                                     fontStyle: FontStyle.normal,
@@ -68,17 +68,17 @@ class ReporteUtilidades extends StatelessWidget {
                                 Text(
                                   'Equivalente a',
                                   style: TextStyle(
-                                    color: Color(0XFF585858),
+                                    color: const Color(0XFF585858),
                                     fontWeight: FontWeight.w400,
                                     fontSize: ScreenUtil().setSp(14),
                                     fontStyle: FontStyle.normal,
                                   ),
                                 ),
-                                Spacer(),
+                                const Spacer(),
                                 Text(
                                   'S/${lineas[index].suma}',
                                   style: TextStyle(
-                                    color: Color(0XFF585858),
+                                    color: const Color(0XFF585858),
                                     fontWeight: FontWeight.w700,
                                     fontSize: ScreenUtil().setSp(16),
                                     fontStyle: FontStyle.normal,
@@ -91,7 +91,7 @@ class ReporteUtilidades extends StatelessWidget {
                       );
                     });
               } else {
-                return Center(
+                return const Center(
                   child: Text('Sin información disponible'),
                 );
               }

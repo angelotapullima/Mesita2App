@@ -13,7 +13,7 @@ class LineaDatabase {
 
       return res;
     } catch (exception) {
-      print(exception);
+      return exception;
     }
   }
 

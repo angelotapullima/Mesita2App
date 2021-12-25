@@ -187,8 +187,8 @@ class MesaApi {
         body: {
           'tn': _prefs.token,
           'id_negocio': _prefs.idNegocio,
-          'mesa_nombre': '$numeroMesa',
-          'mesa_capacidad': '$capacidad',
+          'mesa_nombre': numeroMesa,
+          'mesa_capacidad': capacidad,
           'app': 'true',
         },
       );
@@ -200,7 +200,6 @@ class MesaApi {
         return 2;
       }
     } catch (e) {
-      print(e);
       return 2;
     }
   }
@@ -213,10 +212,10 @@ class MesaApi {
         url,
         body: {
           'tn': _prefs.token,
-          'id_mesa': '${mesa.idMesa}',
+          'id_mesa': mesa.idMesa,
           'id_negocio': _prefs.idNegocio,
-          'mesa_nombre': '${mesa.mesaNombre}',
-          'mesa_capacidad': '${mesa.mesaCapacidad}',
+          'mesa_nombre': mesa.mesaNombre,
+          'mesa_capacidad': mesa.mesaCapacidad,
           'app': 'true',
         },
       );
@@ -228,7 +227,6 @@ class MesaApi {
         return 2;
       }
     } catch (e) {
-      print(e);
       return 2;
     }
   }

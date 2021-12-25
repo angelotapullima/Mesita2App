@@ -23,9 +23,9 @@ class MesasPage extends StatelessWidget {
     final prefs = Preferences();
 
     return Scaffold(
-      backgroundColor: Color(0XFFE5E5E5),
+      backgroundColor: const Color(0XFFE5E5E5),
       appBar: AppBar(
-        backgroundColor: Color(0XFFE5E5E5),
+        backgroundColor: const Color(0XFFE5E5E5),
         leading: InkWell(
           child: Container(),
         ),
@@ -34,7 +34,7 @@ class MesasPage extends StatelessWidget {
             onTap: () {
               mesaModal(context);
             },
-            child: Container(
+            child: SizedBox(
               width: ScreenUtil().setWidth(20),
               height: ScreenUtil().setHeight(20),
               child: SvgPicture.asset('assets/food_svg/add_food.svg'),
@@ -72,7 +72,7 @@ class MesasPage extends StatelessWidget {
                   height: ScreenUtil().setHeight(7),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(15),
-                    color: Color(0xffff0036),
+                    color: const Color(0xffff0036),
                     border: Border.all(
                       color: Colors.grey,
                     ),
@@ -117,7 +117,7 @@ class MesasPage extends StatelessWidget {
                 stream: mesasBloc.mesasStream,
                 builder: (BuildContext context, AsyncSnapshot<List<MesaModel>> snapsdhot) {
                   if (snapsdhot.hasData) {
-                    if (snapsdhot.data.length > 0) {
+                    if (snapsdhot.data.isNotEmpty) {
                       return GridView.builder(
                           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                             crossAxisCount: 2,
@@ -143,7 +143,7 @@ class MesasPage extends StatelessWidget {
                                           );
                                         },
                                         transitionsBuilder: (context, animation, secondaryAnimation, child) {
-                                          var begin = Offset(0.0, 1.0);
+                                          var begin = const Offset(0.0, 1.0);
                                           var end = Offset.zero;
                                           var curve = Curves.ease;
 
@@ -168,7 +168,7 @@ class MesasPage extends StatelessWidget {
                                     child: Row(
                                       mainAxisAlignment: MainAxisAlignment.center,
                                       children: [
-                                        Container(
+                                        SizedBox(
                                           width: constraints.maxWidth * 0.12,
                                           child: Padding(
                                             padding: EdgeInsets.symmetric(
@@ -192,7 +192,7 @@ class MesasPage extends StatelessWidget {
                                           width: constraints.maxWidth * 0.52,
                                           decoration: BoxDecoration(
                                             borderRadius: BorderRadius.circular(5),
-                                            gradient: LinearGradient(
+                                            gradient: const LinearGradient(
                                               begin: Alignment.bottomLeft,
                                               end: Alignment.topRight,
                                               colors: [
@@ -204,9 +204,9 @@ class MesasPage extends StatelessWidget {
                                             ),
                                             boxShadow: [
                                               BoxShadow(
-                                                offset: Offset(0, 0),
+                                                offset: const Offset(0, 0),
                                                 blurRadius: 20.0,
-                                                color: Color(0xff585858).withOpacity(.15),
+                                                color: const Color(0xff585858).withOpacity(.15),
                                               ),
                                             ],
                                           ),
@@ -219,7 +219,7 @@ class MesasPage extends StatelessWidget {
                                                 snapsdhot.data[index].mesaNombre,
                                                 style: TextStyle(
                                                   fontSize: ScreenUtil().setSp(18),
-                                                  color: Color(0xfff9708d),
+                                                  color: const Color(0xfff9708d),
                                                   fontWeight: FontWeight.bold,
                                                 ),
                                               ),
@@ -229,7 +229,7 @@ class MesasPage extends StatelessWidget {
                                         SizedBox(
                                           width: constraints.maxWidth * 0.05,
                                         ),
-                                        Container(
+                                        SizedBox(
                                           width: constraints.maxWidth * 0.12,
                                           child: Padding(
                                             padding: EdgeInsets.symmetric(vertical: ScreenUtil().setHeight(10)),
@@ -261,7 +261,7 @@ class MesasPage extends StatelessWidget {
                                         );
                                       },
                                       transitionsBuilder: (context, animation, secondaryAnimation, child) {
-                                        var begin = Offset(0.0, 1.0);
+                                        var begin = const Offset(0.0, 1.0);
                                         var end = Offset.zero;
                                         var curve = Curves.ease;
 
@@ -337,7 +337,7 @@ class MesasPage extends StatelessWidget {
                                   child: Row(
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
-                                      Container(
+                                      SizedBox(
                                         width: constraints.maxWidth * 0.12,
                                         child: Padding(
                                           padding: EdgeInsets.symmetric(
@@ -345,7 +345,7 @@ class MesasPage extends StatelessWidget {
                                           ),
                                           child: Container(
                                             decoration: BoxDecoration(
-                                              color: (snapsdhot.data[index].mesaEstado != '2') ? Colors.white : Color(0xffff0036),
+                                              color: (snapsdhot.data[index].mesaEstado != '2') ? Colors.white : const Color(0xffff0036),
                                               borderRadius: BorderRadius.circular(5),
                                             ),
                                             height: constraints.maxHeight * 0.55,
@@ -365,19 +365,19 @@ class MesasPage extends StatelessWidget {
                                             begin: Alignment.bottomLeft,
                                             end: Alignment.topRight,
                                             colors: [
-                                              (snapsdhot.data[index].mesaEstado != '2') ? Colors.white : Color(0xffff6787),
-                                              (snapsdhot.data[index].mesaEstado != '2') ? Colors.white : Color(0xffff0036),
+                                              (snapsdhot.data[index].mesaEstado != '2') ? Colors.white : const Color(0xffff6787),
+                                              (snapsdhot.data[index].mesaEstado != '2') ? Colors.white : const Color(0xffff0036),
                                             ],
 
                                             //
                                           ),
                                           boxShadow: [
                                             BoxShadow(
-                                              offset: Offset(0, 0),
+                                              offset: const Offset(0, 0),
                                               blurRadius: 20.0,
                                               color: (snapsdhot.data[index].mesaEstado != '2')
-                                                  ? Color(0xff585858).withOpacity(.15)
-                                                  : Color(0xffff0036).withOpacity(.3),
+                                                  ? const Color(0xff585858).withOpacity(.15)
+                                                  : const Color(0xffff0036).withOpacity(.3),
                                             ),
                                           ],
                                         ),
@@ -391,23 +391,23 @@ class MesasPage extends StatelessWidget {
                                               Row(
                                                 children: [
                                                   Text(
-                                                    '${snapsdhot.data[index].mesaNombre}',
+                                                    snapsdhot.data[index].mesaNombre,
                                                     style: TextStyle(
                                                       fontSize: ScreenUtil().setSp(40),
-                                                      color: (snapsdhot.data[index].mesaEstado != '2') ? Color(0xfff9708d) : Colors.white,
+                                                      color: (snapsdhot.data[index].mesaEstado != '2') ? const Color(0xfff9708d) : Colors.white,
                                                       fontWeight: FontWeight.bold,
                                                     ),
                                                   ),
                                                 ],
                                               ),
-                                              Spacer(),
+                                              const Spacer(),
                                               Row(
                                                 children: [
-                                                  Spacer(),
+                                                  const Spacer(),
                                                   Text(
                                                     'cap .${snapsdhot.data[index].mesaCapacidad}',
                                                     style: TextStyle(
-                                                      color: (snapsdhot.data[index].mesaEstado != '2') ? Color(0xff585858) : Colors.white,
+                                                      color: (snapsdhot.data[index].mesaEstado != '2') ? const Color(0xff585858) : Colors.white,
                                                       fontWeight: FontWeight.bold,
                                                       fontSize: ScreenUtil().setSp(18),
                                                     ),
@@ -421,13 +421,13 @@ class MesasPage extends StatelessWidget {
                                       SizedBox(
                                         width: constraints.maxWidth * 0.05,
                                       ),
-                                      Container(
+                                      SizedBox(
                                         width: constraints.maxWidth * 0.12,
                                         child: Padding(
                                           padding: EdgeInsets.symmetric(vertical: ScreenUtil().setHeight(10)),
                                           child: Container(
                                             decoration: BoxDecoration(
-                                              color: (snapsdhot.data[index].mesaEstado != '2') ? Colors.white : Color(0xffff0036),
+                                              color: (snapsdhot.data[index].mesaEstado != '2') ? Colors.white : const Color(0xffff0036),
                                               borderRadius: BorderRadius.circular(5),
                                             ),
                                             height: constraints.maxHeight * 0.55,
@@ -442,7 +442,7 @@ class MesasPage extends StatelessWidget {
                             });
                           });
                     } else {
-                      return Center(
+                      return const Center(
                         child: Text('Aún no se agregaron mesas'),
                       );
                     }
@@ -462,13 +462,13 @@ class MesasPage extends StatelessWidget {
     return Container(
       height: double.infinity,
       width: double.infinity,
-      color: Color.fromRGBO(0, 0, 0, 0.1),
+      color: const Color.fromRGBO(0, 0, 0, 0.1),
       child: Center(
         child: (Platform.isAndroid)
-            ? CircularProgressIndicator(
+            ? const CircularProgressIndicator(
                 color: Color(0XFFFF0036),
               )
-            : CupertinoActivityIndicator(),
+            : const CupertinoActivityIndicator(),
       ),
     );
   }

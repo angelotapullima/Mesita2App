@@ -13,7 +13,6 @@ class CategoriaApi {
   Future<bool> obtenerCategorias() async {
     try {
       final url = Uri.parse('$apiBaseURL/api/Negocio/listar_categorias');
-      print('${_prefs.token}');
 
       final resp = await http.post(
         url,
@@ -24,7 +23,6 @@ class CategoriaApi {
       );
 
       final decodedData = json.decode(resp.body);
-      print(decodedData);
 
       if (decodedData['result'].length > 0) {
         for (var i = 0; i < decodedData['result'].length; i++) {

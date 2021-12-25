@@ -54,14 +54,14 @@ class MyApp extends StatelessWidget {
                 child: child,
               );
             },
-            localizationsDelegates: [
+            localizationsDelegates: const [
               GlobalMaterialLocalizations.delegate,
               GlobalWidgetsLocalizations.delegate,
               GlobalCupertinoLocalizations.delegate,
             ],
-            supportedLocales: [
-              const Locale('es'),
-              const Locale('es', 'ES'), // Spanish, no country code
+            supportedLocales: const [
+              Locale('es'),
+              Locale('es', 'ES'), // Spanish, no country code
               //const Locale('en', 'EN'), // English, no country code
             ],
             localeResolutionCallback: (Locale locale, Iterable<Locale> supportedLocales) {

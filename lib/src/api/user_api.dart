@@ -13,24 +13,21 @@ class UserApi {
     try {
       final url = Uri.parse('$apiBaseURL/api/Login/guardar_usuario');
 
-      print('Datos a enviar : $nombre, $apellidoPaterno, $apellidoMaterno, $email, $usuario, $passwd ');
-
       final resp = await http.post(url, body: {
-        'persona_nombre': '$nombre',
-        'persona_apellido_paterno': '$apellidoPaterno',
-        'persona_apellido_materno': '$apellidoMaterno',
+        'persona_nombre': nombre,
+        'persona_apellido_paterno': apellidoPaterno,
+        'persona_apellido_materno': apellidoMaterno,
         'persona_nacimiento': '0000-00-00',
         'persona_telefono': '000000000',
         'id_rol': '4',
-        'usuario_nickname': '$usuario',
-        'usuario_contrasenha': '$passwd',
-        'usuario_email': '$email',
+        'usuario_nickname': usuario,
+        'usuario_contrasenha': passwd,
+        'usuario_email': email,
         'usuario_estado': '1',
         'app': 'true',
       });
 
       final decodedData = json.decode(resp.body);
-      print('Respuesta guardar user persona $decodedData');
       if (decodedData['result']['code'] == 1) {
         // _prefs.personName = decodedData['result']['persona']['persona_nombre'];
         // _prefs.personApellidoMaterno = decodedData['result']['persona']['persona_apellido_materno'];
@@ -50,9 +47,9 @@ class UserApi {
       final url = Uri.parse('$apiBaseURL/api/Usuario/guardar_edicion_persona');
 
       final resp = await http.post(url, body: {
-        'persona_nombre_e': '$nombre',
-        'persona_apellido_paterno_e': '$apellidoPaterno',
-        'persona_apellido_materno_e': '$apellidoMaterno',
+        'persona_nombre_e': nombre,
+        'persona_apellido_paterno_e': apellidoPaterno,
+        'persona_apellido_materno_e': apellidoMaterno,
         'persona_nacimiento_e': '-',
         'persona_telefono_e': '-',
         'id_persona': _prefs.idPerson,
@@ -61,7 +58,6 @@ class UserApi {
       });
 
       final decodedData = json.decode(resp.body);
-      print('Respuesta editar persona $decodedData');
       if (decodedData['result']['code'] == 1) {
         _prefs.personName = decodedData['result']['persona']['persona_nombre'];
         _prefs.personApellidoMaterno = decodedData['result']['persona']['persona_apellido_materno'];
@@ -81,18 +77,16 @@ class UserApi {
       final url = Uri.parse('$apiBaseURL/api/Usuario/restablecer_contrasenha');
 
       final resp = await http.post(url, body: {
-        'contrasenha': '$password',
+        'contrasenha': password,
         'id_usuario': _prefs.idUser,
         'tn': _prefs.token,
         'app': 'true',
       });
 
       final decodedData = json.decode(resp.body);
-      print('Respuesta cambiar contraseña: $decodedData');
       if (decodedData['result']['code'] == 1) {
         final _loginApi = LoginApi();
         final res = await _loginApi.login(_prefs.userNickname, password);
-        print(res.message);
         if (res.code == '1') {
           return 1;
         } else {
@@ -107,22 +101,21 @@ class UserApi {
   }
 
   Future<int> cambiarFotoUsuario(File _image) async {
-    print('Entré para cambiar foto WEB SERVICE');
     try {
       int resp;
       final uri = Uri.parse('$apiBaseURL/api/Usuario/guardar_edicion_usuario');
 
-      var multipartFile;
+      dynamic multipartFile;
 
       if (_image != null) {
-        var stream = new http.ByteStream(Stream.castFrom(_image.openRead()));
+        var stream = http.ByteStream(Stream.castFrom(_image.openRead()));
 
         var length = await _image.length();
 
-        multipartFile = new http.MultipartFile('usuario_imagen_e', stream, length, filename: basename(_image.path));
+        multipartFile = http.MultipartFile('usuario_imagen_e', stream, length, filename: basename(_image.path));
       }
 
-      var request = new http.MultipartRequest("POST", uri);
+      var request = http.MultipartRequest("POST", uri);
 
       request.fields["app"] = 'true';
       request.fields["tn"] = '${_prefs.token}';
@@ -140,7 +133,6 @@ class UserApi {
         // listen for response
         response.stream.transform(utf8.decoder).listen((value) {
           final decodedData = json.decode(value);
-          print('Resultado actualizar imagen usuario: $decodedData');
 
           if (decodedData["result"] == 1) {
             resp = 1;
@@ -149,12 +141,10 @@ class UserApi {
           }
         });
       }).catchError((e) {
-        print(e);
         resp = 2;
       });
       return resp;
     } catch (e) {
-      print('Exeption cambiar foto: $e');
       return 2;
     }
   }

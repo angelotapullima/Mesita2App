@@ -18,7 +18,7 @@ class ReporteProductos extends StatelessWidget {
           stream: reporteBloc.reporteProductoStream,
           builder: (context, AsyncSnapshot<List<ReporteProductoModel>> snapshot) {
             if (snapshot.hasData) {
-              if (snapshot.data.length > 0) {
+              if (snapshot.data.isNotEmpty) {
                 var products = snapshot.data;
                 return ListView.builder(
                     shrinkWrap: true,
@@ -27,7 +27,7 @@ class ReporteProductos extends StatelessWidget {
                       return itemFood(products[index]);
                     });
               } else {
-                return Center(
+                return const Center(
                   child: Text('Sin información disponible'),
                 );
               }
@@ -53,7 +53,7 @@ class ReporteProductos extends StatelessWidget {
             Container(
               height: ScreenUtil().setHeight(100),
               width: ScreenUtil().setWidth(100),
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 color: Color(0XFFEEEEEE),
                 shape: BoxShape.circle,
                 boxShadow: [
@@ -72,7 +72,7 @@ class ReporteProductos extends StatelessWidget {
                       child: Container(
                         height: ScreenUtil().setHeight(80),
                         width: ScreenUtil().setWidth(80),
-                        decoration: BoxDecoration(
+                        decoration: const BoxDecoration(
                           color: Color(0XFFEEEEEE),
                           shape: BoxShape.circle,
                           boxShadow: [
@@ -84,14 +84,12 @@ class ReporteProductos extends StatelessWidget {
                           ],
                         ),
                         child: CachedNetworkImage(
-                          placeholder: (context, url) => Container(
+                          placeholder: (context, url) => SizedBox(
                             child: SvgPicture.asset('assets/food_svg/food.svg'),
                           ),
-                          errorWidget: (context, url, error) => Container(
-                            child: Container(
-                              child: SvgPicture.asset(
-                                'assets/food_svg/food.svg',
-                              ),
+                          errorWidget: (context, url, error) => SizedBox(
+                            child: SvgPicture.asset(
+                              'assets/food_svg/food.svg',
                             ),
                           ),
                           imageUrl: '$apiBaseURL/${food.fotoProducto}',
@@ -121,9 +119,9 @@ class ReporteProductos extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    '${food.nombreProducto}',
+                    food.nombreProducto,
                     style: TextStyle(
-                      color: Color(0XFF585858),
+                      color: const Color(0XFF585858),
                       fontSize: ScreenUtil().setSp(16),
                       fontWeight: FontWeight.w500,
                       letterSpacing: 0.16,
@@ -135,7 +133,7 @@ class ReporteProductos extends StatelessWidget {
                   Text(
                     'Se vendió ${food.cantidad}',
                     style: TextStyle(
-                      color: Color(0XFF3A3A3A),
+                      color: const Color(0XFF3A3A3A),
                       fontSize: ScreenUtil().setSp(14),
                       fontWeight: FontWeight.w500,
                       letterSpacing: 0.16,
@@ -148,7 +146,7 @@ class ReporteProductos extends StatelessWidget {
                     text: TextSpan(
                       text: 'Equivalente a ',
                       style: TextStyle(
-                        color: Color(0XFF3A3A3A),
+                        color: const Color(0XFF3A3A3A),
                         fontSize: ScreenUtil().setSp(14),
                         fontWeight: FontWeight.w500,
                         letterSpacing: 0.16,
@@ -157,7 +155,7 @@ class ReporteProductos extends StatelessWidget {
                         TextSpan(
                           text: 'S/${food.suma}',
                           style: TextStyle(
-                            color: Color(0XFF3A3A3A),
+                            color: const Color(0XFF3A3A3A),
                             fontSize: ScreenUtil().setSp(16),
                             fontWeight: FontWeight.w700,
                             letterSpacing: 0.16,

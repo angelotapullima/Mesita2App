@@ -13,7 +13,7 @@ class ReporteUtilidadesLineaDatabase {
 
       return res;
     } catch (exception) {
-      print(exception);
+      return exception;
     }
   }
 

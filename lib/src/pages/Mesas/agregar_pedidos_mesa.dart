@@ -40,14 +40,14 @@ class _DetalleMesaPageState extends State<AgregarePedidoMesa> {
         stream: mesaBloc.mesaStream,
         builder: (context, AsyncSnapshot<List<MesaModel>> snapshot) {
           if (snapshot.hasData) {
-            if (snapshot.data.length > 0) {
+            if (snapshot.data.isNotEmpty) {
               var mesaData = snapshot.data;
               return Scaffold(
-                backgroundColor: Color(0XFFE5E5E5),
+                backgroundColor: const Color(0XFFE5E5E5),
                 appBar: AppBar(
-                  backgroundColor: Color(0XFFFF0036),
+                  backgroundColor: const Color(0XFFFF0036),
                   elevation: 0,
-                  iconTheme: IconThemeData(color: Colors.white),
+                  iconTheme: const IconThemeData(color: Colors.white),
                   title: Text(
                     'Mesa ${mesaData[0].mesaNombre}',
                     style: GoogleFonts.poppins(
@@ -69,7 +69,7 @@ class _DetalleMesaPageState extends State<AgregarePedidoMesa> {
                               );
                             },
                             transitionsBuilder: (context, animation, secondaryAnimation, child) {
-                              var begin = Offset(0.0, 1.0);
+                              var begin = const Offset(0.0, 1.0);
                               var end = Offset.zero;
                               var curve = Curves.ease;
 
@@ -85,7 +85,7 @@ class _DetalleMesaPageState extends State<AgregarePedidoMesa> {
                           ),
                         );
                       },
-                      child: Container(
+                      child: SizedBox(
                         height: ScreenUtil().setHeight(20),
                         width: ScreenUtil().setWidth(20),
                         child: SvgPicture.asset('assets/svg/close_mesa.svg'),
@@ -98,7 +98,7 @@ class _DetalleMesaPageState extends State<AgregarePedidoMesa> {
                       onTap: () {
                         editMesaModal(context, mesaData[0]);
                       },
-                      child: Container(
+                      child: SizedBox(
                         height: ScreenUtil().setHeight(20),
                         width: ScreenUtil().setWidth(20),
                         child: SvgPicture.asset('assets/svg/edit_mesa.svg'),
@@ -111,7 +111,7 @@ class _DetalleMesaPageState extends State<AgregarePedidoMesa> {
                 ),
                 body: Stack(
                   children: [
-                    Container(
+                    SizedBox(
                       height: ScreenUtil().setHeight(200),
                       child: Stack(
                         children: [
@@ -119,7 +119,7 @@ class _DetalleMesaPageState extends State<AgregarePedidoMesa> {
                             clipper: HeaderFormaClipper(),
                             child: Container(
                               height: ScreenUtil().setHeight(200),
-                              decoration: BoxDecoration(
+                              decoration: const BoxDecoration(
                                 color: Color(0xFFF9708D),
                               ),
                             ),
@@ -128,7 +128,7 @@ class _DetalleMesaPageState extends State<AgregarePedidoMesa> {
                             clipper: HeaderFormaClipper(),
                             child: Container(
                               height: ScreenUtil().setHeight(185),
-                              decoration: BoxDecoration(
+                              decoration: const BoxDecoration(
                                 color: Color(0XFFFF0036),
                               ),
                               child: Column(
@@ -162,7 +162,7 @@ class _DetalleMesaPageState extends State<AgregarePedidoMesa> {
                                               );
                                             },
                                             transitionsBuilder: (context, animation, secondaryAnimation, child) {
-                                              var begin = Offset(0.0, 1.0);
+                                              var begin = const Offset(0.0, 1.0);
                                               var end = Offset.zero;
                                               var curve = Curves.ease;
 
@@ -191,14 +191,14 @@ class _DetalleMesaPageState extends State<AgregarePedidoMesa> {
                                         ),
                                         child: Row(
                                           children: [
-                                            Icon(Icons.search),
+                                            const Icon(Icons.search),
                                             SizedBox(
                                               width: ScreenUtil().setHeight(13),
                                             ),
                                             Text(
                                               'Buscar comidas y bebidas',
                                               style: GoogleFonts.poppins(
-                                                color: Color(0XFFA8A7A7),
+                                                color: const Color(0XFFA8A7A7),
                                                 fontWeight: FontWeight.w400,
                                                 fontSize: ScreenUtil().setSp(16),
                                               ),
@@ -227,19 +227,11 @@ class _DetalleMesaPageState extends State<AgregarePedidoMesa> {
                         esComandaCero: false,
                       ),
                     ),
-                    Positioned(
-                      bottom: ScreenUtil().setHeight(24),
-                      left: ScreenUtil().setWidth(24),
-                      right: ScreenUtil().setWidth(24),
-                      child: Column(
-                        children: [],
-                      ),
-                    )
                   ],
                 ),
               );
             } else {
-              return Scaffold();
+              return const Scaffold();
             }
           } else {
             return Scaffold(
@@ -253,13 +245,13 @@ class _DetalleMesaPageState extends State<AgregarePedidoMesa> {
     return Container(
       height: double.infinity,
       width: double.infinity,
-      color: Color.fromRGBO(0, 0, 0, 0.5),
+      color: const Color.fromRGBO(0, 0, 0, 0.5),
       child: Center(
         child: (Platform.isAndroid)
-            ? CircularProgressIndicator(
+            ? const CircularProgressIndicator(
                 color: Color(0XFFFF0036),
               )
-            : CupertinoActivityIndicator(),
+            : const CupertinoActivityIndicator(),
       ),
     );
   }

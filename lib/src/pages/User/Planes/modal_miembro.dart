@@ -47,18 +47,18 @@ void addMiembroModal(BuildContext context, String idPlan) {
         return Stack(
           children: [
             Container(
-              color: Color.fromRGBO(0, 0, 0, 0.001),
+              color: const Color.fromRGBO(0, 0, 0, 0.001),
               child: DraggableScrollableSheet(
                   initialChildSize: 0.93,
                   minChildSize: 0.2,
                   maxChildSize: 0.93,
                   builder: (_, controller) {
                     return Container(
-                      decoration: BoxDecoration(
+                      decoration: const BoxDecoration(
                         color: Colors.white,
                         borderRadius: BorderRadius.only(
-                          topLeft: const Radius.circular(30),
-                          topRight: const Radius.circular(30),
+                          topLeft: Radius.circular(30),
+                          topRight: Radius.circular(30),
                         ),
                       ),
                       child: StreamBuilder(
@@ -81,7 +81,7 @@ void addMiembroModal(BuildContext context, String idPlan) {
                                         child: Center(
                                           child: Container(
                                             width: ScreenUtil().setWidth(48),
-                                            decoration: BoxDecoration(
+                                            decoration: const BoxDecoration(
                                               color: Color(0XFFBABABA),
                                             ),
                                           ),
@@ -94,7 +94,7 @@ void addMiembroModal(BuildContext context, String idPlan) {
                                         child: Text(
                                           'Añadir miembro',
                                           style: GoogleFonts.poppins(
-                                            color: Color(0XFFFF0036),
+                                            color: const Color(0XFFFF0036),
                                             fontWeight: FontWeight.w600,
                                             fontSize: ScreenUtil().setSp(18),
                                           ),
@@ -109,10 +109,10 @@ void addMiembroModal(BuildContext context, String idPlan) {
                                             context,
                                             PageRouteBuilder(
                                               pageBuilder: (context, animation, secondaryAnimation) {
-                                                return BuscarUsuario();
+                                                return const BuscarUsuario();
                                               },
                                               transitionsBuilder: (context, animation, secondaryAnimation, child) {
-                                                var begin = Offset(0.0, 1.0);
+                                                var begin = const Offset(0.0, 1.0);
                                                 var end = Offset.zero;
                                                 var curve = Curves.ease;
 
@@ -130,13 +130,13 @@ void addMiembroModal(BuildContext context, String idPlan) {
                                         },
                                         child: Container(
                                           decoration: BoxDecoration(
-                                            color: Color(0XFFEDEDED),
+                                            color: const Color(0XFFEDEDED),
                                             borderRadius: BorderRadius.circular(15),
                                           ),
-                                          padding: EdgeInsets.all(8),
+                                          padding: const EdgeInsets.all(8),
                                           child: Row(
                                             children: [
-                                              Icon(
+                                              const Icon(
                                                 Icons.search,
                                                 color: Color(0XFFC4C4C4),
                                               ),
@@ -146,7 +146,7 @@ void addMiembroModal(BuildContext context, String idPlan) {
                                               Text(
                                                 miembroBloc.name,
                                                 style: GoogleFonts.poppins(
-                                                  color: (miembroBloc.id == '0') ? Color(0XFFC4C4C4) : Color(0XFF585858),
+                                                  color: (miembroBloc.id == '0') ? const Color(0XFFC4C4C4) : const Color(0XFF585858),
                                                   fontWeight: FontWeight.w400,
                                                   fontSize: ScreenUtil().setSp(18),
                                                   fontStyle: FontStyle.normal,
@@ -227,7 +227,7 @@ void addMiembroModal(BuildContext context, String idPlan) {
                                                 child: Container(
                                                   decoration: BoxDecoration(
                                                     borderRadius: BorderRadius.circular(50),
-                                                    color: (_controller.boton) ? Color(0XFFFF0036) : Color(0XFFFF0036).withOpacity(0.6),
+                                                    color: (_controller.boton) ? const Color(0XFFFF0036) : const Color(0XFFFF0036).withOpacity(0.6),
                                                   ),
                                                   child: Center(
                                                     child: Text(
@@ -255,7 +255,7 @@ void addMiembroModal(BuildContext context, String idPlan) {
                                               return Text(
                                                 _controller.text,
                                                 style: TextStyle(
-                                                  color: Color(0XFFFF0036),
+                                                  color: const Color(0XFFFF0036),
                                                   fontWeight: FontWeight.w600,
                                                   fontSize: ScreenUtil().setSp(16),
                                                   fontStyle: FontStyle.normal,
@@ -273,7 +273,7 @@ void addMiembroModal(BuildContext context, String idPlan) {
                                           child: Text(
                                             'Cancelar',
                                             style: GoogleFonts.poppins(
-                                              color: Color(0XFF8A8A8A),
+                                              color: const Color(0XFF8A8A8A),
                                               fontWeight: FontWeight.w500,
                                               fontSize: ScreenUtil().setSp(16),
                                             ),
@@ -318,18 +318,18 @@ void verMiembroModal(BuildContext context, MiembrosModel miembro) {
         return Stack(
           children: [
             Container(
-              color: Color.fromRGBO(0, 0, 0, 0.001),
+              color: const Color.fromRGBO(0, 0, 0, 0.001),
               child: DraggableScrollableSheet(
                   initialChildSize: 0.93,
                   minChildSize: 0.2,
                   maxChildSize: 0.93,
                   builder: (_, controller) {
                     return Container(
-                      decoration: BoxDecoration(
+                      decoration: const BoxDecoration(
                         color: Colors.white,
                         borderRadius: BorderRadius.only(
-                          topLeft: const Radius.circular(30),
-                          topRight: const Radius.circular(30),
+                          topLeft: Radius.circular(30),
+                          topRight: Radius.circular(30),
                         ),
                       ),
                       child: Padding(
@@ -343,7 +343,7 @@ void verMiembroModal(BuildContext context, MiembrosModel miembro) {
                                 child: Center(
                                   child: Container(
                                     width: ScreenUtil().setWidth(48),
-                                    decoration: BoxDecoration(
+                                    decoration: const BoxDecoration(
                                       color: Color(0XFFBABABA),
                                     ),
                                   ),
@@ -358,7 +358,7 @@ void verMiembroModal(BuildContext context, MiembrosModel miembro) {
                                   child: Container(
                                     height: ScreenUtil().setHeight(100),
                                     width: ScreenUtil().setWidth(100),
-                                    decoration: BoxDecoration(
+                                    decoration: const BoxDecoration(
                                       color: Color(0XFFEEEEEE),
                                       shape: BoxShape.circle,
                                       boxShadow: [
@@ -370,14 +370,12 @@ void verMiembroModal(BuildContext context, MiembrosModel miembro) {
                                       ],
                                     ),
                                     child: CachedNetworkImage(
-                                      placeholder: (context, url) => Container(
+                                      placeholder: (context, url) => SizedBox(
                                         child: SvgPicture.asset('assets/settings_svg/porfile.svg'),
                                       ),
-                                      errorWidget: (context, url, error) => Container(
-                                        child: Container(
-                                          child: SvgPicture.asset(
-                                            'assets/settings_svg/porfile.svg',
-                                          ),
+                                      errorWidget: (context, url, error) => SizedBox(
+                                        child: SvgPicture.asset(
+                                          'assets/settings_svg/porfile.svg',
                                         ),
                                       ),
                                       imageUrl: '$apiBaseURL/${miembro.imagen}',
@@ -400,7 +398,7 @@ void verMiembroModal(BuildContext context, MiembrosModel miembro) {
                               Text(
                                 'Nombre',
                                 style: GoogleFonts.poppins(
-                                  color: Color(0XFF585858),
+                                  color: const Color(0XFF585858),
                                   fontWeight: FontWeight.w500,
                                   fontSize: ScreenUtil().setSp(16),
                                   fontStyle: FontStyle.normal,
@@ -413,14 +411,14 @@ void verMiembroModal(BuildContext context, MiembrosModel miembro) {
                               Container(
                                 width: double.infinity,
                                 decoration: BoxDecoration(
-                                  color: Color(0XFFEDEDED),
+                                  color: const Color(0XFFEDEDED),
                                   borderRadius: BorderRadius.circular(15),
                                 ),
-                                padding: EdgeInsets.all(8),
+                                padding: const EdgeInsets.all(8),
                                 child: Text(
                                   '${miembro.nombre} ${miembro.apellidoPaterno}',
                                   style: GoogleFonts.poppins(
-                                    color: Color(0XFF585858),
+                                    color: const Color(0XFF585858),
                                     fontWeight: FontWeight.w400,
                                     fontSize: ScreenUtil().setSp(16),
                                     fontStyle: FontStyle.normal,
@@ -453,14 +451,14 @@ void verMiembroModal(BuildContext context, MiembrosModel miembro) {
                                         borderRadius: BorderRadius.circular(50),
                                         color: Colors.white,
                                         border: Border.all(
-                                          color: Color(0XFFFF0036),
+                                          color: const Color(0XFFFF0036),
                                           width: 2,
                                         )),
                                     child: Center(
                                       child: Text(
                                         'Quitar miembro',
                                         style: TextStyle(
-                                          color: Color(0XFFFF0036),
+                                          color: const Color(0XFFFF0036),
                                           fontWeight: FontWeight.w600,
                                           fontSize: ScreenUtil().setSp(16),
                                           fontStyle: FontStyle.normal,
@@ -481,7 +479,7 @@ void verMiembroModal(BuildContext context, MiembrosModel miembro) {
                                       return Text(
                                         _controller.text,
                                         style: TextStyle(
-                                          color: Color(0XFFFF0036),
+                                          color: const Color(0XFFFF0036),
                                           fontWeight: FontWeight.w600,
                                           fontSize: ScreenUtil().setSp(16),
                                           fontStyle: FontStyle.normal,
@@ -499,7 +497,7 @@ void verMiembroModal(BuildContext context, MiembrosModel miembro) {
                                   child: Text(
                                     'Cancelar',
                                     style: GoogleFonts.poppins(
-                                      color: Color(0XFF8A8A8A),
+                                      color: const Color(0XFF8A8A8A),
                                       fontWeight: FontWeight.w500,
                                       fontSize: ScreenUtil().setSp(16),
                                     ),
@@ -531,13 +529,13 @@ _showLoading() {
   return Container(
     height: double.infinity,
     width: double.infinity,
-    color: Color.fromRGBO(0, 0, 0, 0.5),
+    color: const Color.fromRGBO(0, 0, 0, 0.5),
     child: Center(
       child: (Platform.isAndroid)
-          ? CircularProgressIndicator(
+          ? const CircularProgressIndicator(
               color: Color(0XFFFF0036),
             )
-          : CupertinoActivityIndicator(),
+          : const CupertinoActivityIndicator(),
     ),
   );
 }

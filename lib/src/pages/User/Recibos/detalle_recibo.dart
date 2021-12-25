@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -14,13 +12,13 @@ class DetalleRecibo extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 0,
-        iconTheme: IconThemeData(
+        iconTheme: const IconThemeData(
           color: Color(0XFF3A3A3A),
         ),
         title: Text(
           'Recibo',
           style: GoogleFonts.poppins(
-            color: Color(0XFF3A3A3A),
+            color: const Color(0XFF3A3A3A),
             fontSize: ScreenUtil().setSp(18),
             fontWeight: FontWeight.w600,
             letterSpacing: 0.16,
@@ -41,7 +39,7 @@ class DetalleRecibo extends StatelessWidget {
                 child: Text(
                   'N° 12345678910111213',
                   style: TextStyle(
-                    color: Color(0XFFFF0036),
+                    color: const Color(0XFFFF0036),
                     fontSize: ScreenUtil().setSp(18),
                     fontWeight: FontWeight.w500,
                     letterSpacing: 0.16,
@@ -89,19 +87,19 @@ class DetalleRecibo extends StatelessWidget {
                 width: double.infinity,
                 child: MaterialButton(
                   color: Colors.white,
-                  textColor: Color(0XFF585858),
+                  textColor: const Color(0XFF585858),
                   elevation: 1,
                   onPressed: () {},
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(22),
-                    side: BorderSide(
+                    side: const BorderSide(
                       color: Color(0XFFFF0036),
                     ),
                   ),
                   child: Text(
                     'Descargar pdf',
                     style: GoogleFonts.poppins(
-                      color: Color(0XFFFF0036),
+                      color: const Color(0XFFFF0036),
                       fontWeight: FontWeight.w500,
                       fontSize: ScreenUtil().setSp(16),
                     ),
@@ -118,12 +116,12 @@ class DetalleRecibo extends StatelessWidget {
   Widget rowData(String titulo, String data) {
     return Row(
       children: [
-        Container(
+        SizedBox(
           width: ScreenUtil().setWidth(150),
           child: Text(
             titulo,
             style: TextStyle(
-              color: Color(0XFF585858),
+              color: const Color(0XFF585858),
               fontSize: ScreenUtil().setSp(16),
               fontWeight: FontWeight.w600,
               letterSpacing: 0.16,
@@ -133,7 +131,7 @@ class DetalleRecibo extends StatelessWidget {
         Text(
           data,
           style: TextStyle(
-            color: Color(0XFF585858),
+            color: const Color(0XFF585858),
             fontSize: ScreenUtil().setSp(16),
             fontWeight: FontWeight.w400,
             letterSpacing: 0.16,
