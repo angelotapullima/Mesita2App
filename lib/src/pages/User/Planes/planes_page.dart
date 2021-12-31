@@ -9,6 +9,7 @@ import 'package:mesita_aplication_2/src/models/planes_model.dart';
 import 'package:mesita_aplication_2/src/pages/User/Planes/Pagos/modals_metodo_pago.dart';
 import 'package:mesita_aplication_2/src/pages/User/Planes/detalle_plan.dart';
 import 'package:mesita_aplication_2/src/preferences/preferences.dart';
+import 'package:mesita_aplication_2/src/utils/utils.dart';
 
 class PlanesPage extends StatelessWidget {
   const PlanesPage({Key key}) : super(key: key);
@@ -203,8 +204,6 @@ class PlanesPage extends StatelessWidget {
                 (prefs.tipoPlan == plan.idPlan)
                     ? InkWell(
                         onTap: () {
-                          // print(plan.idPlan);
-                          // modalSeletPayMetod(context, plan, 'Renovar plan', true);
                           Navigator.push(
                             context,
                             PageRouteBuilder(
@@ -249,7 +248,11 @@ class PlanesPage extends StatelessWidget {
                       )
                     : InkWell(
                         onTap: () {
-                          modalSeletPayMetod(context, plan, 'Cambiar plan', false, false);
+                          if (int.parse(prefs.tipoPlan) > int.parse(plan.idPlan)) {
+                            showToast('Su plan actual está vigente, con mejores beneficios', Colors.black);
+                          } else {
+                            modalSeletPayMetod(context, plan, 'Cambiar plan', false, false);
+                          }
                         },
                         child: Container(
                           padding: const EdgeInsets.all(8),
