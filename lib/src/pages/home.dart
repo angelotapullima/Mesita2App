@@ -8,6 +8,7 @@ import 'package:mesita_aplication_2/src/pages/Mesas/mesas_page.dart';
 import 'package:mesita_aplication_2/src/pages/Pedidos/pedidos_page.dart';
 import 'package:mesita_aplication_2/src/pages/Reportes/reportes_page.dart';
 import 'package:mesita_aplication_2/src/pages/Ventas/ventas_page.dart';
+import 'package:mesita_aplication_2/src/utils/colors.dart';
 
 class Home extends StatefulWidget {
   const Home({Key key}) : super(key: key);
@@ -44,7 +45,7 @@ class _HomeState extends State<Home> {
                 bottom: 0,
                 child: Container(
                   width: ScreenUtil().setWidth(150),
-                  color: const Color(0xffFF0036),
+                  color: colorPrimary1,
                 ),
               ),
               AnimatedPositioned(
@@ -115,8 +116,7 @@ class _HomeState extends State<Home> {
                                                 child: ClipOval(
                                                   child: Container(
                                                     height: ScreenUtil().setHeight(50),
-                                                    color: const Color(0xffFF0036),
-                                                    //color: Colors.blue,
+                                                    color: colorPrimary1,
                                                     child: Row(
                                                       children: [
                                                         const Spacer(),
@@ -139,12 +139,24 @@ class _HomeState extends State<Home> {
                                           bloc.changeToTable();
                                           bloc.changeToClosed();
                                         },
-                                        child: SizedBox(
-                                          height: ScreenUtil().setHeight(40),
-                                          width: ScreenUtil().setWidth(35),
-                                          child: SvgPicture.asset(
-                                            'assets/svg/table_menu.svg',
-                                          ),
+                                        child: Column(
+                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                          children: [
+                                            SizedBox(
+                                              height: ScreenUtil().setHeight(40),
+                                              width: ScreenUtil().setWidth(35),
+                                              child: SvgPicture.asset(
+                                                'assets/svg/table_menu.svg',
+                                              ),
+                                            ),
+                                            Text(
+                                              'Mesas',
+                                              style: TextStyle(
+                                                color: Colors.white,
+                                                fontSize: ScreenUtil().setSp(10),
+                                              ),
+                                            ),
+                                          ],
                                         ),
                                       ),
                                     ],
@@ -164,8 +176,7 @@ class _HomeState extends State<Home> {
                                                 child: ClipOval(
                                                   child: Container(
                                                     height: ScreenUtil().setHeight(100),
-                                                    color: const Color(0xffFF0036),
-                                                    //color: Colors.blue,
+                                                    color: colorPrimary1,
                                                     child: Row(
                                                       children: [
                                                         const Spacer(),
@@ -188,12 +199,24 @@ class _HomeState extends State<Home> {
                                           bloc.changeToPedidos();
                                           bloc.changeToClosed();
                                         },
-                                        child: SizedBox(
-                                          height: ScreenUtil().setHeight(40),
-                                          width: ScreenUtil().setWidth(35),
-                                          child: SvgPicture.asset(
-                                            'assets/svg/pedido_menu.svg',
-                                          ),
+                                        child: Column(
+                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                          children: [
+                                            SizedBox(
+                                              height: ScreenUtil().setHeight(40),
+                                              width: ScreenUtil().setWidth(35),
+                                              child: SvgPicture.asset(
+                                                'assets/svg/pedido_menu.svg',
+                                              ),
+                                            ),
+                                            Text(
+                                              'Pedidos',
+                                              style: TextStyle(
+                                                color: Colors.white,
+                                                fontSize: ScreenUtil().setSp(9),
+                                              ),
+                                            ),
+                                          ],
                                         ),
                                       ),
                                     ],
@@ -213,8 +236,7 @@ class _HomeState extends State<Home> {
                                                 child: ClipOval(
                                                   child: Container(
                                                     height: ScreenUtil().setHeight(100),
-                                                    color: const Color(0xffFF0036),
-                                                    //color: Colors.blue,
+                                                    color: colorPrimary1,
                                                     child: Row(
                                                       children: [
                                                         const Spacer(),
@@ -237,12 +259,24 @@ class _HomeState extends State<Home> {
                                           bloc.changeToComidas();
                                           bloc.changeToClosed();
                                         },
-                                        child: SizedBox(
-                                          height: ScreenUtil().setHeight(40),
-                                          width: ScreenUtil().setWidth(35),
-                                          child: SvgPicture.asset(
-                                            'assets/svg/comida_menu.svg',
-                                          ),
+                                        child: Column(
+                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                          children: [
+                                            SizedBox(
+                                              height: ScreenUtil().setHeight(40),
+                                              width: ScreenUtil().setWidth(35),
+                                              child: SvgPicture.asset(
+                                                'assets/svg/comida_menu.svg',
+                                              ),
+                                            ),
+                                            Text(
+                                              'Comidas',
+                                              style: TextStyle(
+                                                color: Colors.white,
+                                                fontSize: ScreenUtil().setSp(9),
+                                              ),
+                                            ),
+                                          ],
                                         ),
                                       ),
                                     ],
@@ -262,8 +296,7 @@ class _HomeState extends State<Home> {
                                                 child: ClipOval(
                                                   child: Container(
                                                     height: ScreenUtil().setHeight(100),
-                                                    color: const Color(0xffFF0036),
-                                                    //color: Colors.blue,
+                                                    color: colorPrimary1,
                                                     child: Row(
                                                       children: [
                                                         const Spacer(),
@@ -286,12 +319,24 @@ class _HomeState extends State<Home> {
                                           bloc.changeToBebidas();
                                           bloc.changeToClosed();
                                         },
-                                        child: SizedBox(
-                                          height: ScreenUtil().setHeight(40),
-                                          width: ScreenUtil().setWidth(35),
-                                          child: SvgPicture.asset(
-                                            'assets/svg/bebida_menu.svg',
-                                          ),
+                                        child: Column(
+                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                          children: [
+                                            SizedBox(
+                                              height: ScreenUtil().setHeight(40),
+                                              width: ScreenUtil().setWidth(35),
+                                              child: SvgPicture.asset(
+                                                'assets/svg/bebida_menu.svg',
+                                              ),
+                                            ),
+                                            Text(
+                                              'Bebidas',
+                                              style: TextStyle(
+                                                color: Colors.white,
+                                                fontSize: ScreenUtil().setSp(9),
+                                              ),
+                                            ),
+                                          ],
                                         ),
                                       ),
                                     ],
@@ -311,8 +356,7 @@ class _HomeState extends State<Home> {
                                                 child: ClipOval(
                                                   child: Container(
                                                     height: ScreenUtil().setHeight(100),
-                                                    color: const Color(0xffFF0036),
-                                                    //color: Colors.blue,
+                                                    color: colorPrimary1,
                                                     child: Row(
                                                       children: [
                                                         const Spacer(),
@@ -335,12 +379,24 @@ class _HomeState extends State<Home> {
                                           bloc.changeToVentas();
                                           bloc.changeToClosed();
                                         },
-                                        child: SizedBox(
-                                          height: ScreenUtil().setHeight(40),
-                                          width: ScreenUtil().setWidth(35),
-                                          child: SvgPicture.asset(
-                                            'assets/svg/ventas_menu.svg',
-                                          ),
+                                        child: Column(
+                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                          children: [
+                                            SizedBox(
+                                              height: ScreenUtil().setHeight(40),
+                                              width: ScreenUtil().setWidth(35),
+                                              child: SvgPicture.asset(
+                                                'assets/svg/ventas_menu.svg',
+                                              ),
+                                            ),
+                                            Text(
+                                              'Ventas',
+                                              style: TextStyle(
+                                                color: Colors.white,
+                                                fontSize: ScreenUtil().setSp(10),
+                                              ),
+                                            ),
+                                          ],
                                         ),
                                       ),
                                     ],
@@ -360,8 +416,7 @@ class _HomeState extends State<Home> {
                                                 child: ClipOval(
                                                   child: Container(
                                                     height: ScreenUtil().setHeight(100),
-                                                    color: const Color(0xffFF0036),
-                                                    //color: Colors.blue,
+                                                    color: colorPrimary1,
                                                     child: Row(
                                                       children: [
                                                         const Spacer(),
@@ -384,12 +439,24 @@ class _HomeState extends State<Home> {
                                           bloc.changeToReportes();
                                           bloc.changeToClosed();
                                         },
-                                        child: SizedBox(
-                                          height: ScreenUtil().setHeight(40),
-                                          width: ScreenUtil().setWidth(35),
-                                          child: SvgPicture.asset(
-                                            'assets/svg/reportes_menu.svg',
-                                          ),
+                                        child: Column(
+                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                          children: [
+                                            SizedBox(
+                                              height: ScreenUtil().setHeight(40),
+                                              width: ScreenUtil().setWidth(35),
+                                              child: SvgPicture.asset(
+                                                'assets/svg/reportes_menu.svg',
+                                              ),
+                                            ),
+                                            Text(
+                                              'Reportes',
+                                              style: TextStyle(
+                                                color: Colors.white,
+                                                fontSize: ScreenUtil().setSp(9),
+                                              ),
+                                            ),
+                                          ],
                                         ),
                                       ),
                                     ],

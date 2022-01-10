@@ -13,6 +13,7 @@ import 'package:mesita_aplication_2/src/api/user_api.dart';
 import 'package:mesita_aplication_2/src/pages/User/modal_edit_perfil.dart';
 import 'package:mesita_aplication_2/src/pages/home.dart';
 import 'package:mesita_aplication_2/src/preferences/preferences.dart';
+import 'package:mesita_aplication_2/src/utils/colors.dart';
 import 'package:mesita_aplication_2/src/utils/utils.dart';
 
 enum PageMostrar { inicioSesion, registro }
@@ -69,7 +70,7 @@ class _LoginState extends State<Login> {
                   image: AssetImage('assets/img/img_login.jpg'),
                 ),
                 borderRadius: BorderRadius.all(Radius.circular(900)),
-                color: Colors.redAccent,
+                color: colorPrimary1,
               ),
             ), /* CircleAvatar(
               radius: ScreenUtil().setHeight(280),
@@ -88,8 +89,8 @@ class _LoginState extends State<Login> {
                     begin: Alignment.bottomLeft,
                     end: Alignment.topRight,
                     colors: [
-                      const Color(0xffFF6787).withOpacity(.6),
-                      const Color(0xffFF0036).withOpacity(.8),
+                      colorPrimary2.withOpacity(.6),
+                      colorPrimary1.withOpacity(.8),
                     ],
 
                     //
@@ -109,8 +110,8 @@ class _LoginState extends State<Login> {
                   begin: Alignment.bottomLeft,
                   end: Alignment.topRight,
                   colors: [
-                    const Color(0xffFF6787).withOpacity(.6),
-                    const Color(0xffFF0036).withOpacity(.8),
+                    colorPrimary2.withOpacity(.6),
+                    colorPrimary1.withOpacity(.8),
                   ],
 
                   //
@@ -177,7 +178,7 @@ class _LoginState extends State<Login> {
       child: Center(
         child: (Platform.isAndroid)
             ? const CircularProgressIndicator(
-                color: Color(0xffFF0036),
+                color: colorPrimary1,
               )
             : const CupertinoActivityIndicator(),
       ),
@@ -209,9 +210,9 @@ class _LoginState extends State<Login> {
                       horizontal: ScreenUtil().setWidth(2),
                     ),
                     decoration: BoxDecoration(
-                      color: Colors.red,
+                      color: colorPrimary1,
                       borderRadius: BorderRadius.circular(15),
-                      border: Border.all(color: Colors.red),
+                      border: Border.all(color: colorPrimary1),
                     ),
                     child: Center(
                       child: Text(
@@ -347,7 +348,7 @@ class _LoginState extends State<Login> {
           SizedBox(
             width: double.infinity,
             child: MaterialButton(
-              color: Colors.red,
+              color: colorPrimary1,
               textColor: Colors.white,
               elevation: 10,
               onPressed: () async {
@@ -495,9 +496,9 @@ class _LoginState extends State<Login> {
                       horizontal: ScreenUtil().setWidth(2),
                     ),
                     decoration: BoxDecoration(
-                      color: Colors.red,
+                      color: colorPrimary1,
                       borderRadius: BorderRadius.circular(15),
-                      border: Border.all(color: Colors.red),
+                      border: Border.all(color: colorPrimary1),
                     ),
                     child: Center(
                       child: Text(
@@ -645,7 +646,7 @@ class _LoginState extends State<Login> {
           SizedBox(
             width: double.infinity,
             child: MaterialButton(
-              color: Colors.red,
+              color: colorPrimary1,
               textColor: Colors.white,
               elevation: 10,
               onPressed: () async {
@@ -779,7 +780,7 @@ class _LoginState extends State<Login> {
                                     child: Text(
                                       'Ingresar Datos',
                                       style: GoogleFonts.poppins(
-                                        color: const Color(0XFFFF0036),
+                                        color: colorPrimary1,
                                         fontWeight: FontWeight.w600,
                                         fontSize: ScreenUtil().setSp(18),
                                       ),
@@ -972,7 +973,7 @@ class _LoginState extends State<Login> {
                                             child: Container(
                                               decoration: BoxDecoration(
                                                 borderRadius: BorderRadius.circular(50),
-                                                color: (_controller.boton) ? const Color(0XFFFF0036) : const Color(0XFFFF0036).withOpacity(0.6),
+                                                color: (_controller.boton) ? colorPrimary1 : colorPrimary1.withOpacity(0.6),
                                               ),
                                               child: Center(
                                                 child: Text(
@@ -1000,7 +1001,7 @@ class _LoginState extends State<Login> {
                                           return Text(
                                             _controller.text,
                                             style: TextStyle(
-                                              color: const Color(0XFFFF0036),
+                                              color: colorPrimary1,
                                               fontWeight: FontWeight.w600,
                                               fontSize: ScreenUtil().setSp(16),
                                               fontStyle: FontStyle.normal,

@@ -11,6 +11,7 @@ import 'package:mesita_aplication_2/src/models/pedidos_atender_model.dart';
 import 'package:mesita_aplication_2/src/pages/Pedidos/atender_pedido.dart';
 import 'package:mesita_aplication_2/src/preferences/preferences.dart';
 import 'package:mesita_aplication_2/src/utils/circle_user_porfile.dart';
+import 'package:mesita_aplication_2/src/utils/colors.dart';
 import 'package:mesita_aplication_2/src/utils/constants.dart';
 
 class PedidosPage extends StatelessWidget {
@@ -217,7 +218,7 @@ class PedidosPage extends StatelessWidget {
                     pedido.mesaNombre,
                     style: GoogleFonts.poppins(
                       fontSize: (pedido.mesaNombre.length > 2) ? ScreenUtil().setSp(8) : ScreenUtil().setSp(35),
-                      color: const Color(0xfff9708d),
+                      color: colorPrimary2,
                       fontWeight: FontWeight.bold,
                       letterSpacing: 0.16,
                     ),
@@ -327,7 +328,7 @@ class PedidosPage extends StatelessWidget {
       child: Center(
         child: (Platform.isAndroid)
             ? const CircularProgressIndicator(
-                color: Color(0xffFF0036),
+                color: colorPrimary1,
               )
             : const CupertinoActivityIndicator(),
       ),

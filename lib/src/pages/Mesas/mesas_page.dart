@@ -12,6 +12,7 @@ import 'package:mesita_aplication_2/src/pages/Mesas/detalle_mesa_page.dart';
 import 'package:mesita_aplication_2/src/pages/Mesas/modal_agregar_mesa.dart';
 import 'package:mesita_aplication_2/src/preferences/preferences.dart';
 import 'package:mesita_aplication_2/src/utils/circle_user_porfile.dart';
+import 'package:mesita_aplication_2/src/utils/colors.dart';
 
 class MesasPage extends StatelessWidget {
   const MesasPage({Key key}) : super(key: key);
@@ -37,7 +38,7 @@ class MesasPage extends StatelessWidget {
             child: SizedBox(
               width: ScreenUtil().setWidth(20),
               height: ScreenUtil().setHeight(20),
-              child: SvgPicture.asset('assets/food_svg/add_food.svg'),
+              child: SvgPicture.asset('assets/food_svg/add_food.svg', color: colorPrimary1),
             ),
           ),
           SizedBox(
@@ -72,7 +73,7 @@ class MesasPage extends StatelessWidget {
                   height: ScreenUtil().setHeight(7),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(15),
-                    color: const Color(0xffff0036),
+                    color: colorPrimary1,
                     border: Border.all(
                       color: Colors.grey,
                     ),
@@ -219,7 +220,7 @@ class MesasPage extends StatelessWidget {
                                                 snapsdhot.data[index].mesaNombre,
                                                 style: TextStyle(
                                                   fontSize: ScreenUtil().setSp(18),
-                                                  color: const Color(0xfff9708d),
+                                                  color: colorPrimary2,
                                                   fontWeight: FontWeight.bold,
                                                 ),
                                               ),
@@ -276,57 +277,6 @@ class MesasPage extends StatelessWidget {
                                       },
                                     ),
                                   );
-                                  // if (snapsdhot.data[index].mesaEstado == '2') {
-                                  //   Navigator.push(
-                                  //     context,
-                                  //     PageRouteBuilder(
-                                  //       pageBuilder: (context, animation, secondaryAnimation) {
-                                  //         return DetalleMesaPage(
-                                  //           mesa: snapsdhot.data[index],
-                                  //         );
-                                  //       },
-                                  //       transitionsBuilder: (context, animation, secondaryAnimation, child) {
-                                  //         var begin = Offset(0.0, 1.0);
-                                  //         var end = Offset.zero;
-                                  //         var curve = Curves.ease;
-
-                                  //         var tween = Tween(begin: begin, end: end).chain(
-                                  //           CurveTween(curve: curve),
-                                  //         );
-
-                                  //         return SlideTransition(
-                                  //           position: animation.drive(tween),
-                                  //           child: child,
-                                  //         );
-                                  //       },
-                                  //     ),
-                                  //   );
-                                  // } else {
-                                  //   Navigator.push(
-                                  //     context,
-                                  //     PageRouteBuilder(
-                                  //       pageBuilder: (context, animation, secondaryAnimation) {
-                                  //         return AgregarePedidoMesa(
-                                  //           mesa: snapsdhot.data[index],
-                                  //         );
-                                  //       },
-                                  //       transitionsBuilder: (context, animation, secondaryAnimation, child) {
-                                  //         var begin = Offset(0.0, 1.0);
-                                  //         var end = Offset.zero;
-                                  //         var curve = Curves.ease;
-
-                                  //         var tween = Tween(begin: begin, end: end).chain(
-                                  //           CurveTween(curve: curve),
-                                  //         );
-
-                                  //         return SlideTransition(
-                                  //           position: animation.drive(tween),
-                                  //           child: child,
-                                  //         );
-                                  //       },
-                                  //     ),
-                                  //   );
-                                  // }
                                 },
                                 child: Container(
                                   padding: EdgeInsets.only(
@@ -377,7 +327,7 @@ class MesasPage extends StatelessWidget {
                                               blurRadius: 20.0,
                                               color: (snapsdhot.data[index].mesaEstado != '2')
                                                   ? const Color(0xff585858).withOpacity(.15)
-                                                  : const Color(0xffff0036).withOpacity(.3),
+                                                  : colorPrimary1.withOpacity(.3),
                                             ),
                                           ],
                                         ),
@@ -394,7 +344,7 @@ class MesasPage extends StatelessWidget {
                                                     snapsdhot.data[index].mesaNombre,
                                                     style: TextStyle(
                                                       fontSize: ScreenUtil().setSp(40),
-                                                      color: (snapsdhot.data[index].mesaEstado != '2') ? const Color(0xfff9708d) : Colors.white,
+                                                      color: (snapsdhot.data[index].mesaEstado != '2') ? colorPrimary2 : Colors.white,
                                                       fontWeight: FontWeight.bold,
                                                     ),
                                                   ),
@@ -466,7 +416,7 @@ class MesasPage extends StatelessWidget {
       child: Center(
         child: (Platform.isAndroid)
             ? const CircularProgressIndicator(
-                color: Color(0XFFFF0036),
+                color: colorPrimary1,
               )
             : const CupertinoActivityIndicator(),
       ),
