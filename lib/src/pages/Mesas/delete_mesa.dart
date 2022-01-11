@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mesita_aplication_2/src/models/mesa_model.dart';
 import 'package:mesita_aplication_2/src/pages/Lineas_Categories/modal_edit_line.dart';
+import 'package:mesita_aplication_2/src/utils/colors.dart';
 
 class DeleteMesa extends StatefulWidget {
   final MesaModel mesaData;
@@ -66,7 +67,7 @@ class _DeleteMesaState extends State<DeleteMesa> {
                       child: Text(
                         'Eliminar mesa',
                         style: TextStyle(
-                          color: const Color(0XFFFF0036),
+                          color: colorPrimary1,
                           fontSize: ScreenUtil().setSp(16),
                           fontWeight: FontWeight.w400,
                           letterSpacing: 0.16,
@@ -113,7 +114,7 @@ class _DeleteMesaState extends State<DeleteMesa> {
                         return Text(
                           _controller.text,
                           style: TextStyle(
-                            color: const Color(0XFFFF0036),
+                            color: colorPrimary1,
                             fontWeight: FontWeight.w600,
                             fontSize: ScreenUtil().setSp(16),
                             fontStyle: FontStyle.normal,
@@ -150,7 +151,7 @@ class _DeleteMesaState extends State<DeleteMesa> {
       child: Center(
         child: (Platform.isAndroid)
             ? const CircularProgressIndicator(
-                color: Color(0XFFFF0036),
+                color: colorPrimary1,
               )
             : const CupertinoActivityIndicator(),
       ),

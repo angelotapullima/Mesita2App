@@ -15,6 +15,7 @@ import 'package:mesita_aplication_2/src/pages/Pedidos/agregar_producto_page.dart
 import 'package:mesita_aplication_2/src/pages/Pedidos/comanda_mesa_page.dart';
 import 'package:mesita_aplication_2/src/pages/Pedidos/editar_producto_pedido.dart';
 import 'package:mesita_aplication_2/src/pages/Pedidos/modal_pagar_pedido.dart';
+import 'package:mesita_aplication_2/src/utils/colors.dart';
 
 class DeliveryLlevarPage extends StatelessWidget {
   final MesaModel mesa;
@@ -29,7 +30,7 @@ class DeliveryLlevarPage extends StatelessWidget {
     return Scaffold(
       backgroundColor: const Color(0XFFE5E5E5),
       appBar: AppBar(
-        backgroundColor: const Color(0XFFFF0036),
+        backgroundColor: colorPrimary1,
         elevation: 0,
         iconTheme: const IconThemeData(color: Colors.white),
         title: Text(
@@ -56,7 +57,7 @@ class DeliveryLlevarPage extends StatelessWidget {
                   child: Container(
                     height: ScreenUtil().setHeight(150),
                     decoration: const BoxDecoration(
-                      color: Color(0xFFF9708D),
+                      color: colorPrimary2,
                     ),
                   ),
                 ),
@@ -65,7 +66,7 @@ class DeliveryLlevarPage extends StatelessWidget {
                   child: Container(
                     height: ScreenUtil().setHeight(125),
                     decoration: const BoxDecoration(
-                      color: Color(0XFFFF0036),
+                      color: colorPrimary1,
                     ),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
@@ -113,7 +114,7 @@ class DeliveryLlevarPage extends StatelessWidget {
                                 ),
                                 width: double.infinity,
                                 child: MaterialButton(
-                                  color: const Color(0XFFFF0036),
+                                  color: colorPrimary1,
                                   textColor: Colors.white,
                                   elevation: 10,
                                   onPressed: () {
@@ -190,7 +191,7 @@ class DeliveryLlevarPage extends StatelessWidget {
                                 ),
                                 width: double.infinity,
                                 child: MaterialButton(
-                                  color: const Color(0XFFFF0036),
+                                  color: colorPrimary1,
                                   textColor: Colors.white,
                                   elevation: 10,
                                   onPressed: () {
@@ -337,7 +338,7 @@ class DeliveryLlevarPage extends StatelessWidget {
               ),
             ],
           ),
-          iconColor: const Color(0XFFFF0036),
+          iconColor: colorPrimary1,
           trailing: Container(
             margin: EdgeInsets.symmetric(vertical: ScreenUtil().setHeight(8)),
             child: const Icon(Icons.keyboard_arrow_down),
@@ -399,13 +400,13 @@ class DeliveryLlevarPage extends StatelessWidget {
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(22),
                             side: const BorderSide(
-                              color: Color(0XFFFF0036),
+                              color: colorPrimary1,
                             ),
                           ),
                           child: Text(
                             'Agregar',
                             style: GoogleFonts.poppins(
-                              color: const Color(0XFFFF0036),
+                              color: colorPrimary1,
                               fontWeight: FontWeight.w500,
                               fontSize: ScreenUtil().setSp(16),
                             ),
@@ -415,7 +416,7 @@ class DeliveryLlevarPage extends StatelessWidget {
                       Container(
                         width: ScreenUtil().setWidth(200),
                         child: MaterialButton(
-                          color: const Color(0XFFFF0036),
+                          color: colorPrimary1,
                           textColor: Colors.white,
                           elevation: 0,
                           onPressed: () {
@@ -548,7 +549,7 @@ class DeliveryLlevarPage extends StatelessWidget {
     return Center(
       child: (Platform.isAndroid)
           ? const CircularProgressIndicator(
-              color: Color(0XFFFF0036),
+              color: colorPrimary1,
             )
           : const CupertinoActivityIndicator(),
     );

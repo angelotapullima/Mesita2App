@@ -6,6 +6,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:mesita_aplication_2/src/models/mesa_model.dart';
 import 'package:mesita_aplication_2/src/pages/Mesas/detalle_mesa_page.dart';
 import 'package:mesita_aplication_2/src/pages/Pedidos/comanda_mesa_page.dart';
+import 'package:mesita_aplication_2/src/utils/colors.dart';
 
 class ComandaDeliveryLlevar extends StatelessWidget {
   final MesaModel mesa;
@@ -17,7 +18,7 @@ class ComandaDeliveryLlevar extends StatelessWidget {
     return Scaffold(
       backgroundColor: const Color(0XFFE5E5E5),
       appBar: AppBar(
-        backgroundColor: const Color(0XFFFF0036),
+        backgroundColor: colorPrimary1,
         elevation: 0,
         iconTheme: const IconThemeData(color: Colors.white),
         title: Text(
@@ -44,7 +45,7 @@ class ComandaDeliveryLlevar extends StatelessWidget {
                   child: Container(
                     height: ScreenUtil().setHeight(150),
                     decoration: const BoxDecoration(
-                      color: Color(0xFFF9708D),
+                      color: colorPrimary2,
                     ),
                   ),
                 ),
@@ -53,7 +54,7 @@ class ComandaDeliveryLlevar extends StatelessWidget {
                   child: Container(
                     height: ScreenUtil().setHeight(125),
                     decoration: const BoxDecoration(
-                      color: Color(0XFFFF0036),
+                      color: colorPrimary1,
                     ),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.center,

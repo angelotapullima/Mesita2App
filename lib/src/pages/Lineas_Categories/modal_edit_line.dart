@@ -8,6 +8,7 @@ import 'package:keyboard_actions/keyboard_actions.dart';
 import 'package:mesita_aplication_2/src/api/linea_api.dart';
 import 'package:mesita_aplication_2/src/bloc/provider.dart';
 import 'package:mesita_aplication_2/src/models/linea_model.dart';
+import 'package:mesita_aplication_2/src/utils/colors.dart';
 
 class ChangeController extends ChangeNotifier {
   bool cargando = false;
@@ -90,7 +91,7 @@ void editLineModal(BuildContext context, LineaModel lineaData) {
                                   child: Text(
                                     'Editar categoría',
                                     style: GoogleFonts.poppins(
-                                      color: const Color(0XFFFF0036),
+                                      color: colorPrimary1,
                                       fontWeight: FontWeight.w600,
                                       fontSize: ScreenUtil().setSp(18),
                                     ),
@@ -177,7 +178,7 @@ void editLineModal(BuildContext context, LineaModel lineaData) {
                                           child: Container(
                                             decoration: BoxDecoration(
                                               borderRadius: BorderRadius.circular(50),
-                                              color: (_controller.boton) ? const Color(0XFFFF0036) : const Color(0XFFFF0036).withOpacity(0.6),
+                                              color: (_controller.boton) ? colorPrimary1 : colorPrimary1.withOpacity(0.6),
                                             ),
                                             child: Center(
                                               child: Text(
@@ -205,7 +206,7 @@ void editLineModal(BuildContext context, LineaModel lineaData) {
                                         return Text(
                                           _controller.text,
                                           style: TextStyle(
-                                            color: const Color(0XFFFF0036),
+                                            color: colorPrimary1,
                                             fontWeight: FontWeight.w600,
                                             fontSize: ScreenUtil().setSp(16),
                                             fontStyle: FontStyle.normal,
@@ -260,7 +261,7 @@ _showLoading() {
     child: Center(
       child: (Platform.isAndroid)
           ? const CircularProgressIndicator(
-              color: Color(0XFFFF0036),
+              color: colorPrimary1,
             )
           : const CupertinoActivityIndicator(),
     ),

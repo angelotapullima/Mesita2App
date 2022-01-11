@@ -7,6 +7,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:mesita_aplication_2/src/models/planes_model.dart';
 import 'package:mesita_aplication_2/src/pages/User/Planes/Pagos/bloc_pago.dart';
 import 'package:mesita_aplication_2/src/pages/User/Planes/Pagos/detalle_reserva_plin_yape.dart';
+import 'package:mesita_aplication_2/src/utils/colors.dart';
 import 'package:provider/provider.dart';
 
 class ChangeData extends ChangeNotifier {
@@ -109,34 +110,6 @@ void modalSeletPayMetod(BuildContext context, PlanesModel planCambio, String tit
                               InkWell(
                                 onTap: () async {
                                   if (_controller.botton) {
-                                    /* if (_controller.select == 3) {
-                                      ReservasNuevoApi reservasNuevoApi = ReservasNuevoApi();
-                                      provider.changeCargandoTrue();
-                                      final res = await reservasNuevoApi.reservaOnline(canchita);
-
-                                      if (res.code == '1') {
-                                        provider.changeCargandoFalse();
-                                        Navigator.pop(context);
-                                        Navigator.push(
-                                          context,
-                                          PageRouteBuilder(
-                                            transitionDuration: const Duration(milliseconds: 700),
-                                            pageBuilder: (context, animation, secondaryAnimation) {
-                                              return WebViewPagos(link: res.url, cancha: canchita);
-                                            },
-                                            transitionsBuilder: (context, animation, secondaryAnimation, child) {
-                                              return FadeTransition(
-                                                opacity: animation,
-                                                child: child,
-                                              );
-                                            },
-                                          ),
-                                        );
-                                      } else {
-                                        Navigator.pop(context);
-                                        provider.changeCargandoFalse();
-                                      }
-                                    } else { */
                                     Navigator.push(
                                       context,
                                       PageRouteBuilder(
@@ -166,7 +139,7 @@ void modalSeletPayMetod(BuildContext context, PlanesModel planCambio, String tit
                                       return Container(
                                         decoration: BoxDecoration(
                                             borderRadius: BorderRadius.circular(50),
-                                            color: (_controller.botton) ? const Color(0XFFFF0036) : const Color(0XFFFF0036).withOpacity(0.6)),
+                                            color: (_controller.botton) ? colorPrimary1 : colorPrimary1.withOpacity(0.6)),
                                         child: Center(
                                           child: Text(
                                             'Continuar',
@@ -212,7 +185,7 @@ _showLoading() {
     child: Center(
       child: (Platform.isAndroid)
           ? const CircularProgressIndicator(
-              color: Color(0XFFFF0036),
+              color: colorPrimary1,
             )
           : const CupertinoActivityIndicator(),
     ),

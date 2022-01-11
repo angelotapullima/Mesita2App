@@ -13,6 +13,7 @@ import 'package:mesita_aplication_2/src/models/producto_linea_model.dart';
 import 'package:mesita_aplication_2/src/pages/Busqueda/buscar_page.dart';
 import 'package:mesita_aplication_2/src/pages/Mesas/detalle_mesa_page.dart';
 import 'package:mesita_aplication_2/src/pages/Pedidos/agregar_detalle_producto.dart';
+import 'package:mesita_aplication_2/src/utils/colors.dart';
 import 'package:mesita_aplication_2/src/utils/constants.dart';
 
 class AgregarProductoPage extends StatefulWidget {
@@ -36,7 +37,7 @@ class _AgregarProductoPageState extends State<AgregarProductoPage> {
     return Scaffold(
       backgroundColor: const Color(0XFFE5E5E5),
       appBar: AppBar(
-        backgroundColor: const Color(0XFFFF0036),
+        backgroundColor: colorPrimary1,
         elevation: 0,
         iconTheme: const IconThemeData(color: Colors.white),
         title: Text(
@@ -61,7 +62,7 @@ class _AgregarProductoPageState extends State<AgregarProductoPage> {
                       child: Container(
                         height: ScreenUtil().setHeight(270),
                         decoration: const BoxDecoration(
-                          color: Color(0xFFF9708D),
+                          color: colorPrimary2,
                         ),
                       ),
                     ),
@@ -70,7 +71,7 @@ class _AgregarProductoPageState extends State<AgregarProductoPage> {
                       child: Container(
                         height: ScreenUtil().setHeight(250),
                         decoration: const BoxDecoration(
-                          color: Color(0XFFFF0036),
+                          color: colorPrimary1,
                         ),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.center,
@@ -182,7 +183,7 @@ class _AgregarProductoPageState extends State<AgregarProductoPage> {
                                                       ),
                                                       decoration: BoxDecoration(
                                                           borderRadius: BorderRadius.circular(22),
-                                                          color: (index == _controller.index) ? Colors.white : const Color(0XFFFF0036),
+                                                          color: (index == _controller.index) ? Colors.white : colorPrimary1,
                                                           boxShadow: [
                                                             BoxShadow(
                                                               color: (index == _controller.index)
@@ -262,7 +263,7 @@ class _AgregarProductoPageState extends State<AgregarProductoPage> {
       child: Center(
         child: (Platform.isAndroid)
             ? const CircularProgressIndicator(
-                color: Color(0XFFFF0036),
+                color: colorPrimary1,
               )
             : const CupertinoActivityIndicator(),
       ),

@@ -12,6 +12,7 @@ import 'package:keyboard_actions/keyboard_actions.dart';
 import 'package:mesita_aplication_2/src/api/user_api.dart';
 import 'package:mesita_aplication_2/src/pages/User/modal_edit_perfil.dart';
 import 'package:mesita_aplication_2/src/preferences/preferences.dart';
+import 'package:mesita_aplication_2/src/utils/colors.dart';
 import 'package:mesita_aplication_2/src/utils/utils.dart';
 
 class CuentaPage extends StatefulWidget {
@@ -305,7 +306,7 @@ class _CuentaPageState extends State<CuentaPage> {
                                   fontWeight: FontWeight.w400,
                                 ),
                               ),
-                              textColor: Colors.red,
+                              textColor: colorPrimary1,
                             ),
                           )
                         : Center(
@@ -318,7 +319,7 @@ class _CuentaPageState extends State<CuentaPage> {
                                 padding: EdgeInsets.symmetric(horizontal: ScreenUtil().setWidth(50), vertical: ScreenUtil().setHeight(10)),
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(22),
-                                  color: const Color(0XFFFF0036),
+                                  color: colorPrimary1,
                                 ),
                                 child: Text(
                                   'Hecho',
@@ -407,7 +408,7 @@ class _CuentaPageState extends State<CuentaPage> {
                                     child: Text(
                                       'Editar perfil',
                                       style: GoogleFonts.poppins(
-                                        color: const Color(0XFFFF0036),
+                                        color: colorPrimary1,
                                         fontWeight: FontWeight.w600,
                                         fontSize: ScreenUtil().setSp(18),
                                       ),
@@ -612,7 +613,7 @@ class _CuentaPageState extends State<CuentaPage> {
                                             child: Container(
                                               decoration: BoxDecoration(
                                                 borderRadius: BorderRadius.circular(50),
-                                                color: (_controller.boton) ? const Color(0XFFFF0036) : const Color(0XFFFF0036).withOpacity(0.6),
+                                                color: (_controller.boton) ? colorPrimary1 : colorPrimary1.withOpacity(0.6),
                                               ),
                                               child: Center(
                                                 child: Text(
@@ -640,7 +641,7 @@ class _CuentaPageState extends State<CuentaPage> {
                                           return Text(
                                             _controller.text,
                                             style: TextStyle(
-                                              color: const Color(0XFFFF0036),
+                                              color: colorPrimary1,
                                               fontWeight: FontWeight.w600,
                                               fontSize: ScreenUtil().setSp(16),
                                               fontStyle: FontStyle.normal,
@@ -747,7 +748,7 @@ class _CuentaPageState extends State<CuentaPage> {
                                     child: Text(
                                       'Actualizar contraseña',
                                       style: GoogleFonts.poppins(
-                                        color: const Color(0XFFFF0036),
+                                        color: colorPrimary1,
                                         fontWeight: FontWeight.w600,
                                         fontSize: ScreenUtil().setSp(18),
                                       ),
@@ -898,7 +899,7 @@ class _CuentaPageState extends State<CuentaPage> {
                                             child: Container(
                                               decoration: BoxDecoration(
                                                 borderRadius: BorderRadius.circular(50),
-                                                color: (_controller.boton) ? const Color(0XFFFF0036) : const Color(0XFFFF0036).withOpacity(0.6),
+                                                color: (_controller.boton) ? colorPrimary1 : colorPrimary1.withOpacity(0.6),
                                               ),
                                               child: Center(
                                                 child: Text(
@@ -926,7 +927,7 @@ class _CuentaPageState extends State<CuentaPage> {
                                           return Text(
                                             _controller.text,
                                             style: TextStyle(
-                                              color: const Color(0XFFFF0036),
+                                              color: colorPrimary1,
                                               fontWeight: FontWeight.w600,
                                               fontSize: ScreenUtil().setSp(16),
                                               fontStyle: FontStyle.normal,
@@ -999,7 +1000,7 @@ class _CuentaPageState extends State<CuentaPage> {
                 ],
           androidUiSettings: const AndroidUiSettings(
               toolbarTitle: 'Cortar Imagen',
-              toolbarColor: Color(0XFFFF0036),
+              toolbarColor: colorPrimary1,
               toolbarWidgetColor: Colors.white,
               initAspectRatio: CropAspectRatioPreset.original,
               showCropGrid: true,
@@ -1081,7 +1082,7 @@ class _CuentaPageState extends State<CuentaPage> {
                                 const Spacer(),
                                 Icon(
                                   Icons.photo_album_outlined,
-                                  color: const Color(0XFFFF0036),
+                                  color: colorPrimary1,
                                   size: ScreenUtil().setHeight(24),
                                 )
                               ],
@@ -1113,7 +1114,7 @@ class _CuentaPageState extends State<CuentaPage> {
                                 const Spacer(),
                                 Icon(
                                   Icons.photo_camera_outlined,
-                                  color: const Color(0XFFFF0036),
+                                  color: colorPrimary1,
                                   size: ScreenUtil().setHeight(24),
                                 )
                               ],
@@ -1143,7 +1144,7 @@ class _CuentaPageState extends State<CuentaPage> {
       child: Center(
         child: (Platform.isAndroid)
             ? const CircularProgressIndicator(
-                color: Color(0XFFFF0036),
+                color: colorPrimary1,
               )
             : const CupertinoActivityIndicator(),
       ),

@@ -10,6 +10,7 @@ import 'package:mesita_aplication_2/src/bloc/provider.dart';
 import 'package:mesita_aplication_2/src/models/mesa_model.dart';
 import 'package:mesita_aplication_2/src/models/producto_linea_model.dart';
 import 'package:mesita_aplication_2/src/pages/Pedidos/agregar_detalle_producto.dart';
+import 'package:mesita_aplication_2/src/utils/colors.dart';
 import 'package:mesita_aplication_2/src/utils/constants.dart';
 
 class BuscarPage extends StatefulWidget {
@@ -52,7 +53,7 @@ class _BuscarPageState extends State<BuscarPage> {
                     height: ScreenUtil().setHeight(144),
                     width: ScreenUtil().setWidth(359),
                     decoration: const BoxDecoration(
-                      color: Color(0xFFF9708D),
+                      color: colorPrimary2,
                       borderRadius: BorderRadius.only(
                         bottomLeft: Radius.circular(35),
                         bottomRight: Radius.circular(35),
@@ -63,7 +64,7 @@ class _BuscarPageState extends State<BuscarPage> {
                 Container(
                   height: ScreenUtil().setHeight(144),
                   decoration: const BoxDecoration(
-                    color: Color(0XFFFF0036),
+                    color: colorPrimary1,
                     borderRadius: BorderRadius.only(
                       bottomLeft: Radius.circular(35),
                       bottomRight: Radius.circular(35),
@@ -151,7 +152,7 @@ class _BuscarPageState extends State<BuscarPage> {
                   return Center(
                     child: (Platform.isAndroid)
                         ? const CircularProgressIndicator(
-                            color: Color(0XFFFF0036),
+                            color: colorPrimary1,
                           )
                         : const CupertinoActivityIndicator(),
                   );

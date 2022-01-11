@@ -10,6 +10,7 @@ import 'package:mesita_aplication_2/src/pages/Busqueda/buscar_page.dart';
 import 'package:mesita_aplication_2/src/pages/Mesas/delete_mesa.dart';
 import 'package:mesita_aplication_2/src/pages/Mesas/modal_agregar_mesa.dart';
 import 'package:mesita_aplication_2/src/pages/Pedidos/comanda_mesa_page.dart';
+import 'package:mesita_aplication_2/src/utils/colors.dart';
 
 class AgregarePedidoMesa extends StatefulWidget {
   final MesaModel mesa;
@@ -45,7 +46,7 @@ class _DetalleMesaPageState extends State<AgregarePedidoMesa> {
               return Scaffold(
                 backgroundColor: const Color(0XFFE5E5E5),
                 appBar: AppBar(
-                  backgroundColor: const Color(0XFFFF0036),
+                  backgroundColor: colorPrimary1,
                   elevation: 0,
                   iconTheme: const IconThemeData(color: Colors.white),
                   title: Text(
@@ -120,7 +121,7 @@ class _DetalleMesaPageState extends State<AgregarePedidoMesa> {
                             child: Container(
                               height: ScreenUtil().setHeight(200),
                               decoration: const BoxDecoration(
-                                color: Color(0xFFF9708D),
+                                color: colorPrimary2,
                               ),
                             ),
                           ),
@@ -129,7 +130,7 @@ class _DetalleMesaPageState extends State<AgregarePedidoMesa> {
                             child: Container(
                               height: ScreenUtil().setHeight(185),
                               decoration: const BoxDecoration(
-                                color: Color(0XFFFF0036),
+                                color: colorPrimary1,
                               ),
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -249,7 +250,7 @@ class _DetalleMesaPageState extends State<AgregarePedidoMesa> {
       child: Center(
         child: (Platform.isAndroid)
             ? const CircularProgressIndicator(
-                color: Color(0XFFFF0036),
+                color: colorPrimary1,
               )
             : const CupertinoActivityIndicator(),
       ),

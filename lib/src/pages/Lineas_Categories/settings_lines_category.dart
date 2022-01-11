@@ -9,6 +9,7 @@ import 'package:mesita_aplication_2/src/bloc/provider.dart';
 import 'package:mesita_aplication_2/src/models/linea_model.dart';
 import 'package:mesita_aplication_2/src/pages/Lineas_Categories/delete_line.dart';
 import 'package:mesita_aplication_2/src/pages/Lineas_Categories/modal_edit_line.dart';
+import 'package:mesita_aplication_2/src/utils/colors.dart';
 
 class SettingsLinesCategory extends StatelessWidget {
   final String idCategoria;
@@ -27,7 +28,7 @@ class SettingsLinesCategory extends StatelessWidget {
         title: Text(
           'Categorías',
           style: GoogleFonts.poppins(
-            color: const Color(0XFFFF0036),
+            color: colorPrimary1,
             fontSize: ScreenUtil().setSp(18),
             fontWeight: FontWeight.w600,
             letterSpacing: 0.16,
@@ -132,7 +133,7 @@ class SettingsLinesCategory extends StatelessWidget {
       child: Center(
         child: (Platform.isAndroid)
             ? const CircularProgressIndicator(
-                color: Color(0XFFFF0036),
+                color: colorPrimary1,
               )
             : const CupertinoActivityIndicator(),
       ),

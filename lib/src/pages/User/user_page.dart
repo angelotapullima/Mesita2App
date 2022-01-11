@@ -8,6 +8,7 @@ import 'package:mesita_aplication_2/src/pages/User/Planes/planes_page.dart';
 import 'package:mesita_aplication_2/src/pages/User/Recibos/recibos_page.dart';
 import 'package:mesita_aplication_2/src/pages/User/cuenta_page.dart';
 import 'package:mesita_aplication_2/src/preferences/preferences.dart';
+import 'package:mesita_aplication_2/src/utils/colors.dart';
 import 'package:mesita_aplication_2/src/utils/utils.dart';
 
 class UserPage extends StatelessWidget {
@@ -228,7 +229,7 @@ class UserPage extends StatelessWidget {
                 padding: EdgeInsets.symmetric(horizontal: ScreenUtil().setWidth(50), vertical: ScreenUtil().setHeight(10)),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(22),
-                  color: const Color(0XFFFF0036),
+                  color: colorPrimary1,
                 ),
                 child: Text(
                   'Cerrar sesión',

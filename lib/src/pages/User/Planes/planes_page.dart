@@ -9,6 +9,7 @@ import 'package:mesita_aplication_2/src/models/planes_model.dart';
 import 'package:mesita_aplication_2/src/pages/User/Planes/Pagos/modals_metodo_pago.dart';
 import 'package:mesita_aplication_2/src/pages/User/Planes/detalle_plan.dart';
 import 'package:mesita_aplication_2/src/preferences/preferences.dart';
+import 'package:mesita_aplication_2/src/utils/colors.dart';
 import 'package:mesita_aplication_2/src/utils/utils.dart';
 
 class PlanesPage extends StatelessWidget {
@@ -68,7 +69,7 @@ class PlanesPage extends StatelessWidget {
     return Center(
       child: (Platform.isAndroid)
           ? const CircularProgressIndicator(
-              color: Color(0XFFFF0036),
+              color: colorPrimary1,
             )
           : const CupertinoActivityIndicator(),
     );

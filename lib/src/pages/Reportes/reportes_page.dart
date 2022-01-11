@@ -12,6 +12,7 @@ import 'package:mesita_aplication_2/src/pages/Reportes/reporte_productos.dart';
 import 'package:mesita_aplication_2/src/pages/Reportes/reporte_utilidades.dart';
 import 'package:mesita_aplication_2/src/preferences/preferences.dart';
 import 'package:mesita_aplication_2/src/utils/circle_user_porfile.dart';
+import 'package:mesita_aplication_2/src/utils/colors.dart';
 import 'package:mesita_aplication_2/src/utils/utils.dart';
 import 'package:platform_date_picker/platform_date_picker.dart';
 
@@ -145,7 +146,7 @@ class _ReportesPageState extends State<ReportesPage> {
                             ),
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(22),
-                                color: (index == _controller.index) ? const Color(0XFFFF0036) : const Color(0XFFE5E5E5),
+                                color: (index == _controller.index) ? colorPrimary1 : const Color(0XFFE5E5E5),
                                 boxShadow: [
                                   BoxShadow(
                                     color: (index == _controller.index) ? const Color.fromRGBO(255, 0, 54, 0.5) : Colors.transparent,
@@ -293,7 +294,7 @@ class _ReportesPageState extends State<ReportesPage> {
                                   child: Text(
                                     'Establecer fecha',
                                     style: GoogleFonts.poppins(
-                                      color: const Color(0XFFFF0036),
+                                      color: colorPrimary1,
                                       fontWeight: FontWeight.w600,
                                       fontSize: ScreenUtil().setSp(18),
                                     ),
@@ -347,7 +348,7 @@ class _ReportesPageState extends State<ReportesPage> {
                                           child: Container(
                                             decoration: BoxDecoration(
                                               borderRadius: BorderRadius.circular(50),
-                                              color: (_controller.boton) ? const Color(0XFFFF0036) : const Color(0XFFFF0036).withOpacity(0.6),
+                                              color: (_controller.boton) ? colorPrimary1 : colorPrimary1.withOpacity(0.6),
                                             ),
                                             child: Center(
                                               child: Text(
@@ -375,7 +376,7 @@ class _ReportesPageState extends State<ReportesPage> {
                                         return Text(
                                           _controller.text,
                                           style: TextStyle(
-                                            color: const Color(0XFFFF0036),
+                                            color: colorPrimary1,
                                             fontWeight: FontWeight.w600,
                                             fontSize: ScreenUtil().setSp(16),
                                             fontStyle: FontStyle.normal,
@@ -429,7 +430,7 @@ class _ReportesPageState extends State<ReportesPage> {
       child: Center(
         child: (Platform.isAndroid)
             ? const CircularProgressIndicator(
-                color: Color(0XFFFF0036),
+                color: colorPrimary1,
               )
             : const CupertinoActivityIndicator(),
       ),

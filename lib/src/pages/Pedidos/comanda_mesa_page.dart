@@ -13,6 +13,7 @@ import 'package:mesita_aplication_2/src/bloc/provider.dart';
 import 'package:mesita_aplication_2/src/models/mesa_model.dart';
 import 'package:mesita_aplication_2/src/models/pedido_temporal_model.dart';
 import 'package:mesita_aplication_2/src/pages/Pedidos/agregar_producto_page.dart';
+import 'package:mesita_aplication_2/src/utils/colors.dart';
 import 'package:mesita_aplication_2/src/utils/constants.dart';
 import 'package:mesita_aplication_2/src/utils/utils.dart';
 
@@ -151,7 +152,7 @@ class _ComandaPageState extends State<ComandaPage> {
                                   height: ScreenUtil().setHeight(32),
                                   //width: ScreenUtil().setWidth(86),
                                   decoration: BoxDecoration(
-                                    color: const Color(0XFFFF0036),
+                                    color: colorPrimary1,
                                     borderRadius: BorderRadius.circular(30),
                                     boxShadow: const [
                                       BoxShadow(
@@ -213,58 +214,6 @@ class _ComandaPageState extends State<ComandaPage> {
                                     ],
                                   ),
                                 ),
-                                // InkWell(
-                                //   onTap: () async {
-                                //     final _ptDB = PedidosTemporalDatabase();
-                                //     await _ptDB.deleteDetallesPedidoTemporalPorId(comanda[index].id);
-                                //     comandaBloc.obtenerComandaPorMesa(widget.mesa.idMesa);
-                                //   },
-                                //   child: Container(
-                                //     padding: EdgeInsets.symmetric(horizontal: ScreenUtil().setWidth(16)),
-                                //     height: ScreenUtil().setHeight(32),
-                                //     //width: ScreenUtil().setWidth(86),
-                                //     decoration: BoxDecoration(
-                                //       color: Color(0XFFFF0036),
-                                //       borderRadius: BorderRadius.circular(30),
-                                //       boxShadow: [
-                                //         BoxShadow(
-                                //           color: Color.fromRGBO(88, 88, 88, 0.5),
-                                //         ),
-                                //       ],
-                                //     ),
-                                //     child: Row(
-                                //       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                //       children: [
-                                //         Container(
-                                //           margin: EdgeInsets.symmetric(horizontal: 8),
-                                //           height: ScreenUtil().setHeight(22),
-                                //           width: ScreenUtil().setWidth(22),
-                                //           decoration: BoxDecoration(
-                                //             color: Colors.white,
-                                //             shape: BoxShape.circle,
-                                //             boxShadow: [
-                                //               BoxShadow(
-                                //                 color: Color.fromRGBO(88, 88, 88, 0.5),
-                                //               ),
-                                //             ],
-                                //           ),
-                                //           child: Center(
-                                //             child: Text(
-                                //               '${comanda[index].cantidad}',
-                                //               style: GoogleFonts.poppins(
-                                //                 fontWeight: FontWeight.w700,
-                                //                 fontSize: ScreenUtil().setSp(16),
-                                //               ),
-                                //             ),
-                                //           ),
-                                //         ),
-                                //         Icon(
-                                //           Icons.delete_outline,
-                                //         ),
-                                //       ],
-                                //     ),
-                                //   ),
-                                // ),
                               ],
                             ),
                           );
@@ -339,13 +288,13 @@ class _ComandaPageState extends State<ComandaPage> {
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(22),
                           side: const BorderSide(
-                            color: Color(0XFFFF0036),
+                            color: colorPrimary1,
                           ),
                         ),
                         child: Text(
                           'Agregar pedidos',
                           style: GoogleFonts.poppins(
-                            color: const Color(0XFFFF0036),
+                            color: colorPrimary1,
                             fontWeight: FontWeight.w500,
                             fontSize: ScreenUtil().setSp(16),
                           ),
@@ -356,7 +305,7 @@ class _ComandaPageState extends State<ComandaPage> {
                       margin: EdgeInsets.only(left: ScreenUtil().setWidth(24), right: ScreenUtil().setWidth(24), bottom: ScreenUtil().setHeight(16)),
                       width: double.infinity,
                       child: MaterialButton(
-                        color: const Color(0XFFFF0036),
+                        color: colorPrimary1,
                         textColor: Colors.white,
                         elevation: 10,
                         onPressed: () async {
@@ -412,7 +361,7 @@ class _ComandaPageState extends State<ComandaPage> {
                 ),
                 width: double.infinity,
                 child: MaterialButton(
-                  color: const Color(0XFFFF0036),
+                  color: colorPrimary1,
                   textColor: Colors.white,
                   elevation: 10,
                   onPressed: () {
@@ -476,7 +425,7 @@ class _ComandaPageState extends State<ComandaPage> {
       child: Center(
         child: (Platform.isAndroid)
             ? const CircularProgressIndicator(
-                color: Color(0XFFFF0036),
+                color: colorPrimary1,
               )
             : const CupertinoActivityIndicator(),
       ),
@@ -567,7 +516,7 @@ class _ComandaPageState extends State<ComandaPage> {
                                     child: Text(
                                       'Detalles de entrega',
                                       style: GoogleFonts.poppins(
-                                        color: const Color(0XFFFF0036),
+                                        color: colorPrimary1,
                                         fontWeight: FontWeight.w600,
                                         fontSize: ScreenUtil().setSp(18),
                                       ),
@@ -727,7 +676,7 @@ class _ComandaPageState extends State<ComandaPage> {
                                             child: Container(
                                               decoration: BoxDecoration(
                                                 borderRadius: BorderRadius.circular(50),
-                                                color: const Color(0XFFFF0036),
+                                                color: colorPrimary1,
                                               ),
                                               child: Center(
                                                 child: Text(

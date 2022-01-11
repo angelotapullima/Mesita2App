@@ -10,6 +10,7 @@ import 'package:mesita_aplication_2/src/api/pedidos_api.dart';
 import 'package:mesita_aplication_2/src/bloc/provider.dart';
 import 'package:mesita_aplication_2/src/models/pedidos_model.dart';
 import 'package:mesita_aplication_2/src/pages/Pedidos/delete_detail_pedido.dart';
+import 'package:mesita_aplication_2/src/utils/colors.dart';
 import 'package:mesita_aplication_2/src/utils/constants.dart';
 
 class EditarDetalleProductoPedido extends StatefulWidget {
@@ -187,7 +188,7 @@ class _EditarDetalleProductoPedidoState extends State<EditarDetalleProductoPedid
                                   height: ScreenUtil().setHeight(32),
                                   //width: ScreenUtil().setWidth(86),
                                   decoration: BoxDecoration(
-                                    color: const Color(0XFFFF0036),
+                                    color: colorPrimary1,
                                     borderRadius: BorderRadius.circular(30),
                                     boxShadow: const [
                                       BoxShadow(
@@ -269,15 +270,15 @@ class _EditarDetalleProductoPedidoState extends State<EditarDetalleProductoPedid
                                     fontStyle: FontStyle.normal),
                                 enabledBorder: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(15),
-                                  borderSide: BorderSide(color: const Color(0XFFFF0036), width: ScreenUtil().setWidth(2)),
+                                  borderSide: BorderSide(color: colorPrimary1, width: ScreenUtil().setWidth(2)),
                                 ),
                                 focusedBorder: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(15),
-                                  borderSide: BorderSide(color: const Color(0XFFFF0036), width: ScreenUtil().setWidth(2)),
+                                  borderSide: BorderSide(color: colorPrimary1, width: ScreenUtil().setWidth(2)),
                                 ),
                                 border: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(15),
-                                  borderSide: BorderSide(color: const Color(0XFFFF0036), width: ScreenUtil().setWidth(2)),
+                                  borderSide: BorderSide(color: colorPrimary1, width: ScreenUtil().setWidth(2)),
                                 ),
                               ),
                               style: GoogleFonts.poppins(
@@ -321,7 +322,7 @@ class _EditarDetalleProductoPedidoState extends State<EditarDetalleProductoPedid
                                 width: ScreenUtil().setWidth(130),
                                 //width: ScreenUtil().setWidth(86),
                                 decoration: BoxDecoration(
-                                  color: const Color(0XFFFF0036),
+                                  color: colorPrimary1,
                                   borderRadius: BorderRadius.circular(30),
                                   boxShadow: const [
                                     BoxShadow(
@@ -458,7 +459,7 @@ class _EditarDetalleProductoPedidoState extends State<EditarDetalleProductoPedid
       child: Center(
         child: (Platform.isAndroid)
             ? const CircularProgressIndicator(
-                color: Color(0XFFFF0036),
+                color: colorPrimary1,
               )
             : const CupertinoActivityIndicator(),
       ),

@@ -10,6 +10,7 @@ import 'package:mesita_aplication_2/src/bloc/provider.dart';
 import 'package:mesita_aplication_2/src/models/miembros_model.dart';
 import 'package:mesita_aplication_2/src/models/plan_user_model.dart';
 import 'package:mesita_aplication_2/src/pages/User/Planes/modal_miembro.dart';
+import 'package:mesita_aplication_2/src/utils/colors.dart';
 import 'package:mesita_aplication_2/src/utils/constants.dart';
 
 class DetallePlanPage extends StatelessWidget {
@@ -93,7 +94,7 @@ class DetallePlanPage extends StatelessWidget {
                         margin: const EdgeInsets.symmetric(),
                         width: double.infinity,
                         child: MaterialButton(
-                          color: const Color(0XFFFF0036),
+                          color: colorPrimary1,
                           textColor: Colors.white,
                           elevation: 1,
                           onPressed: () {
@@ -216,7 +217,7 @@ class DetallePlanPage extends StatelessWidget {
     return Center(
       child: (Platform.isAndroid)
           ? const CircularProgressIndicator(
-              color: Color(0XFFFF0036),
+              color: colorPrimary1,
             )
           : const CupertinoActivityIndicator(),
     );

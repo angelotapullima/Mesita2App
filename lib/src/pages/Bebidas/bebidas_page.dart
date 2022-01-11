@@ -15,6 +15,7 @@ import 'package:mesita_aplication_2/src/pages/Lineas_Categories/settings_lines_c
 import 'package:mesita_aplication_2/src/pages/Products/detail_product.dart';
 import 'package:mesita_aplication_2/src/preferences/preferences.dart';
 import 'package:mesita_aplication_2/src/utils/circle_user_porfile.dart';
+import 'package:mesita_aplication_2/src/utils/colors.dart';
 import 'package:mesita_aplication_2/src/utils/constants.dart';
 import 'package:provider/provider.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
@@ -78,7 +79,10 @@ class _BebidasPageState extends State<BebidasPage> {
             child: SizedBox(
               width: ScreenUtil().setWidth(20),
               height: ScreenUtil().setHeight(20),
-              child: SvgPicture.asset('assets/food_svg/add_food.svg'),
+              child: SvgPicture.asset(
+                'assets/food_svg/add_food.svg',
+                color: colorPrimary1,
+              ),
             ),
           ),
           SizedBox(
@@ -173,7 +177,7 @@ class _BebidasPageState extends State<BebidasPage> {
                                     ),
                                     decoration: BoxDecoration(
                                         borderRadius: BorderRadius.circular(22),
-                                        color: (index == value) ? const Color(0XFFFF0036) : const Color(0XFFE5E5E5),
+                                        color: (index == value) ? colorPrimary1 : const Color(0XFFE5E5E5),
                                         boxShadow: [
                                           BoxShadow(
                                             color: (index == value) ? const Color.fromRGBO(255, 0, 54, 0.5) : Colors.transparent,
@@ -246,7 +250,7 @@ class _BebidasPageState extends State<BebidasPage> {
       child: Center(
         child: (Platform.isAndroid)
             ? const CircularProgressIndicator(
-                color: Color(0XFFFF0036),
+                color: colorPrimary1,
               )
             : const CupertinoActivityIndicator(),
       ),
@@ -416,18 +420,3 @@ class _BebidasPageState extends State<BebidasPage> {
     );
   }
 }
-
-// class CategoryController extends ChangeNotifier {
-//   String idSelec = '1';
-//   int index = 0;
-
-//   void changeIndex(int i) {
-//     index = i;
-//     notifyListeners();
-//   }
-
-//   // void changeIdSelect(String id) {
-//   //   idSelec = id;
-//   //   notifyListeners();
-//   // }
-// }

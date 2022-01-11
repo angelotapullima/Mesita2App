@@ -10,6 +10,7 @@ import 'package:flutter/services.dart';
 import 'package:mesita_aplication_2/src/models/planes_model.dart';
 import 'package:mesita_aplication_2/src/pages/User/Planes/Pagos/validar_pago_page.dart';
 import 'package:mesita_aplication_2/src/preferences/preferences.dart';
+import 'package:mesita_aplication_2/src/utils/colors.dart';
 import 'package:mesita_aplication_2/src/utils/utils.dart';
 
 class DetalleReservaPlinYape extends StatefulWidget {
@@ -81,7 +82,7 @@ class _DetalleReservaPlinYapeState extends State<DetalleReservaPlinYape> {
                                   '${prefs.negocioNombre}',
                                   textAlign: TextAlign.center,
                                   style: GoogleFonts.poppins(
-                                    color: const Color(0XFFFF0036),
+                                    color: colorPrimary1,
                                     fontSize: ScreenUtil().setSp(18),
                                     fontWeight: FontWeight.w600,
                                     letterSpacing: ScreenUtil().setSp(0.016),
@@ -478,7 +479,7 @@ class _DetalleReservaPlinYapeState extends State<DetalleReservaPlinYape> {
                           child: Container(
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(50),
-                              color: const Color(0XFFFF0036),
+                              color: colorPrimary1,
                             ),
                             child: Center(
                               child: Text(

@@ -16,6 +16,7 @@ import 'package:mesita_aplication_2/src/database/linea_database.dart';
 import 'package:mesita_aplication_2/src/models/linea_model.dart';
 import 'package:mesita_aplication_2/src/models/producto_linea_model.dart';
 import 'package:mesita_aplication_2/src/pages/Comidas/comidas_page.dart';
+import 'package:mesita_aplication_2/src/utils/colors.dart';
 import 'package:mesita_aplication_2/src/utils/constants.dart';
 import 'package:provider/provider.dart';
 
@@ -292,7 +293,7 @@ void _newProductModal(BuildContext context, String idCategoria, String nameCateg
                                   child: Text(
                                     'Nueva $nameCategory',
                                     style: GoogleFonts.poppins(
-                                      color: const Color(0XFFFF0036),
+                                      color: colorPrimary1,
                                       fontWeight: FontWeight.w600,
                                       fontSize: ScreenUtil().setSp(18),
                                     ),
@@ -770,7 +771,7 @@ void _newProductModal(BuildContext context, String idCategoria, String nameCateg
                                           child: Container(
                                             decoration: BoxDecoration(
                                               borderRadius: BorderRadius.circular(50),
-                                              color: (_controller.boton) ? const Color(0XFFFF0036) : const Color(0XFFFF0036).withOpacity(0.6),
+                                              color: (_controller.boton) ? colorPrimary1 : colorPrimary1.withOpacity(0.6),
                                             ),
                                             child: Center(
                                               child: Text(
@@ -798,7 +799,7 @@ void _newProductModal(BuildContext context, String idCategoria, String nameCateg
                                         return Text(
                                           _controller.text,
                                           style: TextStyle(
-                                            color: const Color(0XFFFF0036),
+                                            color: colorPrimary1,
                                             fontWeight: FontWeight.w600,
                                             fontSize: ScreenUtil().setSp(16),
                                             fontStyle: FontStyle.normal,
@@ -902,7 +903,7 @@ void _addCategoryModal(BuildContext context, String idCategoria) {
                                   child: Text(
                                     'Nueva categoría',
                                     style: GoogleFonts.poppins(
-                                      color: const Color(0XFFFF0036),
+                                      color: colorPrimary1,
                                       fontWeight: FontWeight.w600,
                                       fontSize: ScreenUtil().setSp(18),
                                     ),
@@ -991,7 +992,7 @@ void _addCategoryModal(BuildContext context, String idCategoria) {
                                           child: Container(
                                             decoration: BoxDecoration(
                                               borderRadius: BorderRadius.circular(50),
-                                              color: (_controller.boton) ? const Color(0XFFFF0036) : const Color(0XFFFF0036).withOpacity(0.6),
+                                              color: (_controller.boton) ? colorPrimary1 : colorPrimary1.withOpacity(0.6),
                                             ),
                                             child: Center(
                                               child: Text(
@@ -1019,7 +1020,7 @@ void _addCategoryModal(BuildContext context, String idCategoria) {
                                         return Text(
                                           _controller.text,
                                           style: TextStyle(
-                                            color: const Color(0XFFFF0036),
+                                            color: colorPrimary1,
                                             fontWeight: FontWeight.w600,
                                             fontSize: ScreenUtil().setSp(16),
                                             fontStyle: FontStyle.normal,
@@ -1142,7 +1143,7 @@ void editProductModal(BuildContext context, ProductoLineaModel productData, Stri
                                   child: Text(
                                     'Editar $nameCategory',
                                     style: GoogleFonts.poppins(
-                                      color: const Color(0XFFFF0036),
+                                      color: colorPrimary1,
                                       fontWeight: FontWeight.w600,
                                       fontSize: ScreenUtil().setSp(18),
                                     ),
@@ -1616,7 +1617,7 @@ void editProductModal(BuildContext context, ProductoLineaModel productData, Stri
                                           child: Container(
                                             decoration: BoxDecoration(
                                               borderRadius: BorderRadius.circular(50),
-                                              color: (_controller.boton) ? const Color(0XFFFF0036) : const Color(0XFFFF0036).withOpacity(0.6),
+                                              color: (_controller.boton) ? colorPrimary1 : colorPrimary1.withOpacity(0.6),
                                             ),
                                             child: Center(
                                               child: Text(
@@ -1644,7 +1645,7 @@ void editProductModal(BuildContext context, ProductoLineaModel productData, Stri
                                         return Text(
                                           _controller.text,
                                           style: TextStyle(
-                                            color: const Color(0XFFFF0036),
+                                            color: colorPrimary1,
                                             fontWeight: FontWeight.w600,
                                             fontSize: ScreenUtil().setSp(16),
                                             fontStyle: FontStyle.normal,
@@ -1717,7 +1718,7 @@ void updatePhotoProductModal(BuildContext context, String idCategoria, String id
               ],
         androidUiSettings: const AndroidUiSettings(
             toolbarTitle: 'Cortar Imagen',
-            toolbarColor: Color(0XFFFF0036),
+            toolbarColor: colorPrimary1,
             toolbarWidgetColor: Colors.white,
             initAspectRatio: CropAspectRatioPreset.original,
             showCropGrid: true,
@@ -1799,7 +1800,7 @@ void updatePhotoProductModal(BuildContext context, String idCategoria, String id
                               const Spacer(),
                               Icon(
                                 Icons.photo_album_outlined,
-                                color: const Color(0XFFFF0036),
+                                color: colorPrimary1,
                                 size: ScreenUtil().setHeight(24),
                               )
                             ],
@@ -1831,7 +1832,7 @@ void updatePhotoProductModal(BuildContext context, String idCategoria, String id
                               const Spacer(),
                               Icon(
                                 Icons.photo_camera_outlined,
-                                color: const Color(0XFFFF0036),
+                                color: colorPrimary1,
                                 size: ScreenUtil().setHeight(24),
                               )
                             ],
@@ -1861,7 +1862,7 @@ _showLoading() {
     child: Center(
       child: (Platform.isAndroid)
           ? const CircularProgressIndicator(
-              color: Color(0XFFFF0036),
+              color: colorPrimary1,
             )
           : const CupertinoActivityIndicator(),
     ),

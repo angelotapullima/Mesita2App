@@ -6,6 +6,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mesita_aplication_2/src/bloc/provider.dart';
 import 'package:mesita_aplication_2/src/models/buscar_user_model.dart';
+import 'package:mesita_aplication_2/src/utils/colors.dart';
 
 class BuscarUsuario extends StatefulWidget {
   const BuscarUsuario({Key key}) : super(key: key);
@@ -87,7 +88,7 @@ class _BuscarUsuarioState extends State<BuscarUsuario> {
                     child: Container(
                       padding: const EdgeInsets.all(8),
                       decoration: BoxDecoration(
-                        color: const Color(0XFFFF0036),
+                        color: colorPrimary1,
                         borderRadius: BorderRadius.circular(15),
                       ),
                       child: Text(
@@ -162,7 +163,7 @@ class _BuscarUsuarioState extends State<BuscarUsuario> {
     return Center(
       child: (Platform.isAndroid)
           ? const CircularProgressIndicator(
-              color: Color(0XFFFF0036),
+              color: colorPrimary1,
             )
           : const CupertinoActivityIndicator(),
     );

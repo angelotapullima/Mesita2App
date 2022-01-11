@@ -11,6 +11,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:mesita_aplication_2/src/api/planes_api.dart';
 import 'package:mesita_aplication_2/src/models/planes_model.dart';
 import 'package:mesita_aplication_2/src/preferences/preferences.dart';
+import 'package:mesita_aplication_2/src/utils/colors.dart';
 import 'package:mesita_aplication_2/src/utils/utils.dart';
 
 class ValidarPagoPage extends StatefulWidget {
@@ -495,7 +496,7 @@ class _ValidarPagoPageState extends State<ValidarPagoPage> {
                                     width: ScreenUtil().setWidth(20),
                                     decoration: BoxDecoration(
                                       shape: BoxShape.circle,
-                                      color: (_controller.tipoDoc == '03') ? const Color(0XFFFF0036) : const Color(0XFFf7f7f7),
+                                      color: (_controller.tipoDoc == '03') ? colorPrimary1 : const Color(0XFFf7f7f7),
                                       border: Border.all(
                                         color: const Color(0XFFF7F7F7),
                                         width: ScreenUtil().setWidth(4),
@@ -540,7 +541,7 @@ class _ValidarPagoPageState extends State<ValidarPagoPage> {
                                     width: ScreenUtil().setWidth(20),
                                     decoration: BoxDecoration(
                                       shape: BoxShape.circle,
-                                      color: (_controller.tipoDoc == '01') ? const Color(0XFFFF0036) : const Color(0XFFF7F7F7),
+                                      color: (_controller.tipoDoc == '01') ? colorPrimary1 : const Color(0XFFF7F7F7),
                                       border: Border.all(
                                         color: const Color(0XFFF7F7F7),
                                         width: ScreenUtil().setWidth(4),
@@ -592,11 +593,11 @@ class _ValidarPagoPageState extends State<ValidarPagoPage> {
                                 contentPadding: EdgeInsets.symmetric(horizontal: ScreenUtil().setWidth(8)),
                                 counterText: "",
                                 enabledBorder: OutlineInputBorder(
-                                  borderSide: const BorderSide(color: Color(0XFFFF0036)),
+                                  borderSide: const BorderSide(color: colorPrimary1),
                                   borderRadius: BorderRadius.circular(8),
                                 ),
                                 focusedBorder: OutlineInputBorder(
-                                  borderSide: const BorderSide(color: Color(0XFFFF0036)),
+                                  borderSide: const BorderSide(color: colorPrimary1),
                                   borderRadius: BorderRadius.circular(8),
                                 ),
                                 hintText: 'Ingrese RUC',
@@ -632,11 +633,11 @@ class _ValidarPagoPageState extends State<ValidarPagoPage> {
                                 contentPadding: EdgeInsets.symmetric(horizontal: ScreenUtil().setWidth(8)),
                                 counterText: "",
                                 enabledBorder: OutlineInputBorder(
-                                  borderSide: const BorderSide(color: Color(0XFFFF0036)),
+                                  borderSide: const BorderSide(color: colorPrimary1),
                                   borderRadius: BorderRadius.circular(8),
                                 ),
                                 focusedBorder: OutlineInputBorder(
-                                  borderSide: const BorderSide(color: Color(0XFFFF0036)),
+                                  borderSide: const BorderSide(color: colorPrimary1),
                                   borderRadius: BorderRadius.circular(8),
                                 ),
                                 hintText: 'Ingrese razón social',
@@ -672,11 +673,11 @@ class _ValidarPagoPageState extends State<ValidarPagoPage> {
                                 contentPadding: EdgeInsets.symmetric(horizontal: ScreenUtil().setWidth(8)),
                                 counterText: "",
                                 enabledBorder: OutlineInputBorder(
-                                  borderSide: const BorderSide(color: Color(0XFFFF0036)),
+                                  borderSide: const BorderSide(color: colorPrimary1),
                                   borderRadius: BorderRadius.circular(8),
                                 ),
                                 focusedBorder: OutlineInputBorder(
-                                  borderSide: const BorderSide(color: Color(0XFFFF0036)),
+                                  borderSide: const BorderSide(color: colorPrimary1),
                                   borderRadius: BorderRadius.circular(8),
                                 ),
                                 hintText: 'Ingrese dirección',
@@ -779,7 +780,7 @@ class _ValidarPagoPageState extends State<ValidarPagoPage> {
                         return Container(
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(50),
-                            color: (_controller.boton) ? const Color(0XFFFF0036) : const Color(0XFFFF0036).withOpacity(0.6),
+                            color: (_controller.boton) ? colorPrimary1 : colorPrimary1.withOpacity(0.6),
                           ),
                           child: Center(
                             child: Text(
@@ -802,7 +803,7 @@ class _ValidarPagoPageState extends State<ValidarPagoPage> {
                           return Text(
                             _controller.text,
                             style: GoogleFonts.poppins(
-                              color: const Color(0XFFFF0036),
+                              color: colorPrimary1,
                               fontWeight: FontWeight.w600,
                               fontSize: ScreenUtil().setSp(14),
                               fontStyle: FontStyle.normal,
@@ -839,7 +840,7 @@ class _ValidarPagoPageState extends State<ValidarPagoPage> {
       child: Center(
         child: (Platform.isAndroid)
             ? const CircularProgressIndicator(
-                color: Color(0XFFFF0036),
+                color: colorPrimary1,
               )
             : const CupertinoActivityIndicator(),
       ),

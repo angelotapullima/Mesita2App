@@ -54,13 +54,6 @@ class _ComidasPageState extends State<ComidasPage> {
   Widget build(BuildContext context) {
     final prefs = Preferences();
     final lineasBloc = ProviderBloc.lineas(context);
-    // if (carga == 0) {
-
-    //   lineasBloc.updateLineasPorNegocio(idCategoria);
-    //   carga++;
-    // } else {
-    //   lineasBloc.obtenerLineasPorNegocio(idCategoria);
-    // }
 
     lineasBloc.obtenerLineasPorNegocio(idCategoria);
     final provider = Provider.of<CategoryController>(context, listen: false);

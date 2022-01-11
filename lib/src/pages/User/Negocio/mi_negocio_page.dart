@@ -6,6 +6,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mesita_aplication_2/src/preferences/preferences.dart';
+import 'package:mesita_aplication_2/src/utils/colors.dart';
 import 'package:mesita_aplication_2/src/utils/utils.dart';
 
 class MiNegocioPage extends StatefulWidget {
@@ -59,53 +60,6 @@ class _MiNegocioPageState extends State<MiNegocioPage> {
                   letterSpacing: 0.16,
                 ),
               ),
-              // actions: [
-              //   (_controller.editarActive)
-              //       ? InkWell(
-              //           onTap: () async {
-              //             _controller.changeCargando(true);
-              //             if (_controller.botton) {
-              //               final _negocioApi = NegocioApi();
-              //               final res = await _negocioApi.actualizarNegocio(
-              //                   _nombreNegocioController.text, _direccionController.text, _telefonoController.text);
-
-              //               if (res == 1) {
-              //                 _controller.changeActive(false);
-              //                 showToast('Negocio actualizado correctamente', Colors.black);
-
-              //                 setState(() {});
-              //               } else {
-              //                 showToast('Ocurrió un error', Colors.red);
-              //               }
-              //             }
-              //             _controller.changeCargando(false);
-              //           },
-              //           child: Center(
-              //             child: Text(
-              //               'Guardar',
-              //               style: GoogleFonts.poppins(
-              //                 color: Colors.red,
-              //               ),
-              //             ),
-              //           ),
-              //         )
-              //       : InkWell(
-              //           onTap: () {
-              //             _controller.changeActive(true);
-              //           },
-              //           child: Center(
-              //             child: Text(
-              //               'Editar',
-              //               style: GoogleFonts.poppins(
-              //                 color: Colors.red,
-              //               ),
-              //             ),
-              //           ),
-              //         ),
-              //   SizedBox(
-              //     width: ScreenUtil().setWidth(24),
-              //   ),
-              // ],
             ),
             body: Stack(
               children: [
@@ -124,7 +78,10 @@ class _MiNegocioPageState extends State<MiNegocioPage> {
                           child: SizedBox(
                             height: ScreenUtil().setHeight(70),
                             width: ScreenUtil().setWidth(70),
-                            child: SvgPicture.asset('assets/settings_svg/negocio.svg'),
+                            child: SvgPicture.asset(
+                              'assets/settings_svg/negocio.svg',
+                              color: colorPrimary1,
+                            ),
                           ),
                         ),
                         SizedBox(
@@ -462,7 +419,7 @@ class _MiNegocioPageState extends State<MiNegocioPage> {
       child: Center(
         child: (Platform.isAndroid)
             ? const CircularProgressIndicator(
-                color: Color(0XFFFF0036),
+                color: colorPrimary1,
               )
             : const CupertinoActivityIndicator(),
       ),

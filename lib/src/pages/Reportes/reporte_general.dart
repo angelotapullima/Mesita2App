@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mesita_aplication_2/src/bloc/provider.dart';
 import 'package:mesita_aplication_2/src/models/reporte_general_model.dart';
+import 'package:mesita_aplication_2/src/utils/colors.dart';
 
 class ReporteGeneral extends StatelessWidget {
   const ReporteGeneral({Key key}) : super(key: key);
@@ -125,7 +126,7 @@ class ReporteGeneral extends StatelessWidget {
     return Center(
       child: (Platform.isAndroid)
           ? const CircularProgressIndicator(
-              color: Color(0XFFFF0036),
+              color: colorPrimary1,
             )
           : const CupertinoActivityIndicator(),
     );

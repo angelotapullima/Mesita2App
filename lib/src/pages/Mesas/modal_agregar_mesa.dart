@@ -8,6 +8,7 @@ import 'package:keyboard_actions/keyboard_actions.dart';
 import 'package:mesita_aplication_2/src/api/mesa_api.dart';
 import 'package:mesita_aplication_2/src/bloc/provider.dart';
 import 'package:mesita_aplication_2/src/models/mesa_model.dart';
+import 'package:mesita_aplication_2/src/utils/colors.dart';
 
 class ChangeController extends ChangeNotifier {
   bool cargando = false;
@@ -90,7 +91,7 @@ void mesaModal(BuildContext context) {
                                   child: Text(
                                     'Agregar mesa',
                                     style: GoogleFonts.poppins(
-                                      color: const Color(0XFFFF0036),
+                                      color: colorPrimary1,
                                       fontWeight: FontWeight.w600,
                                       fontSize: ScreenUtil().setSp(18),
                                     ),
@@ -229,7 +230,7 @@ void mesaModal(BuildContext context) {
                                         return Container(
                                           decoration: BoxDecoration(
                                             borderRadius: BorderRadius.circular(50),
-                                            color: (_controller.boton) ? const Color(0XFFFF0036) : const Color(0XFFFF0036).withOpacity(0.6),
+                                            color: (_controller.boton) ? colorPrimary1 : colorPrimary1.withOpacity(0.6),
                                           ),
                                           child: Center(
                                             child: Text(
@@ -256,7 +257,7 @@ void mesaModal(BuildContext context) {
                                         return Text(
                                           _controller.text,
                                           style: TextStyle(
-                                            color: const Color(0XFFFF0036),
+                                            color: colorPrimary1,
                                             fontWeight: FontWeight.w600,
                                             fontSize: ScreenUtil().setSp(16),
                                             fontStyle: FontStyle.normal,
@@ -370,7 +371,7 @@ void editMesaModal(BuildContext context, MesaModel mesaData) {
                                   child: Text(
                                     'Editar mesa',
                                     style: GoogleFonts.poppins(
-                                      color: const Color(0XFFFF0036),
+                                      color: colorPrimary1,
                                       fontWeight: FontWeight.w600,
                                       fontSize: ScreenUtil().setSp(18),
                                     ),
@@ -514,7 +515,7 @@ void editMesaModal(BuildContext context, MesaModel mesaData) {
                                         return Container(
                                           decoration: BoxDecoration(
                                             borderRadius: BorderRadius.circular(50),
-                                            color: (_controller.boton) ? const Color(0XFFFF0036) : const Color(0XFFFF0036).withOpacity(0.6),
+                                            color: (_controller.boton) ? colorPrimary1 : colorPrimary1.withOpacity(0.6),
                                           ),
                                           child: Center(
                                             child: Text(
@@ -541,7 +542,7 @@ void editMesaModal(BuildContext context, MesaModel mesaData) {
                                         return Text(
                                           _controller.text,
                                           style: TextStyle(
-                                            color: const Color(0XFFFF0036),
+                                            color: colorPrimary1,
                                             fontWeight: FontWeight.w600,
                                             fontSize: ScreenUtil().setSp(16),
                                             fontStyle: FontStyle.normal,
@@ -596,7 +597,7 @@ _showLoading() {
     child: Center(
       child: (Platform.isAndroid)
           ? const CircularProgressIndicator(
-              color: Color(0XFFFF0036),
+              color: colorPrimary1,
             )
           : const CupertinoActivityIndicator(),
     ),

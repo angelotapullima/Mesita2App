@@ -10,6 +10,7 @@ import 'package:mesita_aplication_2/src/api/planes_api.dart';
 import 'package:mesita_aplication_2/src/bloc/provider.dart';
 import 'package:mesita_aplication_2/src/models/miembros_model.dart';
 import 'package:mesita_aplication_2/src/pages/User/Planes/buscar_usuario_page.dart';
+import 'package:mesita_aplication_2/src/utils/colors.dart';
 import 'package:mesita_aplication_2/src/utils/constants.dart';
 
 class ChangeController extends ChangeNotifier {
@@ -94,7 +95,7 @@ void addMiembroModal(BuildContext context, String idPlan) {
                                         child: Text(
                                           'Añadir miembro',
                                           style: GoogleFonts.poppins(
-                                            color: const Color(0XFFFF0036),
+                                            color: colorPrimary1,
                                             fontWeight: FontWeight.w600,
                                             fontSize: ScreenUtil().setSp(18),
                                           ),
@@ -227,7 +228,7 @@ void addMiembroModal(BuildContext context, String idPlan) {
                                                 child: Container(
                                                   decoration: BoxDecoration(
                                                     borderRadius: BorderRadius.circular(50),
-                                                    color: (_controller.boton) ? const Color(0XFFFF0036) : const Color(0XFFFF0036).withOpacity(0.6),
+                                                    color: (_controller.boton) ? colorPrimary1 : colorPrimary1.withOpacity(0.6),
                                                   ),
                                                   child: Center(
                                                     child: Text(
@@ -255,7 +256,7 @@ void addMiembroModal(BuildContext context, String idPlan) {
                                               return Text(
                                                 _controller.text,
                                                 style: TextStyle(
-                                                  color: const Color(0XFFFF0036),
+                                                  color: colorPrimary1,
                                                   fontWeight: FontWeight.w600,
                                                   fontSize: ScreenUtil().setSp(16),
                                                   fontStyle: FontStyle.normal,
@@ -451,14 +452,14 @@ void verMiembroModal(BuildContext context, MiembrosModel miembro) {
                                         borderRadius: BorderRadius.circular(50),
                                         color: Colors.white,
                                         border: Border.all(
-                                          color: const Color(0XFFFF0036),
+                                          color: colorPrimary1,
                                           width: 2,
                                         )),
                                     child: Center(
                                       child: Text(
                                         'Quitar miembro',
                                         style: TextStyle(
-                                          color: const Color(0XFFFF0036),
+                                          color: colorPrimary1,
                                           fontWeight: FontWeight.w600,
                                           fontSize: ScreenUtil().setSp(16),
                                           fontStyle: FontStyle.normal,
@@ -479,7 +480,7 @@ void verMiembroModal(BuildContext context, MiembrosModel miembro) {
                                       return Text(
                                         _controller.text,
                                         style: TextStyle(
-                                          color: const Color(0XFFFF0036),
+                                          color: colorPrimary1,
                                           fontWeight: FontWeight.w600,
                                           fontSize: ScreenUtil().setSp(16),
                                           fontStyle: FontStyle.normal,
@@ -533,7 +534,7 @@ _showLoading() {
     child: Center(
       child: (Platform.isAndroid)
           ? const CircularProgressIndicator(
-              color: Color(0XFFFF0036),
+              color: colorPrimary1,
             )
           : const CupertinoActivityIndicator(),
     ),

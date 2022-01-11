@@ -16,6 +16,7 @@ import 'package:mesita_aplication_2/src/pages/Pedidos/agregar_producto_page.dart
 import 'package:mesita_aplication_2/src/pages/Pedidos/comanda_mesa_page.dart';
 import 'package:mesita_aplication_2/src/pages/Pedidos/editar_producto_pedido.dart';
 import 'package:mesita_aplication_2/src/pages/Pedidos/modal_pagar_pedido.dart';
+import 'package:mesita_aplication_2/src/utils/colors.dart';
 import 'package:mesita_aplication_2/src/utils/constants.dart';
 
 class DetalleMesaPage extends StatefulWidget {
@@ -52,7 +53,7 @@ class _DetalleMesaPageState extends State<DetalleMesaPage> {
               return Scaffold(
                 backgroundColor: const Color(0XFFE5E5E5),
                 appBar: AppBar(
-                  backgroundColor: const Color(0XFFFF0036),
+                  backgroundColor: colorPrimary1,
                   elevation: 0,
                   iconTheme: const IconThemeData(color: Colors.white),
                   title: Text(
@@ -127,7 +128,7 @@ class _DetalleMesaPageState extends State<DetalleMesaPage> {
                             child: Container(
                               height: ScreenUtil().setHeight(200),
                               decoration: const BoxDecoration(
-                                color: Color(0xFFF9708D),
+                                color: colorPrimary2,
                               ),
                             ),
                           ),
@@ -136,7 +137,7 @@ class _DetalleMesaPageState extends State<DetalleMesaPage> {
                             child: Container(
                               height: ScreenUtil().setHeight(185),
                               decoration: const BoxDecoration(
-                                color: Color(0XFFFF0036),
+                                color: colorPrimary1,
                               ),
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -402,63 +403,6 @@ class _DetalleMesaPageState extends State<DetalleMesaPage> {
                                                       fontSize: ScreenUtil().setSp(15),
                                                     ),
                                                   ),
-                                                  /* Container(
-                                                      padding: EdgeInsets.symmetric(horizontal: ScreenUtil().setWidth(16)),
-                                                      height: ScreenUtil().setHeight(32),
-                                                      //width: ScreenUtil().setWidth(86),
-                                                      decoration: BoxDecoration(
-                                                        color: Color(0XFFFF0036),
-                                                        borderRadius: BorderRadius.circular(30),
-                                                        boxShadow: [
-                                                          BoxShadow(
-                                                            color: Color.fromRGBO(88, 88, 88, 0.5),
-                                                          ),
-                                                        ],
-                                                      ),
-                                                      child: Row(
-                                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                                        children: [
-                                                          Text(
-                                                            '-',
-                                                            style: GoogleFonts.poppins(
-                                                              fontWeight: FontWeight.w700,
-                                                              fontSize: ScreenUtil().setSp(16),
-                                                            ),
-                                                          ),
-                                                          Container(
-                                                            margin: EdgeInsets.symmetric(horizontal: 8),
-                                                            height: ScreenUtil().setHeight(22),
-                                                            width: ScreenUtil().setWidth(22),
-                                                            decoration: BoxDecoration(
-                                                              color: Colors.white,
-                                                              shape: BoxShape.circle,
-                                                              boxShadow: [
-                                                                BoxShadow(
-                                                                  color: Color.fromRGBO(88, 88, 88, 0.5),
-                                                                ),
-                                                              ],
-                                                            ),
-                                                            child: Center(
-                                                              child: Text(
-                                                                '${pedidos[0].detallesPedido[index].cantidad}',
-                                                                style: GoogleFonts.poppins(
-                                                                  fontWeight: FontWeight.w700,
-                                                                  fontSize: ScreenUtil().setSp(16),
-                                                                ),
-                                                              ),
-                                                            ),
-                                                          ),
-                                                          Text(
-                                                            '+',
-                                                            style: GoogleFonts.poppins(
-                                                              fontWeight: FontWeight.w700,
-                                                              fontSize: ScreenUtil().setSp(16),
-                                                            ),
-                                                          ),
-                                                        ],
-                                                      ),
-                                                    ),
-                                                  */
                                                 ],
                                               ),
                                             ),
@@ -533,13 +477,13 @@ class _DetalleMesaPageState extends State<DetalleMesaPage> {
                                       shape: RoundedRectangleBorder(
                                         borderRadius: BorderRadius.circular(22),
                                         side: const BorderSide(
-                                          color: Color(0XFFFF0036),
+                                          color: colorPrimary1,
                                         ),
                                       ),
                                       child: Text(
                                         'Agregar pedidos',
                                         style: GoogleFonts.poppins(
-                                          color: const Color(0XFFFF0036),
+                                          color: colorPrimary1,
                                           fontWeight: FontWeight.w500,
                                           fontSize: ScreenUtil().setSp(16),
                                         ),
@@ -551,7 +495,7 @@ class _DetalleMesaPageState extends State<DetalleMesaPage> {
                                         left: ScreenUtil().setWidth(24), right: ScreenUtil().setWidth(24), bottom: ScreenUtil().setHeight(16)),
                                     width: double.infinity,
                                     child: MaterialButton(
-                                      color: const Color(0XFFFF0036),
+                                      color: colorPrimary1,
                                       textColor: Colors.white,
                                       elevation: 1,
                                       onPressed: () {
@@ -638,7 +582,7 @@ class _DetalleMesaPageState extends State<DetalleMesaPage> {
       child: Center(
         child: (Platform.isAndroid)
             ? const CircularProgressIndicator(
-                color: Color(0XFFFF0036),
+                color: colorPrimary1,
               )
             : const CupertinoActivityIndicator(),
       ),

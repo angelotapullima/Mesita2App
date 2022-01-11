@@ -8,6 +8,7 @@ import 'package:keyboard_actions/keyboard_actions.dart';
 import 'package:mesita_aplication_2/src/api/venta_api.dart';
 import 'package:mesita_aplication_2/src/bloc/provider.dart';
 import 'package:mesita_aplication_2/src/models/pedidos_model.dart';
+import 'package:mesita_aplication_2/src/utils/colors.dart';
 
 class ChangeController extends ChangeNotifier {
   bool cargando = false;
@@ -127,7 +128,7 @@ void pagarPedidoModal(BuildContext context, PedidoModel pedido, bool esDeliveryL
                                   child: Text(
                                     'Pagar',
                                     style: GoogleFonts.poppins(
-                                      color: const Color(0XFFFF0036),
+                                      color: colorPrimary1,
                                       fontWeight: FontWeight.w600,
                                       fontSize: ScreenUtil().setSp(18),
                                     ),
@@ -179,7 +180,7 @@ void pagarPedidoModal(BuildContext context, PedidoModel pedido, bool esDeliveryL
                                                 width: ScreenUtil().setWidth(20),
                                                 decoration: BoxDecoration(
                                                   shape: BoxShape.circle,
-                                                  color: (_controller.tipoPago == '1') ? const Color(0XFFFF0036) : const Color(0XFFE5E5E5),
+                                                  color: (_controller.tipoPago == '1') ? colorPrimary1 : const Color(0XFFE5E5E5),
                                                   border: Border.all(
                                                     color: const Color(0XFFE5E5E5),
                                                     width: ScreenUtil().setWidth(4),
@@ -231,7 +232,7 @@ void pagarPedidoModal(BuildContext context, PedidoModel pedido, bool esDeliveryL
                                                 width: ScreenUtil().setWidth(20),
                                                 decoration: BoxDecoration(
                                                   shape: BoxShape.circle,
-                                                  color: (_controller.tipoPago == '2') ? const Color(0XFFFF0036) : const Color(0XFFE5E5E5),
+                                                  color: (_controller.tipoPago == '2') ? colorPrimary1 : const Color(0XFFE5E5E5),
                                                   border: Border.all(
                                                     color: const Color(0XFFE5E5E5),
                                                     width: ScreenUtil().setWidth(4),
@@ -279,7 +280,7 @@ void pagarPedidoModal(BuildContext context, PedidoModel pedido, bool esDeliveryL
                                                 width: ScreenUtil().setWidth(20),
                                                 decoration: BoxDecoration(
                                                   shape: BoxShape.circle,
-                                                  color: (_controller.tipoPago == '3') ? const Color(0XFFFF0036) : const Color(0XFFE5E5E5),
+                                                  color: (_controller.tipoPago == '3') ? colorPrimary1 : const Color(0XFFE5E5E5),
                                                   border: Border.all(
                                                     color: const Color(0XFFE5E5E5),
                                                     width: ScreenUtil().setWidth(4),
@@ -354,7 +355,7 @@ void pagarPedidoModal(BuildContext context, PedidoModel pedido, bool esDeliveryL
                                                 width: ScreenUtil().setWidth(20),
                                                 decoration: BoxDecoration(
                                                   shape: BoxShape.circle,
-                                                  color: (_controller.tipoDoc == '03') ? const Color(0XFFFF0036) : const Color(0XFFE5E5E5),
+                                                  color: (_controller.tipoDoc == '03') ? colorPrimary1 : const Color(0XFFE5E5E5),
                                                   border: Border.all(
                                                     color: const Color(0XFFE5E5E5),
                                                     width: ScreenUtil().setWidth(4),
@@ -402,7 +403,7 @@ void pagarPedidoModal(BuildContext context, PedidoModel pedido, bool esDeliveryL
                                                 width: ScreenUtil().setWidth(20),
                                                 decoration: BoxDecoration(
                                                   shape: BoxShape.circle,
-                                                  color: (_controller.tipoDoc == '01') ? const Color(0XFFFF0036) : const Color(0XFFE5E5E5),
+                                                  color: (_controller.tipoDoc == '01') ? colorPrimary1 : const Color(0XFFE5E5E5),
                                                   border: Border.all(
                                                     color: const Color(0XFFE5E5E5),
                                                     width: ScreenUtil().setWidth(4),
@@ -443,7 +444,7 @@ void pagarPedidoModal(BuildContext context, PedidoModel pedido, bool esDeliveryL
                                                 width: ScreenUtil().setWidth(20),
                                                 decoration: BoxDecoration(
                                                   shape: BoxShape.circle,
-                                                  color: (_controller.tipoDoc == '02') ? const Color(0XFFFF0036) : const Color(0XFFE5E5E5),
+                                                  color: (_controller.tipoDoc == '02') ? colorPrimary1 : const Color(0XFFE5E5E5),
                                                   border: Border.all(
                                                     color: const Color(0XFFE5E5E5),
                                                     width: ScreenUtil().setWidth(4),
@@ -757,7 +758,7 @@ void pagarPedidoModal(BuildContext context, PedidoModel pedido, bool esDeliveryL
                                           child: Container(
                                             decoration: BoxDecoration(
                                               borderRadius: BorderRadius.circular(50),
-                                              color: (_controller.boton) ? const Color(0XFFFF0036) : const Color(0XFFFF0036).withOpacity(0.6),
+                                              color: (_controller.boton) ? colorPrimary1 : colorPrimary1.withOpacity(0.6),
                                             ),
                                             child: Center(
                                               child: Text(
@@ -785,7 +786,7 @@ void pagarPedidoModal(BuildContext context, PedidoModel pedido, bool esDeliveryL
                                         return Text(
                                           _controller.text,
                                           style: TextStyle(
-                                            color: const Color(0XFFFF0036),
+                                            color: colorPrimary1,
                                             fontWeight: FontWeight.w600,
                                             fontSize: ScreenUtil().setSp(16),
                                             fontStyle: FontStyle.normal,
@@ -840,7 +841,7 @@ _showLoading() {
     child: Center(
       child: (Platform.isAndroid)
           ? const CircularProgressIndicator(
-              color: Color(0XFFFF0036),
+              color: colorPrimary1,
             )
           : const CupertinoActivityIndicator(),
     ),

@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:intl/intl.dart';
+import 'package:mesita_aplication_2/src/utils/colors.dart';
 
 obtenerPrimerNombre(String nombre) {
   if (nombre != '') {
@@ -104,7 +105,7 @@ showLoading() {
   return Center(
     child: (Platform.isAndroid)
         ? const CircularProgressIndicator(
-            color: Color(0XFFFF0036),
+            color: colorPrimary1,
           )
         : const CupertinoActivityIndicator(),
   );

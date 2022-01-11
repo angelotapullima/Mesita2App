@@ -8,6 +8,7 @@ import 'package:mesita_aplication_2/src/bloc/provider.dart';
 import 'package:mesita_aplication_2/src/models/venta_model.dart';
 import 'package:mesita_aplication_2/src/preferences/preferences.dart';
 import 'package:mesita_aplication_2/src/utils/circle_user_porfile.dart';
+import 'package:mesita_aplication_2/src/utils/colors.dart';
 import 'package:mesita_aplication_2/src/utils/utils.dart';
 import 'package:platform_date_picker/platform_date_picker.dart';
 
@@ -467,7 +468,7 @@ class _VentasPageState extends State<VentasPage> {
                       child: Center(
                         child: (Platform.isAndroid)
                             ? const CircularProgressIndicator(
-                                color: Color(0XFFFF0036),
+                                color: colorPrimary1,
                               )
                             : const CupertinoActivityIndicator(),
                       ),
@@ -498,7 +499,7 @@ class _VentasPageState extends State<VentasPage> {
   //             margin: EdgeInsets.symmetric(vertical: ScreenUtil().setHeight(8), horizontal: ScreenUtil().setWidth(16)),
   //             padding: EdgeInsets.symmetric(vertical: ScreenUtil().setHeight(8), horizontal: ScreenUtil().setWidth(16)),
   //             decoration: BoxDecoration(
-  //               color: (controller.value == value) ? Color(0XFFFF0036) : Colors.transparent,
+  //               color: (controller.value == value) ? colorPrimary1 : Colors.transparent,
   //               borderRadius: BorderRadius.circular(22),
   //             ),
   //             child: Text(
@@ -695,7 +696,7 @@ class _VentasPageState extends State<VentasPage> {
                                   child: Text(
                                     'Establecer fecha',
                                     style: GoogleFonts.poppins(
-                                      color: const Color(0XFFFF0036),
+                                      color: colorPrimary1,
                                       fontWeight: FontWeight.w600,
                                       fontSize: ScreenUtil().setSp(18),
                                     ),
@@ -747,7 +748,7 @@ class _VentasPageState extends State<VentasPage> {
                                           child: Container(
                                             decoration: BoxDecoration(
                                               borderRadius: BorderRadius.circular(50),
-                                              color: (_controller.boton) ? const Color(0XFFFF0036) : const Color(0XFFFF0036).withOpacity(0.6),
+                                              color: (_controller.boton) ? colorPrimary1 : colorPrimary1.withOpacity(0.6),
                                             ),
                                             child: Center(
                                               child: Text(
@@ -775,7 +776,7 @@ class _VentasPageState extends State<VentasPage> {
                                         return Text(
                                           _controller.text,
                                           style: TextStyle(
-                                            color: const Color(0XFFFF0036),
+                                            color: colorPrimary1,
                                             fontWeight: FontWeight.w600,
                                             fontSize: ScreenUtil().setSp(16),
                                             fontStyle: FontStyle.normal,
@@ -829,7 +830,7 @@ class _VentasPageState extends State<VentasPage> {
       child: Center(
         child: (Platform.isAndroid)
             ? const CircularProgressIndicator(
-                color: Color(0XFFFF0036),
+                color: colorPrimary1,
               )
             : const CupertinoActivityIndicator(),
       ),

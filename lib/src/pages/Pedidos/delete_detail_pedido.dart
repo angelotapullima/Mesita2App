@@ -7,6 +7,7 @@ import 'package:mesita_aplication_2/src/api/pedidos_api.dart';
 import 'package:mesita_aplication_2/src/bloc/provider.dart';
 import 'package:mesita_aplication_2/src/models/pedidos_model.dart';
 import 'package:mesita_aplication_2/src/pages/Lineas_Categories/modal_edit_line.dart';
+import 'package:mesita_aplication_2/src/utils/colors.dart';
 
 class DeleteDetallePedido extends StatefulWidget {
   final DetallePedidoModel pedidoDetalle;
@@ -78,7 +79,7 @@ class _DeleteDetallePedidoState extends State<DeleteDetallePedido> {
                       child: Text(
                         'Eliminar producto del pedido',
                         style: TextStyle(
-                          color: const Color(0XFFFF0036),
+                          color: colorPrimary1,
                           fontSize: ScreenUtil().setSp(16),
                           fontWeight: FontWeight.w400,
                           letterSpacing: 0.16,
@@ -125,7 +126,7 @@ class _DeleteDetallePedidoState extends State<DeleteDetallePedido> {
                         return Text(
                           _controller.text,
                           style: TextStyle(
-                            color: const Color(0XFFFF0036),
+                            color: colorPrimary1,
                             fontWeight: FontWeight.w600,
                             fontSize: ScreenUtil().setSp(16),
                             fontStyle: FontStyle.normal,
@@ -162,7 +163,7 @@ class _DeleteDetallePedidoState extends State<DeleteDetallePedido> {
       child: Center(
         child: (Platform.isAndroid)
             ? const CircularProgressIndicator(
-                color: Color(0XFFFF0036),
+                color: colorPrimary1,
               )
             : const CupertinoActivityIndicator(),
       ),

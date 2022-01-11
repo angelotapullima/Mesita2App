@@ -7,6 +7,7 @@ import 'package:mesita_aplication_2/src/api/pedidos_api.dart';
 import 'package:mesita_aplication_2/src/bloc/provider.dart';
 import 'package:mesita_aplication_2/src/models/pedidos_atender_model.dart';
 import 'package:mesita_aplication_2/src/pages/Lineas_Categories/modal_edit_line.dart';
+import 'package:mesita_aplication_2/src/utils/colors.dart';
 
 class AtenderPedido extends StatefulWidget {
   final PedidosAtenderModel pedidoDetalle;
@@ -112,7 +113,7 @@ class _AtenderPedidoState extends State<AtenderPedido> {
                         return Text(
                           _controller.text,
                           style: TextStyle(
-                            color: const Color(0XFFFF0036),
+                            color: colorPrimary1,
                             fontWeight: FontWeight.w600,
                             fontSize: ScreenUtil().setSp(16),
                             fontStyle: FontStyle.normal,
@@ -149,7 +150,7 @@ class _AtenderPedidoState extends State<AtenderPedido> {
       child: Center(
         child: (Platform.isAndroid)
             ? const CircularProgressIndicator(
-                color: Color(0XFFFF0036),
+                color: colorPrimary1,
               )
             : const CupertinoActivityIndicator(),
       ),

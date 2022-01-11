@@ -4,6 +4,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:mesita_aplication_2/src/api/linea_api.dart';
 import 'package:mesita_aplication_2/src/api/planes_api.dart';
 import 'package:mesita_aplication_2/src/preferences/preferences.dart';
+import 'package:mesita_aplication_2/src/utils/colors.dart';
 import 'package:mesita_aplication_2/src/utils/utils.dart';
 
 class Splash extends StatefulWidget {
@@ -58,7 +59,7 @@ class _SplashState extends State<Splash> with AfterLayoutMixin<Splash> {
             color: Colors.white,
           ),
           Center(
-            child: SvgPicture.asset('assets/mesita_logo.svg'),
+            child: SvgPicture.asset('assets/mesita_logo.svg', color: colorPrimary1),
           ),
         ],
       ),

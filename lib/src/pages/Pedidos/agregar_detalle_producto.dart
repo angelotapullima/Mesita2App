@@ -12,6 +12,7 @@ import 'package:mesita_aplication_2/src/bloc/provider.dart';
 import 'package:mesita_aplication_2/src/models/agregar_producto_pedido_model.dart';
 import 'package:mesita_aplication_2/src/models/pedido_temporal_model.dart';
 import 'package:mesita_aplication_2/src/models/producto_linea_model.dart';
+import 'package:mesita_aplication_2/src/utils/colors.dart';
 import 'package:mesita_aplication_2/src/utils/constants.dart';
 
 class AgregarDetalleProducto extends StatefulWidget {
@@ -152,7 +153,7 @@ class _AgregarDetalleProductoState extends State<AgregarDetalleProducto> {
                                   height: ScreenUtil().setHeight(32),
                                   //width: ScreenUtil().setWidth(86),
                                   decoration: BoxDecoration(
-                                    color: const Color(0XFFFF0036),
+                                    color: colorPrimary1,
                                     borderRadius: BorderRadius.circular(30),
                                     boxShadow: const [
                                       BoxShadow(
@@ -255,15 +256,15 @@ class _AgregarDetalleProductoState extends State<AgregarDetalleProducto> {
                                 //     left: ScreenUtil().setWidth(10), top: ScreenUtil().setHeight(10), bottom: ScreenUtil().setHeight(1)),
                                 enabledBorder: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(15),
-                                  borderSide: BorderSide(color: const Color(0XFFFF0036), width: ScreenUtil().setWidth(2)),
+                                  borderSide: BorderSide(color: colorPrimary1, width: ScreenUtil().setWidth(2)),
                                 ),
                                 focusedBorder: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(15),
-                                  borderSide: BorderSide(color: const Color(0XFFFF0036), width: ScreenUtil().setWidth(2)),
+                                  borderSide: BorderSide(color: colorPrimary1, width: ScreenUtil().setWidth(2)),
                                 ),
                                 border: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(15),
-                                  borderSide: BorderSide(color: const Color(0XFFFF0036), width: ScreenUtil().setWidth(2)),
+                                  borderSide: BorderSide(color: colorPrimary1, width: ScreenUtil().setWidth(2)),
                                 ),
                               ),
                               style: GoogleFonts.poppins(
@@ -339,7 +340,7 @@ class _AgregarDetalleProductoState extends State<AgregarDetalleProducto> {
                                 width: ScreenUtil().setWidth(130),
                                 //width: ScreenUtil().setWidth(86),
                                 decoration: BoxDecoration(
-                                  color: const Color(0XFFFF0036),
+                                  color: colorPrimary1,
                                   borderRadius: BorderRadius.circular(30),
                                   boxShadow: const [
                                     BoxShadow(
@@ -404,7 +405,7 @@ class _AgregarDetalleProductoState extends State<AgregarDetalleProducto> {
                                 icon: (_controller.llevar)
                                     ? const Icon(
                                         Icons.check_box_outlined,
-                                        color: Color(0XFFFF0036),
+                                        color: colorPrimary1,
                                       )
                                     : const Icon(
                                         Icons.check_box_outline_blank_outlined,
@@ -509,7 +510,7 @@ class _AgregarDetalleProductoState extends State<AgregarDetalleProducto> {
       child: Center(
         child: (Platform.isAndroid)
             ? const CircularProgressIndicator(
-                color: Color(0XFFFF0036),
+                color: colorPrimary1,
               )
             : const CupertinoActivityIndicator(),
       ),
